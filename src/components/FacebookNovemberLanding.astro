@@ -39,97 +39,111 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
     {
       offerActive ? (
         <>
-          NOVEMBER SPECIAL &nbsp;·&nbsp;
+          <span>November special</span>
+          <span class="gg-topline__dot" aria-hidden="true" />
           <strong>50% off your first lawn treatment</strong>
-          &nbsp;·&nbsp; Up to $75 off
+          <span class="gg-topline__dot" aria-hidden="true" />
+          <span>Up to $75 off</span>
         </>
       ) : (
         <>
-          FREE ESTIMATE &nbsp;·&nbsp;
+          <span>Free estimate</span>
+          <span class="gg-topline__dot" aria-hidden="true" />
           <strong>Lawn fertilization &amp; weed control</strong>
-          &nbsp;·&nbsp; Plans start at ${site.startingPrice.amount}/{site.startingPrice.period}
+          <span class="gg-topline__dot" aria-hidden="true" />
+          <span>Plans start at ${site.startingPrice.amount}/{site.startingPrice.period}</span>
         </>
       )
     }
   </div>
 
-  <div class="gg-shell">
-    <header class="gg-header">
-      <a href="/" class="gg-logo-link">
+  <header class="gg-header">
+    <div class="gg-shell gg-header__inner">
+      <a href="/" class="gg-logo-link" aria-label={`${site.name} home`}>
         <img
           class="gg-logo"
-          src="/images/brand/logo-full-glow.png"
-          alt="Grow Green Weed Control"
-          width="145"
-          height="114"
+          src="/images/brand/logo-128.webp"
+          srcset="/images/brand/logo-64.webp 64w, /images/brand/logo-128.webp 128w, /images/brand/logo-192.webp 192w"
+          sizes="52px"
+          alt=""
+          width="52"
+          height="52"
           fetchpriority="high"
           decoding="async"
         />
+        <span>
+          <strong>Grow Green</strong>
+          <small>Weed Control</small>
+        </span>
       </a>
       <div class="gg-header-right">
-        LOCAL. FAMILY-OWNED. FIREFIGHTER-OWNED.
+        <span>Local · Family-owned · Firefighter-owned</span>
         <a href={`tel:${site.phoneTel}`}>{site.phone}</a>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <div class="gg-hero">
-      <div class="gg-hero-grid">
-        <div class="gg-hero-copy">
-          <span class="gg-kicker">South Louisiana lawns. Local lawn experts.</span>
-          <h1>Less weeds.<br /><span>More lawn to love.</span></h1>
-          <p class="gg-hero-lead">
-            Give your lawn a plan for every season. Get a free estimate for professional weed control
-            and fertilization from your local, firefighter-owned team.
-          </p>
+  <div class="gg-hero">
+    <div class="gg-hero__media" aria-hidden="true"></div>
+    <div class="gg-hero__veil" aria-hidden="true"></div>
+    <div class="gg-shell gg-hero-grid">
+      <div class="gg-hero-copy">
+        <span class="gg-kicker">South Louisiana lawns · Local lawn experts</span>
+        <p class="gg-brand">Grow Green Weed Control</p>
+        <h1>
+          Less weeds.
+          <br />
+          <em>More lawn to love.</em>
+        </h1>
+        <p class="gg-hero-lead">
+          Give your lawn a plan for every season. Get a free estimate for professional weed control
+          and fertilization from your local, firefighter-owned team.
+        </p>
 
-          {
-            offerActive ? (
-              <div class="gg-offer">
-                <div class="gg-offer-number">
-                  50<small>% OFF</small>
-                </div>
-                <div class="gg-offer-text">
-                  Your first lawn treatment
-                  <span>November special · Save up to $75</span>
-                </div>
-                <img
-                  class="gg-offer-mascot"
-                  src="/images/mascot/backpack-sprayer.png"
-                  alt="Grow Green mascot"
-                  width="95"
-                  height="115"
-                  decoding="async"
-                />
+        {
+          offerActive ? (
+            <div class="gg-offer">
+              <div class="gg-offer-number">
+                50<small>% OFF</small>
               </div>
-            ) : (
-              <div class="gg-offer gg-offer-expired">
-                <div class="gg-offer-text">
-                  This November special has ended.
-                  <span>You can still request a free estimate for your lawn.</span>
-                </div>
+              <div class="gg-offer-text">
+                Your first lawn treatment
+                <span>November special · Save up to $75</span>
               </div>
-            )
-          }
+              <img
+                class="gg-offer-mascot"
+                src="/images/mascot/backpack-sprayer.png"
+                alt=""
+                width="88"
+                height="106"
+                decoding="async"
+              />
+            </div>
+          ) : (
+            <div class="gg-offer gg-offer-expired">
+              <div class="gg-offer-text">
+                This November special has ended.
+                <span>You can still request a free estimate for your lawn.</span>
+              </div>
+            </div>
+          )
+        }
 
-          <ul class="gg-hero-points">
-            <li>Free, no-obligation estimate</li>
-            <li>Local firefighter-owned team</li>
-            <li>Plans start at ${site.startingPrice.amount}/{site.startingPrice.period}</li>
-          </ul>
+        <ul class="gg-hero-points">
+          <li>Free, no-obligation estimate</li>
+          <li>Local firefighter-owned team</li>
+          <li>Plans start at ${site.startingPrice.amount}/{site.startingPrice.period}</li>
+        </ul>
 
-          <figure class="gg-hero-photo">
-            <img
-              src="/images/campaigns/facebook-nov/lawn-sign.jpg"
-              alt="Healthy lawn with a Grow Green Weed Control yard sign"
-              width="980"
-              height="551"
-              decoding="async"
-            />
-            <figcaption>A real Grow Green lawn. A plan built for yours.</figcaption>
-          </figure>
+        <div class="gg-hero-actions">
+          <a class="gg-hero-cta" href="#gg-estimate-form-card">
+            {offerActive ? "Claim the November offer" : "Request my estimate"}
+          </a>
+          <a class="gg-hero-call" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
         </div>
+      </div>
 
-        <div class="gg-form-card" id="gg-estimate-form-card">
+      <div class="gg-form-card" id="gg-estimate-form-card">
           <p class="gg-form-eyebrow">
             {offerActive ? "Your November offer starts here" : "Request your free estimate"}
           </p>
@@ -369,7 +383,6 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
           </noscript>
         </div>
       </div>
-    </div>
   </div>
 
   <div class="gg-trust">
@@ -393,13 +406,27 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
     </div>
   </div>
 
+  <div class="gg-lawn-band">
+    <div class="gg-shell">
+      <figure class="gg-lawn-band__photo">
+        <img
+          src="/images/campaigns/facebook-nov/lawn-sign.jpg"
+          alt="Healthy lawn with a Grow Green Weed Control yard sign"
+          width="980"
+          height="551"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>A real Grow Green lawn. A plan built for yours.</figcaption>
+      </figure>
+    </div>
+  </div>
+
   <div class="gg-section gg-white">
     <div class="gg-shell">
-      <div class="gg-section-head">
-        <div>
-          <span class="gg-section-label">More than a one-time spray</span>
-          <h2>The right care.<br />At the right time of year.</h2>
-        </div>
+      <div class="gg-section-head gg-section-head--stack">
+        <span class="gg-section-label">More than a one-time spray</span>
+        <h2>The right care. At the right time of year.</h2>
         <p>
           Louisiana lawns need more than the same treatment on repeat. Our program changes with the
           season, your grass type and what’s growing in your yard.
@@ -454,29 +481,34 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
 
   <div class="gg-section">
     <div class="gg-shell gg-local-grid">
-      <figure class="gg-local-photo">
-        <img
-          src="/images/campaigns/facebook-nov/community.jpeg"
-          alt="Grow Green with local firefighters at a community event"
-          loading="lazy"
-          decoding="async"
-          width="768"
-          height="1024"
-        />
-        <figcaption>Rooted here. Proud to be part of our community.</figcaption>
-        <img
-          class="gg-truck-detail"
-          src="/images/campaigns/facebook-nov/truck.jpg"
-          alt="Grow Green branded lawn treatment truck"
-          width="980"
-          height="895"
-          loading="lazy"
-          decoding="async"
-        />
-      </figure>
+      <div class="gg-local-media">
+        <figure class="gg-local-media__main">
+          <img
+            src="/images/campaigns/facebook-nov/community.jpeg"
+            alt="Grow Green with local firefighters at a community event"
+            loading="lazy"
+            decoding="async"
+            width="768"
+            height="1024"
+          />
+          <figcaption>Rooted here. Proud to be part of our community.</figcaption>
+        </figure>
+        <figure class="gg-local-media__truck">
+          <img
+            src="/images/hero/truck-and-trailer-960.webp"
+            srcset="/images/hero/truck-and-trailer-640.webp 640w, /images/hero/truck-and-trailer-960.webp 960w, /images/hero/truck-and-trailer-1280.webp 1280w"
+            sizes="(max-width: 900px) 100vw, 28vw"
+            alt="Grow Green Weed Control truck and trailer"
+            width="960"
+            height="720"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </div>
       <div class="gg-local-copy">
         <span class="gg-section-label">Your neighbors in lawn care</span>
-        <h2>Local roots.<br />Care you can count on.</h2>
+        <h2>Local roots. Care you can count on.</h2>
         <p>
           Grow Green is a family-owned, firefighter-owned lawn treatment company serving the Greater
           Baton Rouge area. We believe good service starts with showing up, doing the work and
@@ -492,24 +524,35 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
           <strong>Serving</strong> Prairieville, Gonzales, Baton Rouge, Denham Springs, Walker,
           Central, Zachary and surrounding communities. We’ll confirm availability for your address.
         </p>
+        <button class="gg-scroll-button gg-local-cta" type="button" data-scroll-to-estimate>
+          {offerActive ? "Claim my November offer" : "Get my free estimate"}
+          <span aria-hidden="true">→</span>
+        </button>
       </div>
     </div>
   </div>
 
   <div class="gg-section gg-white">
     <div class="gg-shell">
-      <span class="gg-section-label">Simple from the start</span>
-      <h2>A few details. A clear next step.</h2>
+      <div class="gg-section-head gg-section-head--center">
+        <div>
+          <span class="gg-section-label">Simple from the start</span>
+          <h2>A few details. A clear next step.</h2>
+        </div>
+      </div>
       <div class="gg-process">
         <article>
+          <span class="gg-process__n" aria-hidden="true">1</span>
           <h3>Send your address.</h3>
           <p>Tell us which lawn to review and how to reach you.</p>
         </article>
         <article>
+          <span class="gg-process__n" aria-hidden="true">2</span>
           <h3>Get your estimate.</h3>
           <p>Our local team prepares your lawn program and pricing.</p>
         </article>
         <article>
+          <span class="gg-process__n" aria-hidden="true">3</span>
           <h3>Make it official.</h3>
           <p>
             {
@@ -519,6 +562,12 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
             }
           </p>
         </article>
+      </div>
+      <div class="gg-process__cta">
+        <button class="gg-scroll-button" type="button" data-scroll-to-estimate>
+          {offerActive ? "Claim 50% off my first treatment" : "Get my free estimate"}
+          <span aria-hidden="true">→</span>
+        </button>
       </div>
     </div>
   </div>
@@ -694,67 +743,150 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
     margin-inline: auto;
   }
   #gg-fb-estimate .gg-topline {
-    background: var(--ink);
-    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem 0.65rem;
+    background: linear-gradient(90deg, #0a2215, #143524 50%, #0a2215);
+    color: #e7f1ea;
     text-align: center;
-    padding: 9px 16px;
-    font-size: 13px;
-    letter-spacing: 0.01em;
-    border-bottom: 3px solid var(--lime);
+    padding: 0.55rem 1rem;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-bottom: 0;
   }
   #gg-fb-estimate .gg-topline strong {
     color: var(--lime);
+    font-weight: 900;
+  }
+  #gg-fb-estimate .gg-topline__dot {
+    width: 0.28rem;
+    height: 0.28rem;
+    border-radius: 50%;
+    background: rgba(245, 206, 69, 0.85);
   }
   #gg-fb-estimate .gg-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+    padding: 0;
+  }
+  #gg-fb-estimate .gg-header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
-    padding: 8px 0;
+    gap: 1rem;
+    padding: 0.65rem 0;
   }
   #gg-fb-estimate .gg-logo-link {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
     text-decoration: none;
+    color: var(--ink);
   }
   #gg-fb-estimate .gg-logo {
-    width: 190px;
-    height: 138px;
+    width: 52px;
+    height: 52px;
     object-fit: contain;
+  }
+  #gg-fb-estimate .gg-logo-link span {
+    display: grid;
+    line-height: 1.05;
+  }
+  #gg-fb-estimate .gg-logo-link strong {
+    font-size: 1.08rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+  }
+  #gg-fb-estimate .gg-logo-link small {
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: #6a7d71;
   }
   #gg-fb-estimate .gg-header-right {
     text-align: right;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    font-weight: 700;
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #6f8175;
   }
   #gg-fb-estimate .gg-header-right a {
     display: block;
-    font-size: 20px;
+    font-size: 1.05rem;
     letter-spacing: -0.02em;
     text-decoration: none;
-    margin-top: 3px;
+    margin-top: 0.1rem;
+    color: var(--ink);
+    font-weight: 900;
+    text-transform: none;
   }
   #gg-fb-estimate .gg-hero {
-    padding: 4px 0 38px;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: #fff;
+    background: #07180f;
+    padding: 2rem 0 2.5rem;
+  }
+  #gg-fb-estimate .gg-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: url("/images/home/hero-lawn-640.webp") center / cover no-repeat;
+    transform: scale(1.04);
+    animation: gg-ken 18s ease-in-out infinite alternate;
+  }
+  @media (min-width: 700px) {
+    #gg-fb-estimate .gg-hero__media {
+      background-image: url("/images/home/hero-lawn-960.webp");
+    }
+  }
+  @media (min-width: 1100px) {
+    #gg-fb-estimate .gg-hero__media {
+      background-image: url("/images/home/hero-lawn-1280.webp");
+    }
+  }
+  #gg-fb-estimate .gg-hero__veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      radial-gradient(ellipse 50% 65% at 82% 38%, rgba(36, 132, 61, 0.22), transparent 58%),
+      linear-gradient(108deg, rgba(5, 22, 13, 0.93) 0%, rgba(5, 22, 13, 0.8) 38%, rgba(5, 22, 13, 0.42) 72%, rgba(5, 22, 13, 0.58) 100%);
   }
   #gg-fb-estimate .gg-hero-grid {
+    position: relative;
+    z-index: 2;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
-    gap: 64px;
-    align-items: start;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2rem;
+    align-items: center;
   }
   #gg-fb-estimate .gg-hero-copy {
-    padding-top: 12px;
+    padding-top: 0.25rem;
   }
   #gg-fb-estimate .gg-kicker,
   #gg-fb-estimate .gg-section-label {
     display: block;
-    font-size: 11px;
+    font-size: 0.74rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 17px;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.7rem;
     color: var(--green);
+  }
+  #gg-fb-estimate .gg-hero .gg-kicker {
+    color: #c9ddcf;
   }
   #gg-fb-estimate .gg-section-label::before {
     content: "";
@@ -765,36 +897,49 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
     margin-right: 9px;
     vertical-align: middle;
   }
-  #gg-fb-estimate h1 {
-    font-size: clamp(44px, 5.3vw, 68px);
-    max-width: 600px;
-    margin-bottom: 22px;
+  #gg-fb-estimate .gg-brand {
+    margin: 0 0 0.45rem;
+    font-size: clamp(1.4rem, 2.8vw, 1.95rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: #fff;
   }
-  #gg-fb-estimate h1 span {
-    color: var(--green);
+  #gg-fb-estimate h1 {
+    font-size: clamp(2.35rem, 5vw, 3.55rem);
+    max-width: 14ch;
+    margin-bottom: 0.85rem;
+    color: #fff;
+  }
+  #gg-fb-estimate h1 em {
+    font-style: normal;
+    color: var(--lime);
   }
   #gg-fb-estimate .gg-hero-lead {
-    font-size: 18px;
-    max-width: 480px;
-    color: #4a5e50;
-    line-height: 1.65;
+    font-size: 1.05rem;
+    max-width: 33rem;
+    color: #e2efe6;
+    line-height: 1.55;
+    font-weight: 500;
   }
   #gg-fb-estimate .gg-offer {
     display: flex;
     align-items: center;
-    gap: 20px;
-    margin: 27px 0 22px;
-    padding: 20px 24px;
-    background: var(--ink);
+    gap: 0.9rem;
+    margin: 1.15rem 0 1rem;
+    padding: 0.9rem 1rem;
+    background: rgba(7, 24, 15, 0.72);
+    border: 1px solid rgba(245, 206, 69, 0.35);
     color: #fff;
-    border-radius: 12px;
+    border-radius: 0.95rem;
     position: relative;
+    backdrop-filter: blur(6px);
   }
   #gg-fb-estimate .gg-offer-expired {
     justify-content: flex-start;
   }
   #gg-fb-estimate .gg-offer-number {
-    font-size: 66px;
+    font-size: 2.75rem;
     line-height: 1;
     font-weight: 900;
     letter-spacing: -0.07em;
@@ -802,11 +947,11 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
     white-space: nowrap;
   }
   #gg-fb-estimate .gg-offer-number small {
-    font-size: 26px;
+    font-size: 1.05rem;
     letter-spacing: -0.04em;
   }
   #gg-fb-estimate .gg-offer-text {
-    font-size: 17px;
+    font-size: 1rem;
     flex: 1;
     font-weight: 700;
     line-height: 1.35;
@@ -814,13 +959,13 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
   #gg-fb-estimate .gg-offer-text span {
     display: block;
     color: #dae7d5;
-    font-size: 13px;
-    font-weight: 400;
-    margin-top: 5px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-top: 0.2rem;
   }
   #gg-fb-estimate .gg-offer-mascot {
-    width: 95px;
-    height: 115px;
+    width: 70px;
+    height: 86px;
     object-fit: contain;
     flex-shrink: 0;
     align-self: center;
@@ -828,49 +973,56 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
   }
   #gg-fb-estimate .gg-hero-points {
     list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 18px;
-    font-size: 12px;
-    font-weight: 700;
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.95rem;
+    font-weight: 750;
+    color: #d8eadc;
+    margin: 0;
   }
   #gg-fb-estimate .gg-hero-points li::before {
-    content: "✓";
-    color: var(--green);
-    margin-right: 7px;
+    content: "";
+    display: inline-block;
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-right: 0.55rem;
+    border-radius: 50%;
+    background: var(--lime);
+    vertical-align: 0.15em;
   }
-  #gg-fb-estimate .gg-hero-photo {
-    margin: 23px 0 0;
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #e0e7dc;
+  #gg-fb-estimate .gg-hero-actions {
+    display: none;
+    flex-wrap: wrap;
+    gap: 0.6rem;
   }
-  #gg-fb-estimate .gg-hero-photo img {
-    width: 100%;
-    height: 245px;
-    object-fit: cover;
-    object-position: center 58%;
+  #gg-fb-estimate .gg-hero-cta,
+  #gg-fb-estimate .gg-hero-call {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.72rem 1.15rem;
+    border-radius: 0.75rem;
+    font-weight: 900;
+    text-decoration: none;
   }
-  #gg-fb-estimate .gg-hero-photo figcaption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 28px 16px 12px;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  #gg-fb-estimate .gg-hero-cta {
+    background: linear-gradient(180deg, #ffd45a, var(--lime));
+    color: #172014;
+  }
+  #gg-fb-estimate .gg-hero-call {
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
     color: #fff;
-    font-size: 12px;
-    font-weight: 700;
   }
   #gg-fb-estimate .gg-form-card {
     background: #fff;
-    border: 1px solid var(--line);
-    border-top: 5px solid var(--green);
-    border-radius: 14px;
-    padding: 29px 28px;
-    box-shadow: 0 15px 45px #1c3b2010;
-    scroll-margin-top: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-top: 5px solid var(--lime);
+    border-radius: 1.15rem;
+    padding: 1.15rem 1.1rem 1.2rem;
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.32);
+    scroll-margin-top: 5.5rem;
+    color: var(--ink);
   }
   #gg-fb-estimate .gg-form-eyebrow {
     font-size: 10px;
@@ -1112,174 +1264,250 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
     color: var(--green);
   }
   #gg-fb-estimate .gg-trust {
-    border-top: 1px solid var(--line);
+    border-top: 0;
     border-bottom: 1px solid var(--line);
-    padding: 20px 0;
+    padding: 1.25rem 0;
+    background: #fff;
   }
   #gg-fb-estimate .gg-trust-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
+    gap: 0.85rem 1.1rem;
   }
   #gg-fb-estimate .gg-trust-grid strong {
     display: block;
-    font-size: 14px;
+    font-size: 0.95rem;
+    margin-bottom: 0.12rem;
   }
   #gg-fb-estimate .gg-trust-grid span {
-    font-size: 11px;
+    font-size: 0.84rem;
     color: #5f7161;
+    line-height: 1.4;
+  }
+  #gg-fb-estimate .gg-lawn-band {
+    padding: 1.35rem 0 0;
+    background: #fff;
+  }
+  #gg-fb-estimate .gg-lawn-band__photo {
+    margin: 0;
+    position: relative;
+    border-radius: 1.15rem;
+    overflow: hidden;
+    background: #d7e4d8;
+    aspect-ratio: 2.2 / 1;
+    min-height: 260px;
+  }
+  #gg-fb-estimate .gg-lawn-band__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 55%;
+  }
+  #gg-fb-estimate .gg-lawn-band__photo figcaption {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 2.2rem 1.15rem 1rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.72));
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 800;
   }
   #gg-fb-estimate .gg-section {
-    padding: 60px 0;
+    padding: 2.35rem 0;
   }
   #gg-fb-estimate .gg-white {
     background: #fff;
   }
   #gg-fb-estimate .gg-section-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    gap: 50px;
-    margin-bottom: 35px;
+    display: grid;
+    gap: 0.55rem;
+    margin-bottom: 1.5rem;
+  }
+  #gg-fb-estimate .gg-section-head--stack h2 {
+    max-width: 18ch;
+  }
+  #gg-fb-estimate .gg-section-head--stack p {
+    max-width: 40rem;
+    font-size: 1.02rem;
+    line-height: 1.55;
+    color: #576957;
+  }
+  #gg-fb-estimate .gg-section-head--center {
+    justify-items: center;
+    text-align: center;
+  }
+  #gg-fb-estimate .gg-section-head--center h2 {
+    max-width: none;
   }
   #gg-fb-estimate .gg-section-head h2 {
     max-width: 590px;
   }
   #gg-fb-estimate .gg-section-head p {
-    max-width: 350px;
-    font-size: 14px;
+    max-width: 40rem;
+    font-size: 1.02rem;
     color: #576957;
   }
   #gg-fb-estimate .gg-program-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 34px;
+    gap: 1.25rem;
   }
   #gg-fb-estimate .gg-program-card {
-    border-top: 2px solid var(--green);
-    padding-top: 22px;
+    border-top: 3px solid var(--green);
+    padding: 1.05rem 0.15rem 0.25rem;
   }
   #gg-fb-estimate .gg-card-number {
-    font-size: 11px;
+    font-size: 0.72rem;
     font-weight: 800;
     color: var(--green);
     letter-spacing: 0.08em;
   }
   #gg-fb-estimate .gg-program-card h3 {
-    font-size: 23px;
-    margin: 13px 0;
+    font-size: 1.25rem;
+    margin: 0.55rem 0 0.45rem;
   }
   #gg-fb-estimate .gg-program-card p {
-    font-size: 14px;
+    font-size: 0.95rem;
     color: #576957;
+    line-height: 1.5;
   }
   #gg-fb-estimate .gg-season-note {
     display: flex;
-    gap: 25px;
+    gap: 1.15rem;
     align-items: center;
-    margin-top: 35px;
-    padding: 23px 28px;
+    margin-top: 1.5rem;
+    padding: 1.1rem 1.25rem;
     background: #eef3e7;
-    border-radius: 4px;
+    border-radius: 1rem;
   }
   #gg-fb-estimate .gg-season-note img {
-    width: 83px;
-    height: 110px;
+    width: 72px;
+    height: 96px;
     object-fit: contain;
     flex-shrink: 0;
   }
   #gg-fb-estimate .gg-season-note strong {
     display: block;
-    font-size: 17px;
-    margin-bottom: 5px;
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
   }
   #gg-fb-estimate .gg-season-note p {
-    font-size: 13px;
+    font-size: 0.92rem;
     color: #53634e;
+    line-height: 1.5;
   }
   #gg-fb-estimate .gg-local-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.05fr 0.95fr;
     align-items: center;
-    gap: 68px;
+    gap: 2rem;
   }
-  #gg-fb-estimate .gg-local-photo {
+  #gg-fb-estimate .gg-local-media {
+    display: grid;
+    gap: 0.75rem;
+  }
+  #gg-fb-estimate .gg-local-media__main,
+  #gg-fb-estimate .gg-local-media__truck {
     margin: 0;
-    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
   }
-  #gg-fb-estimate .gg-local-photo img {
+  #gg-fb-estimate .gg-local-media__main img,
+  #gg-fb-estimate .gg-local-media__truck img {
     width: 100%;
-    height: 470px;
+    height: 100%;
     object-fit: cover;
-    object-position: center 52%;
-    border-radius: 4px;
+    display: block;
   }
-  #gg-fb-estimate .gg-local-photo .gg-truck-detail {
-    width: 100%;
-    height: 155px;
-    object-fit: cover;
-    object-position: center 58%;
-    margin-top: 18px;
-    border-radius: 8px;
+  #gg-fb-estimate .gg-local-media__main {
+    aspect-ratio: 4 / 3;
+    background: #d7e4d8;
   }
-  #gg-fb-estimate .gg-local-photo figcaption {
-    font-size: 11px;
-    padding-top: 10px;
+  #gg-fb-estimate .gg-local-media__main img {
+    object-position: center 35%;
+  }
+  #gg-fb-estimate .gg-local-media__truck {
+    aspect-ratio: 16 / 9;
+    background: #d7e4d8;
+  }
+  #gg-fb-estimate .gg-local-media__main figcaption {
+    font-size: 0.8rem;
+    padding: 0.55rem 0.15rem 0;
     color: #5a6d5d;
   }
   #gg-fb-estimate .gg-local-copy h2 {
-    margin-bottom: 22px;
+    margin-bottom: 0.85rem;
   }
   #gg-fb-estimate .gg-local-copy p {
-    font-size: 15px;
+    font-size: 1rem;
     color: #576957;
-    margin-bottom: 20px;
+    margin-bottom: 0.85rem;
+    line-height: 1.55;
   }
   #gg-fb-estimate .gg-local-list {
     list-style: none;
-    font-size: 14px;
+    font-size: 0.95rem;
+    margin-bottom: 0.85rem;
   }
   #gg-fb-estimate .gg-local-list li {
-    padding: 12px 0;
+    padding: 0.65rem 0;
     border-bottom: 1px solid var(--line);
   }
   #gg-fb-estimate .gg-local-list li::before {
     content: "✓";
-    margin-right: 12px;
+    margin-right: 0.65rem;
     color: var(--green);
+    font-weight: 800;
   }
   #gg-fb-estimate .gg-service-area {
-    font-size: 12px !important;
-    margin-top: 20px;
+    font-size: 0.86rem !important;
+    margin: 0 0 1.1rem;
+    color: #5a6d5d;
+  }
+  #gg-fb-estimate .gg-local-cta {
+    background: var(--lime);
+    color: var(--ink);
   }
   #gg-fb-estimate .gg-process {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    margin-top: 32px;
-    counter-reset: step;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
   }
   #gg-fb-estimate .gg-process article {
-    padding-left: 40px;
+    padding: 0;
     position: relative;
-    counter-increment: step;
   }
-  #gg-fb-estimate .gg-process article::before {
-    content: counter(step, decimal-leading-zero);
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--green);
-    font-size: 12px;
-    font-weight: 800;
+  #gg-fb-estimate .gg-process__n {
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-bottom: 0.7rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--lime);
+    font-size: 0.92rem;
+    font-weight: 900;
   }
   #gg-fb-estimate .gg-process h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 1.15rem;
+    margin-bottom: 0.45rem;
   }
   #gg-fb-estimate .gg-process p {
-    font-size: 13px;
+    font-size: 0.94rem;
     color: #576957;
+    line-height: 1.5;
+  }
+  #gg-fb-estimate .gg-process__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.75rem;
+  }
+  #gg-fb-estimate .gg-process__cta .gg-scroll-button {
+    background: var(--lime);
+    color: var(--ink);
+    min-width: min(100%, 320px);
   }
   #gg-fb-estimate .gg-faq-wrap {
     display: grid;
@@ -1327,29 +1555,41 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
     line-height: 1.8;
   }
   #gg-fb-estimate .gg-final {
-    background: var(--ink);
+    background:
+      radial-gradient(ellipse 48% 75% at 20% 0%, rgba(245, 206, 69, 0.14), transparent 55%),
+      linear-gradient(180deg, #123222, #0e2a1a);
     color: #fff;
-    padding: 50px 0;
+    padding: 2.4rem 0;
   }
   #gg-fb-estimate .gg-final-grid {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 45px;
+    gap: 1.5rem 2rem;
   }
   #gg-fb-estimate .gg-final h2 {
-    font-size: clamp(30px, 3vw, 42px);
-    margin-bottom: 12px;
+    font-size: clamp(1.7rem, 3vw, 2.35rem);
+    margin-bottom: 0.45rem;
   }
   #gg-fb-estimate .gg-final p {
     color: #dae5d7;
-    font-size: 14px;
+    font-size: 1rem;
+    max-width: 34rem;
   }
   #gg-fb-estimate .gg-final .gg-scroll-button {
     background: var(--lime);
     color: var(--ink);
-    width: 260px;
+    width: auto;
+    min-width: 240px;
     flex-shrink: 0;
+  }
+  @keyframes gg-ken {
+    from {
+      transform: scale(1.02);
+    }
+    to {
+      transform: scale(1.07);
+    }
   }
   #gg-fb-estimate .gg-final .gg-scroll-button:hover {
     background: #e2ff9a;
@@ -1398,28 +1638,38 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
       font-size: 11px;
       padding: 8px 10px;
     }
-    #gg-fb-estimate .gg-header {
-      padding: 12px 0;
+    #gg-fb-estimate .gg-header__inner {
+      padding: 0.55rem 0;
+    }
+    #gg-fb-estimate .gg-logo-link span {
+      display: none;
     }
     #gg-fb-estimate .gg-logo {
-      width: 128px;
-      height: 94px;
+      width: 48px;
+      height: 48px;
     }
-    #gg-fb-estimate .gg-header-right {
-      font-size: 9px;
-      letter-spacing: 0.04em;
-      max-width: 180px;
+    #gg-fb-estimate .gg-header-right span {
+      display: none;
     }
     #gg-fb-estimate .gg-header-right a {
-      font-size: 17px;
+      font-size: 1rem;
     }
     #gg-fb-estimate .gg-hero {
-      padding: 5px 0 27px;
+      padding: 1.35rem 0 1.75rem;
+    }
+    #gg-fb-estimate .gg-hero-actions {
+      display: flex;
+      width: 100%;
+      margin-bottom: 0.25rem;
+    }
+    #gg-fb-estimate .gg-hero-cta,
+    #gg-fb-estimate .gg-hero-call {
+      flex: 1 1 auto;
     }
     #gg-fb-estimate .gg-hero-grid {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 1.25rem;
     }
     #gg-fb-estimate .gg-hero-copy {
       padding: 0;
@@ -1464,11 +1714,8 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
       font-size: 11px;
     }
     #gg-fb-estimate .gg-hero-points {
-      font-size: 10px;
-      gap: 7px 12px;
-    }
-    #gg-fb-estimate .gg-hero-photo {
-      display: none;
+      font-size: 0.92rem;
+      gap: 0.4rem;
     }
     #gg-fb-estimate .gg-form-card {
       width: 100%;
@@ -1541,14 +1788,14 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
     }
     #gg-fb-estimate .gg-local-grid {
       grid-template-columns: 1fr;
-      gap: 30px;
+      gap: 1.35rem;
     }
-    #gg-fb-estimate .gg-local-photo img {
-      height: 330px;
-      object-position: center 55%;
+    #gg-fb-estimate .gg-lawn-band__photo {
+      min-height: 220px;
+      aspect-ratio: 16 / 10;
     }
     #gg-fb-estimate .gg-local-copy h2 {
-      margin-bottom: 17px;
+      margin-bottom: 0.7rem;
     }
     #gg-fb-estimate .gg-process {
       grid-template-columns: 1fr;
@@ -1619,6 +1866,7 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
     #gg-fb-estimate *::after {
       scroll-behavior: auto !important;
       transition: none !important;
+      animation: none !important;
     }
   }
 </style>
