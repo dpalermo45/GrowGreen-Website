@@ -233,7 +233,8 @@ const serviceGroups = [
     min-height: var(--header-h);
     padding: 0.55rem 0;
     overflow: visible;
-    z-index: 1;
+    /* Must stay above .nav-backdrop or the gray overlay intercepts menu taps. */
+    z-index: 260;
   }
   .brand {
     display: inline-flex;
@@ -554,7 +555,11 @@ const serviceGroups = [
     .nav-backdrop {
       display: none;
       position: fixed;
-      inset: 0;
+      /* Sit under the sticky header only — do not dim the menu or Close button. */
+      top: var(--nav-panel-top, var(--header-h));
+      right: 0;
+      bottom: 0;
+      left: 0;
       z-index: 240;
       margin: 0;
       padding: 0;
@@ -585,6 +590,7 @@ const serviceGroups = [
       overflow: auto;
       -webkit-overflow-scrolling: touch;
       padding-bottom: max(1.1rem, env(safe-area-inset-bottom));
+      pointer-events: auto;
     }
     .site-nav.open {
       display: block;
@@ -743,7 +749,9 @@ const serviceGroups = [
   document.addEventListener("click", (event) => {
     const target = event.target;
     if (!(target instanceof Node)) return;
-    if (nav?.contains(target) || toggle?.contains(target)) return;
+    if (nav?.contains(target) || toggle?.contains(target) || backdrop?.contains(target)) {
+      return;
+    }
     setNavOpen(false);
   });
 
