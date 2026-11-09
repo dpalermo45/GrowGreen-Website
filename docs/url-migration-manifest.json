@@ -1,0 +1,1745 @@
+{
+  "count": 138,
+  "urls": [
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/"
+      ],
+      "migration_priority": "high",
+      "priority_note": "top clicks 583"
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/*/",
+      "sources": [
+        "gsc:Not found (404)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/*"
+      ]
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/2023/01/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/2023/01/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/about-us/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/about-us/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress post",
+      "path": "/battling-dallis-grass-the-challenge-of-eliminating-a-stubborn-weed-in-warm-season-grasses/",
+      "sources": [
+        "wordpress_post",
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/battling-dallis-grass-the-challenge-of-eliminating-a-stubborn-weed-in-warm-season-grasses/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress post",
+      "path": "/battling-large-patch-disease-a-guide-to-protecting-your-baton-rouge-lawn/",
+      "sources": [
+        "wordpress_post",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/battling-large-patch-disease-a-guide-to-protecting-your-baton-rouge-lawn/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/careers/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Alternate page with proper canonical tag",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/careers/",
+        "https://growgreenweedcontrol.com/careers/?job=lawn-treatment-technician",
+        "https://growgreenweedcontrol.com/careers/?job=part-time-office-assistant"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/category/baton-rouge-la/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/baton-rouge-la/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/category/burweed/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/burweed/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/category/centipede-lawn/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/centipede-lawn/"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress feed/archive feed \u2014 not recreated",
+      "path": "/category/centipede-lawn/feed/",
+      "sources": [
+        "gsc:Excluded by \u2018noindex\u2019 tag"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/centipede-lawn/feed/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/category/fertilization/winterizier/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/fertilization/winterizier/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/category/lawn-disease/large-patch/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/lawn-disease/large-patch/"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress feed/archive feed \u2014 not recreated",
+      "path": "/category/lawn-disease/large-patch/feed/",
+      "sources": [
+        "gsc:Excluded by \u2018noindex\u2019 tag"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/lawn-disease/large-patch/feed/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/category/lawn-fungus/brown-patch/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/lawn-fungus/brown-patch/"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress feed/archive feed \u2014 not recreated",
+      "path": "/category/lawn-fungus/feed/",
+      "sources": [
+        "gsc:Excluded by \u2018noindex\u2019 tag"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/lawn-fungus/feed/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/category/lawn-insects/army-worms/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/lawn-insects/army-worms/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/category/lawn-insects/chinch-bugs/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/lawn-insects/chinch-bugs/"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress feed/archive feed \u2014 not recreated",
+      "path": "/category/lawn-insects/feed/",
+      "sources": [
+        "gsc:Excluded by \u2018noindex\u2019 tag"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/lawn-insects/feed/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/category/prairieville-la/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/prairieville-la/"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress feed/archive feed \u2014 not recreated",
+      "path": "/category/prairieville-la/feed/",
+      "sources": [
+        "gsc:Excluded by \u2018noindex\u2019 tag"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/prairieville-la/feed/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/category/pre-emergents/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/pre-emergents/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/category/stickers/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/stickers/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/category/weed/",
+      "sources": [
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/weed/"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress feed/archive feed \u2014 not recreated",
+      "path": "/category/weed/dallis-grass/feed/",
+      "sources": [
+        "gsc:Excluded by \u2018noindex\u2019 tag"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/category/weed/dallis-grass/feed/"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress feed/archive feed \u2014 not recreated",
+      "path": "/comments/feed/",
+      "sources": [
+        "gsc:Excluded by \u2018noindex\u2019 tag"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/comments/feed/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress post",
+      "path": "/common-lawn-insects-in-prairieville/",
+      "sources": [
+        "wordpress_post",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/common-lawn-insects-in-prairieville/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/contact-us/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/contact-us/"
+      ],
+      "migration_priority": "high",
+      "priority_note": "top clicks 59"
+    },
+    {
+      "outcome": "redirected",
+      "status": 301,
+      "redirect_to": "/contact-us/",
+      "notes": "Alias/typo URL \u2192 /contact-us/",
+      "path": "/contact/",
+      "sources": [
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/contact/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/core-aeration/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/core-aeration/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress post",
+      "path": "/creating-a-thriving-centipede-lawn-in-baton-rouge-louisiana/",
+      "sources": [
+        "wordpress_post",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/creating-a-thriving-centipede-lawn-in-baton-rouge-louisiana/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/customer-login-pay-bill/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/customer-login-pay-bill/"
+      ]
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/estimate-request/",
+      "sources": [
+        "gsc:Not found (404)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/estimate-request/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress post",
+      "path": "/excellent-results-with-our-lawn-treatment-program/",
+      "sources": [
+        "wordpress_post",
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/excellent-results-with-our-lawn-treatment-program/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/facebook-estimate-request/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/facebook-estimate-request/"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress feed/archive feed \u2014 not recreated",
+      "path": "/feed/",
+      "sources": [
+        "gsc:Excluded by \u2018noindex\u2019 tag"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/feed/"
+      ]
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/fire-ant-control/",
+      "sources": [
+        "gsc:Not found (404)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/fire-ant-control/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/fire-ant-treatment/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/fire-ant-treatment/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/fire-ant-treatments-baton-rouge/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Discovered - currently not indexed",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/fire-ant-treatments-baton-rouge/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/flower-bed-weed-control-and-fertilization/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/flower-bed-weed-control-and-fertilization/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/gym-member-lawn-care-special/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/gym-member-lawn-care-special/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress post",
+      "path": "/how-to-kill-pickers-stickers-burweed-in-louisiana/",
+      "sources": [
+        "wordpress_post",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/how-to-kill-pickers-stickers-burweed-in-louisiana/",
+        "https://growgreenweedcontrol.com/how-to-kill-pickers-stickers-burweed-in-louisiana/#gg-kill-title",
+        "https://growgreenweedcontrol.com/how-to-kill-pickers-stickers-burweed-in-louisiana/#gg-prevent-title",
+        "https://growgreenweedcontrol.com/how-to-kill-pickers-stickers-burweed-in-louisiana/#gg-identify-title",
+        "https://growgreenweedcontrol.com/how-to-kill-pickers-stickers-burweed-in-louisiana/#gg-calendar-title"
+      ],
+      "migration_priority": "high",
+      "priority_note": "top clicks 408"
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress post",
+      "path": "/importance-of-winterizing-your-lawn-and-pre-emergents-in-south-louisiana/",
+      "sources": [
+        "wordpress_post",
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/importance-of-winterizing-your-lawn-and-pre-emergents-in-south-louisiana/"
+      ]
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/lawn-care-baton-rouge/",
+      "sources": [
+        "gsc:Not found (404)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-care-baton-rouge/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-care-blog/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-care-blog/"
+      ]
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/lawn-care-prairieville/",
+      "sources": [
+        "gsc:Not found (404)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-care-prairieville/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-fertilization-ascension/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-fertilization-ascension/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-fertilization-baton-rouge/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-fertilization-baton-rouge/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-fertilization-denham-springs/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-fertilization-denham-springs/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-fertilization-gonzales/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-fertilization-gonzales/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-fertilization-laplace/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-fertilization-laplace/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-fertilization-lutcher/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-fertilization-lutcher/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-fertilization-plaquemine/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Crawled - currently not indexed",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-fertilization-plaquemine/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-fertilization-prairieville/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-fertilization-prairieville/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-fertilization-weed-control/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-fertilization-weed-control/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-fungus/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-fungus/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-insects/",
+      "sources": [
+        "wordpress_page"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-insects/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-treatment-addis-la/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Discovered - currently not indexed",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatment-addis-la/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-treatment-and-weed-control-in-iberville-parish/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatment-and-weed-control-in-iberville-parish/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-treatment-in-saint-gabriel-la/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Crawled - currently not indexed",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatment-in-saint-gabriel-la/"
+      ]
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/lawn-treatment-prairieville/",
+      "sources": [
+        "gsc:Not found (404)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatment-prairieville/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-treatment-service-in-central-la/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatment-service-in-central-la/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-treatment-service-in-denham-springs-la/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatment-service-in-denham-springs-la/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-treatment-service-in-gonzales-la/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatment-service-in-gonzales-la/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-treatment-service-in-walker-la/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatment-service-in-walker-la/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-treatment-service-prairieville-la/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatment-service-prairieville-la/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-treatment-springfield-la/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatment-springfield-la/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-treatment-west-baton-rouge-la/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatment-west-baton-rouge-la/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-treatments-ascension/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatments-ascension/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-treatments-baton-rouge/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatments-baton-rouge/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/lawn-treatments-livingston-parish/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatments-livingston-parish/"
+      ]
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/lawn-treatments-springfield-la/",
+      "sources": [
+        "gsc:Not found (404)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/lawn-treatments-springfield-la/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/liquid-aeration-quote-request-received/",
+      "sources": [
+        "wordpress_page"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/liquid-aeration-quote-request-received/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/liquid-aeration/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/liquid-aeration/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/mosquito-flea-tick-treatments/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/mosquito-flea-tick-treatments/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/nextdoor-estimate-request/",
+      "sources": [
+        "wordpress_page"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/nextdoor-estimate-request/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/plant-disease-or-pest/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Discovered - currently not indexed",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/plant-disease-or-pest/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/post-card-estimate-request/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/post-card-estimate-request/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/privacy-policy/",
+      "sources": [
+        "wordpress_page"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/privacy-policy/"
+      ]
+    },
+    {
+      "outcome": "redirected",
+      "status": 301,
+      "redirect_to": "/privacy-policy/",
+      "notes": "Alias/typo URL \u2192 /privacy-policy/",
+      "path": "/privacy/",
+      "sources": [
+        "gsc:Page with redirect"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/privacy"
+      ]
+    },
+    {
+      "outcome": "redirected",
+      "status": 301,
+      "redirect_to": "/request-a-quote/",
+      "notes": "Alias/typo URL \u2192 /request-a-quote/",
+      "path": "/request-/",
+      "sources": [
+        "gsc:Page with redirect"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/request-"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/request-a-quote/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/request-a-quote/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/request-an-estimate-facebook-50/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/request-an-estimate-facebook-50/"
+      ]
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/reviews/",
+      "sources": [
+        "gsc:Not found (404)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/reviews/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/services/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/services/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/soil-sample/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/soil-sample/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/baton-rouge/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/baton-rouge/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/brown-patch/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/brown-patch/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/burweed/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/burweed/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/dallis-grass/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/dallis-grass/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/denham-springs/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/denham-springs/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/disease/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/disease/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/fertilization/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/fertilization/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/fertilizer-baton-rouge/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/fertilizer-baton-rouge/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/fertilizer-prairieville-la/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/fertilizer-prairieville-la/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/fertilizer-south-louisiana/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/fertilizer-south-louisiana/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/fungicide/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/fungicide/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/gonzales/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/gonzales/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/herbicide/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/herbicide/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/lawn-care/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/lawn-care/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/lawn-fertilizer/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/lawn-fertilizer/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/lawn-treatment/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/lawn-treatment/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/lawn-treatments/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/lawn-treatments/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/pickers/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/pickers/"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress feed/archive feed \u2014 not recreated",
+      "path": "/tag/pickers/feed/",
+      "sources": [
+        "gsc:Excluded by \u2018noindex\u2019 tag"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/pickers/feed/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/prairieville/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/prairieville/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/pre-emergent/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/pre-emergent/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/pre-emergents/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/pre-emergents/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/stickers/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/stickers/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/thicker-lawns/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/thicker-lawns/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/weed-control/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/weed-control/"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress feed/archive feed \u2014 not recreated",
+      "path": "/tag/weeds/feed/",
+      "sources": [
+        "gsc:Excluded by \u2018noindex\u2019 tag"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/weeds/feed/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/winter-lawn-south-louisiana/",
+      "sources": [
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/winter-lawn-south-louisiana/"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress feed/archive feed \u2014 not recreated",
+      "path": "/tag/winter-lawn-south-louisiana/feed/",
+      "sources": [
+        "gsc:Excluded by \u2018noindex\u2019 tag"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/winter-lawn-south-louisiana/feed/"
+      ]
+    },
+    {
+      "outcome": "retired",
+      "status": 410,
+      "notes": "WP taxonomy archive \u2014 not recreated as thin archive; content lives on posts/pages",
+      "path": "/tag/winter-lawn/",
+      "sources": [
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tag/winter-lawn/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/terms-and-conditions/",
+      "sources": [
+        "wordpress_page"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/terms-and-conditions/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/test/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/test/"
+      ]
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/thank-you-careers/",
+      "sources": [
+        "gsc:Not found (404)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/thank-you-careers/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/thank-you-core-aeration/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/thank-you-core-aeration/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/thank-you-nextdoor/",
+      "sources": [
+        "wordpress_page"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/thank-you-nextdoor/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/thank-you/",
+      "sources": [
+        "wordpress_page"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/thank-you/"
+      ]
+    },
+    {
+      "outcome": "redirected",
+      "status": 301,
+      "redirect_to": "/the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/",
+      "notes": "Alias/typo URL \u2192 /the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/",
+      "path": "/the-ultimate-guide-to-fertilizing-your-lawn-in-south-Louisiana/",
+      "sources": [
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/the-ultimate-guide-to-fertilizing-your-lawn-in-south-Louisiana"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress post",
+      "path": "/the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/",
+      "sources": [
+        "wordpress_post",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/"
+      ],
+      "migration_priority": "high",
+      "priority_note": "top clicks 117"
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/tree-and-shrub-care/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tree-and-shrub-care/"
+      ]
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/tree-shrub-care/",
+      "sources": [
+        "gsc:Not found (404)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tree-shrub-care/"
+      ]
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/tree-shrub-program/",
+      "sources": [
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/tree-shrub-program/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/trucklead/",
+      "sources": [
+        "wordpress_page",
+        "gsc:Discovered - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/trucklead/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/weed-control-ascension/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/weed-control-ascension/"
+      ]
+    },
+    {
+      "outcome": "retained",
+      "status": 200,
+      "notes": "Published WordPress page",
+      "path": "/weed-control-baton-rouge/",
+      "sources": [
+        "wordpress_page",
+        "gsc:performance"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/weed-control-baton-rouge/"
+      ]
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/wp-*.php",
+      "sources": [
+        "gsc:Not found (404)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/wp-*.php"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress administrative or theme asset URL \u2014 do not recreate",
+      "path": "/wp-admin/*/",
+      "sources": [
+        "gsc:Blocked by robots.txt"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/wp-admin/*"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress administrative or theme asset URL \u2014 do not recreate",
+      "path": "/wp-admin/admin-ajax.php",
+      "sources": [
+        "gsc:Blocked due to other 4xx issue"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/wp-admin/admin-ajax.php"
+      ]
+    },
+    {
+      "outcome": "review",
+      "status": null,
+      "notes": "Seen in Search Console or references; map during implementation",
+      "path": "/wp-content/*/",
+      "sources": [
+        "gsc:Not found (404)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/wp-content/*"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress administrative or theme asset URL \u2014 do not recreate",
+      "path": "/wp-content/themes/Divi/includes/builder/frontend-builder/assets/vendors/",
+      "sources": [
+        "gsc:Blocked due to access forbidden (403)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/wp-content/themes/Divi/includes/builder/frontend-builder/assets/vendors"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress administrative or theme asset URL \u2014 do not recreate",
+      "path": "/wp-content/themes/Divi/includes/builder/images/",
+      "sources": [
+        "gsc:Blocked due to access forbidden (403)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/wp-content/themes/Divi/includes/builder/images"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress administrative or theme asset URL \u2014 do not recreate",
+      "path": "/wp-json/ggwc/v1/website-lead/",
+      "sources": [
+        "gsc:Not found (404)"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/wp-json/ggwc/v1/website-lead"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress administrative or theme asset URL \u2014 do not recreate",
+      "path": "/wp-json/wp/v2/posts/",
+      "sources": [
+        "gsc:Blocked due to other 4xx issue",
+        "gsc:Crawled - currently not indexed"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/wp-json/wp/v2/posts?per_page=5&_embed&categories=%3CCATEGORY_ID%3E",
+        "https://growgreenweedcontrol.com/wp-json/wp/v2/posts?per_page=3&_embed",
+        "https://growgreenweedcontrol.com/wp-json/wp/v2/posts?per_page=9&_embed"
+      ]
+    },
+    {
+      "outcome": "intentionally_excluded",
+      "status": 410,
+      "notes": "WordPress administrative or theme asset URL \u2014 do not recreate",
+      "path": "/wp-login.php",
+      "sources": [
+        "gsc:Excluded by \u2018noindex\u2019 tag"
+      ],
+      "absolute_examples": [
+        "https://growgreenweedcontrol.com/wp-login.php"
+      ]
+    }
+  ]
+}

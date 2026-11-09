@@ -1,0 +1,71 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build / caches
+dist/
+.astro/
+.cache/
+.vite/
+.turbo/
+coverage/
+.pytest_cache/
+__pycache__/
+*.pyc
+.sass-cache/
+.tmp/
+.temp/
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+**/secrets/**
+
+# Google reviews OAuth tokens + temporary review cache (never commit)
+.data/
+.data/**
+
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Raw source archives & exports (preserve locally, never commit)
+website-media.zip
+website-media/
+*.WordPress*.xml
+ggwc-crm-lead-proxy*.php
+form page code.txt
+careers page code.txt
+tmp-careers-openings.json
+https___growgreenweedcontrol.com_*.xlsx
+Design-References/
+
+# Large regenerable GIS source for parish map (run scripts/generate-la-parish-map.mjs)
+scripts/la-parishes-source.json
+
+# Intermediate extraction (regenerable; may be large)
+_source_extract/
+docs/_indexing_raw.json
+docs/image-catalog-raw.json
+docs/indexing-inventory.json
+
+# Generated image derivatives cache (committed curated public assets only)
+.media-work/
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Local Lighthouse lab output
+.lighthouse/
+
+
+.migration-work/
+

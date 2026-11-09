@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TreeShrubCarePage from "../components/TreeShrubCarePage.astro";
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Tree & Shrub Care | Grow Green Weed Control – Seasonal Ornamental Program"
+  description="Six-visit tree and shrub care for South Louisiana landscapes—seasonal monitoring, targeted pest and disease management, and plant nutrition. Free local estimate."
+  canonicalPath="/tree-and-shrub-care/"
+>
+  <link slot="head" rel="preload" as="image" href="/images/services/tree-shrub-hero-800.webp" fetchpriority="high" />
+  <TreeShrubCarePage />
+</BaseLayout>

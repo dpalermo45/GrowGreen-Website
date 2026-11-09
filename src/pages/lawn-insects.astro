@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LawnInsectsPage from "../components/LawnInsectsPage.astro";
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Lawn Insect Control | Grow Green Weed Control – Chinch Bugs, Armyworms & More"
+  description="Targeted lawn insect evaluation and treatment for chinch bugs, armyworms, sod webworms, and mole crickets in South Louisiana. Evidence first—then the right response."
+  canonicalPath="/lawn-insects/"
+>
+  <link slot="head" rel="preload" as="image" href="/images/services/lawn-insects-damage-720.webp" fetchpriority="high" />
+  <LawnInsectsPage />
+</BaseLayout>

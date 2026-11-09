@@ -1,0 +1,186 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  /** Dark forest hero band (closer to homepage CTA language) */
+  tone?: "light" | "forest";
+  /** @deprecated Prefer eyebrow — logo already brands the site */
+  brandSignal?: string;
+}
+
+const { eyebrow, title, lead, brandSignal, tone = "light" } = Astro.props;
+const showEyebrow = eyebrow || (brandSignal ? "Grow Green Weed Control" : undefined);
+const hasActions = Astro.slots.has("actions");
+---
+
+{/*
+  Shared page hero.
+  - Default slot: optional misc content under the lead (parent links, notes).
+  - Named `actions` slot: CTA row (buttons/links). Spacing is handled here—
+    pass bare anchors/buttons; they wrap in `.hero-actions`.
+*/}
+<section class:list={["page-hero", tone === "forest" && "page-hero--forest"]}>
+  <div class="container motion-rise">
+    {showEyebrow && (
+      <p class:list={["page-hero__eyebrow", tone === "forest" && "page-hero__eyebrow--light"]}>
+        {showEyebrow}
+      </p>
+    )}
+    <h1 set:html={title} />
+    {lead && <p class="lead hero-lead">{lead}</p>}
+    <slot />
+    {
+      hasActions && (
+        <div class="hero-actions">
+          <slot name="actions" />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding: clamp(2.55rem, 5.4vw, 3.65rem) 0 clamp(2.15rem, 4.2vw, 3rem);
+    background:
+      radial-gradient(circle at 94% 6%, rgba(242, 170, 43, 0.16), transparent 26%),
+      radial-gradient(circle at 6% 88%, rgba(47, 122, 67, 0.11), transparent 34%),
+      radial-gradient(circle at 48% -8%, rgba(255, 255, 255, 0.7), transparent 42%),
+      linear-gradient(180deg, #eef5ef 0%, #f7faf7 44%, #ffffff 100%);
+    border-bottom: 1px solid rgba(22, 56, 37, 0.08);
+    overflow: hidden;
+  }
+  /* Soft diagonal hatch — atmosphere without competing with type */
+  .page-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.45;
+    background:
+      repeating-linear-gradient(
+        -18deg,
+        transparent 0 14px,
+        rgba(22, 56, 37, 0.018) 14px 15px
+      );
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 88%);
+  }
+  .page-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    z-index: 1;
+    background: linear-gradient(90deg, var(--gold) 0 30%, var(--green-700) 30% 100%);
+  }
+  .page-hero .container {
+    position: relative;
+    z-index: 1;
+  }
+  /* Parish / Core style gold rule + warm eyebrow */
+  .page-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0 0 0.9rem;
+    color: #8a5a10;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .page-hero__eyebrow::before {
+    content: "";
+    width: 1.6rem;
+    height: 3px;
+    flex: 0 0 1.6rem;
+    border-radius: 999px;
+    background: var(--gold);
+  }
+  .page-hero__eyebrow--light {
+    color: #f0d48a;
+  }
+  .page-hero__eyebrow--light::before {
+    width: 1.35rem;
+    flex-basis: 1.35rem;
+    height: 2px;
+    background: var(--gold-soft);
+  }
+  .page-hero h1 {
+    font-size: clamp(2.1rem, 4.2vw, 3.25rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    max-width: 16ch;
+    margin: 0 0 0.65rem;
+    color: var(--green-900);
+    text-wrap: balance;
+  }
+  .hero-lead {
+    margin-top: 0;
+    margin-bottom: 0;
+    max-width: 40rem;
+    color: #3f5347;
+    font-size: clamp(1.02rem, 1.45vw, 1.12rem);
+    line-height: 1.62;
+  }
+  /* CTA row — named `actions` slot, or authors can use .hero-actions in default slot */
+  .hero-actions,
+  .page-hero :global(.hero-actions) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.4rem;
+  }
+  /* Allow a single wrapper div inside the actions slot without breaking the flex row */
+  .hero-actions > :global(div:only-child) {
+    display: contents;
+  }
+  .page-hero :global(.hero-actions) + :global(*),
+  .hero-actions + :global(*) {
+    margin-top: 1rem;
+  }
+  /* Misc default-slot content (e.g. parent link) sits under lead with breathing room */
+  .hero-lead + :global(:not(.hero-actions)) {
+    margin-top: 1rem;
+  }
+  @media (max-width: 640px) {
+    .page-hero h1 {
+      max-width: none;
+    }
+  }
+  .page-hero--forest {
+    background:
+      radial-gradient(circle at 88% 10%, rgba(77, 168, 95, 0.22), transparent 28%),
+      radial-gradient(circle at 12% 90%, rgba(242, 170, 43, 0.1), transparent 32%),
+      linear-gradient(135deg, #06180e 0%, #0b2817 52%, #124024 100%);
+    border-bottom: 0;
+    color: #fff;
+  }
+  .page-hero--forest::after {
+    opacity: 0.28;
+    background:
+      repeating-linear-gradient(
+        -18deg,
+        transparent 0 16px,
+        rgba(255, 255, 255, 0.035) 16px 17px
+      );
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 90%);
+  }
+  .page-hero--forest::before {
+    background: var(--gold);
+    width: 34%;
+    left: auto;
+    right: 0;
+    height: 5px;
+  }
+  .page-hero--forest h1 {
+    color: #fff;
+  }
+  .page-hero--forest .hero-lead {
+    color: #dce8df;
+  }
+</style>

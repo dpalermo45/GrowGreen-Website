@@ -1,0 +1,117 @@
+{
+  "wordpress": {
+    "published_pages": 56,
+    "published_posts": 8,
+    "attachment_records": 303,
+    "attachments_found_locally": 303,
+    "attachments_missing": 0
+  },
+  "service_areas_count": 40,
+  "service_areas": [
+    "St. Amant",
+    "Prairieville",
+    "Gonzales",
+    "Geismar",
+    "Dutchtown",
+    "Sorrento",
+    "Baton Rouge",
+    "Denham Springs",
+    "Walker",
+    "Central",
+    "Zachary",
+    "Donaldsonville",
+    "Paulina",
+    "Lutcher",
+    "Gramercy",
+    "Metairie",
+    "Kenner",
+    "Madisonville",
+    "Covington",
+    "Hammond",
+    "Ponchatoula",
+    "Springfield",
+    "Addis",
+    "Brusly",
+    "Port Allen",
+    "St. George",
+    "Livingston",
+    "Port Vincent",
+    "Baker",
+    "Watson",
+    "Albany",
+    "Mandeville",
+    "Killian",
+    "Maurepas",
+    "LaPlace",
+    "Convent",
+    "Darrow",
+    "White Castle",
+    "Plaquemine",
+    "Saint Gabriel"
+  ],
+  "url_manifest_count": 138,
+  "indexing_workbooks": [
+    {
+      "file": "https___growgreenweedcontrol.com_-Coverage-2026-11-05.xlsx",
+      "category": "Coverage summary \u2014 all known pages",
+      "url_count": 0
+    },
+    {
+      "file": "https___growgreenweedcontrol.com_-Coverage-Drilldown-2026-11-05 (1).xlsx",
+      "category": "Excluded by \u2018noindex\u2019 tag",
+      "url_count": 12
+    },
+    {
+      "file": "https___growgreenweedcontrol.com_-Coverage-Drilldown-2026-11-05 (2).xlsx",
+      "category": "Blocked due to other 4xx issue",
+      "url_count": 2
+    },
+    {
+      "file": "https___growgreenweedcontrol.com_-Coverage-Drilldown-2026-11-05 (3).xlsx",
+      "category": "Blocked due to access forbidden (403)",
+      "url_count": 2
+    },
+    {
+      "file": "https___growgreenweedcontrol.com_-Coverage-Drilldown-2026-11-05 (4).xlsx",
+      "category": "Page with redirect",
+      "url_count": 2
+    },
+    {
+      "file": "https___growgreenweedcontrol.com_-Coverage-Drilldown-2026-11-05 (5).xlsx",
+      "category": "Alternate page with proper canonical tag",
+      "url_count": 2
+    },
+    {
+      "file": "https___growgreenweedcontrol.com_-Coverage-Drilldown-2026-11-05 (6).xlsx",
+      "category": "Blocked by robots.txt",
+      "url_count": 1
+    },
+    {
+      "file": "https___growgreenweedcontrol.com_-Coverage-Drilldown-2026-11-05 (7).xlsx",
+      "category": "Crawled - currently not indexed",
+      "url_count": 24
+    },
+    {
+      "file": "https___growgreenweedcontrol.com_-Coverage-Drilldown-2026-11-05 (8).xlsx",
+      "category": "Discovered - currently not indexed",
+      "url_count": 36
+    },
+    {
+      "file": "https___growgreenweedcontrol.com_-Coverage-Drilldown-2026-11-05.xlsx",
+      "category": "Not found (404)",
+      "url_count": 13
+    },
+    {
+      "file": "https___growgreenweedcontrol.com_-Performance-on-Search-2026-11-05.xlsx",
+      "category": "Search performance (July 2025\u2013Nov 2026 window per Filters)",
+      "url_count": 0
+    }
+  ],
+  "performance_top4_verified": true,
+  "form_page_code_txt": "empty \u2014 reconstruct from PHP proxy + live page patterns in WP content",
+  "notes": [
+    "Attachment status in XML is inherit (303), matching WordPress attachment publish model.",
+    "website-media.zip preserved; website-media/uploads already extracted \u2014 do not re-extract blindly.",
+    "Do not invent review ratings, customer counts, guarantees, or contract terms from screenshots."
+  ]
+}

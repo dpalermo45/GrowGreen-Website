@@ -1,0 +1,66 @@
+{
+  "listReviewsPage1": {
+    "averageRating": 4.8,
+    "totalReviewCount": 42,
+    "nextPageToken": "page-2",
+    "reviews": [
+      {
+        "reviewId": "r1",
+        "reviewer": { "displayName": "Alex P." },
+        "starRating": "FIVE",
+        "comment": "Showed up when promised and did an excellent job on the first application.",
+        "createTime": "2026-01-10T15:00:00Z",
+        "updateTime": "2026-01-10T15:00:00Z"
+      },
+      {
+        "reviewId": "r2",
+        "reviewer": { "displayName": "Jordan K." },
+        "starRating": "TWO",
+        "comment": "Communication was slow on a follow-up visit.",
+        "createTime": "2025-12-01T12:00:00Z",
+        "updateTime": "2025-12-02T12:00:00Z"
+      }
+    ]
+  },
+  "listReviewsPage2": {
+    "averageRating": 4.8,
+    "totalReviewCount": 42,
+    "reviews": [
+      {
+        "reviewId": "r3",
+        "reviewer": { "displayName": "Sam R." },
+        "starRating": "FOUR",
+        "comment": "Lawn looks better after a few visits.",
+        "createTime": "2025-11-01T12:00:00Z",
+        "updateTime": "2025-11-01T12:00:00Z"
+      }
+    ]
+  },
+  "accounts": {
+    "accounts": [{ "name": "accounts/111", "accountName": "Grow Green Weed Control", "type": "PERSONAL" }]
+  },
+  "locations": {
+    "locations": [
+      {
+        "name": "locations/222",
+        "title": "Grow Green Weed Control",
+        "storefrontAddress": {
+          "addressLines": ["14464 L Keller Rd"],
+          "locality": "St. Amant",
+          "administrativeArea": "LA",
+          "postalCode": "70774"
+        }
+      },
+      {
+        "name": "locations/333",
+        "title": "Other Location",
+        "storefrontAddress": {
+          "addressLines": ["1 Other St"],
+          "locality": "Baton Rouge",
+          "administrativeArea": "LA",
+          "postalCode": "70801"
+        }
+      }
+    ]
+  }
+}

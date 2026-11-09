@@ -1,0 +1,668 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { site } from "../data/site";
+import { coverageFaqAnswer, areaServedSchema } from "../data/service-areas";
+import "../styles/flower-bed-weed-control.css";
+
+const source = "Flower Bed Weed Control Page";
+const leadSource = "Website - Flower Bed Weed Control Page";
+
+const bedPhotos = {
+  hero: {
+    slug: "front-bed-pine-straw-white-home",
+    alt: "Curved pine-straw flower bed with shrubs and flowers in front of a white residential home",
+    caption: "Front-yard bed with pine straw and layered shrubs",
+  },
+  featured: {
+    slug: "mulched-bed-crepe-myrtle-brick-home",
+    alt: "Freshly mulched residential flower bed with a crepe myrtle and evergreen shrubs along a brick home",
+    caption: "Mulched bed with crepe myrtle and foundation shrubs",
+  },
+  gallery: [
+    {
+      slug: "mulched-hedge-bed-lawn-treatment-sign",
+      alt: "Clean mulched flower bed with a trimmed hedge and Grow Green lawn treatment yard sign in the front turf",
+      caption: "Maintained hedge bed with Grow Green yard sign",
+    },
+    {
+      slug: "curved-bed-white-flowers-driveway",
+      alt: "Curved residential flower bed filled with white flowering plants beside a green lawn and driveway",
+      caption: "Curved bed with dense white seasonal flowers",
+    },
+    {
+      slug: "pine-straw-bed-crape-myrtle-mailbox",
+      alt: "Pine-straw landscaped bed with pink crape myrtle blooms, purple groundcover, and a mailbox at the sidewalk",
+      caption: "Pine-straw bed with flowering crape myrtles",
+    },
+    {
+      slug: "front-bed-hedge-edge-white-brick",
+      alt: "Residential flower bed with reddish mulch, flowering plants, and a low hedge edge beside a white brick home",
+      caption: "Hedge-edged bed with seasonal plantings",
+    },
+  ],
+} as const;
+
+function bedSrc(slug: string, width: 480 | 640 | 960): string {
+  return `/images/services/flower-beds/${slug}-${width}.webp`;
+}
+function bedSrcSet(slug: string): string {
+  return `${bedSrc(slug, 480)} 480w, ${bedSrc(slug, 640)} 640w, ${bedSrc(slug, 960)} 960w`;
+}
+function bedJpg(slug: string): string {
+  return `/images/services/flower-beds/${slug}-960.jpg`;
+}
+
+const introChecks = [
+  "Mulch, rock, pine straw & mixed beds",
+  "Treatment around flowers and shrubs",
+  "Pre-emergent weed suppression",
+  "Bed fertilization when selected",
+] as const;
+
+const program = [
+  {
+    n: "01",
+    title: "Control visible weeds",
+    body: "We identify active weeds and use targeted post-emergent applications where the label and surrounding plant material allow. Difficult or mature weeds may require more than one treatment.",
+  },
+  {
+    n: "02",
+    title: "Suppress the next wave",
+    body: "Pre-emergent creates a preventive barrier that reduces many weeds before they germinate. It is a major advantage over pulling alone, though no barrier stops every weed.",
+  },
+  {
+    n: "03",
+    title: "Support desirable plants",
+    body: "When bed fertilization is part of your plan, we apply appropriate nutrients to support color and healthy growth—without a one-size-fits-all blanket application.",
+  },
+] as const;
+
+const weeds = ["Spurge", "Chamberbitter", "Dollarweed", "Nutsedge", "Oxalis", "Grassy invaders"] as const;
+
+const expectations = [
+  {
+    title: "Care before application",
+    body: "We consider desirable plants, bed material, weed maturity, moisture, and weather before choosing a treatment.",
+  },
+  {
+    title: "Progress—not an overnight promise",
+    body: "Many weeds decline gradually. Tough, mature, or newly germinating weeds can require follow-up treatment.",
+  },
+  {
+    title: "Prevention needs consistency",
+    body: "Pre-emergent reduces future germination, but weather, soil disturbance, and weed type can affect performance.",
+  },
+  {
+    title: "Communication after service",
+    body: "You receive applicable instructions and can contact our local office if something needs another look.",
+  },
+] as const;
+
+const steps = [
+  {
+    n: "01",
+    title: "Request an estimate",
+    body: "Send the service address and tell us what you are seeing in your beds.",
+  },
+  {
+    n: "02",
+    title: "We review the property",
+    body: "Our local team evaluates the bed layout, size, condition, and service needs.",
+  },
+  {
+    n: "03",
+    title: "Approve clear pricing",
+    body: "You receive straightforward recommendations and pricing without pressure.",
+  },
+  {
+    n: "04",
+    title: "We maintain the results",
+    body: "Scheduled visits help control active weeds and keep prevention working.",
+  },
+] as const;
+
+const whyCards = [
+  {
+    title: "Licensed & insured",
+    body: "Professional products are applied according to their labels by a trained local team.",
+  },
+  {
+    title: "Clear communication",
+    body: "Service updates, applicable instructions, and a real local office when you need help.",
+  },
+  {
+    title: "Results-focused service",
+    body: "We explain what treatment can reasonably accomplish before you approve anything.",
+  },
+  {
+    title: "Louisiana focused",
+    body: "Recommendations built around local plants, weeds, heat, humidity, and long growing seasons.",
+  },
+] as const;
+
+const bedTypes = [
+  "Not sure",
+  "Mulch",
+  "Pine straw",
+  "Rock / gravel",
+  "Bare soil",
+  "Mixed bed materials",
+] as const;
+
+const helpNeeded = [
+  "Ongoing flower bed weed control",
+  "Flower bed weed control and fertilization",
+  "One-time weed control estimate",
+  "Not sure — recommend the right plan",
+] as const;
+
+const faqs = [
+  {
+    q: "Will treatment hurt my flowers or shrubs?",
+    a: "We identify the desirable plants and use precision application methods and products only where their labels allow. Because ornamentals vary in sensitivity, the technician may avoid certain areas or recommend a different approach when treatment would create unnecessary risk.",
+  },
+  {
+    q: "Does pre-emergent stop every weed?",
+    a: "No. Pre-emergent can reduce many weeds before they germinate, but it does not control every species and it does not kill weeds that are already growing. Weather, irrigation, soil disturbance, and bed condition can also affect performance.",
+  },
+  {
+    q: "How quickly will existing weeds die?",
+    a: "Timing depends on the weed, product, growth stage, and weather. Some weeds show symptoms within days, while others decline more slowly or require a follow-up treatment. We avoid promising an overnight result that the biology cannot support.",
+  },
+  {
+    q: "Do I need to pull the weeds before the first visit?",
+    a: "Usually, no. Leave the weeds in place until we evaluate them unless our office tells you otherwise. Foliage can help with identification and may be needed for certain post-emergent treatments to work effectively.",
+  },
+  {
+    q: "Do you hand-pull weeds, install mulch, or trim plants?",
+    a: "Our standard service focuses on professional weed-control applications, prevention, and selected plant nutrition. Routine hand-weeding, mulching, edging, pruning, and landscape installation are not included unless they appear as a separate item on your quote.",
+  },
+  {
+    q: "How often should flower beds be treated?",
+    a: "That depends on the bed material, weed pressure, season, irrigation, and how clean you want the beds to remain. Ongoing service generally provides more consistent prevention than occasional one-time treatments. We will recommend a practical schedule after reviewing the property.",
+  },
+  {
+    q: "What about children and pets?",
+    a: "We apply products according to their labels and provide any applicable re-entry instructions after service. Keep people and pets away from treated areas until the stated re-entry condition—often once the application is dry—has been met.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Flower Bed Weed Control and Fertilization",
+  url: "https://growgreenweedcontrol.com/flower-bed-weed-control-and-fertilization/",
+  image: `https://growgreenweedcontrol.com${bedJpg(bedPhotos.hero.slug)}`,
+  description:
+    "Professional flower bed weed control, pre-emergent prevention, and optional fertilization for landscaped beds across 40 South Louisiana communities.",
+  serviceType: "Flower Bed Weed Control and Fertilization",
+  provider: {
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    logo: "https://growgreenweedcontrol.com/images/brand/logo.png",
+    telephone: site.phoneTel,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.city,
+      addressRegion: site.address.state,
+      postalCode: site.address.zip,
+      addressCountry: "US",
+    },
+  },
+  areaServed: areaServedSchema(),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://growgreenweedcontrol.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Services",
+      item: "https://growgreenweedcontrol.com/services/",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Flower Bed Weed Control",
+      item: "https://growgreenweedcontrol.com/flower-bed-weed-control-and-fertilization/",
+    },
+  ],
+};
+---
+
+<div class="beds-page" data-beds-page>
+  <header class="beds-hero beds-hero--photo">
+    <div class="beds-hero__media" aria-hidden="true">
+      <img
+        src={bedJpg(bedPhotos.hero.slug)}
+        srcset={bedSrcSet(bedPhotos.hero.slug)}
+        sizes="100vw"
+        width="480"
+        height="640"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="beds-hero__shade" aria-hidden="true"></div>
+    <div class="f-inner beds-hero__grid">
+      <div class="beds-motion">
+        <div class="beds-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <p class="beds-hero__eyebrow">Firefighter-owned · South Louisiana local</p>
+        <h1>Flower beds that stay <em>cleaner, longer.</em></h1>
+        <p class="beds-hero__lead">
+          Professional flower bed weed control and fertilization for mulch, rock, pine straw, and landscaped
+          beds—carefully applied around the plants you want to keep.
+        </p>
+        <div class="beds-hero__actions">
+          <a class="f-btn f-btn--gold" href="#beds-quote">Get my free estimate →</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+        <ul class="beds-hero__notes" aria-label="Service highlights">
+          <li>Pre- & post-emergent control</li>
+          <li>Precision applications</li>
+          <li>Local office support</li>
+        </ul>
+      </div>
+      <div class="beds-hero__visual beds-motion">
+        <img
+          class="beds-hero__mascot"
+          src="/images/mascot/backpack-sprayer-320.webp"
+          srcset="/images/mascot/backpack-sprayer-216.webp 216w, /images/mascot/backpack-sprayer-320.webp 320w, /images/mascot/backpack-sprayer-480.webp 480w"
+          sizes="180px"
+          width="320"
+          height="380"
+          alt=""
+          decoding="async"
+        />
+        <p class="beds-hero__caption">Let Grow Green handle the weeds in the beds around your home</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="beds-proof f-inner" aria-label="Grow Green credentials">
+    <div class="beds-proof__item">
+      <strong>Family-owned</strong>
+      <span>Local decisions, local service</span>
+    </div>
+    <div class="beds-proof__item">
+      <strong>Firefighter-owned</strong>
+      <span>Built in St. Amant, Louisiana</span>
+    </div>
+    <div class="beds-proof__item">
+      <strong>Licensed & insured</strong>
+      <span>Professional residential applications</span>
+    </div>
+    <div class="beds-proof__item">
+      <strong>Maintenance focus</strong>
+      <span>Weed control—not landscaping installs</span>
+    </div>
+  </div>
+
+  <section class="f-section beds-guide beds-guide--cream" aria-labelledby="beds-why-title">
+    <div class="f-inner">
+      <div class="beds-guide__intro">
+        <p class="f-kicker">Bed-care benefits</p>
+        <h2 class="f-title" id="beds-why-title">Local care for beds that stay cleaner.</h2>
+        <p class="f-lead beds-guide__lead">
+          We are a South Louisiana treatment company—not a national franchise and not a landscaping crew adding weed
+          control on the side. Your property is cared for by a local team that understands our climate, applies
+          professional products carefully around desirable plants, and answers when you call.
+        </p>
+      </div>
+      <div class="beds-guide__grid">
+        {
+          whyCards.map((card) => (
+            <article class="beds-guide__card">
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section beds-program" aria-labelledby="beds-program-title">
+    <div class="f-inner">
+      <div class="beds-program__head">
+        <div>
+          <p class="f-kicker">A smarter bed-care strategy</p>
+          <h2 class="f-title" id="beds-program-title">Control. Prevent. Feed.</h2>
+          <p class="f-lead beds-guide__lead">
+            Each property is evaluated before treatment, then the right combination is selected for the weeds, bed
+            material, desirable plants, and season—so care stays practical for South Louisiana’s long growing season.
+          </p>
+        </div>
+        <img
+          class="beds-program__mascot"
+          src="/images/mascot/bed-spot-treat-320.webp"
+          srcset="/images/mascot/bed-spot-treat-216.webp 216w, /images/mascot/bed-spot-treat-320.webp 320w, /images/mascot/bed-spot-treat-480.webp 480w"
+          sizes="220px"
+          width="220"
+          height="330"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="beds-program__grid">
+        {
+          program.map((card) => (
+            <article class="beds-program__card">
+              <span class="beds-program__num">{card.n}</span>
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="beds-program__note">
+        Product selection and treatment timing vary by plant species, weed pressure, weather, bed condition, and label
+        requirements. Your technician will explain any special preparation or re-entry instructions.
+      </p>
+    </div>
+  </section>
+
+  <section class="f-section beds-process" aria-labelledby="beds-process-title">
+    <div class="f-inner">
+      <p class="f-kicker f-kicker--light f-center">Simple from the start</p>
+      <h2 class="f-title f-center" id="beds-process-title">From weedy beds to a clear plan.</h2>
+      <p class="f-lead f-center">
+        No confusing package maze. We gather the details, review the beds, and give you a clear recommendation.
+      </p>
+      <div class="beds-steps">
+        {
+          steps.map((step) => (
+            <article class="beds-step">
+              <span class="beds-step__num">{step.n}</span>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="beds-expect__grid">
+        <article class="beds-expect__card beds-expect__card--yes">
+          <h3>Before we arrive</h3>
+          <ul>
+            <li>Leave weeds in place unless our office asks otherwise—foliage helps identification and treatment</li>
+            <li>Unlock gates and clear toys, hoses, and pet waste from bed edges and walkways</li>
+            <li>Tell us about sensitive plants, recent plantings, or areas you do not want treated</li>
+          </ul>
+        </article>
+        <article class="beds-expect__card beds-expect__card--no">
+          <h3>After we leave</h3>
+          <ul>
+            <li>Follow any re-entry instructions before people or pets return to treated beds</li>
+            <li>Expect gradual progress—tough or mature weeds may need follow-up</li>
+            <li>Hand-pulling, mulching, and pruning are not included unless separately quoted</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section beds-honesty beds-guide--cream" aria-labelledby="beds-intro-title">
+    <div class="f-inner beds-diag__grid">
+      <figure class="beds-visual">
+        <img
+          src={bedJpg(bedPhotos.featured.slug)}
+          srcset={bedSrcSet(bedPhotos.featured.slug)}
+          sizes="(max-width: 900px) 90vw, 420px"
+          width="480"
+          height="640"
+          alt={bedPhotos.featured.alt}
+          title={bedPhotos.featured.caption}
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="beds-visual__badge">
+          <strong>Clean beds finish the yard.</strong>
+          <span>Professional prevention and targeted control keep weeds from becoming the focal point.</span>
+        </figcaption>
+      </figure>
+      <div>
+        <p class="f-kicker">Honest limits</p>
+        <h2 class="f-title" id="beds-intro-title">What this service is—and isn’t.</h2>
+        <p class="f-lead beds-guide__lead">
+          Pulling weeds provides a quick reset, but it does little to slow the next wave. Grow Green combines careful
+          control of visible weeds with a preventive strategy designed for South Louisiana’s long growing season.
+        </p>
+        <ul class="beds-checks">
+          {
+            introChecks.map((item, i) => (
+              <li>
+                <span class="beds-checks__num" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <div>
+                  <strong>{item}</strong>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="beds-note">
+          <strong>Built for maintenance—not landscaping.</strong> We focus on professional weed control and plant
+          nutrition. Routine hand-pulling, mulching, pruning, edging, and bed installation are not included unless
+          specifically quoted.
+        </div>
+      </div>
+    </div>
+
+    <div class="f-inner beds-photo-gallery" aria-labelledby="beds-gallery-title">
+      <div class="beds-photo-gallery__head">
+        <p class="f-kicker">Real bed photography</p>
+        <h2 class="f-title" id="beds-gallery-title">South Louisiana beds we help keep cleaner.</h2>
+        <p class="f-lead beds-guide__lead">
+          Owner photos of residential mulch, pine-straw, and hedge beds—used to show the kind of landscapes this
+          service supports. Results vary by weeds, plants, weather, and follow-up care.
+        </p>
+      </div>
+      <div class="beds-photo-gallery__grid">
+        {
+          bedPhotos.gallery.map((photo) => (
+            <figure class="beds-photo-gallery__item">
+              <img
+                src={bedJpg(photo.slug)}
+                srcset={bedSrcSet(photo.slug)}
+                sizes="(min-width: 900px) 22vw, 45vw"
+                width="480"
+                height="640"
+                alt={photo.alt}
+                title={photo.caption}
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>{photo.caption}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section beds-expect" aria-labelledby="beds-targets-title">
+    <div class="f-inner beds-diag__grid">
+      <div>
+        <p class="f-kicker">Common South Louisiana problems</p>
+        <h2 class="f-title" id="beds-targets-title">Weed pressure varies.</h2>
+        <p class="f-lead beds-guide__lead">
+          Broadleaf weeds, sedges, and unwanted grasses respond differently. Identification matters—especially when the
+          weed is growing beside a flower, shrub, or groundcover you want protected.
+        </p>
+        <div class="beds-chips" aria-label="Common weeds targeted">
+          {weeds.map((w) => <span class="beds-chip">{w}</span>)}
+        </div>
+        <a class="f-btn f-btn--green" href="#beds-quote">Tell us about your beds →</a>
+      </div>
+      <aside class="beds-expect-card" aria-labelledby="beds-expectations-title">
+        <h3 id="beds-expectations-title">What good service should look like</h3>
+        <p>Clear expectations create better results and fewer surprises.</p>
+        <ul class="beds-expect-list">
+          {
+            expectations.map((item, i) => (
+              <li>
+                <span class="beds-expect-mark">{i + 1}</span>
+                <div>
+                  <strong>{item.title}</strong>
+                  <span>{item.body}</span>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="f-section beds-faq" aria-labelledby="beds-faq-title">
+    <div class="f-inner beds-local__grid">
+      <div>
+        <p class="f-kicker">Straight answers</p>
+        <h2 class="f-title" id="beds-faq-title">Flower bed service FAQs</h2>
+        <p class="f-lead">Still unsure whether this is the right service? Our local office can help.</p>
+        <a class="f-btn f-btn--green" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+      </div>
+      <div class="beds-faq__list">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section beds-quote" id="beds-quote" aria-labelledby="beds-quote-title">
+    <div class="f-inner beds-quote__grid">
+      <div>
+        <p class="f-kicker f-kicker--light">Free flower bed estimate</p>
+        <h2 class="f-title" id="beds-quote-title">Let’s clean up those beds.</h2>
+        <p class="f-lead">
+          Tell us where the property is and what the beds need. Our local team will review the details and prepare
+          straightforward pricing.
+        </p>
+        <ul class="beds-quote__benefits">
+          <li>No pressure or obligation</li>
+          <li>Most quote requests reviewed during business hours, {site.hours.label}</li>
+          <li>Your information goes directly to Grow Green</li>
+        </ul>
+        <p class="beds-quote__chip" aria-hidden="true">Service noted: Flower Bed Weed Control & Fertilization</p>
+        <a class="beds-quote__phone" href={`tel:${site.phoneTel}`}>
+          <span>Prefer to talk?</span>
+          <strong>Call {site.phone}</strong>
+        </a>
+      </div>
+      <div>
+        <div class="beds-picks" data-beds-picks>
+          <div>
+            <label for="beds-bed-type">What kind of beds do you have?</label>
+            <select id="beds-bed-type" data-bed-type>
+              {bedTypes.map((opt) => <option value={opt}>{opt}</option>)}
+            </select>
+          </div>
+          <div>
+            <label for="beds-help-needed">What would you like help with?</label>
+            <select id="beds-help-needed" data-help-needed>
+              {helpNeeded.map((opt) => <option value={opt}>{opt}</option>)}
+            </select>
+          </div>
+        </div>
+        <QuoteForm
+          source={source}
+          leadSource={leadSource}
+          heading="Request your free estimate"
+          subheading="Share the service address and anything about weed pressure, gates, or plant sensitivity that will help us prepare your quote."
+          compact
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="beds-final" aria-label="Request a flower bed weed control estimate">
+    <div class="f-inner">
+      <div class="beds-final__card">
+        <div>
+          <h2>Give the whole landscape a cleaner finish.</h2>
+          <p>
+            Let Grow Green build a practical weed-control plan for the beds around your home—with clear expectations and
+            no high-pressure sales pitch.
+          </p>
+        </div>
+        <div class="beds-final__actions">
+          <a class="f-btn f-btn--gold" href="#beds-quote">Get my free estimate</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-beds-page]");
+  if (root) {
+    const notes = root.querySelector<HTMLTextAreaElement>('textarea[name="notes"]');
+    const bedType = root.querySelector<HTMLSelectElement>("[data-bed-type]");
+    const helpNeeded = root.querySelector<HTMLSelectElement>("[data-help-needed]");
+    const SERVICE = "Service requested: Flower Bed Weed Control & Fertilization";
+
+    function syncNotes() {
+      if (!notes) return;
+      const lines = (notes.value || "")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .filter(
+          (line) =>
+            !line.startsWith("Service requested:") &&
+            !line.startsWith("Bed material:") &&
+            !line.startsWith("Help needed:"),
+        );
+      lines.unshift(SERVICE);
+      if (bedType?.value) lines.push(`Bed material: ${bedType.value}`);
+      if (helpNeeded?.value) lines.push(`Help needed: ${helpNeeded.value}`);
+      notes.value = lines.join("\n");
+    }
+
+    bedType?.addEventListener("change", syncNotes);
+    helpNeeded?.addEventListener("change", syncNotes);
+    notes?.addEventListener("blur", syncNotes);
+    syncNotes();
+  }
+</script>

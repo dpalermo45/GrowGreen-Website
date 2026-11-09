@@ -1,0 +1,104 @@
+[
+  {
+    "id": "mulched-bed-crepe-myrtle-brick-home",
+    "slug": "mulched-bed-crepe-myrtle-brick-home",
+    "width": 480,
+    "height": 640,
+    "nativeWidth": 480,
+    "nativeHeight": 640,
+    "files": {
+      "w480": "/images/services/flower-beds/mulched-bed-crepe-myrtle-brick-home-480.webp",
+      "w640": "/images/services/flower-beds/mulched-bed-crepe-myrtle-brick-home-640.webp",
+      "w960": "/images/services/flower-beds/mulched-bed-crepe-myrtle-brick-home-960.webp",
+      "jpg": "/images/services/flower-beds/mulched-bed-crepe-myrtle-brick-home-960.jpg",
+      "card": "/images/services/flower-beds/mulched-bed-crepe-myrtle-brick-home-card.webp"
+    },
+    "alt": "Freshly mulched residential flower bed with a crepe myrtle and evergreen shrubs along a brick home",
+    "caption": "Mulched bed with crepe myrtle and foundation shrubs"
+  },
+  {
+    "id": "curved-bed-white-flowers-driveway",
+    "slug": "curved-bed-white-flowers-driveway",
+    "width": 480,
+    "height": 640,
+    "nativeWidth": 480,
+    "nativeHeight": 640,
+    "files": {
+      "w480": "/images/services/flower-beds/curved-bed-white-flowers-driveway-480.webp",
+      "w640": "/images/services/flower-beds/curved-bed-white-flowers-driveway-640.webp",
+      "w960": "/images/services/flower-beds/curved-bed-white-flowers-driveway-960.webp",
+      "jpg": "/images/services/flower-beds/curved-bed-white-flowers-driveway-960.jpg",
+      "card": "/images/services/flower-beds/curved-bed-white-flowers-driveway-card.webp"
+    },
+    "alt": "Curved residential flower bed filled with white flowering plants beside a green lawn and driveway",
+    "caption": "Curved bed with dense white seasonal flowers"
+  },
+  {
+    "id": "pine-straw-bed-crape-myrtle-mailbox",
+    "slug": "pine-straw-bed-crape-myrtle-mailbox",
+    "width": 480,
+    "height": 640,
+    "nativeWidth": 480,
+    "nativeHeight": 640,
+    "files": {
+      "w480": "/images/services/flower-beds/pine-straw-bed-crape-myrtle-mailbox-480.webp",
+      "w640": "/images/services/flower-beds/pine-straw-bed-crape-myrtle-mailbox-640.webp",
+      "w960": "/images/services/flower-beds/pine-straw-bed-crape-myrtle-mailbox-960.webp",
+      "jpg": "/images/services/flower-beds/pine-straw-bed-crape-myrtle-mailbox-960.jpg",
+      "card": "/images/services/flower-beds/pine-straw-bed-crape-myrtle-mailbox-card.webp"
+    },
+    "alt": "Pine-straw landscaped bed with pink crape myrtle blooms, purple groundcover, and a mailbox at the sidewalk",
+    "caption": "Pine-straw bed with flowering crape myrtles"
+  },
+  {
+    "id": "front-bed-pine-straw-white-home",
+    "slug": "front-bed-pine-straw-white-home",
+    "width": 480,
+    "height": 640,
+    "nativeWidth": 480,
+    "nativeHeight": 640,
+    "files": {
+      "w480": "/images/services/flower-beds/front-bed-pine-straw-white-home-480.webp",
+      "w640": "/images/services/flower-beds/front-bed-pine-straw-white-home-640.webp",
+      "w960": "/images/services/flower-beds/front-bed-pine-straw-white-home-960.webp",
+      "jpg": "/images/services/flower-beds/front-bed-pine-straw-white-home-960.jpg",
+      "card": "/images/services/flower-beds/front-bed-pine-straw-white-home-card.webp"
+    },
+    "alt": "Curved pine-straw flower bed with shrubs and flowers in front of a white residential home",
+    "caption": "Front-yard bed with pine straw and layered shrubs"
+  },
+  {
+    "id": "mulched-hedge-bed-lawn-treatment-sign",
+    "slug": "mulched-hedge-bed-lawn-treatment-sign",
+    "width": 480,
+    "height": 640,
+    "nativeWidth": 480,
+    "nativeHeight": 640,
+    "files": {
+      "w480": "/images/services/flower-beds/mulched-hedge-bed-lawn-treatment-sign-480.webp",
+      "w640": "/images/services/flower-beds/mulched-hedge-bed-lawn-treatment-sign-640.webp",
+      "w960": "/images/services/flower-beds/mulched-hedge-bed-lawn-treatment-sign-960.webp",
+      "jpg": "/images/services/flower-beds/mulched-hedge-bed-lawn-treatment-sign-960.jpg",
+      "card": "/images/services/flower-beds/mulched-hedge-bed-lawn-treatment-sign-card.webp"
+    },
+    "alt": "Clean mulched flower bed with a trimmed hedge and Grow Green lawn treatment yard sign in the front turf",
+    "caption": "Maintained hedge bed with Grow Green yard sign"
+  },
+  {
+    "id": "front-bed-hedge-edge-white-brick",
+    "slug": "front-bed-hedge-edge-white-brick",
+    "width": 480,
+    "height": 640,
+    "nativeWidth": 480,
+    "nativeHeight": 640,
+    "files": {
+      "w480": "/images/services/flower-beds/front-bed-hedge-edge-white-brick-480.webp",
+      "w640": "/images/services/flower-beds/front-bed-hedge-edge-white-brick-640.webp",
+      "w960": "/images/services/flower-beds/front-bed-hedge-edge-white-brick-960.webp",
+      "jpg": "/images/services/flower-beds/front-bed-hedge-edge-white-brick-960.jpg",
+      "card": "/images/services/flower-beds/front-bed-hedge-edge-white-brick-card.webp"
+    },
+    "alt": "Residential flower bed with reddish mulch, flowering plants, and a low hedge edge beside a white brick home",
+    "caption": "Hedge-edged bed with seasonal plantings"
+  }
+]

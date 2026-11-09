@@ -1,0 +1,672 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { site } from "../data/site";
+import { coverageFaqAnswer, coverageShortPhrase, areaServedSchema } from "../data/service-areas";
+import "../styles/liquid-aeration.css";
+
+const source = "Liquid Aeration Service Page";
+const leadSource = "Website - Liquid Aeration Service Page";
+
+const signals = [
+  {
+    n: "01",
+    title: "Water beads or runs off",
+    body: "Irrigation or rainfall sits on the surface instead of soaking evenly into hard-to-wet soil.",
+  },
+  {
+    n: "02",
+    title: "Dry spots keep coming back",
+    body: "Some areas stay thirsty while others stay wet—even when the irrigation schedule looks right.",
+  },
+  {
+    n: "03",
+    title: "You want soil help without plugs",
+    body: "You want soil-conditioning support, but do not want holes, cores, or a machine crossing the turf.",
+  },
+  {
+    n: "04",
+    title: "Access is tight",
+    body: "Gates, slopes, irrigation layout, or narrow turf make a core aerator inconvenient or impractical.",
+  },
+] as const;
+
+const truths = [
+  {
+    title: "Uniform coverage across accessible turf",
+    body: "Tight corners and areas near irrigation can be treated without maneuvering a bulky aerator.",
+  },
+  {
+    title: "No cores left on the surface",
+    body: "There are no temporary soil plugs to dry, crumble, or mow back into the lawn.",
+  },
+  {
+    title: "Benefits develop below the surface",
+    body: "This is not instant green paint. Results depend on soil, weather, irrigation, and the broader lawn program.",
+  },
+  {
+    title: "It is not the same as core aeration",
+    body: "Liquid aeration does not physically remove compacted soil. Severe compaction may still call for core aeration.",
+  },
+] as const;
+
+const benefits = [
+  {
+    n: "01",
+    title: "Supports more even wetting",
+    body: "Soil-conditioning ingredients are designed to help irrigation and rainfall move through hard-to-wet areas more consistently.",
+  },
+  {
+    n: "02",
+    title: "No plugs or open holes",
+    body: "The lawn keeps a clean appearance after treatment because no cores are pulled and left across the surface.",
+  },
+  {
+    n: "03",
+    title: "Reaches difficult areas",
+    body: "Tight gates, slopes, irrigation-heavy lawns, and narrow turf sections can be covered without core-aerator access.",
+  },
+  {
+    n: "04",
+    title: "Pairs with ongoing lawn care",
+    body: "Liquid aeration fits naturally alongside fertilization, irrigation management, and other long-term soil-health practices.",
+  },
+] as const;
+
+const steps = [
+  {
+    n: "01",
+    title: "We review the property",
+    body: "We consider the turf, access, irrigation, and the soil-health concerns behind your request before completing the application.",
+  },
+  {
+    n: "02",
+    title: "We treat accessible turf",
+    body: "The liquid treatment is applied across the lawn without a core machine, open holes, or piles of soil plugs.",
+  },
+  {
+    n: "03",
+    title: "You follow the aftercare",
+    body: "We provide watering and re-entry guidance based on the application so the treatment can be used as intended.",
+  },
+  {
+    n: "04",
+    title: "Expect gradual support",
+    body: "Think of soil-conditioning as improving the growing environment over time—not an overnight cosmetic color change.",
+  },
+] as const;
+
+const related = [
+  {
+    href: "/lawn-fertilization-weed-control/",
+    label: "Lawn fertilization & weed control",
+    body: "Season-smart nutrition and weed prevention that work with healthier soil conditions.",
+  },
+  {
+    href: "/core-aeration/",
+    label: "Core aeration",
+    body: "Physical plug removal when immediate openings through compacted soil are the priority.",
+  },
+  {
+    href: "/soil-sample/",
+    label: "Soil sampling",
+    body: "Lab analysis and a plain-English report when you want clearer nutrient and pH guidance.",
+  },
+] as const;
+
+const faqs = [
+  {
+    q: "What is liquid aeration?",
+    a: "Liquid aeration is a soil-conditioning application made across the turf. It is designed to support better wetting and water movement through the soil profile without mechanically removing soil cores.",
+  },
+  {
+    q: "Does liquid aeration physically break apart compacted soil?",
+    a: "It does not physically remove compacted soil the way hollow-tine core aeration does. Liquid aeration is better understood as gradual soil-conditioning and moisture-management support. Severe compaction may still call for core aeration.",
+  },
+  {
+    q: "Will there be holes or plugs across my lawn?",
+    a: "No. A liquid application does not pull soil cores, so there are no aeration holes or plugs left across the surface. The lawn may simply look like it received a normal liquid treatment.",
+  },
+  {
+    q: "When is liquid aeration a better fit than core aeration?",
+    a: "Liquid aeration is often a strong fit when you want soil-conditioning support without plugs or machinery, or when access, slopes, or irrigation make a core machine inconvenient. Core aeration is usually better when immediate physical decompaction is the main goal.",
+  },
+  {
+    q: "Is liquid aeration suitable for my grass type?",
+    a: "We use lawn-treatment programs across common South Louisiana warm-season turf, including St. Augustine, centipede, zoysia, and bermuda. We will consider turf condition and timing before recommending the service.",
+  },
+  {
+    q: "How soon should I expect results?",
+    a: "Liquid aeration is not intended to create an instant color change. Response depends on soil conditions, weather, irrigation, and the overall lawn program. Think of it as improving the growing environment over time rather than providing an overnight cosmetic result.",
+  },
+  {
+    q: "Do I need to water after liquid aeration?",
+    a: "Watering may be part of the aftercare, but the amount and timing should come from your service instructions rather than a universal rule. We will tell you what to do after the application.",
+  },
+  {
+    q: "Is liquid aeration safe around people and pets?",
+    a: "We apply professional products according to their directions. Follow the re-entry instructions provided after service and keep people and pets off the treated area until the stated interval has passed.",
+  },
+  {
+    q: "How is liquid aeration priced?",
+    a: "Pricing depends primarily on the amount of turf being treated, property access, and site conditions. Send the address through the estimate form and our office can review the property and provide straightforward pricing.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Liquid Aeration",
+  url: "https://growgreenweedcontrol.com/liquid-aeration/",
+  image: "https://growgreenweedcontrol.com/images/services/liquid-aeration-hero-1280.webp",
+  description: `Professional liquid aeration and soil-conditioning for warm-season lawns across ${coverageShortPhrase()}.`,
+  serviceType: "Liquid Lawn Aeration and Soil Conditioning",
+  provider: {
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    logo: "https://growgreenweedcontrol.com/images/brand/logo.png",
+    telephone: site.phoneTel,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.city,
+      addressRegion: site.address.state,
+      postalCode: site.address.zip,
+      addressCountry: "US",
+    },
+  },
+  areaServed: areaServedSchema(),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://growgreenweedcontrol.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Services",
+      item: "https://growgreenweedcontrol.com/services/",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Liquid Aeration",
+      item: "https://growgreenweedcontrol.com/liquid-aeration/",
+    },
+  ],
+};
+---
+
+<div class="liquid-page" data-liquid-page>
+  <header class="liquid-hero liquid-hero--photo">
+    <div class="liquid-hero__media" aria-hidden="true">
+      <img
+        src="/images/services/liquid-aeration-hero-1280.webp"
+        srcset="/images/services/liquid-aeration-hero-800.webp 800w, /images/services/liquid-aeration-hero-1280.webp 1280w"
+        sizes="100vw"
+        width="1280"
+        height="853"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="liquid-hero__shade" aria-hidden="true"></div>
+    <div class="f-inner liquid-hero__grid">
+      <div class="liquid-hero__copy motion-rise">
+        <nav class="liquid-crumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/services/">Services</a>
+          <span aria-hidden="true">/</span>
+          <span>Liquid aeration</span>
+        </nav>
+        <div class="liquid-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <p class="liquid-hero__eyebrow">Liquid aeration · South Louisiana</p>
+        <h1>Better water movement—without pulling a single <em>plug.</em></h1>
+        <p class="liquid-hero__lead">
+          A full-lawn soil-conditioning application designed to support more even wetting and water movement through the
+          soil—without cores, holes, or a heavy aerator crossing the turf.
+        </p>
+        <div class="liquid-hero__actions">
+          <a class="f-btn f-btn--gold" href="#liquid-quote">Get my free estimate →</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+        <ul class="liquid-hero__notes" aria-label="Service highlights">
+          <li>No plugs or holes</li>
+          <li>Full-lawn application</li>
+          <li>Gradual soil-health support</li>
+        </ul>
+        <p class="liquid-hero__truth">
+          Soil-conditioning benefits develop gradually. This is not overnight green paint or physical plug removal.
+        </p>
+      </div>
+      <div class="liquid-hero__visual motion-rise">
+        <img
+          class="liquid-hero__mascot"
+          src="/images/mascot/watering-320.webp"
+          srcset="/images/mascot/watering-216.webp 216w, /images/mascot/watering-320.webp 320w, /images/mascot/watering-480.webp 480w"
+          sizes="(max-width: 960px) 55vw, 280px"
+          width="480"
+          height="560"
+          alt=""
+          decoding="async"
+        />
+      </div>
+    </div>
+  </header>
+
+  <div class="liquid-proof f-inner" aria-label="Grow Green credentials">
+    <div class="liquid-proof__item">
+      <strong>Firefighter-owned</strong>
+      <span>Local and family-operated</span>
+    </div>
+    <div class="liquid-proof__item">
+      <strong>Lawn specialists</strong>
+      <span>Not a mowing or landscape crew</span>
+    </div>
+    <div class="liquid-proof__item">
+      <strong>Straight answers</strong>
+      <span>What liquid aeration can—and cannot—do</span>
+    </div>
+    <div class="liquid-proof__item">
+      <strong>Liquid or core</strong>
+      <span>We recommend the better fit</span>
+    </div>
+  </div>
+
+  <section class="f-section liquid-compare-band" aria-labelledby="liquid-compare-title">
+    <div class="f-inner">
+      <p class="f-kicker f-kicker--light f-center">The right tool for the lawn</p>
+      <h2 class="f-title f-center" id="liquid-compare-title">When liquid fits—and when core may be better.</h2>
+      <p class="f-lead f-center">
+        The services are not identical. We would rather recommend the approach that matches the property than pretend one
+        option is automatically best for every lawn.
+      </p>
+      <div class="liquid-compare">
+        <article class="liquid-choice liquid-choice--featured">
+          <p class="liquid-choice__tag">Low-disruption soil conditioning</p>
+          <h3>Liquid aeration is a strong fit when…</h3>
+          <p>
+            You want ongoing soil-health support and broad treatment coverage without holes, plugs, or mechanical aeration
+            equipment.
+          </p>
+          <ul>
+            <li>A clean lawn appearance immediately after service matters</li>
+            <li>Tight access, slopes, or irrigation make machinery inconvenient</li>
+            <li>You want uniform application across accessible turf</li>
+            <li>You understand that soil-conditioning benefits develop gradually</li>
+          </ul>
+          <a href="#liquid-quote">Request liquid aeration pricing →</a>
+        </article>
+        <article class="liquid-choice">
+          <p class="liquid-choice__tag">Immediate physical openings</p>
+          <h3>Core aeration may be better when…</h3>
+          <p>
+            The priority is immediate physical decompaction by removing soil plugs from a heavily trafficked or severely
+            compacted lawn.
+          </p>
+          <ul>
+            <li>The ground is extremely hard or traffic-compacted</li>
+            <li>Physical soil removal is the main objective</li>
+            <li>A core machine can safely access the treatment area</li>
+            <li>You are comfortable marking obstacles and leaving temporary plugs</li>
+          </ul>
+          <a href="/core-aeration/">Explore core aeration →</a>
+        </article>
+      </div>
+      <p class="liquid-honesty">
+        <strong>Not sure which one you need?</strong> Request the estimate and tell us what you are seeing. We can
+        recommend liquid, core, or neither based on the lawn instead of forcing the wrong service.
+      </p>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="liquid-signals-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">When this service helps</p>
+      <h2 class="f-title f-center" id="liquid-signals-title">Common reasons homeowners look at liquid aeration.</h2>
+      <p class="f-lead f-center">
+        If water is not moving into the soil the way it should—or you want soil support without tearing up the lawn—this
+        may be worth a closer look.
+      </p>
+      <div class="liquid-steps liquid-steps--signals">
+        {
+          signals.map((s) => (
+            <article class="liquid-step">
+              <span class="liquid-step__num">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section liquid-guide" aria-labelledby="liquid-benefits-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">A cleaner soil-health option</p>
+      <h2 class="f-title f-center" id="liquid-benefits-title">Why homeowners choose liquid aeration.</h2>
+      <p class="f-lead f-center">
+        Broad coverage, little surface disruption, and an easy fit beside an established lawn-care plan.
+      </p>
+      <div class="liquid-steps">
+        {
+          benefits.map((b) => (
+            <article class="liquid-step">
+              <span class="liquid-step__num">{b.n}</span>
+              <h3>{b.title}</h3>
+              <p>{b.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="liquid-midcta">
+        <div>
+          <strong>Want pricing for your lawn?</strong>
+          <p>Send the address and we will follow up with a clear next step—no pressure.</p>
+        </div>
+        <a class="f-btn f-btn--gold" href="#liquid-quote">Get my free estimate →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section liquid-process" aria-labelledby="liquid-process-title">
+    <div class="f-inner">
+      <p class="f-kicker f-kicker--light f-center">Simple and low disruption</p>
+      <h2 class="f-title f-center" id="liquid-process-title">What to expect from your service.</h2>
+      <p class="f-lead f-center">
+        The lawn is treated evenly, there are no soil cores to clean up, and we provide watering and aftercare directions
+        for that application.
+      </p>
+      <div class="liquid-steps">
+        {
+          steps.map((s) => (
+            <article class="liquid-step">
+              <span class="liquid-step__num">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="liquid-expect__grid">
+        <article class="liquid-expect__card liquid-expect__card--yes">
+          <h3>Before we arrive</h3>
+          <ul>
+            <li>Unlock gates and move toys, hoses, furniture, and pet waste from the treatment area</li>
+            <li>Let the office know about access restrictions, recent sod, or areas you do not want treated</li>
+            <li>You generally do not need to mark sprinkler heads solely to protect them from coring tines</li>
+          </ul>
+        </article>
+        <article class="liquid-expect__card liquid-expect__card--no">
+          <h3>After we leave</h3>
+          <ul>
+            <li>Follow the watering directions in your service communication—not a one-size-fits-all amount</li>
+            <li>Follow the provided people-and-pet re-entry instructions before using the treated lawn</li>
+            <li>Expect gradual soil-health support—not an overnight cosmetic change in turf color</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section liquid-explainer" aria-labelledby="liquid-explainer-title">
+    <div class="f-inner liquid-diag__grid">
+      <figure class="liquid-diagram">
+        <img
+          src="/images/services/liquid-aeration-spray-960.webp"
+          width="960"
+          height="960"
+          alt="Grow Green applying a liquid lawn treatment from a branded service truck"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>
+          The treatment reaches accessible turf without punching holes or running a core machine across the lawn.
+        </figcaption>
+      </figure>
+      <div>
+        <p class="f-kicker">What the service actually does</p>
+        <h2 class="f-title" id="liquid-explainer-title">Soil conditioning—not mechanical plug removal.</h2>
+        <p class="f-lead">
+          Core aeration physically removes soil. Liquid aeration takes a different approach: a soil-conditioning treatment
+          is applied across the turf to support better wetting and water movement over time. It gives homeowners a
+          lower-disruption option for ongoing soil-health support.
+        </p>
+        <ul class="liquid-checks">
+          {
+            truths.map((t, i) => (
+              <li>
+                <span class="liquid-checks__num" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <div>
+                  <strong>{t.title}</strong>
+                  <p>{t.body}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section liquid-related" aria-labelledby="liquid-related-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Related lawn services</p>
+      <h2 class="f-title f-center" id="liquid-related-title">Often paired with liquid aeration.</h2>
+      <p class="f-lead f-center">
+        Soil-health work is strongest when it sits inside a clear overall plan for your turf.
+      </p>
+      <div class="liquid-routes">
+        {
+          related.map((item) => (
+            <a class="liquid-route" href={item.href}>
+              <strong>{item.label}</strong>
+              <span>{item.body}</span>
+              <em aria-hidden="true">Learn more →</em>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section liquid-program" aria-labelledby="liquid-local-title">
+    <div class="f-inner liquid-local__grid">
+      <figure class="liquid-owner">
+        <img
+          class="liquid-local__photo"
+          src="/images/services/liquid-aeration-local-960.webp"
+          srcset="/images/about/owner-with-son-640.webp 640w, /images/services/liquid-aeration-local-960.webp 960w, /images/about/owner-with-son-1280.webp 1280w"
+          sizes="(max-width: 900px) 90vw, 420px"
+          width="960"
+          height="1200"
+          alt="Grow Green owner with his son beside a branded Grow Green service truck"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="liquid-owner__badge">
+          <strong>Family-owned. Firefighter-owned.</strong>
+          <span>Lawn treatment specialists—not a mowing route add-on.</span>
+        </figcaption>
+      </figure>
+      <div>
+        <p class="f-kicker">Why Grow Green</p>
+        <h2 class="f-title" id="liquid-local-title">An honest recommendation from a company that specializes in lawns.</h2>
+        <p class="f-lead">
+          Soil-health services should support the lawn—not just sound impressive on a sales page. We work with South
+          Louisiana warm-season turf and explain where liquid aeration fits, what to expect, and when mechanical core
+          aeration makes more sense.
+        </p>
+        <div class="liquid-local__points">
+          <div class="liquid-local__point">Locally owned</div>
+          <div class="liquid-local__point">Family-operated</div>
+          <div class="liquid-local__point">Firefighter-owned</div>
+          <div class="liquid-local__point">No-pressure pricing</div>
+        </div>
+        <a class="f-btn f-btn--green" href="/about-us/">Meet Grow Green →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section liquid-faq" aria-labelledby="liquid-faq-title">
+    <div class="f-inner liquid-faq__grid">
+      <aside class="liquid-faq__intro">
+        <p class="f-kicker">Good to know</p>
+        <h2 class="f-title" id="liquid-faq-title">Liquid aeration questions we hear most.</h2>
+        <p class="f-lead">
+          Straight answers on plugs, timing, watering, and when{" "}
+          <a href="/core-aeration/">core aeration</a> may fit better.
+        </p>
+        <div class="liquid-faq__aside">
+          <img
+            class="liquid-faq__mascot"
+            src="/images/mascot/watering-320.webp"
+            srcset="/images/mascot/watering-216.webp 216w, /images/mascot/watering-320.webp 320w"
+            sizes="140px"
+            width="216"
+            height="252"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="liquid-faq__aside-copy">
+            <strong>Still have a question?</strong>
+            <p>
+              Call the local Grow Green team at{" "}
+              <a href={`tel:${site.phoneTel}`}>{site.phone}</a>
+              <span> · {site.hours.label}</span>
+            </p>
+          </div>
+        </div>
+      </aside>
+      <div class="liquid-faq__list">
+        {
+          faqs.map((f, index) => (
+            <details class="liquid-faq__item" open={index === 0}>
+              <summary>{f.q}</summary>
+              <div class="liquid-faq__answer">
+                {f.q.startsWith("Does liquid aeration physically") ? (
+                  <p>
+                    It does not physically remove compacted soil the way hollow-tine core aeration does. Liquid aeration
+                    is better understood as gradual soil-conditioning and moisture-management support. Severe compaction
+                    may still call for <a href="/core-aeration/">core aeration</a>.
+                  </p>
+                ) : f.q.startsWith("When is liquid aeration a better fit") ? (
+                  <p>
+                    Liquid aeration is often a strong fit when you want soil-conditioning support without plugs or
+                    machinery, or when access, slopes, or irrigation make a core machine inconvenient.{" "}
+                    <a href="/core-aeration/">Core aeration</a> is usually better when immediate physical decompaction is
+                    the main goal.
+                  </p>
+                ) : (
+                  <p>{f.a}</p>
+                )}
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section liquid-quote" id="liquid-quote" aria-labelledby="liquid-quote-title">
+    <div class="f-inner liquid-quote__grid">
+      <div>
+        <p class="f-kicker f-kicker--light">Free custom estimate</p>
+        <h2 class="f-title" id="liquid-quote-title">Request liquid aeration pricing.</h2>
+        <p class="f-lead">
+          Tell us where the lawn is. Our local office will review the property and follow up with a straightforward next
+          step—and an honest recommendation if core aeration may fit better.
+        </p>
+        <ul class="liquid-quote__benefits">
+          <li>No pressure or obligation</li>
+          <li>Most quote requests reviewed during business hours, {site.hours.label}</li>
+          <li>Your information goes directly to Grow Green</li>
+        </ul>
+        <p class="liquid-quote__chip" aria-hidden="true">Service noted: Liquid Aeration</p>
+        <a class="liquid-quote__phone" href={`tel:${site.phoneTel}`}>
+          <span>Prefer to talk?</span>
+          <strong>Call {site.phone}</strong>
+        </a>
+      </div>
+      <div class="liquid-form-shell">
+        <QuoteForm
+          source={source}
+          leadSource={leadSource}
+          heading="Get my free liquid aeration estimate"
+          subheading="Share the service address and anything we should know—gate codes, irrigation notes, access questions, or lawn details."
+          compact
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="liquid-final" aria-label="Request a liquid aeration estimate">
+    <div class="f-inner">
+      <div class="liquid-final__card">
+        <div>
+          <h2>Support better soil without tearing up the lawn.</h2>
+          <p>
+            Get a straightforward liquid aeration estimate—and an honest recommendation about whether it is the right fit
+            for your South Louisiana lawn.
+          </p>
+        </div>
+        <div class="liquid-final__actions">
+          <a class="f-btn f-btn--gold" href="#liquid-quote">Get my free estimate</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-liquid-page]");
+  if (root) {
+    const notes = root.querySelector<HTMLTextAreaElement>('textarea[name="notes"]');
+    const PREFIX = "Service requested: Liquid Aeration";
+
+    if (notes) {
+      const seed = () => {
+        const value = notes.value.trim();
+        if (!value) notes.value = `${PREFIX}\n`;
+        else if (!value.toLowerCase().includes("liquid aeration")) notes.value = `${PREFIX}\n${value}`;
+      };
+      seed();
+      notes.addEventListener("focus", seed, { once: true });
+    }
+  }
+</script>

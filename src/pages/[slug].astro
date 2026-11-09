@@ -1,0 +1,308 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CityPageView from "../components/CityPageView.astro";
+import ParishPageView from "../components/ParishPageView.astro";
+import { isParishHubPage, resolveParishHub } from "../lib/geo/parishHub";
+import ServicePageView from "../components/ServicePageView.astro";
+import CampaignPageView from "../components/CampaignPageView.astro";
+import BlogPostPage from "../components/BlogPostPage.astro";
+import { serviceBySlug, relatedServicePages, services } from "../data/services";
+import { campaignBySlug } from "../data/campaigns";
+import { blogPostBySlug, blogPosts } from "../data/blog-posts.generated";
+import { readableToArticleHtml } from "../lib/content/articleHtml";
+import { curatedArticleHtmlFor } from "../data/blog-articles";
+import { loadPageContent } from "../lib/content/loadPageContent";
+import { allGeoPageSlugs, resolveGeoPage } from "../lib/geo/resolveGeoPage";
+import { parishMediaFor } from "../data/parish-media";
+import { site } from "../data/site";
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  /** Dedicated service landings live as their own page modules for CSS code-splitting. */
+  const dedicatedPageSlugs = new Set([
+    "lawn-fertilization-weed-control",
+    "core-aeration",
+    "liquid-aeration",
+    "tree-and-shrub-care",
+    "fire-ant-treatment",
+    "flower-bed-weed-control-and-fertilization",
+    "mosquito-flea-tick-treatments",
+    "soil-sample",
+    "lawn-fungus-and-insects",
+    "lawn-fungus",
+    "lawn-insects",
+  ]);
+  const slugs = new Set<string>();
+
+  for (const s of services) {
+    if (!dedicatedPageSlugs.has(s.slug)) slugs.add(s.slug);
+    s.relatedPages?.forEach((r) => {
+      if (!dedicatedPageSlugs.has(r.slug)) slugs.add(r.slug);
+    });
+  }
+  Object.keys(relatedServicePages).forEach((s) => {
+    if (!dedicatedPageSlugs.has(s)) slugs.add(s);
+  });
+  allGeoPageSlugs().forEach((s) => slugs.add(s));
+  Object.keys(campaignBySlug).forEach((s) => slugs.add(s));
+  blogPosts.forEach((p) => slugs.add(p.slug));
+
+  [
+    "thank-you",
+    "thank-you-nextdoor",
+    "thank-you-core-aeration",
+    "liquid-aeration-quote-request-received",
+    "test",
+  ].forEach((s) => slugs.add(s));
+
+  return [...slugs].map((slug) => ({ params: { slug } }));
+}
+
+const slug = Astro.params.slug!;
+
+const service = serviceBySlug[slug];
+const related = relatedServicePages[slug];
+const geo = resolveGeoPage(slug);
+const campaign = campaignBySlug[slug];
+const post = blogPostBySlug[slug];
+
+const thankYouMeta: Record<string, { title: string; message: string }> = {
+  "thank-you": {
+    title: "Thank you — estimate request received",
+    message:
+      "Thanks for requesting an estimate. Our local office will follow up during business hours (Monday–Friday, 8 AM–4 PM).",
+  },
+  "thank-you-nextdoor": {
+    title: "Thank you — Nextdoor request received",
+    message:
+      "We received your Nextdoor estimate request. A Grow Green team member will follow up during business hours.",
+  },
+  "thank-you-core-aeration": {
+    title: "Thank you — core aeration request received",
+    message:
+      "Thanks for your interest in core aeration. We’ll review your property details and follow up during business hours.",
+  },
+  "liquid-aeration-quote-request-received": {
+    title: "Liquid aeration quote request received",
+    message:
+      "Thanks for requesting a liquid aeration quote. Our office will follow up with next steps during business hours.",
+  },
+};
+
+const thankYou = thankYouMeta[slug];
+const kind = service
+  ? "service"
+  : related
+    ? "related"
+    : geo
+      ? "geo"
+      : campaign
+        ? "campaign"
+        : post
+          ? "post"
+          : thankYou
+            ? "thankyou"
+            : slug === "test"
+              ? "test"
+              : "missing";
+
+const parishHub = geo && isParishHubPage(geo) ? resolveParishHub(geo) : null;
+const parishOg = parishHub
+  ? (() => {
+      const media = parishMediaFor(parishHub.parishKey);
+      return media ? `/images/parishes/${media.hero.slug}-1280.jpg` : undefined;
+    })()
+  : undefined;
+const richPostRaw = post ? loadPageContent(post.slug) : null;
+/** WP extracts that are only shortcodes / empty must not block generated article HTML. */
+const richPostHasBody = Boolean(
+  richPostRaw &&
+    (richPostRaw.paragraphs.length > 0 ||
+      richPostRaw.headings.length > 0 ||
+      richPostRaw.faqs.length > 0 ||
+      (richPostRaw.plain_len || 0) > 120),
+);
+const richPost = richPostHasBody ? richPostRaw : null;
+const curatedHtml = post ? curatedArticleHtmlFor(post.slug) : null;
+const articleHtml =
+  post && !richPost
+    ? curatedHtml ||
+      readableToArticleHtml(
+        {
+          headings: post.headings,
+          paragraphs: post.paragraphs,
+          list_items: post.list_items,
+        },
+        { prioritize: post.priority || (post.paragraphs?.length || 0) > 8 },
+      )
+    : null;
+---
+
+{
+  kind === "service" && service && (
+    <BaseLayout
+      title={`${service.title} | Grow Green Weed Control`}
+      description={service.summary}
+      canonicalPath={`/${slug}/`}
+    >
+      <ServicePageView
+        title={service.title}
+        summary={service.summary}
+        bullets={service.bullets}
+        source={`service-${slug}`}
+        slug={slug}
+        related={service.relatedPages}
+      />
+    </BaseLayout>
+  )
+}
+
+{
+  kind === "related" && related && (
+    <BaseLayout
+      title={`${related.title} | Grow Green Weed Control`}
+      description={related.summary}
+      canonicalPath={`/${slug}/`}
+    >
+      <ServicePageView
+        title={related.title}
+        summary={related.summary}
+        bullets={related.bullets}
+        source={`service-${slug}`}
+        slug={slug}
+        parentHref={`/${related.parentSlug}/`}
+        parentLabel={serviceBySlug[related.parentSlug]?.title || "Services"}
+      />
+    </BaseLayout>
+  )
+}
+
+{
+  kind === "geo" && geo && parishHub && (
+    <BaseLayout
+      title={`${parishHub.displayTitle} | Grow Green Weed Control`}
+      description={parishHub.intro}
+      canonicalPath={geo.path}
+      ogImage={parishOg}
+    >
+      <ParishPageView page={geo} />
+    </BaseLayout>
+  )
+}
+
+{
+  kind === "geo" && geo && !isParishHubPage(geo) && (
+    <BaseLayout title={geo.seoTitle} description={geo.seoDesc} canonicalPath={geo.path}>
+      <CityPageView page={geo} />
+    </BaseLayout>
+  )
+}
+
+{
+  kind === "campaign" && campaign && (
+    <BaseLayout
+      title={`${campaign.title} | Grow Green Weed Control`}
+      description={campaign.summary}
+      canonicalPath={`/${slug}/`}
+      hideChrome={campaign.id === "facebook-50" || campaign.id === "facebook-estimate"}
+      ogImage={
+        campaign.id === "facebook-50" || campaign.id === "facebook-estimate"
+          ? "/images/campaigns/facebook-nov/lawn-sign.jpg"
+          : undefined
+      }
+    >
+      <CampaignPageView campaign={campaign} />
+    </BaseLayout>
+  )
+}
+
+{
+  kind === "post" && post && (
+    <BaseLayout
+      title={post.seoTitle || `${post.title} | Grow Green Weed Control`}
+      description={post.seoDesc || post.paragraphs?.[0] || post.title}
+      canonicalPath={post.path}
+      ogImage={`/images/blog/${post.slug}-640.webp`}
+    >
+      <link
+        slot="head"
+        rel="preload"
+        as="image"
+        href={`/images/blog/${post.slug}-640.webp`}
+        fetchpriority="high"
+      />
+      <BlogPostPage post={post} rich={richPost} articleHtml={articleHtml} />
+    </BaseLayout>
+  )
+}
+
+{
+  kind === "thankyou" && thankYou && (
+    <BaseLayout title={thankYou.title} description={thankYou.message} canonicalPath={`/${slug}/`} noindex>
+      <section class="ty-page">
+        <div class="ty-page__inner motion-rise">
+          <div class="ty-panel thank-you-panel">
+            <p class="ty-panel__eyebrow eyebrow">Grow Green Weed Control</p>
+            <h1>{thankYou.title}</h1>
+            <p class="ty-panel__lead">{thankYou.message}</p>
+            <p class="ty-panel__note">
+              Questions? Call <a href={`tel:${site.phoneTel}`}>{site.phone}</a> or email{" "}
+              <a href={`mailto:${site.email}`}>{site.email}</a> during office hours ({site.hours.label}).
+            </p>
+            <div class="ty-panel__actions thank-you-panel__actions">
+              <a class="btn btn-gold" href="/">Back to homepage</a>
+              <a class="btn btn-green" href="/services/">Browse services</a>
+              <a class="btn btn-soft" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </BaseLayout>
+  )
+}
+
+{
+  kind === "test" && (
+    <BaseLayout
+      title="Page retired | Grow Green Weed Control"
+      description="This test page has been retired."
+      canonicalPath="/test/"
+      noindex
+    >
+      <section class="section">
+        <div class="container">
+          <div class="thank-you-panel motion-rise">
+            <p class="eyebrow">Grow Green Weed Control</p>
+            <h1>This page has been retired</h1>
+            <p>The legacy /test/ URL is no longer in use.</p>
+            <div class="thank-you-panel__actions">
+              <a class="btn btn-green" href="/">Continue to homepage</a>
+              <a class="btn btn-gold" href="/request-a-quote/">Get a free quote</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </BaseLayout>
+  )
+}
+
+{
+  kind === "missing" && (
+    <BaseLayout title="Not found | Grow Green Weed Control" description="Page not found" noindex>
+      <section class="section">
+        <div class="container">
+          <div class="thank-you-panel motion-rise">
+            <p class="eyebrow">Grow Green Weed Control</p>
+            <h1>Page not found</h1>
+            <p>We could not find that page. Head home or request a free lawn estimate.</p>
+            <div class="thank-you-panel__actions">
+              <a class="btn btn-green" href="/">Return home</a>
+              <a class="btn btn-gold" href="/request-a-quote/">Get a free quote</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </BaseLayout>
+  )
+}

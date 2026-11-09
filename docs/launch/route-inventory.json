@@ -1,0 +1,770 @@
+{
+  "generatedAt": "2026-11-08T05:25:51.214Z",
+  "totals": {
+    "routes": 148,
+    "byType": {
+      "static": 9,
+      "error": 1,
+      "redirect": 24,
+      "api": 12,
+      "blog": 8,
+      "service": 12,
+      "utility": 9,
+      "campaign": 6,
+      "geo": 24,
+      "legal": 2,
+      "service-area": 41
+    },
+    "serviceAreaCities": 40,
+    "serviceAreaHubs": 4,
+    "getStaticPathsSlugs": 55,
+    "sitemapUrls": 101,
+    "manifestRetained": 64,
+    "manifestRedirected": 4,
+    "navInternalLinks": 20,
+    "middlewareRedirects": 24
+  },
+  "discrepancies": [],
+  "routes": [
+    {
+      "path": "/",
+      "type": "static",
+      "source": "src/pages/index.astro"
+    },
+    {
+      "path": "/(astro-not-found)/",
+      "type": "error",
+      "source": "src/pages/404.astro"
+    },
+    {
+      "path": "/[slug]/",
+      "type": "static",
+      "source": "src/pages/[slug].astro (dynamic template)"
+    },
+    {
+      "path": "/about",
+      "type": "redirect",
+      "source": "middleware.ts→/about-us/"
+    },
+    {
+      "path": "/about-us/",
+      "type": "static",
+      "source": "src/pages/about-us.astro"
+    },
+    {
+      "path": "/about/",
+      "type": "redirect",
+      "source": "middleware.ts→/about-us/; src/pages/about.astro"
+    },
+    {
+      "path": "/api/careers",
+      "type": "api",
+      "source": "src/pages/api/careers.ts"
+    },
+    {
+      "path": "/api/careers/applications",
+      "type": "api",
+      "source": "src/pages/api/careers/applications.ts"
+    },
+    {
+      "path": "/api/careers/openings",
+      "type": "api",
+      "source": "src/pages/api/careers/openings.ts"
+    },
+    {
+      "path": "/api/google-reviews/callback",
+      "type": "api",
+      "source": "src/pages/api/google-reviews/callback.ts"
+    },
+    {
+      "path": "/api/google-reviews/disconnect",
+      "type": "api",
+      "source": "src/pages/api/google-reviews/disconnect.ts"
+    },
+    {
+      "path": "/api/google-reviews/display",
+      "type": "api",
+      "source": "src/pages/api/google-reviews/display.ts"
+    },
+    {
+      "path": "/api/google-reviews/locations",
+      "type": "api",
+      "source": "src/pages/api/google-reviews/locations.ts"
+    },
+    {
+      "path": "/api/google-reviews/oauth/start",
+      "type": "api",
+      "source": "src/pages/api/google-reviews/oauth/start.ts"
+    },
+    {
+      "path": "/api/google-reviews/refresh",
+      "type": "api",
+      "source": "src/pages/api/google-reviews/refresh.ts"
+    },
+    {
+      "path": "/api/google-reviews/select",
+      "type": "api",
+      "source": "src/pages/api/google-reviews/select.ts"
+    },
+    {
+      "path": "/api/google-reviews/status",
+      "type": "api",
+      "source": "src/pages/api/google-reviews/status.ts"
+    },
+    {
+      "path": "/api/leads/website",
+      "type": "api",
+      "source": "src/pages/api/leads/website.ts"
+    },
+    {
+      "path": "/battling-dallis-grass-the-challenge-of-eliminating-a-stubborn-weed-in-warm-season-grasses/",
+      "type": "blog",
+      "source": "blog-posts.generated.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/battling-large-patch-disease-a-guide-to-protecting-your-baton-rouge-lawn/",
+      "type": "blog",
+      "source": "blog-posts.generated.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/careers/",
+      "type": "static",
+      "source": "src/pages/careers.astro"
+    },
+    {
+      "path": "/common-lawn-insects-in-prairieville/",
+      "type": "blog",
+      "source": "blog-posts.generated.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/contact",
+      "type": "redirect",
+      "source": "middleware.ts→/contact-us/"
+    },
+    {
+      "path": "/contact-us/",
+      "type": "static",
+      "source": "src/pages/contact-us.astro"
+    },
+    {
+      "path": "/contact/",
+      "type": "redirect",
+      "source": "middleware.ts→/contact-us/; src/pages/contact.astro"
+    },
+    {
+      "path": "/core-aeration/",
+      "type": "service",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/creating-a-thriving-centipede-lawn-in-baton-rouge-louisiana/",
+      "type": "blog",
+      "source": "blog-posts.generated.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/customer-login-pay-bill/",
+      "type": "utility",
+      "source": "src/pages/customer-login-pay-bill.astro"
+    },
+    {
+      "path": "/excellent-results-with-our-lawn-treatment-program/",
+      "type": "blog",
+      "source": "blog-posts.generated.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/facebook-estimate-request/",
+      "type": "campaign",
+      "source": "campaigns.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/fire-ant-treatment/",
+      "type": "service",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/fire-ant-treatments-baton-rouge/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:relatedUrls"
+    },
+    {
+      "path": "/flower-bed-weed-control",
+      "type": "redirect",
+      "source": "middleware.ts→/flower-bed-weed-control-and-fertilization/"
+    },
+    {
+      "path": "/flower-bed-weed-control-and-fertilization/",
+      "type": "service",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/flower-bed-weed-control/",
+      "type": "redirect",
+      "source": "middleware.ts→/flower-bed-weed-control-and-fertilization/; src/pages/flower-bed-weed-control.astro"
+    },
+    {
+      "path": "/google-reviews/setup/",
+      "type": "utility",
+      "source": "src/pages/google-reviews/setup.astro"
+    },
+    {
+      "path": "/gym-member-lawn-care-special/",
+      "type": "campaign",
+      "source": "campaigns.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/how-to-kill-pickers-stickers-burweed-in-louisiana/",
+      "type": "blog",
+      "source": "blog-posts.generated.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/importance-of-winterizing-your-lawn-and-pre-emergents-in-south-louisiana/",
+      "type": "blog",
+      "source": "blog-posts.generated.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/lawn-care-blog/",
+      "type": "static",
+      "source": "src/pages/lawn-care-blog.astro"
+    },
+    {
+      "path": "/lawn-fertilization-ascension/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:hub.relatedUrls"
+    },
+    {
+      "path": "/lawn-fertilization-baton-rouge/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:relatedUrls"
+    },
+    {
+      "path": "/lawn-fertilization-denham-springs/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:relatedUrls"
+    },
+    {
+      "path": "/lawn-fertilization-gonzales/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:relatedUrls"
+    },
+    {
+      "path": "/lawn-fertilization-laplace/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl"
+    },
+    {
+      "path": "/lawn-fertilization-lutcher/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl"
+    },
+    {
+      "path": "/lawn-fertilization-plaquemine/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl"
+    },
+    {
+      "path": "/lawn-fertilization-prairieville/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:relatedUrls"
+    },
+    {
+      "path": "/lawn-fertilization-weed-control/",
+      "type": "service",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/lawn-fungus-and-insects/",
+      "type": "service",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/lawn-fungus/",
+      "type": "service",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/lawn-insects/",
+      "type": "service",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/lawn-treatment-addis-la/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl"
+    },
+    {
+      "path": "/lawn-treatment-and-weed-control-in-iberville-parish/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:serviceAreaHubs"
+    },
+    {
+      "path": "/lawn-treatment-denham-springs",
+      "type": "redirect",
+      "source": "middleware.ts→/service-areas/denham-springs/"
+    },
+    {
+      "path": "/lawn-treatment-denham-springs/",
+      "type": "redirect",
+      "source": "middleware.ts→/service-areas/denham-springs/; src/pages/lawn-treatment-denham-springs.astro"
+    },
+    {
+      "path": "/lawn-treatment-in-saint-gabriel-la/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl"
+    },
+    {
+      "path": "/lawn-treatment-service-in-central-la/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl"
+    },
+    {
+      "path": "/lawn-treatment-service-in-denham-springs-la/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl"
+    },
+    {
+      "path": "/lawn-treatment-service-in-gonzales-la/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl"
+    },
+    {
+      "path": "/lawn-treatment-service-in-walker-la/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl"
+    },
+    {
+      "path": "/lawn-treatment-service-prairieville-la/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl"
+    },
+    {
+      "path": "/lawn-treatment-springfield-la/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl"
+    },
+    {
+      "path": "/lawn-treatment-west-baton-rouge-la/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:serviceAreaHubs"
+    },
+    {
+      "path": "/lawn-treatments-ascension/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:serviceAreaHubs"
+    },
+    {
+      "path": "/lawn-treatments-baton-rouge/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl"
+    },
+    {
+      "path": "/lawn-treatments-livingston-parish/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl; service-areas.ts:serviceAreaHubs"
+    },
+    {
+      "path": "/liquid-aeration-quote-request-received/",
+      "type": "utility",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/liquid-aeration/",
+      "type": "service",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/mosquito-flea-tick-treatments/",
+      "type": "service",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/nextdoor-estimate-request/",
+      "type": "campaign",
+      "source": "campaigns.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/plant-disease-or-pest/",
+      "type": "service",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/post-card-estimate-request/",
+      "type": "campaign",
+      "source": "campaigns.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/pre-emergent-weed-control",
+      "type": "redirect",
+      "source": "middleware.ts→/lawn-fertilization-weed-control/"
+    },
+    {
+      "path": "/pre-emergent-weed-control/",
+      "type": "redirect",
+      "source": "middleware.ts→/lawn-fertilization-weed-control/; src/pages/pre-emergent-weed-control.astro"
+    },
+    {
+      "path": "/privacy",
+      "type": "redirect",
+      "source": "middleware.ts→/privacy-policy/"
+    },
+    {
+      "path": "/privacy-policy/",
+      "type": "legal",
+      "source": "src/pages/privacy-policy.astro"
+    },
+    {
+      "path": "/privacy/",
+      "type": "redirect",
+      "source": "middleware.ts→/privacy-policy/; src/pages/privacy.astro"
+    },
+    {
+      "path": "/request-",
+      "type": "redirect",
+      "source": "middleware.ts→/request-a-quote/"
+    },
+    {
+      "path": "/request-/",
+      "type": "redirect",
+      "source": "middleware.ts→/request-a-quote/; src/pages/request-.astro"
+    },
+    {
+      "path": "/request-a-quote/",
+      "type": "static",
+      "source": "src/pages/request-a-quote.astro"
+    },
+    {
+      "path": "/request-an-estimate-facebook-50/",
+      "type": "campaign",
+      "source": "campaigns.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/robots.txt",
+      "type": "utility",
+      "source": "src/pages/robots.txt.ts"
+    },
+    {
+      "path": "/service-areas/",
+      "type": "static",
+      "source": "src/pages/service-areas/index.astro"
+    },
+    {
+      "path": "/service-areas/[slug]/",
+      "type": "service-area",
+      "source": "src/pages/service-areas/[slug].astro (dynamic template)"
+    },
+    {
+      "path": "/service-areas/addis/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/albany/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/baker/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/baton-rouge/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/brusly/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/central/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/convent/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/covington/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/darrow/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/denham-springs/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/donaldsonville/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/dutchtown/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/geismar/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/gonzales/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/gramercy/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/hammond/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/kenner/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/killian/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/laplace/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/livingston/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/lutcher/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/madisonville/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/mandeville/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/maurepas/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/metairie/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/paulina/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/plaquemine/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/ponchatoula/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/port-allen/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/port-vincent/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/prairieville/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/saint-gabriel/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/sorrento/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/springfield/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/st-amant/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/st-george/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/walker/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/watson/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/white-castle/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/service-areas/zachary/",
+      "type": "service-area",
+      "source": "getStaticPaths:service-areas/[slug].astro"
+    },
+    {
+      "path": "/services/",
+      "type": "static",
+      "source": "src/pages/services.astro"
+    },
+    {
+      "path": "/services/core-aeration",
+      "type": "redirect",
+      "source": "middleware.ts→/core-aeration/"
+    },
+    {
+      "path": "/services/core-aeration/",
+      "type": "redirect",
+      "source": "middleware.ts→/core-aeration/; src/pages/services/core-aeration.astro"
+    },
+    {
+      "path": "/services/fire-ant-treatment",
+      "type": "redirect",
+      "source": "middleware.ts→/fire-ant-treatment/"
+    },
+    {
+      "path": "/services/fire-ant-treatment/",
+      "type": "redirect",
+      "source": "middleware.ts→/fire-ant-treatment/; src/pages/services/fire-ant-treatment.astro"
+    },
+    {
+      "path": "/services/flower-bed-weed-control",
+      "type": "redirect",
+      "source": "middleware.ts→/flower-bed-weed-control-and-fertilization/"
+    },
+    {
+      "path": "/services/flower-bed-weed-control/",
+      "type": "redirect",
+      "source": "middleware.ts→/flower-bed-weed-control-and-fertilization/; src/pages/services/flower-bed-weed-control.astro"
+    },
+    {
+      "path": "/services/lawn-fertilization-weed-control",
+      "type": "redirect",
+      "source": "middleware.ts→/lawn-fertilization-weed-control/"
+    },
+    {
+      "path": "/services/lawn-fertilization-weed-control/",
+      "type": "redirect",
+      "source": "middleware.ts→/lawn-fertilization-weed-control/; src/pages/services/lawn-fertilization-weed-control.astro"
+    },
+    {
+      "path": "/sitemap.xml",
+      "type": "utility",
+      "source": "src/pages/sitemap.xml.ts"
+    },
+    {
+      "path": "/soil-sample/",
+      "type": "service",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/terms-and-conditions/",
+      "type": "legal",
+      "source": "src/pages/terms-and-conditions.astro"
+    },
+    {
+      "path": "/test/",
+      "type": "utility",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/thank-you-core-aeration/",
+      "type": "utility",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/thank-you-nextdoor/",
+      "type": "utility",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/thank-you/",
+      "type": "utility",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/the-ultimate-guide-to-fertilizing-your-lawn-in-south-Louisiana",
+      "type": "redirect",
+      "source": "middleware.ts→/the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/"
+    },
+    {
+      "path": "/the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/",
+      "type": "blog",
+      "source": "blog-posts.generated.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/the-ultimate-guide-to-fertilizing-your-lawn-in-south-Louisiana/",
+      "type": "redirect",
+      "source": "middleware.ts→/the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/"
+    },
+    {
+      "path": "/tree-and-shrub-care/",
+      "type": "service",
+      "source": "getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/trucklead/",
+      "type": "campaign",
+      "source": "campaigns.ts; getStaticPaths:[slug].astro"
+    },
+    {
+      "path": "/weed-control-ascension/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:hub.relatedUrls"
+    },
+    {
+      "path": "/weed-control-baton-rouge/",
+      "type": "geo",
+      "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:relatedUrls"
+    }
+  ]
+}

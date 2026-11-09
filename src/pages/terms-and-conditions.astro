@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { terms } from "../data/legal-content.generated";
+import { site } from "../data/site";
+
+export const prerender = true;
+
+function slugify(s: string) {
+  return s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+---
+
+<BaseLayout
+  title="Terms & Conditions | Grow Green Weed Control"
+  description="Terms that govern use of the Grow Green Weed Control website and SMS text-messaging program."
+  canonicalPath="/terms-and-conditions/"
+>
+  <PageHero
+    eyebrow="Legal"
+    title="Terms &amp; Conditions"
+    lead="The terms that govern use of our website and participation in Grow Green Weed Control’s text-messaging program."
+  />
+
+  <section class="legal-page">
+    <div class="legal-page__inner">
+      <aside class="legal-toc" aria-label="Terms and conditions contents">
+        <strong>On this page</strong>
+        <ol>
+          {terms.toc.map((h) => (
+            <li>
+              <a href={`#${slugify(h)}`}>{h}</a>
+            </li>
+          ))}
+        </ol>
+        <p class="legal-toc__help">
+          Need help? Call <a href={`tel:${site.phoneTel}`}>{site.phone}</a> or email{" "}
+          <a href={`mailto:${site.email}`}>{site.email}</a>.
+        </p>
+      </aside>
+      <article class="legal-prose prose" set:html={terms.html} />
+    </div>
+  </section>
+</BaseLayout>

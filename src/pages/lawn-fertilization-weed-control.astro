@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LawnFertilizationPage from "../components/LawnFertilizationPage.astro";
+import { serviceBySlug } from "../data/services";
+
+export const prerender = true;
+
+const service = serviceBySlug["lawn-fertilization-weed-control"];
+if (!service) throw new Error("Missing service lawn-fertilization-weed-control");
+---
+
+<BaseLayout
+  title={`${service.title} | Grow Green Weed Control`}
+  description={service.summary}
+  canonicalPath="/lawn-fertilization-weed-control/"
+>
+  <link slot="head" rel="preload" as="image" href="/images/home/hero-lawn-640.webp" fetchpriority="high" />
+  <LawnFertilizationPage />
+</BaseLayout>

@@ -1,0 +1,658 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import GoogleReviews from "./GoogleReviews.astro";
+import { site } from "../data/site";
+import {
+  areaServedSchema,
+  coverageHeroServingLine,
+  coverageShortPhrase,
+  serviceAreaCount,
+} from "../data/service-areas";
+import "../styles/homepage.css";
+
+const checkSvg = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+/** Featured homepage services — mosquito/flea/tick kept off this grid. */
+const featuredServices = [
+  {
+    primary: true,
+    href: "/lawn-fertilization-weed-control/",
+    image: "/images/services/zoysia.webp",
+    imageAlt: "Healthy green zoysia lawn treated by Grow Green",
+    badge: "Core program",
+    type: "Lawn program",
+    name: "Lawn Fertilization & Weed Control",
+    description: "Season-smart weed control and nutrition for South Louisiana turf.",
+  },
+  {
+    href: "/flower-bed-weed-control-and-fertilization/",
+    image: "/images/services/flower-bed-card.webp",
+    imageAlt: "Clean landscaped flower bed with stone edging and mulch",
+    badge: "Beds",
+    type: "Landscape",
+    name: "Flower Bed Weed Control",
+    description: "Pre-emergent and targeted weed control for cleaner beds.",
+  },
+  {
+    href: "/fire-ant-treatment/",
+    image: "/images/services/ant-mound.webp",
+    imageAlt: "Fire ant mound in a South Louisiana lawn",
+    badge: "Pests",
+    type: "Ant control",
+    name: "Fire Ant Treatment",
+    description: "Colony-focused fire ant control for yards and play areas.",
+  },
+  {
+    href: "/tree-and-shrub-care/",
+    image: "/images/about/kyle-tree-shrub-care.webp",
+    imageAlt: "Grow Green technician providing tree and shrub care",
+    badge: "Ornamentals",
+    type: "Plant care",
+    name: "Tree & Shrub Care",
+    description: "Seasonal nutrition, insect, and disease care for ornamentals.",
+  },
+  {
+    href: "/soil-sample/",
+    image: "/images/services/soil-sampling.webp",
+    imageAlt: "Soil sampling tools on a lawn",
+    badge: "Analysis",
+    type: "Soil",
+    name: "Soil Sampling",
+    description: "Lab analysis of nutrients, salts, and pH for your lawn.",
+  },
+  {
+    href: "/core-aeration/",
+    image: "/images/services/core-aeration.webp",
+    imageAlt: "Core aeration equipment relieving compacted lawn soil",
+    badge: "Soil health",
+    type: "Compaction",
+    name: "Aeration",
+    description: "Mechanical cores that open compacted soil for healthier roots.",
+  },
+] as const;
+
+/** Confirmed typical round focus from lawn program source content — timing may shift. */
+const programRounds = [
+  { num: "1", when: "Jan–Feb", title: "Pre-emergent + winter weed clean-up" },
+  { num: "2", when: "Feb–Mar", title: "Micronutrients + spring disease protection" },
+  { num: "3", when: "Mar–Apr", title: "Spring fertilizer + continued weed control" },
+  { num: "4", when: "May–Jun", title: "Early-summer nutrition + targeted control" },
+  { num: "5", when: "Jun–Jul", title: "Summer fertilizer + insect protection" },
+  { num: "6", when: "Aug–Sep", title: "Late-summer weed clean-up + insect control" },
+  { num: "7", when: "Oct–Nov", title: "Potassium + winter weed prevention" },
+  { num: "8", when: "Nov–Dec", title: "Winterizer + second pre-emergent" },
+] as const;
+
+/** Short homepage sample — full 40 live on /service-areas/. */
+const popularAreas = [
+  { label: "Baton Rouge", href: "/lawn-treatments-baton-rouge/" },
+  { label: "Prairieville", href: "/lawn-treatment-service-prairieville-la/" },
+  { label: "Gonzales", href: "/lawn-treatment-service-in-gonzales-la/" },
+  { label: "Denham Springs", href: "/lawn-treatment-service-in-denham-springs-la/" },
+  { label: "Walker", href: "/lawn-treatment-service-in-walker-la/" },
+  { label: "St. Amant", href: "/service-areas/st-amant/" },
+] as const;
+
+const schemaAreaServed = areaServedSchema();
+
+const serviceListJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Grow Green Lawn and Pest Services",
+  itemListElement: featuredServices.map((s, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Service",
+      name: s.name,
+      areaServed: schemaAreaServed,
+      url: `https://growgreenweedcontrol.com${s.href}`,
+    },
+  })),
+};
+---
+
+<div id="gg-homepage">
+  <!-- 1. Offer + estimate -->
+  <section id="gg-hero" aria-label="Hero">
+    <div class="hero-wrap">
+      <div class="copy">
+        <div class="hero-brand">
+          <img src="/images/brand/logo-128.webp" width="72" height="72" alt="" decoding="async" />
+          <span>
+            <strong>Grow Green</strong>
+            <small>Weed Control</small>
+          </span>
+        </div>
+        <p class="eyebrow">Locally owned · Firefighter-owned · South Louisiana</p>
+        <h1 class="title">
+          A greener, <em>weed-free lawn</em>—without the guesswork
+        </h1>
+        <p class="sub">
+          Local weed control and fertilization for warm-season lawns across South Louisiana.
+        </p>
+        <p class="price-note">{site.startingPrice.short}</p>
+        <div class="ctas">
+          <a href="#gg-form" class="btn btn-primary">Request My Free Estimate →</a>
+          <a href={`tel:${site.phoneTel}`} class="phone-link">Call {site.phone}</a>
+        </div>
+        <ul class="trust-list" aria-label="Why homeowners choose Grow Green">
+          <li>Month-to-month options</li>
+          <li>Season-specific lawn care</li>
+          <li>Clear treatment records</li>
+        </ul>
+        <div class="brand-row">
+          <div class="mascot">
+            <img
+              src="/images/mascot/spray-wand-216.webp"
+              srcset="/images/mascot/spray-wand-216.webp 216w, /images/mascot/spray-wand-320.webp 320w, /images/mascot/spray-wand-480.webp 480w"
+              sizes="120px"
+              alt=""
+              width="120"
+              height="140"
+              decoding="async"
+            />
+          </div>
+          <p class="brand-note">
+            {coverageHeroServingLine(site.address.city)}
+          </p>
+        </div>
+      </div>
+
+      <div class="quote" id="gg-form">
+        <QuoteForm
+          source="homepage-hero"
+          leadSource="Homepage Hero"
+          heading="See What Your Lawn Would Cost"
+          subheading="Enter the service address and we’ll measure your lawn to prepare an accurate, no-obligation estimate."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Company credibility (single owner introduction) -->
+  <section id="gg-home-intro" aria-label="Meet Grow Green Weed Control">
+    <div class="intro-wrap">
+      <figure class="video-panel">
+        <div
+          class="video-shell gg-video-wrap"
+          data-video-src="/videos/dereck-intro.mp4"
+          data-video-poster="/images/home/video-poster.jpg"
+        >
+          <img
+            class="video-poster"
+            src="/images/home/video-poster-640.webp"
+            srcset="/images/home/video-poster-480.webp 480w, /images/home/video-poster-640.webp 640w"
+            sizes="(max-width: 900px) 92vw, 480px"
+            alt="Dereck, owner of Grow Green Weed Control, standing beside a Grow Green service truck"
+            width="1080"
+            height="1080"
+            loading="lazy"
+            decoding="async"
+          />
+          <button class="video-play" type="button" aria-label="Play video introduction from Dereck"
+          ></button>
+        </div>
+        <figcaption>Meet Dereck and learn how Grow Green cares for South Louisiana lawns.</figcaption>
+      </figure>
+
+      <div class="intro-copy">
+        <p class="eyebrow">Owner introduction</p>
+        <h2>Meet Dereck, owner of Grow Green</h2>
+        <p>
+          Grow Green provides expert
+          <a href="/lawn-fertilization-weed-control/">weed control and fertilization</a>
+          throughout <strong>Baton Rouge, Prairieville, Gonzales, Denham Springs,</strong>
+          and surrounding communities—from a local team based in {site.address.city}.
+        </p>
+        <p>
+          Our year-round liquid program is tailored to
+          <strong>Bermuda, St. Augustine, Centipede, and Zoysia lawns</strong>—helping control weeds,
+          support healthier roots, improve color, and address insects and common lawn diseases.
+        </p>
+        <div class="intro-actions">
+          <a class="intro-btn" href="/about-us/">About our local team →</a>
+          <a class="intro-link" href="#gg-form">Request a free estimate →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. How it works -->
+  <section id="gg-how-it-works" aria-label="How Grow Green lawn treatment works">
+    <div class="process-wrap">
+      <header class="process-header">
+        <p class="eyebrow">How it works</p>
+        <h2>A Better Lawn in Four Simple Steps</h2>
+        <p class="process-lead">
+          From your first estimate to every scheduled visit, Grow Green keeps lawn care clear and
+          convenient.
+        </p>
+      </header>
+
+      <ol class="process-steps">
+        <li class="step">
+          <div class="step-number" aria-hidden="true">1</div>
+          <div class="step-card">
+            <h3>Request Your Free Estimate</h3>
+            <p>
+              Send us your service address. We’ll measure the lawn and provide clear, no-obligation
+              pricing for the recommended program.
+            </p>
+            <div class="step-meta">Free • No pressure</div>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-number" aria-hidden="true">2</div>
+          <div class="step-card">
+            <h3>Approve Your Program</h3>
+            <p>
+              Review your recommended service, approve the estimate online, and our office will
+              confirm and schedule your first visit.
+            </p>
+            <div class="step-meta">Clear, upfront pricing</div>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-number" aria-hidden="true">3</div>
+          <div class="step-card">
+            <h3>Your First Treatment</h3>
+            <p>
+              A trained technician treats your lawn for its current seasonal needs and documents the
+              conditions we find during the visit.
+            </p>
+            <div class="step-meta">Season-specific care</div>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-number" aria-hidden="true">4</div>
+          <div class="step-card">
+            <h3>Year-Round Lawn Care</h3>
+            <p>
+              We return on a seasonal schedule with treatments adjusted for Louisiana’s changing
+              seasons and your lawn’s ongoing needs.
+            </p>
+            <div class="step-meta">Seasonal visits all year</div>
+          </div>
+        </li>
+      </ol>
+
+    </div>
+  </section>
+
+  <!-- 4. Signature program -->
+  <section id="gg-about-program" aria-labelledby="gg-program-title">
+    <div class="program-wrap">
+      <header class="program-header">
+        <div>
+          <p class="program-eyebrow">Our signature lawn program</p>
+          <h2 id="gg-program-title">
+            Seasonal care.<br />
+            <em>One healthier lawn,</em> all year.
+          </h2>
+        </div>
+        <p class="program-intro">
+          Our liquid lawn program combines
+          <strong>weed prevention, targeted weed control, balanced nutrition, and seasonal monitoring</strong>
+          for South Louisiana lawns. Visits are generally spaced about six weeks apart. Exact timing
+          and materials may shift with turf type, weather, and label requirements—not a rigid
+          calendar for every property.
+        </p>
+      </header>
+
+      <div class="program-grid">
+        <article class="rhythm-card" aria-labelledby="gg-rhythm-heading">
+          <p class="rhythm-label">Year-round treatment rhythm</p>
+          <h3 id="gg-rhythm-heading" class="rhythm-number">
+            <strong>~6</strong>
+            <span>weeks between visits</span>
+          </h3>
+          <p class="rhythm-spacing">
+            <strong>About every 6 weeks</strong>
+            <span>Consistent support through Louisiana seasons</span>
+          </p>
+          <ol class="visit-list">
+            {
+              programRounds.map((r) => (
+                <li>
+                  <span class="visit-num" aria-hidden="true">
+                    {r.num}
+                  </span>
+                  <span class="visit-when">{r.when}</span>
+                  <span class="visit-title">{r.title}</span>
+                </li>
+              ))
+            }
+          </ol>
+          <p class="rhythm-copy">
+            Each round is adjusted for current weather, weed pressure, turf growth, and what your
+            lawn needs—not the same mix sprayed every time.
+          </p>
+          <p class="rhythm-link">
+            <a href="/lawn-fertilization-weed-control/">Full program details →</a>
+          </p>
+        </article>
+
+        <div class="included-panel">
+          <h3 class="included-heading">What the program is built to do</h3>
+
+          <article class="program-feature">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 21V10m0 4c-4.2 0-7-2.5-7-6 4.2 0 7 2.5 7 6Zm0-2c4.2 0 7-2.5 7-6-4.2 0-7 2.5-7 6Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </div>
+            <div class="feature-copy">
+              <h3>Prevent and control weeds</h3>
+              <p>
+                Seasonal
+                <a href="/lawn-fertilization-weed-control/">pre-emergent and post-emergent weed control</a>
+                helps stop new weeds before they start and targets existing weeds when conditions
+                allow.
+              </p>
+            </div>
+          </article>
+
+          <article class="program-feature">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 3v18M7.5 7.2C9 8.6 10.5 9.3 12 9.3m4.5-2.1C15 8.6 13.5 9.3 12 9.3M6 13c2 1.7 4 2.5 6 2.5m6-2.5c-2 1.7-4 2.5-6 2.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <div class="feature-copy">
+              <h3>Build stronger turf from the roots up</h3>
+              <p>
+                Balanced liquid fertilizer and micronutrients support healthier roots, improved
+                color, and denser growth without pushing the lawn harder than the season allows.
+              </p>
+            </div>
+          </article>
+
+          <article class="program-feature">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 12a8 8 0 1 0 16 0 8 8 0 0 0-16 0Z" stroke="currentColor" stroke-width="1.8"
+                ></path>
+                <path
+                  d="M12 8v4l2.8 1.8"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </div>
+            <div class="feature-copy">
+              <h3>Adjust with the Louisiana seasons</h3>
+              <p>
+                Your technician watches turf response, weed activity, insects, and signs of disease so
+                treatments and recommendations match what is happening in your yard.
+              </p>
+            </div>
+          </article>
+
+          <div class="turf-note">
+            <span
+              ><strong>Locally tailored:</strong> Programs are customized for Bermuda, St. Augustine,
+              Centipede, and Zoysia lawns throughout Ascension Parish, Baton Rouge, Livingston Parish,
+              and nearby areas.</span
+            >
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. Services + areas -->
+  <section id="gg-services-home" aria-label="Grow Green lawn and pest services">
+    <div class="services-wrap">
+      <header class="services-header">
+        <div class="heading-copy">
+          <p class="eyebrow">Services built for South Louisiana</p>
+          <h2>Professional lawn &amp; outdoor treatments</h2>
+          <p class="services-lead">
+            Start with our year-round lawn program or add targeted care for fire ants, flower beds,
+            ornamentals, and compacted soil.
+          </p>
+          <a class="services-all" href="/services/">View all services →</a>
+        </div>
+      </header>
+
+      <ul class="services-grid">
+        {
+          featuredServices.map((s) => (
+            <li class:list={["service-item", s.primary && "service-item--primary"]}>
+              <a class="service-card" href={s.href} aria-label={`Explore ${s.name}`}>
+                <div class="service-media">
+                  <img src={s.image} loading="lazy" decoding="async" alt={s.imageAlt} width="640" height="400" />
+                  <span class="service-badge">{s.badge}</span>
+                </div>
+                <div class="service-body">
+                  <p class="service-type">{s.type}</p>
+                  <h3 class="service-name">{s.name}</h3>
+                  <p class="service-description">{s.description}</p>
+                  <span class="service-action">
+                    Explore <span class="service-arrow" aria-hidden="true">→</span>
+                  </span>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="service-areas">
+        <div class="areas-intro">
+          <p class="areas-heading">Areas we serve</p>
+          <p class="areas-note">
+            {coverageShortPhrase()}. Browse a few nearby communities, or open the full directory.
+          </p>
+        </div>
+        <nav class="area-chips" aria-label="Popular Grow Green service areas">
+          {
+            popularAreas.map((a) => (
+              <a href={a.href}>{a.label}</a>
+            ))
+          }
+          <a class="area-chip-more" href="/service-areas/">View all {serviceAreaCount} areas</a>
+        </nav>
+      </div>
+    </div>
+    <script type="application/ld+json" set:html={JSON.stringify(serviceListJsonLd)} />
+  </section>
+
+  <!-- 6. Concrete benefits (distinct from owner intro; work photo) -->
+  <section id="gg-why-choose" aria-labelledby="gg-why-title">
+    <div class="why-wrap">
+      <div class="why-grid">
+        <div class="why-copy">
+          <p class="why-eyebrow">What you get with Grow Green</p>
+          <h2 id="gg-why-title">Treatments planned around your lawn—not a one-size calendar.</h2>
+          <p class="why-lead">
+            From weed prevention to seasonal nutrition and ornamental care, every service has a clear
+            job. Our technicians document visits, explain what they applied, and keep recommendations
+            tied to warm-season turf conditions in South Louisiana.
+          </p>
+
+          <ul class="reason-list">
+            <li>
+              <span class="reason-icon" set:html={checkSvg} />
+              <span>
+                <span class="reason-title">Warm-season turf focus</span>
+                <span class="reason-text"
+                  >Programs shaped for Bermuda, St. Augustine, Centipede, and Zoysia.</span
+                >
+              </span>
+            </li>
+            <li>
+              <span class="reason-icon" set:html={checkSvg} />
+              <span>
+                <span class="reason-title">Documented visits</span>
+                <span class="reason-text"
+                  >Clear notes after service so you know what was treated and why.</span
+                >
+              </span>
+            </li>
+            <li>
+              <span class="reason-icon" set:html={checkSvg} />
+              <span>
+                <span class="reason-title">Add only what you need</span>
+                <span class="reason-text"
+                  >Aeration, fire ants, beds, trees, and outdoor pests stay optional add-ons.</span
+                >
+              </span>
+            </li>
+            <li>
+              <span class="reason-icon" set:html={checkSvg} />
+              <span>
+                <span class="reason-title">Nearby office support</span>
+                <span class="reason-text"
+                  >Call or text {site.phone} during office hours for estimates and account help.</span
+                >
+              </span>
+            </li>
+          </ul>
+
+          <div class="why-actions">
+            <a class="why-btn" href="#gg-form">Request My Free Estimate →</a>
+            <a class="why-link" href="/lawn-fertilization-weed-control/"
+              >Explore Our Lawn Program →</a
+            >
+          </div>
+        </div>
+
+        <figure class="why-media why-media--work">
+          <div class="work-photo">
+            <img
+              src="/images/hero/truck-and-trailer.webp"
+              alt="Grow Green Weed Control service truck and trailer"
+              width="1280"
+              height="853"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <figcaption class="tech-label">Local trucks, local technicians, local routes.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Google reviews (cached Business Profile API; falls back to profile link) -->
+  <GoogleReviews
+    id="gg-home-reviews"
+    heading="What neighbors say on Google"
+    lead="Recent five-star write-ups about our technicians, communication, and lawn treatments."
+  />
+
+  <!-- 8. Final estimate CTA -->
+  <section id="gg-quote-banner" aria-labelledby="ggq-title">
+    <div class="ggq-wrap">
+      <div class="ggq-grid">
+        <div class="ggq-copy">
+          <p class="ggq-eyebrow">Free local lawn estimate</p>
+          <h2 id="ggq-title">
+            Ready to stop guessing<br />
+            <em>what your lawn needs?</em>
+          </h2>
+          <p class="ggq-lead">
+            Tell us what you’re seeing and what you want to improve. Our local team will review your
+            property and recommend a straightforward plan—with
+            <strong>clear pricing and no pressure.</strong>
+          </p>
+          <ul class="ggq-benefits">
+            <li>
+              <span class="ggq-check" set:html={checkSvg} />
+              Free property estimate
+            </li>
+            <li>
+              <span class="ggq-check" set:html={checkSvg} />
+              Month-to-month options
+            </li>
+            <li>
+              <span class="ggq-check" set:html={checkSvg} />
+              Serving 40 South Louisiana communities
+            </li>
+          </ul>
+        </div>
+
+        <aside class="ggq-card" aria-label="Request a free lawn estimate">
+          <span class="ggq-card-label">Free &amp; no obligation</span>
+          <strong class="ggq-card-title">Get your free, personalized lawn estimate.</strong>
+          <p class="ggq-card-copy">
+            Start online, or call or text {site.phone} during office hours
+            ({site.hours.label}) if you would rather talk with our team.
+          </p>
+          <div class="ggq-actions">
+            <a class="ggq-primary" href="#gg-form">Start My Free Estimate →</a>
+            <div class="ggq-contact-row">
+              <a
+                class="ggq-phone"
+                href={`tel:${site.phoneTel}`}
+                aria-label={`Call Grow Green Weed Control at ${site.phone}`}
+              >
+                Call Us
+              </a>
+              <a
+                class="ggq-phone"
+                href={`sms:${site.phoneTel}`}
+                aria-label={`Text Grow Green Weed Control at ${site.phone}`}
+              >
+                Text Us
+              </a>
+            </div>
+          </div>
+          <p class="ggq-service-line">Serving {coverageShortPhrase()}</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  (function () {
+    const section = document.getElementById("gg-home-intro");
+    if (!section) return;
+    const wrap = section.querySelector(".gg-video-wrap");
+    if (!(wrap instanceof HTMLElement)) return;
+
+    const src = wrap.getAttribute("data-video-src");
+    const poster = wrap.getAttribute("data-video-poster");
+    let started = false;
+
+    function startVideo() {
+      if (started || !src) return;
+      started = true;
+      const player = document.createElement("video");
+      player.className = "video-player";
+      player.setAttribute("controls", "");
+      player.setAttribute("playsinline", "");
+      player.setAttribute("preload", "metadata");
+      player.setAttribute(
+        "aria-label",
+        "Introduction from Dereck, owner of Grow Green Weed Control",
+      );
+      if (poster) player.setAttribute("poster", poster);
+      const source = document.createElement("source");
+      source.setAttribute("src", src);
+      source.setAttribute("type", "video/mp4");
+      player.appendChild(source);
+      while (wrap.firstChild) wrap.removeChild(wrap.firstChild);
+      wrap.style.cursor = "default";
+      wrap.appendChild(player);
+      const playPromise = player.play();
+      if (playPromise && typeof playPromise.catch === "function") playPromise.catch(() => {});
+    }
+
+    wrap.addEventListener("click", startVideo, { once: true });
+  })();
+</script>

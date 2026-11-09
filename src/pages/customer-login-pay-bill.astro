@@ -1,0 +1,129 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+import "../styles/customer-portal.css";
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Customer Login / Pay Bill | Grow Green Weed Control"
+  description="Sign in to the Grow Green Weed Control customer portal to view your account or pay your bill. Local office help available during business hours."
+  canonicalPath="/customer-login-pay-bill/"
+>
+  <div class="portal-page">
+    <header class="portal-hero">
+      <div class="portal-hero__inner">
+        <div class="portal-hero__copy motion-rise">
+          <p class="portal-hero__eyebrow">Grow Green Weed Control</p>
+          <h1>Customer login &amp; pay bill</h1>
+          <p class="portal-hero__lead">
+            Sign in to the secure customer portal to view your account and make a payment.
+          </p>
+          <div class="portal-hero__actions">
+            <a
+              class="portal-btn portal-btn--gold"
+              href={site.portalUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Open customer portal
+              <span class="portal-btn__arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="portal-btn portal-btn--ghost" href="#portal-help">Need login help?</a>
+          </div>
+        </div>
+        <div class="portal-hero__visual motion-rise" aria-hidden="true">
+          <img
+            class="portal-hero__mascot"
+            src="/images/mascot/thumbs-up-240.webp"
+            srcset="/images/mascot/thumbs-up-240.webp 240w, /images/mascot/thumbs-up.png 512w"
+            sizes="(max-width: 860px) 180px, 240px"
+            width="240"
+            height="280"
+            alt=""
+            decoding="async"
+            fetchpriority="high"
+          />
+        </div>
+      </div>
+    </header>
+
+    <section class="portal-help" id="portal-help" aria-label="Account help">
+      <div class="portal-help__inner motion-rise">
+        <a class="portal-help__link" href={`tel:${site.phoneTel}`}>
+          <span>Call</span>
+          <strong>{site.phone}</strong>
+          <em>Talk with the office about login or billing</em>
+        </a>
+        <a class="portal-help__link" href={`mailto:${site.email}`}>
+          <span>Email</span>
+          <strong>{site.email}</strong>
+          <em>Send account questions during business hours</em>
+        </a>
+        <div class="portal-help__link portal-help__static">
+          <span>Hours</span>
+          <strong>8 AM–4 PM</strong>
+          <em>{site.hours.weekdays}, America/Chicago</em>
+        </div>
+      </div>
+    </section>
+
+    <section class="portal-guide" aria-labelledby="portal-guide-title">
+      <div class="portal-guide__inner">
+        <div class="motion-rise">
+          <p class="portal-guide__kicker">Existing customers</p>
+          <h2 id="portal-guide-title">What the portal is for</h2>
+          <p class="portal-guide__intro">
+            The portal is a separate system from this website. Use it for account access and payments;
+            call or email our office if you need help signing in.
+          </p>
+          <ol class="portal-guide__list">
+            <li>
+              <span class="portal-guide__num" aria-hidden="true">1</span>
+              <div>
+                <strong>Pay your bill</strong>
+                <p>Make a payment through the secure customer portal.</p>
+              </div>
+            </li>
+            <li>
+              <span class="portal-guide__num" aria-hidden="true">2</span>
+              <div>
+                <strong>Review account details</strong>
+                <p>Sign in to view information tied to your Grow Green account.</p>
+              </div>
+            </li>
+            <li>
+              <span class="portal-guide__num" aria-hidden="true">3</span>
+              <div>
+                <strong>Get local help when stuck</strong>
+                <p>
+                  Our St. Amant office can help with login and billing questions during{" "}
+                  {site.hours.label}.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <aside class="portal-aside motion-rise" aria-label="Related options">
+          <div class="portal-aside__block">
+            <h3>New customer?</h3>
+            <p>
+              This portal is for existing accounts.{" "}
+              <a href="/request-a-quote/">Request a free estimate</a> and our team will follow up
+              about service for your lawn.
+            </p>
+          </div>
+          <div class="portal-aside__block portal-aside__note">
+            <h3>Prefer the office?</h3>
+            <p>
+              Call <a href={`tel:${site.phoneTel}`}>{site.phone}</a> or email{" "}
+              <a href={`mailto:${site.email}`}>{site.email}</a>. We are open {site.hours.label}.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

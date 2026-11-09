@@ -1,0 +1,40 @@
+{
+  "name": "growgreen-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "media:curate": "node scripts/curate-media.mjs",
+    "media:curate-blog": "node scripts/curate-blog-inline-images.mjs",
+    "check:urls": "node scripts/check-url-coverage.mjs",
+    "launch:inventory": "node --experimental-strip-types scripts/launch-inventory.mjs",
+    "launch:crawl": "node scripts/launch-crawl.mjs",
+    "launch:service-areas": "node --experimental-strip-types scripts/launch-service-area-audit.mjs",
+    "launch:verify": "node scripts/launch-verify.mjs",
+    "launch:lighthouse": "node scripts/lighthouse-batch.mjs launch-final .lighthouse/launch-final",
+    "launch:content-scan": "node scripts/launch-content-scan.mjs",
+    "launch:prod-env": "node scripts/check-prod-env.mjs",
+    "launch:prod-env:strict": "node scripts/check-prod-env.mjs --production"
+  },
+  "dependencies": {
+    "@astrojs/node": "^9.5.1",
+    "astro": "^5.16.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.4",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "allowScripts": {
+    "sharp@0.34.5": true,
+    "esbuild@0.27.7": true,
+    "esbuild@0.25.12": true
+  }
+}

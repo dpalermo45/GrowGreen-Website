@@ -1,0 +1,16 @@
+{
+  "generatedAt": "2026-11-08T05:29:06.472Z",
+  "baseUrl": "http://127.0.0.1:4321/",
+  "connectionOk": true,
+  "connectionError": null,
+  "inventoryGeneratedAt": "2026-11-08T05:25:51.214Z",
+  "pagesCrawled": 132,
+  "statusHistogram": {
+    "200": 131,
+    "404": 1
+  },
+  "pagesWithH1": 131,
+  "pagesWithBrokenInternalLinks": 0,
+  "brokenLinkRows": 0,
+  "brokenByKind": {}
+}

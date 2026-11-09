@@ -1,0 +1,773 @@
+---
+import { site } from "../data/site";
+import { coverageFaqAnswer, serviceAreaCount } from "../data/service-areas";
+import "../styles/request-quote.css";
+
+const mapToken = import.meta.env.PUBLIC_MAPBOX_TOKEN || "";
+const leadSource = "Request an Estimate";
+const source = "Request an Estimate";
+
+const primaryServices = [
+  {
+    value: "Lawn Fertilization & Weed Control",
+    name: "Lawn Fertilization & Weed Control",
+    desc: "Year-round nutrition and targeted weed control.",
+    popular: true,
+  },
+  {
+    value: "Core Aeration",
+    name: "Core Aeration",
+    desc: "Reduce compaction and help roots grow deeper.",
+  },
+  {
+    value: "Fire Ant Control",
+    name: "Fire Ant Control",
+    desc: "Seasonal fire ant treatments for South Louisiana lawns.",
+  },
+  {
+    value: "Mosquito, Flea & Tick",
+    name: "Mosquito, Flea & Tick",
+    desc: "Outdoor treatments for biting pests around the yard.",
+  },
+  {
+    value: "Flower Bed Weed Control",
+    name: "Flower Bed Weed Control",
+    desc: "Pre- and post-emergent control for beds.",
+  },
+  {
+    value: "Tree & Shrub Care",
+    name: "Tree & Shrub Care",
+    desc: "Nutrition and pest care for ornamentals.",
+  },
+  {
+    value: "Not sure — recommend the right treatment",
+    name: "I’m not sure—help me choose",
+    desc: "Tell us what you see and our team will point you in the right direction.",
+    full: true,
+  },
+] as const;
+
+const moreServices = [
+  { value: "Liquid Aeration", name: "Liquid Aeration", desc: "A soil-loosening alternative to cores." },
+  { value: "Lawn Fungus Treatment", name: "Lawn Fungus Treatment", desc: "Help for large patch and other diseases." },
+  { value: "Soil Analysis", name: "Soil Analysis", desc: "Lab results with practical recommendations." },
+  { value: "Ornamental Plant Disease/Pest", name: "Ornamental Disease & Pest", desc: "Targeted care for landscape plants." },
+  { value: "Lawn Insect Control", name: "Lawn Insect Control", desc: "Chinch bugs, armyworms, and more." },
+  {
+    value: "Wetting Agent / Drought Stress (Lateral G)",
+    name: "Wetting Agent / Drought Stress",
+    desc: "Help moisture reach dry, stressed soil.",
+  },
+] as const;
+
+const faqs = [
+  {
+    q: "How will I receive pricing?",
+    a: `Our local office will follow up during business hours (${site.hours.label}) with clear pricing for your property.`,
+  },
+  {
+    q: "Is service month-to-month?",
+    a: "Yes. Service is billed month-to-month so you can stay because the communication and results earn your business.",
+  },
+  {
+    q: "What should I expect after treatment?",
+    a: "We apply professional products according to their labels and provide any applicable watering, mowing, pet, and re-entry instructions with your service communication.",
+  },
+  {
+    q: "What areas does Grow Green service?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+] as const;
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+
+<article class="rq-page" id="gg-quote-page" data-mapbox={mapToken} aria-labelledby="ggq-page-title">
+  <div class="rq-hero">
+    <div class="rq-inner rq-layout">
+      <div class="rq-intro motion-rise">
+        <p class="rq-eyebrow">Free local lawn quote</p>
+        <h1 id="ggq-page-title">A better lawn starts with a <span>better plan.</span></h1>
+        <p class="rq-lead">
+          Tell us what your lawn needs. Our local team will review your property and send straightforward
+          pricing—with no pressure.
+        </p>
+
+        <div class="rq-proof" aria-label="Why homeowners choose Grow Green">
+          <div class="rq-proof-item">
+            <strong>Locally owned</strong>
+            <span>Family & firefighter-owned</span>
+          </div>
+          <div class="rq-proof-item">
+            <strong>From $39/mo</strong>
+            <span>Starting price by lawn size</span>
+          </div>
+          <div class="rq-proof-item">
+            <strong>Clear pricing</strong>
+            <span>Month-to-month options</span>
+          </div>
+        </div>
+
+        <div class="rq-next" aria-label="What happens next">
+          <p class="rq-next-title">What happens next</p>
+          <ol class="rq-next-list">
+            <li>
+              <span class="rq-next-number">1</span>
+              <span><b>Send your request.</b> It takes about a minute.</span>
+            </li>
+            <li>
+              <span class="rq-next-number">2</span>
+              <span><b>We review your property</b> and the services you selected.</span>
+            </li>
+            <li>
+              <span class="rq-next-number">3</span>
+              <span><b>Get clear pricing</b> from a real local team member.</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="rq-card motion-rise motion-delay-2" id="ggq-form-card">
+        <form id="ggq-form" novalidate>
+          <input type="hidden" name="source" value={source} />
+          <input type="hidden" name="lead_source" value={leadSource} />
+          <div class="hp" aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">
+            <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+          </div>
+
+          <div class="rq-card-top" aria-hidden="true">
+            <div class="rq-card-kicker">
+              <span>Your free quote</span>
+              <span class="rq-step-count" id="ggq-step-count">Step 1 of 3</span>
+            </div>
+            <div class="rq-progress" id="ggq-progress">
+              <span class="is-active"></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="rq-form-body" id="ggq-form-body">
+            <fieldset class="rq-step" data-step="1">
+              <legend><span class="rq-step-title">How can we help?</span></legend>
+              <p class="rq-step-copy">Choose one or more. If you are unsure, select “Help me choose.”</p>
+              <p class="rq-price-note">
+                Plans start at <strong>$39/month</strong>. Your estimate depends on lawn size and selected
+                services.
+              </p>
+
+              <div class="rq-service-grid" id="ggq-services">
+                {
+                  primaryServices.map((s) => (
+                    <label class:list={["rq-service-option", s.full && "rq-field-full"]}>
+                      <input type="checkbox" name="service" value={s.value} />
+                      <span class="rq-service-card">
+                        <span class="rq-checkmark" aria-hidden="true" />
+                        <span>
+                          {"popular" in s && s.popular ? <span class="rq-popular">Most requested</span> : null}
+                          <span class="rq-service-name">{s.name}</span>
+                          <span class="rq-service-desc">{s.desc}</span>
+                        </span>
+                      </span>
+                    </label>
+                  ))
+                }
+              </div>
+
+              <details class="rq-more">
+                <summary>See specialized lawn and plant treatments</summary>
+                <div class="rq-more-inner rq-service-grid">
+                  {
+                    moreServices.map((s) => (
+                      <label class="rq-service-option">
+                        <input type="checkbox" name="service" value={s.value} />
+                        <span class="rq-service-card">
+                          <span class="rq-checkmark" aria-hidden="true" />
+                          <span>
+                            <span class="rq-service-name">{s.name}</span>
+                            <span class="rq-service-desc">{s.desc}</span>
+                          </span>
+                        </span>
+                      </label>
+                    ))
+                  }
+                </div>
+              </details>
+
+              <p class="rq-service-error" id="ggq-service-error" role="alert">
+                Please choose at least one service.
+              </p>
+
+              <div class="rq-actions">
+                <div class="rq-actions-right">
+                  <button class="rq-button" type="button" data-next="2">Continue →</button>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="rq-step" data-step="2" hidden>
+              <legend><span class="rq-step-title">Where is the property?</span></legend>
+              <p class="rq-step-copy">Start with the service address so we can review the correct lawn.</p>
+
+              <div class="rq-row">
+                <div class="rq-field rq-field-full" data-field="address">
+                  <label class="rq-label" for="ggq-address">Service address</label>
+                  <div class="rq-address-wrap">
+                    <input
+                      class="rq-input"
+                      id="ggq-address"
+                      name="address"
+                      type="text"
+                      autocomplete="street-address"
+                      placeholder="Start typing your street address"
+                      aria-describedby="ggq-address-status"
+                      aria-autocomplete="list"
+                      aria-controls="ggq-suggestions"
+                    />
+                    <ul class="rq-suggestions" id="ggq-suggestions" role="listbox" hidden></ul>
+                  </div>
+                  <div class="rq-address-status" id="ggq-address-status">
+                    Choose a suggestion, or enter the city and ZIP manually below.
+                  </div>
+                  <div class="rq-field-error">Please enter the service address.</div>
+                </div>
+
+                <div class="rq-field" data-field="city">
+                  <label class="rq-label" for="ggq-city">City</label>
+                  <input class="rq-input" id="ggq-city" name="city" type="text" autocomplete="address-level2" placeholder="City" />
+                  <div class="rq-field-error">Please enter the city.</div>
+                </div>
+
+                <div class="rq-field" data-field="zip">
+                  <label class="rq-label" for="ggq-zip">ZIP code</label>
+                  <input
+                    class="rq-input"
+                    id="ggq-zip"
+                    name="zip"
+                    type="text"
+                    inputmode="numeric"
+                    autocomplete="postal-code"
+                    maxlength="10"
+                    placeholder="ZIP code"
+                  />
+                  <div class="rq-field-error">Please enter a valid ZIP code.</div>
+                </div>
+
+                <div class="rq-field rq-field-full">
+                  <label class="rq-label" for="ggq-state">State</label>
+                  <input class="rq-input" id="ggq-state" name="state" type="text" value="LA" readonly aria-readonly="true" />
+                  <p class="rq-help">
+                    We accept customers in {serviceAreaCount} communities across South Louisiana. Submit your address to confirm coverage.
+                  </p>
+                </div>
+              </div>
+
+              <div class="rq-actions">
+                <button class="rq-back" type="button" data-back="1">← Back</button>
+                <div class="rq-actions-right">
+                  <button class="rq-button" type="button" data-next="3">Continue →</button>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="rq-step" data-step="3" hidden>
+              <legend><span class="rq-step-title">Where should we send the quote?</span></legend>
+              <p class="rq-step-copy">A local team member will use this information to follow up about pricing.</p>
+
+              <div class="rq-row">
+                <div class="rq-field rq-field-full" data-field="name">
+                  <label class="rq-label" for="ggq-name">Full name</label>
+                  <input class="rq-input" id="ggq-name" name="name" type="text" autocomplete="name" placeholder="First and last name" />
+                  <div class="rq-field-error">Please enter your name.</div>
+                </div>
+
+                <div class="rq-field" data-field="phone">
+                  <label class="rq-label" for="ggq-phone">Phone number</label>
+                  <input
+                    class="rq-input"
+                    id="ggq-phone"
+                    name="phone"
+                    type="tel"
+                    inputmode="tel"
+                    autocomplete="tel"
+                    placeholder="(225) 555-0123"
+                  />
+                  <div class="rq-field-error">Please enter a valid 10-digit phone number.</div>
+                </div>
+
+                <div class="rq-field" data-field="email">
+                  <label class="rq-label" for="ggq-email">Email address</label>
+                  <input
+                    class="rq-input"
+                    id="ggq-email"
+                    name="email"
+                    type="email"
+                    inputmode="email"
+                    autocomplete="email"
+                    placeholder="you@example.com"
+                  />
+                  <div class="rq-field-error">Please enter a valid email address.</div>
+                </div>
+
+                <div class="rq-field rq-field-full" data-field="notes">
+                  <label class="rq-label" for="ggq-notes"
+                    >Anything else we should know? <span class="rq-optional">Optional</span></label
+                  >
+                  <textarea
+                    class="rq-textarea"
+                    id="ggq-notes"
+                    name="notes"
+                    placeholder="Problem areas, gate code, pets, or anything you have noticed..."
+                  ></textarea>
+                </div>
+
+                <div class="rq-field rq-field-full">
+                  <label class="rq-consent" for="ggq-sms-opt-in">
+                    <input id="ggq-sms-opt-in" name="sms_opt_in" type="checkbox" value="Yes" />
+                    <span>
+                      <strong>Optional text-message consent:</strong> By checking this box, I agree to receive SMS
+                      messages from Grow Green Weed Control about estimates, appointments, service updates, billing
+                      notifications, and customer support. Message and data rates may apply. Message frequency varies.
+                      Reply STOP to opt out or HELP for help. Consent is not a condition of purchase. See our
+                      <a href="/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a> and
+                      <a href="/terms-and-conditions/" target="_blank" rel="noopener">Terms & Conditions</a>.
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="rq-submit-error" id="ggq-submit-error" role="alert"></div>
+
+              <div class="rq-actions">
+                <button class="rq-back" type="button" data-back="2">← Back</button>
+                <div class="rq-actions-right">
+                  <button class="rq-button" id="ggq-submit" type="submit">Request My Free Quote →</button>
+                </div>
+              </div>
+              <p class="rq-secure">Your information is used only to prepare and follow up on your quote.</p>
+            </fieldset>
+          </div>
+        </form>
+
+        <div class="rq-success" id="ggq-success" role="status" aria-live="polite" hidden>
+          <div class="rq-success-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"
+              ><path
+                d="m5 12.5 4.3 4.3L19.5 6.5"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path></svg
+            >
+          </div>
+          <h2>Your quote request is in.</h2>
+          <p>
+            Thanks! A Grow Green team member will review your information and follow up with pricing during business
+            hours. Need help sooner?
+          </p>
+          <a class="rq-success-call" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rq-below">
+    <div class="rq-inner">
+      <div class="rq-below-head">
+        <h2>Straight answers before you start.</h2>
+        <p>
+          Choosing a lawn-care company should feel simple. Here are the questions homeowners ask most often before
+          requesting a quote.
+        </p>
+      </div>
+
+      <div class="rq-faq-grid">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+
+      <div class="rq-bottom-note">
+        <div>
+          <strong>Prefer to talk with a real person?</strong>
+          <span>Our local office team is happy to help · {site.hours.label}</span>
+        </div>
+        <a class="rq-bottom-call" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+      </div>
+    </div>
+  </div>
+</article>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+
+<script>
+  (function () {
+    const root = document.getElementById("gg-quote-page");
+    if (!root || root.dataset.bound === "1") return;
+    root.dataset.bound = "1";
+
+    const mapToken = root.dataset.mapbox || "";
+    const form = root.querySelector("#ggq-form");
+    const successPanel = root.querySelector("#ggq-success");
+    const submitButton = root.querySelector("#ggq-submit");
+    const submitError = root.querySelector("#ggq-submit-error");
+    const stepCount = root.querySelector("#ggq-step-count");
+    const progressBars = Array.from(root.querySelectorAll("#ggq-progress span"));
+    const steps = Array.from(root.querySelectorAll(".rq-step"));
+    const serviceInputs = Array.from(root.querySelectorAll('input[name="service"]'));
+    const serviceError = root.querySelector("#ggq-service-error");
+    const addressInput = root.querySelector("#ggq-address");
+    const cityInput = root.querySelector("#ggq-city");
+    const zipInput = root.querySelector("#ggq-zip");
+    const stateInput = root.querySelector("#ggq-state");
+    const addressStatus = root.querySelector("#ggq-address-status");
+    const suggestions = root.querySelector("#ggq-suggestions");
+    const phoneInput = root.querySelector("#ggq-phone");
+
+    let currentStep = 1;
+    let addressTimer = null;
+    let submitting = false;
+    let conversionFired = false;
+    let idempotencyKey = uuid();
+
+    function uuid() {
+      if (crypto.randomUUID) return crypto.randomUUID();
+      return "quote-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+    }
+
+    function digits(value) {
+      return String(value || "").replace(/\D/g, "");
+    }
+
+    function formatPhone(value) {
+      const number = digits(value).slice(0, 10);
+      if (number.length <= 3) return number ? "(" + number : "";
+      if (number.length <= 6) return "(" + number.slice(0, 3) + ") " + number.slice(3);
+      return "(" + number.slice(0, 3) + ") " + number.slice(3, 6) + "-" + number.slice(6);
+    }
+
+    function isEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(value || "").trim());
+    }
+
+    function setFieldError(name, invalid) {
+      const field = root.querySelector('[data-field="' + name + '"]');
+      if (!field) return;
+      field.classList.toggle("is-invalid", Boolean(invalid));
+    }
+
+    function selectedServices() {
+      return serviceInputs.filter((input) => input.checked).map((input) => input.value);
+    }
+
+    function validateStep(stepNumber) {
+      if (stepNumber === 1) {
+        const valid = selectedServices().length > 0;
+        serviceError?.classList.toggle("is-visible", !valid);
+        return valid;
+      }
+      if (stepNumber === 2) {
+        const addressValid = (addressInput?.value || "").trim().length >= 5;
+        const cityValid = (cityInput?.value || "").trim().length >= 2;
+        const zipValid = /^\d{5}(?:-\d{4})?$/.test((zipInput?.value || "").trim());
+        setFieldError("address", !addressValid);
+        setFieldError("city", !cityValid);
+        setFieldError("zip", !zipValid);
+        return addressValid && cityValid && zipValid;
+      }
+      if (stepNumber === 3) {
+        const nameValid = (root.querySelector("#ggq-name")?.value || "").trim().length >= 2;
+        const phoneValid = digits(phoneInput?.value).length === 10;
+        const emailValid = isEmail(root.querySelector("#ggq-email")?.value);
+        setFieldError("name", !nameValid);
+        setFieldError("phone", !phoneValid);
+        setFieldError("email", !emailValid);
+        return nameValid && phoneValid && emailValid;
+      }
+      return true;
+    }
+
+    function showStep(stepNumber) {
+      currentStep = Math.max(1, Math.min(3, stepNumber));
+      steps.forEach((step) => {
+        step.hidden = Number(step.dataset.step) !== currentStep;
+      });
+      if (stepCount) stepCount.textContent = "Step " + currentStep + " of 3";
+      progressBars.forEach((bar, index) => {
+        bar.classList.toggle("is-complete", index + 1 < currentStep);
+        bar.classList.toggle("is-active", index + 1 === currentStep);
+      });
+      submitError?.classList.remove("is-visible");
+      hideSuggestions();
+    }
+
+    root.querySelectorAll("[data-next]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (validateStep(currentStep)) showStep(Number(button.dataset.next));
+      });
+    });
+
+    root.querySelectorAll("[data-back]").forEach((button) => {
+      button.addEventListener("click", () => showStep(Number(button.dataset.back)));
+    });
+
+    serviceInputs.forEach((input) => {
+      input.addEventListener("change", () => {
+        if (selectedServices().length) serviceError?.classList.remove("is-visible");
+      });
+    });
+
+    phoneInput?.addEventListener("input", () => {
+      phoneInput.value = formatPhone(phoneInput.value);
+      if (digits(phoneInput.value).length === 10) setFieldError("phone", false);
+    });
+
+    zipInput?.addEventListener("input", () => {
+      zipInput.value = zipInput.value.replace(/[^\d-]/g, "").slice(0, 10);
+      if (/^\d{5}(?:-\d{4})?$/.test(zipInput.value)) setFieldError("zip", false);
+    });
+
+    function hideSuggestions() {
+      if (!(suggestions instanceof HTMLElement)) return;
+      suggestions.hidden = true;
+      suggestions.replaceChildren();
+    }
+
+    function featureLabel(feature) {
+      const properties = feature.properties || {};
+      const full = properties.full_address || feature.place_name || "";
+      const primary = properties.name || properties.address || full.split(",")[0] || full;
+      const secondary = properties.place_formatted || full.split(",").slice(1).join(",").trim();
+      return { full: full || [primary, secondary].filter(Boolean).join(", "), primary, secondary };
+    }
+
+    function addressParts(feature) {
+      const properties = feature.properties || {};
+      const context = properties.context || {};
+      const label = featureLabel(feature);
+      const city =
+        (context.place && context.place.name) ||
+        (context.locality && context.locality.name) ||
+        "";
+      const postcode = (context.postcode && context.postcode.name) || "";
+      return { address: label.full, city, zip: postcode, label };
+    }
+
+    async function lookupAddress(query) {
+      if (!mapToken || query.length < 4 || !(suggestions instanceof HTMLElement)) {
+        hideSuggestions();
+        return;
+      }
+      try {
+        const params = new URLSearchParams({
+          q: query,
+          access_token: mapToken,
+          autocomplete: "true",
+          country: "us",
+          types: "address",
+          proximity: "-91.1403,30.2296",
+          language: "en",
+          limit: "5",
+        });
+        const res = await fetch("https://api.mapbox.com/search/geocode/v6/forward?" + params.toString(), {
+          headers: { Accept: "application/json" },
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        const features = Array.isArray(data.features) ? data.features : [];
+        suggestions.replaceChildren();
+        if (!features.length) {
+          hideSuggestions();
+          return;
+        }
+        features.forEach((f) => {
+          const label = featureLabel(f);
+          const li = document.createElement("li");
+          li.setAttribute("role", "option");
+          const btn = document.createElement("button");
+          btn.type = "button";
+          const main = document.createElement("span");
+          main.className = "rq-suggestion-main";
+          main.textContent = label.primary;
+          const sub = document.createElement("span");
+          sub.className = "rq-suggestion-sub";
+          sub.textContent = label.secondary;
+          btn.append(main, sub);
+          btn.addEventListener("click", () => {
+            const parts = addressParts(f);
+            if (addressInput instanceof HTMLInputElement) addressInput.value = parts.address;
+            if (cityInput instanceof HTMLInputElement) cityInput.value = parts.city;
+            if (zipInput instanceof HTMLInputElement) zipInput.value = parts.zip;
+            if (stateInput instanceof HTMLInputElement) stateInput.value = "LA";
+            if (addressStatus) {
+              addressStatus.textContent = "Address selected";
+              addressStatus.classList.add("is-found");
+            }
+            setFieldError("address", false);
+            setFieldError("city", false);
+            setFieldError("zip", false);
+            hideSuggestions();
+          });
+          li.append(btn);
+          suggestions.append(li);
+        });
+        suggestions.hidden = false;
+      } catch {
+        hideSuggestions();
+      }
+    }
+
+    addressInput?.addEventListener("input", () => {
+      addressStatus?.classList.remove("is-found");
+      if (addressStatus) {
+        addressStatus.textContent = "Choose a suggestion, or enter the city and ZIP manually below.";
+      }
+      clearTimeout(addressTimer);
+      const q = addressInput.value.trim();
+      if (q.length < 4) {
+        hideSuggestions();
+        return;
+      }
+      addressTimer = setTimeout(() => lookupAddress(q), 280);
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!root.contains(event.target)) return;
+      if (
+        suggestions instanceof HTMLElement &&
+        !suggestions.contains(event.target) &&
+        event.target !== addressInput
+      ) {
+        hideSuggestions();
+      }
+    });
+
+    function trackingParams() {
+      const q = new URLSearchParams(location.search);
+      return {
+        utm_source: q.get("utm_source") || "",
+        utm_medium: q.get("utm_medium") || "",
+        utm_campaign: q.get("utm_campaign") || "",
+        utm_term: q.get("utm_term") || "",
+        utm_content: q.get("utm_content") || "",
+        gclid: q.get("gclid") || "",
+        fbclid: q.get("fbclid") || "",
+      };
+    }
+
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (submitting || !(form instanceof HTMLFormElement)) return;
+      submitError?.classList.remove("is-visible");
+
+      const honeypot = form.elements.namedItem("website");
+      if (honeypot instanceof HTMLInputElement && honeypot.value.trim()) return;
+
+      if (!validateStep(1)) {
+        showStep(1);
+        return;
+      }
+      if (!validateStep(2)) {
+        showStep(2);
+        return;
+      }
+      if (!validateStep(3)) return;
+
+      submitting = true;
+      const original = submitButton?.innerHTML || "";
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending your request…";
+      }
+
+      const services = selectedServices();
+      const tracking = trackingParams();
+      const userNotes = (root.querySelector("#ggq-notes")?.value || "").trim();
+      const notesLines = [];
+      if (userNotes) notesLines.push(userNotes);
+      notesLines.push("Services requested: " + services.join(", "));
+
+      const payload = {
+        name: (root.querySelector("#ggq-name")?.value || "").trim(),
+        phone: digits(phoneInput?.value),
+        email: (root.querySelector("#ggq-email")?.value || "").trim(),
+        address: (addressInput?.value || "").trim(),
+        city: (cityInput?.value || "").trim(),
+        zip: (zipInput?.value || "").trim(),
+        state: (stateInput?.value || "LA").trim() || "LA",
+        notes: notesLines.join("\n"),
+        website: "",
+        sms_opt_in_status: root.querySelector("#ggq-sms-opt-in")?.checked ? "Yes" : "No",
+        lead_source: form.querySelector('[name="lead_source"]')?.value || "Request an Estimate",
+        source: form.querySelector('[name="source"]')?.value || "Request an Estimate",
+        services_interest: services.join(", "),
+        page_url: location.href,
+        submitted_at: new Date().toISOString(),
+        idempotency_key: idempotencyKey,
+        ...tracking,
+      };
+
+      try {
+        const res = await fetch("/api/leads/website/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok || !data.ok || data.customer_id == null || data.customer_id === "") {
+          throw new Error(data.message || "Submission was not confirmed.");
+        }
+
+        if (!conversionFired && typeof window.ggwcTrack === "function") {
+          window.ggwcTrack("ggwc_lead_accepted", {
+            customer_id: data.customer_id,
+            mocked: !!data.mocked,
+          });
+          conversionFired = true;
+        }
+
+        form.hidden = true;
+        if (successPanel instanceof HTMLElement) {
+          successPanel.hidden = false;
+          if (data.mocked) {
+            const p = successPanel.querySelector("p");
+            if (p) {
+              p.textContent =
+                "Request accepted in mock mode (no live CRM). Configure CRM credentials for production delivery.";
+            }
+          }
+          successPanel.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        idempotencyKey = uuid();
+      } catch (err) {
+        if (submitError instanceof HTMLElement) {
+          submitError.innerHTML =
+            'We could not confirm your request. Please try again or call <a href="tel:+12254613199">(225) 461-3199</a>.';
+          submitError.classList.add("is-visible");
+        }
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = false;
+          submitButton.innerHTML = original;
+        }
+      } finally {
+        submitting = false;
+      }
+    });
+
+    showStep(1);
+  })();
+</script>

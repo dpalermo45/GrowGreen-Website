@@ -1,0 +1,382 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import PageHero from "./PageHero.astro";
+import BrandStrip from "./BrandStrip.astro";
+import CtaBand from "./CtaBand.astro";
+import FacebookNovemberLanding from "./FacebookNovemberLanding.astro";
+import { site } from "../data/site";
+import type { CampaignOffer } from "../data/campaigns";
+import { loadPageContent } from "../lib/content/loadPageContent";
+
+interface Props {
+  campaign: CampaignOffer;
+}
+
+const { campaign } = Astro.props;
+
+const facebookNovember =
+  campaign.id === "facebook-50" || campaign.id === "facebook-estimate";
+
+const expired =
+  campaign.status === "expired" ||
+  (campaign.expiresAt != null && new Date(campaign.expiresAt).getTime() < Date.now());
+
+/** Discount copy only when labeled, not expired, and not stuck in draft. */
+const showOffer =
+  Boolean(campaign.offerLabel) &&
+  !expired &&
+  campaign.status !== "draft";
+
+/** Stored WP paragraphs / structure — omit testimonials and form-only microcopy */
+function campaignParagraphOk(p: string): boolean {
+  if (!p || p.length < 40 || p.length > 900) return false;
+  const t = p.trim();
+  if (/^please enter|^enter a valid|^fields marked|^optional:/i.test(t)) return false;
+  if (/^grow green weed control$/i.test(t)) return false;
+  if (/^[\u201c"]/.test(t)) return false;
+  if (/\u201cWithin a short time|\bhighly recommend\b/i.test(p) && /\u201c/.test(p)) return false;
+  if (/^by checking this box, i agree to receive sms/i.test(t)) return false;
+  if (/please enable javascript/i.test(t)) return false;
+  if (/^thanks for reaching out|^we\u2019ve received your estimate|^no need to submit again/i.test(t)) return false;
+  if (/^your request is in\.?$/i.test(t)) return false;
+  return true;
+}
+
+const rich = !facebookNovember ? loadPageContent(campaign.slug) : null;
+const s = rich?.structured || {};
+
+const storyParasRaw = (rich?.paragraphs || []).filter(campaignParagraphOk);
+/** Prefer keeping specialty add-on lines that often sit late in WP extracts */
+const storyParasPreferred = storyParasRaw.filter((p) =>
+  /need extra help|ask about fire ant|fungus and insect|soil health options/i.test(p),
+);
+const storyParas = [
+  ...storyParasPreferred,
+  ...storyParasRaw.filter((p) => !storyParasPreferred.includes(p)),
+].slice(0, 12);
+
+const features = (s.features || [])
+  .filter((f) => f.title && f.body && f.body.length > 24)
+  .slice(0, 8);
+
+const processSteps = (s.process || [])
+  .filter((step) => step.title && step.body && step.body.length > 15)
+  .slice(0, 6);
+
+const faqItems = (rich?.faqs || [])
+  .filter((f) => {
+    if (!f.q?.trim() || !f.a?.trim()) return false;
+    if (f.a.length < 40) return false;
+    if (/tell us about your lawn \(optional\)|what would you like help with/i.test(f.q)) return false;
+    return true;
+  })
+  .slice(0, 8);
+
+const listItems = (rich?.list_items || [])
+  .filter((x) => x.length > 18 && x.length < 200)
+  .filter((x) => !/600\+|4\.9★|★★★★★/i.test(x))
+  .slice(0, 8);
+
+const hasStoredNarrative =
+  storyParas.length > 0 ||
+  features.length > 0 ||
+  processSteps.length > 0 ||
+  faqItems.length > 0 ||
+  listItems.length > 0;
+
+const heroEyebrow = showOffer ? "Seasonal offer" : campaign.offerLabel ? "Offer update" : "Grow Green campaign";
+---
+
+{
+  facebookNovember ? (
+    <FacebookNovemberLanding campaign={campaign} offerActive={showOffer} />
+  ) : (
+    <>
+      <PageHero eyebrow={heroEyebrow} title={campaign.headline} lead={campaign.summary}>
+        <div slot="actions">
+          <a class="btn btn-green" href="#campaign-estimate">Get My Free Quote</a>
+          <a class="btn btn-soft" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+        </div>
+      </PageHero>
+
+      <section class="section-tight campaign-body" id="campaign-estimate">
+        <div class="container split-quote">
+          <div class="campaign-col motion-rise">
+            {showOffer ? (
+              <div class="offer-banner">
+                <p class="offer-kicker">Current promotion</p>
+                <strong>{campaign.offerLabel}</strong>
+                {campaign.offerDetail && <p class="offer-detail">{campaign.offerDetail}</p>}
+                {campaign.expiresAt && (
+                  <p class="offer-meta">Review date: {campaign.expiresAt}</p>
+                )}
+              </div>
+            ) : campaign.offerLabel ? (
+              <div class="offer-banner expired">
+                <strong>This promotional offer is no longer active.</strong>
+                <p class="offer-detail">
+                  You can still request a free estimate for lawn fertilization and weed control starting at $
+                  {site.startingPrice.amount}/{site.startingPrice.period}.
+                </p>
+              </div>
+            ) : null}
+
+            <BrandStrip compact />
+
+            {hasStoredNarrative ? (
+              <div class="campaign-main">
+                {storyParas.length > 0 && (
+                  <section class="campaign-block">
+                    {storyParas.map((p) => (
+                      <p>{p}</p>
+                    ))}
+                  </section>
+                )}
+
+                {features.length > 0 && (
+                  <section class="campaign-block">
+                    <h2>Why homeowners choose Grow Green</h2>
+                    <div class="campaign-feature-grid">
+                      {features.map((f) => (
+                        <article>
+                          <h3>{f.title}</h3>
+                          <p>{f.body}</p>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                )}
+
+                {processSteps.length > 0 && (
+                  <section class="campaign-block">
+                    <h2>How it works</h2>
+                    <ol class="campaign-process">
+                      {processSteps.map((step) => (
+                        <li>
+                          <strong>
+                            {step.number ? `${step.number}. ` : ""}
+                            {step.title}
+                          </strong>
+                          <p>{step.body}</p>
+                        </li>
+                      ))}
+                    </ol>
+                  </section>
+                )}
+
+                {listItems.length > 0 && (
+                  <section class="campaign-block">
+                    <h2>Program highlights</h2>
+                    <ul class="bullet-list">
+                      {listItems.map((item) => (
+                        <li>{item}</li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+
+                {faqItems.length > 0 && (
+                  <section class="campaign-block campaign-faqs">
+                    <h2>Questions people ask</h2>
+                    {faqItems.map((f) => (
+                      <details>
+                        <summary>{f.q}</summary>
+                        <p>{f.a}</p>
+                      </details>
+                    ))}
+                  </section>
+                )}
+              </div>
+            ) : (
+              <div class="campaign-fallback">
+                <h2>Local lawn care, clear next steps</h2>
+                <p>
+                  Grow Green Weed Control is a firefighter-owned, family-operated team serving South Louisiana. We
+                  provide lawn fertilization, weed control, and related treatments with seasonal timing and clear visit
+                  notes — without inventing guarantees or review claims.
+                </p>
+                <ul class="campaign-trust">
+                  {site.identity.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                  <li>Based in {site.address.city}</li>
+                </ul>
+              </div>
+            )}
+
+            <p class="campaign-price">{site.startingPrice.short}</p>
+            <p class="campaign-contact">
+              Prefer to talk? Call <a href={`tel:${site.phoneTel}`}>{site.phone}</a> or email{" "}
+              <a href={`mailto:${site.email}`}>{site.email}</a>. Hours: {site.hours.label}.
+            </p>
+          </div>
+          <div class="motion-rise motion-delay-1">
+            <QuoteForm
+              source={`campaign-${campaign.slug}`}
+              leadSource={campaign.leadSourceHint}
+              promotionCode={showOffer ? campaign.id : ""}
+              heading="Request your free estimate"
+              subheading={
+                showOffer
+                  ? "Share your service address. Mentions of the current offer are noted for office follow-up."
+                  : "Share your service address for a clear, no-obligation estimate."
+              }
+            />
+          </div>
+        </div>
+      </section>
+
+      <CtaBand
+        heading="Ready for a free local estimate?"
+        text={`Call ${site.phone} or send your service address — our ${site.address.city} office follows up during business hours.`}
+      />
+    </>
+  )
+}
+
+<style>
+  .campaign-body {
+    background: linear-gradient(180deg, #f7faf7 0%, #fff 28%, #fff 100%);
+  }
+  .campaign-col {
+    display: grid;
+    gap: 0;
+  }
+  .offer-kicker {
+    margin: 0 0 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8a5a10;
+  }
+  .offer-detail {
+    margin: 0.4rem 0 0;
+  }
+  .offer-meta {
+    margin: 0.4rem 0 0;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .campaign-main {
+    display: grid;
+    gap: 1.75rem;
+    margin-top: 0.25rem;
+  }
+  .campaign-block h2 {
+    margin: 0 0 0.65rem;
+    font-size: 1.25rem;
+    color: var(--green-900);
+  }
+  .campaign-block > p,
+  .campaign-block p {
+    color: var(--muted);
+  }
+  .campaign-feature-grid {
+    display: grid;
+    gap: 0.85rem;
+  }
+  @media (min-width: 640px) {
+    .campaign-feature-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .campaign-feature-grid article {
+    padding: 0.95rem 1rem;
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #dbe6de;
+    border-top: 3px solid var(--gold);
+    box-shadow: 0 8px 20px rgba(17, 45, 27, 0.05);
+  }
+  .campaign-feature-grid h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.02rem;
+    color: var(--ink);
+    font-weight: 900;
+  }
+  .campaign-feature-grid p {
+    margin: 0;
+    font-size: 0.94rem;
+  }
+  .campaign-process {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.85rem;
+    color: var(--muted);
+  }
+  .campaign-process p {
+    margin: 0.35rem 0 0;
+  }
+  .campaign-faqs details {
+    background: #fff;
+    border: 1px solid #dbe6de;
+    border-radius: 12px;
+    padding: 0.65rem 0.85rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 8px 20px rgba(17, 45, 27, 0.04);
+  }
+  .campaign-faqs summary {
+    cursor: pointer;
+    font-weight: 900;
+    color: var(--ink);
+  }
+  .campaign-faqs details p {
+    margin: 0.5rem 0 0;
+    font-size: 0.95rem;
+  }
+  .campaign-fallback {
+    margin: 0.15rem 0 0.35rem;
+    padding: 1.15rem 1.2rem;
+    background: #fff;
+    border: 1px solid #dbe6de;
+    border-radius: 14px;
+    border-top: 3px solid var(--gold);
+    box-shadow: 0 10px 24px rgba(17, 45, 27, 0.05);
+  }
+  .campaign-fallback h2 {
+    margin: 0 0 0.55rem;
+    font-size: 1.25rem;
+    color: var(--green-900);
+  }
+  .campaign-fallback p {
+    margin: 0;
+    color: var(--muted);
+  }
+  .campaign-trust {
+    list-style: none;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 1rem;
+  }
+  .campaign-trust li {
+    position: relative;
+    padding-left: 0.95rem;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #5f7466;
+  }
+  .campaign-trust li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--green-700);
+  }
+  .campaign-price {
+    margin: 1.35rem 0 0.55rem;
+    font-weight: 800;
+    color: var(--green-900);
+  }
+  .campaign-contact {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+</style>

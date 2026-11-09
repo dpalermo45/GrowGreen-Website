@@ -1,0 +1,878 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import GoogleReviews from "./GoogleReviews.astro";
+import { site } from "../data/site";
+import { coverageFaqAnswer, areaServedSchema } from "../data/service-areas";
+import "../styles/lawn-fertilization.css";
+
+const source = "Lawn Fertilization & Weed Control Service Page";
+const phone = site.phone;
+const phoneTel = site.phoneTel;
+
+const features = [
+  {
+    title: "Prevent weeds early",
+    body: "Strategic pre-emergent barriers help stop many seasonal weeds before they ever break through the soil.",
+    icon: "leaf",
+  },
+  {
+    title: "Target active weeds",
+    body: "Post-emergent treatments are selected for the weed, turf type, temperature, and condition of the lawn.",
+    icon: "target",
+  },
+  {
+    title: "Feed for the season",
+    body: "Fertilizer, micronutrients, iron, and potassium are used when they benefit the turf instead of forcing growth at the wrong time.",
+    icon: "feed",
+  },
+  {
+    title: "Watch insects & disease",
+    body: "Technicians monitor for common threats such as chinch bugs, armyworms, mole crickets, sod webworms, and large patch.",
+    icon: "watch",
+  },
+  {
+    title: "Seasonal planned visits",
+    body: "Visits are generally spaced about six weeks apart, giving your lawn consistent support throughout the year. Your estimate confirms the visit plan for your property.",
+    icon: "calendar",
+  },
+  {
+    title: "Clear service communication",
+    body: "We notify you around service, document the visit, and provide watering and re-entry guidance.",
+    icon: "notes",
+  },
+] as const;
+
+const seasons = [
+  {
+    kicker: "Winter foundation",
+    title: "Prevent & protect",
+    rounds: [
+      {
+        number: "01",
+        date: "January–February",
+        title: "Pre-emergent barrier + weed clean-up",
+        body: "We establish a pre-emergent barrier for coming weed pressure and apply blanket post-emergent control for visible winter weeds.",
+      },
+      {
+        number: "02",
+        date: "February–March",
+        title: "Micronutrients + spring disease protection",
+        body: "Early-season micronutrients and iron support color while preventive fungicide helps protect against spring large patch and related disease.",
+      },
+    ],
+  },
+  {
+    kicker: "Spring growth",
+    title: "Wake up & thicken",
+    rounds: [
+      {
+        number: "03",
+        date: "March–April",
+        title: "Spring fertilizer + continued weed control",
+        body: "The main fertilizer cycle begins as warm-season turf wakes up. We maintain weed prevention and target remaining weeds as conditions allow.",
+      },
+      {
+        number: "04",
+        date: "May–June",
+        title: "Early-summer nutrition + targeted control",
+        body: "Season-appropriate fertilizer supports active growth while technicians target broadleaf and sedge weeds and watch for early insect activity.",
+      },
+    ],
+  },
+  {
+    kicker: "Summer defense",
+    title: "Feed & defend",
+    rounds: [
+      {
+        number: "05",
+        date: "June–July",
+        title: "Summer fertilizer + insect protection",
+        body: "Summer nutrition supports color and density while insect protection targets threats such as chinch bugs and armyworms when appropriate.",
+      },
+      {
+        number: "06",
+        date: "August–September",
+        title: "Late-summer weed clean-up + insect control",
+        body: "We clean up treatable weeds and focus insect control on late-season pressure from sod webworms, chinch bugs, and mole crickets.",
+      },
+    ],
+  },
+  {
+    kicker: "Fall reset",
+    title: "Strengthen & reset",
+    rounds: [
+      {
+        number: "07",
+        date: "October–November",
+        title: "Potassium + winter weed prevention + fungicide",
+        body: "Potassium supports stress tolerance, pre- and post-emergents address winter weeds, and fungicide helps cure and prevent fall large patch.",
+      },
+      {
+        number: "08",
+        date: "November–December",
+        title: "Winterizer + second pre-emergent",
+        body: "Winterizer supports root health, a second pre-emergent extends weed prevention, and technicians spot-treat active weeds or fungus as needed.",
+      },
+    ],
+  },
+] as const;
+
+const process = [
+  { number: "1", title: "Request a quote", body: "Send your address and contact details in about a minute." },
+  { number: "2", title: "We measure", body: "We review the treatable lawn area and your service needs." },
+  { number: "3", title: "Approve & schedule", body: "Receive clear monthly pricing, approve it, and choose a start date." },
+  { number: "4", title: "We manage the plan", body: "Visits, reminders, notes, and seasonal adjustments stay on track." },
+] as const;
+
+const faqs = [
+  {
+    q: "Is this a monthly lawn treatment?",
+    a: "No. The year-round program uses seasonal visits, generally about six weeks apart—not a spray every month. The annual program price is typically divided into 12 predictable monthly payments. Your estimate confirms visit timing and billing for your property.",
+  },
+  {
+    q: "Do I have to sign a long-term contract?",
+    a: "Billing is set up month-to-month on standard plans. Terms for your property are explained in the estimate before you approve.",
+  },
+  {
+    q: "Do I need to be home for service?",
+    a: "Usually not. As long as we can access the lawn and any locked gates are opened, we can complete service and send your visit notes afterward.",
+  },
+  {
+    q: "What should I do with children and pets?",
+    a: "Keep people and pets off treated areas during application and follow the re-entry instructions we provide—typically until the treatment has dried. Product-specific directions always control.",
+  },
+  {
+    q: "When will I see weed-control results?",
+    a: "Many weeds begin responding after treatment, but speed varies by species, maturity, temperature, rainfall, and turf stress. Some difficult weeds require multiple or specialized treatments.",
+  },
+  {
+    q: "What if an issue appears between visits?",
+    a: "Contact our office. We will review the issue, determine whether it is covered by the program, and arrange the appropriate next step.",
+  },
+  {
+    q: "Which grass types do you treat?",
+    a: "Our program is built for the warm-season grasses common here, including St. Augustine, centipede, zoysia, and bermuda.",
+  },
+  {
+    q: "Where do you provide lawn service?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+];
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Lawn Fertilization and Weed Control Program",
+  serviceType: "Lawn fertilization and weed control",
+  description:
+    "An 8-visit, season-smart lawn fertilization and weed control program for warm-season Louisiana turf.",
+  provider: {
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    telephone: "+1-225-461-3199",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.city,
+      addressRegion: site.address.state,
+      postalCode: site.address.zip,
+      addressCountry: "US",
+    },
+  },
+  areaServed: areaServedSchema(),
+  offers: {
+    "@type": "Offer",
+    priceCurrency: "USD",
+    price: "39",
+    description:
+      "Monthly pricing starts at $39. Final pricing depends on measured lawn area and selected services.",
+  },
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+function featureIcon(kind: (typeof features)[number]["icon"]) {
+  switch (kind) {
+    case "leaf":
+      return `<path d="M5 20c0-7 3-12 11-16 2 6 1 13-4 16" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M5 20c3-5 6-8 11-11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>`;
+    case "target":
+      return `<path d="M12 3v18M6 7c3 0 6 2 6 5-3 0-6-2-6-5Zm12 6c-3 0-6 2-6 5 3 0 6-2 6-5Z" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>`;
+    case "feed":
+      return `<path d="M7 4h10v5l-2 3v7H9v-7L7 9V4Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9 8h6M9 15h6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>`;
+    case "watch":
+      return `<path d="M8 10V8a4 4 0 0 1 8 0v2M6 12h12v4a6 6 0 0 1-12 0v-4Z" stroke="currentColor" stroke-width="1.9"/><path d="M3 13h3m12 0h3M4 19l3-2m13 2-3-2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>`;
+    case "calendar":
+      return `<rect x="4" y="5" width="16" height="15" rx="2" stroke="currentColor" stroke-width="1.9"/><path d="M8 3v4m8-4v4M4 10h16" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>`;
+    default:
+      return `<path d="M4 5h16v12H9l-5 4V5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8 9h8m-8 4h5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>`;
+  }
+}
+---
+
+<article class="lawn-page lawn-page--calendar-first" id="gg-lawn-page" aria-label="Lawn fertilization and weed control">
+  <header class="lawn-hero lawn-hero--photo">
+    <div class="lawn-hero__media" aria-hidden="true">
+      <picture>
+        <source media="(max-width: 699px)" srcset="/images/home/hero-lawn-640.webp" type="image/webp" />
+        <source media="(max-width: 1099px)" srcset="/images/home/hero-lawn-960.webp" type="image/webp" />
+        <source media="(max-width: 1499px)" srcset="/images/home/hero-lawn-1280.webp" type="image/webp" />
+        <img
+          src="/images/home/hero-lawn-640.webp"
+          alt=""
+          width="1600"
+          height="900"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+    </div>
+    <div class="lawn-hero__shade" aria-hidden="true"></div>
+    <div class="lawn-inner lawn-hero__grid">
+      <div class="motion-rise">
+        <div class="lawn-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <p class="lawn-hero__eyebrow">Lawn fertilization & weed control · South Louisiana</p>
+        <h1>Season-smart lawn care built for <em>warm-season turf.</em></h1>
+        <p class="lawn-hero__lead">
+          A year-round lawn program that prevents weeds, targets active problems, and feeds South Louisiana lawns at
+          the right time—with monthly pricing that starts at $39/month; your final price depends on lawn size and
+          selected services.
+        </p>
+        <div class="lawn-hero__actions">
+          <a class="lawn-btn lawn-btn--gold" href="#ggl-quote" data-quote-source="Hero CTA">
+            Get my free lawn quote →
+          </a>
+          <a class="lawn-btn lawn-btn--ghost" href={`tel:${phoneTel}`}>Call {phone}</a>
+        </div>
+        <ul class="lawn-hero__notes" aria-label="Service highlights">
+          <li>Seasonal planned visits</li>
+          <li>Month-to-month billing options</li>
+          <li>From $39/month (by lawn size)</li>
+        </ul>
+        <p class="lawn-hero__truth">
+          Starting pricing is not an instant property quote. Final pricing depends on measured lawn size and selected
+          services—and good lawn care is a process, not overnight green paint.
+        </p>
+      </div>
+      <div class="lawn-hero__visual motion-rise">
+        <img
+          class="lawn-hero__mascot"
+          src="/images/mascot/spreader-320.webp"
+          srcset="/images/mascot/spreader-216.webp 216w, /images/mascot/spreader-320.webp 320w, /images/mascot/spreader-480.webp 480w"
+          sizes="(max-width: 960px) 55vw, 280px"
+          width="320"
+          height="493"
+          alt=""
+          decoding="async"
+        />
+      </div>
+    </div>
+  </header>
+
+  <div class="lawn-proof lawn-inner" aria-label="Grow Green credentials">
+    <div class="lawn-proof__item">
+      <strong>Firefighter-owned</strong>
+      <span>Local and family-operated</span>
+    </div>
+    <div class="lawn-proof__item">
+      <strong>Lawn specialists</strong>
+      <span>Not a mowing or landscape crew</span>
+    </div>
+    <div class="lawn-proof__item">
+      <strong>Seasonal visits</strong>
+      <span>Timed for Louisiana turf</span>
+    </div>
+    <div class="lawn-proof__item">
+      <strong>Starting at $39/month</strong>
+      <span>Final price by lawn size</span>
+    </div>
+  </div>
+
+  <section class="lawn-section lawn-program lawn-program--featured motion-rise" aria-labelledby="ggl-program-title">
+    <div class="lawn-inner">
+      <div class="lawn-program__head">
+        <div>
+          <p class="lawn-kicker">What happens throughout the year</p>
+          <h2 class="lawn-heading" id="ggl-program-title">Your 8-round lawn treatment plan</h2>
+        </div>
+        <p class="lawn-program__note">
+          This is the typical Baton Rouge–area schedule. Exact timing and materials may shift with turf
+          type, temperature, rainfall, pest pressure, and label requirements.
+        </p>
+      </div>
+
+      <div class="lawn-seasons">
+        {
+          seasons.map((season) => (
+            <div class="lawn-season">
+              <div class="lawn-season__label">
+                <span>{season.kicker}</span>
+                <strong>{season.title}</strong>
+              </div>
+              {season.rounds.map((round) => (
+                <article class="lawn-round">
+                  <div class="lawn-round__top">
+                    <span class="lawn-round__num">{round.number}</span>
+                    <span class="lawn-round__date">{round.date}</span>
+                  </div>
+                  <h3>{round.title}</h3>
+                  <p>{round.body}</p>
+                </article>
+              ))}
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="lawn-program__foot">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"
+          ><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"></circle><path
+            d="M12 11v6m0-10v.01"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"></path></svg
+        >
+        <span
+          >Treatments are adjusted to protect the turf during extreme heat, drought, heavy rain, cold
+          snaps, or other conditions that make an application ineffective or inappropriate.</span
+        >
+      </div>
+    </div>
+  </section>
+
+  <section class="lawn-intro lawn-section motion-rise" aria-labelledby="lawn-intro-title">
+    <div class="lawn-inner lawn-intro__grid">
+      <div>
+        <p class="lawn-kicker">Meet the team behind the plan</p>
+        <h2 class="lawn-heading" id="lawn-intro-title">Local ownership. Louisiana turf timing.</h2>
+        <p class="lawn-lead">
+          Heat, humidity, heavy rain, drought stress, insects, and year-round weed pressure all change
+          what your lawn needs. We time each visit around local growing conditions.
+        </p>
+        <ul class="lawn-intro__points" aria-label="Program benefits">
+          <li>
+            <span class="lawn-check" aria-hidden="true"
+              ><svg viewBox="0 0 24 24" fill="none"
+                ><path
+                  d="m5 12 4 4L19 6"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path></svg
+              ></span
+            >Pre- & post-emergent weed control
+          </li>
+          <li>
+            <span class="lawn-check" aria-hidden="true"
+              ><svg viewBox="0 0 24 24" fill="none"
+                ><path
+                  d="m5 12 4 4L19 6"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path></svg
+              ></span
+            >Season-specific nutrition
+          </li>
+          <li>
+            <span class="lawn-check" aria-hidden="true"
+              ><svg viewBox="0 0 24 24" fill="none"
+                ><path
+                  d="m5 12 4 4L19 6"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path></svg
+              ></span
+            >Month-to-month billing
+          </li>
+          <li>
+            <span class="lawn-check" aria-hidden="true"
+              ><svg viewBox="0 0 24 24" fill="none"
+                ><path
+                  d="m5 12 4 4L19 6"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path></svg
+              ></span
+            >Starting at $39/month
+          </li>
+        </ul>
+      </div>
+      <figure class="lawn-video">
+        <div
+          class="lawn-video__shell gg-video-wrap"
+          data-video-src="/videos/dereck-intro.mp4"
+          data-video-poster="/images/home/video-poster.jpg"
+        >
+          <img
+            class="lawn-video__poster"
+            src="/images/home/video-poster-640.webp"
+            srcset="/images/home/video-poster-480.webp 480w, /images/home/video-poster-640.webp 640w"
+            sizes="(max-width: 900px) 92vw, 480px"
+            width="1080"
+            height="1080"
+            alt="Dereck introducing Grow Green Weed Control"
+            loading="lazy"
+            decoding="async"
+          />
+          <button class="video-play lawn-video__play" type="button" aria-label="Play introduction from Dereck"
+            >Play</button
+          >
+        </div>
+        <figcaption class="lawn-video__caption">
+          <strong>Meet Dereck</strong> — local ownership and lawn care built around Louisiana turf.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="lawn-section lawn-local motion-rise" aria-labelledby="ggl-local-title">
+    <div class="lawn-inner lawn-local__grid">
+      <div class="lawn-local__copy">
+        <p class="lawn-kicker">A program designed here</p>
+        <h2 class="lawn-heading" id="ggl-local-title">
+          Built for South Louisiana growing conditions—not a generic calendar.
+        </h2>
+        <p class="lawn-lead">
+          Each visit is timed around local turf needs so prevention, nutrition, and monitoring stay
+          aligned with the season you are in.
+        </p>
+        <p class="lawn-turf-line">Built for St. Augustine, centipede, zoysia, and bermuda lawns.</p>
+      </div>
+
+      <div class="lawn-feature-grid">
+        {
+          features.map((feature) => (
+            <article class="lawn-feature">
+              <div class="lawn-feature__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" set:html={featureIcon(feature.icon)} />
+              </div>
+              <h3>{feature.title}</h3>
+              <p>{feature.body}</p>
+            </article>
+          ))
+        }
+        <div class="lawn-honest">
+          <strong>Good lawn care is a process—not green paint.</strong>
+          <p>
+            Some weeds respond quickly; established sedges, dallisgrass, and stressed areas can require
+            targeted follow-up. Weather, watering, shade, drainage, soil conditions, and how the lawn is
+            maintained also affect results. We will tell you what we see and what the lawn needs next.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lawn-section lawn-pricing motion-rise" aria-labelledby="ggl-pricing-title">
+    <div class="lawn-inner lawn-pricing__grid">
+      <div class="lawn-pricing__copy">
+        <p class="lawn-kicker">Straightforward monthly pricing</p>
+        <h2 class="lawn-heading" id="ggl-pricing-title">
+          One consistent payment. A full year of lawn care.
+        </h2>
+        <p class="lawn-lead">
+          Your annual 8-visit program is divided into 12 predictable monthly payments. You are paying
+          for the complete year-round program—not a visit every month. Pricing starts at $39/month;
+          your exact price depends on measured lawn size and selected services.
+        </p>
+        <div class="lawn-start-price">
+          <strong>$39</strong><span>starting at / month</span>
+        </div>
+        <ul class="lawn-price-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"
+              ><path
+                d="m5 12 4 4L19 6"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path></svg
+            >Seasonal treatments timed for Louisiana
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"
+              ><path
+                d="m5 12 4 4L19 6"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path></svg
+            >Month-to-month billing options
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"
+              ><path
+                d="m5 12 4 4L19 6"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path></svg
+            >Optional fire ant, tree & shrub, aeration, flower bed, and pest services
+          </li>
+        </ul>
+        <a class="lawn-btn lawn-btn--gold" href="#ggl-quote" data-quote-source="Pricing CTA">
+          Get My Exact Price
+          <svg class="lawn-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"
+            ><path
+              d="M5 12h14m-5-5 5 5-5 5"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path></svg
+          >
+        </a>
+      </div>
+
+      <div class="lawn-estimator" id="ggl-estimator" aria-labelledby="ggl-estimator-title">
+        <div class="lawn-estimator__head">
+          <div>
+            <h3 id="ggl-estimator-title">Instant planning estimate</h3>
+            <p>Move the slider to your approximate lawn size.</p>
+          </div>
+          <span class="lawn-estimator__badge">Planning tool</span>
+        </div>
+
+        <label class="lawn-slider-label" for="ggl-slider">
+          <span>Lawn size</span>
+          <output id="ggl-slider-output" for="ggl-slider">5,000 sq ft</output>
+        </label>
+        <input
+          class="lawn-slider"
+          id="ggl-slider"
+          type="range"
+          min="5"
+          max="30"
+          value="5"
+          step="1"
+          aria-describedby="ggl-estimator-note"
+        />
+
+        <div class="lawn-size-presets" aria-label="Common lawn sizes">
+          <button class="lawn-size-btn is-active" type="button" data-size="5">5k</button>
+          <button class="lawn-size-btn" type="button" data-size="8">8k</button>
+          <button class="lawn-size-btn" type="button" data-size="10">10k</button>
+          <button class="lawn-size-btn" type="button" data-size="15">15k</button>
+          <button class="lawn-size-btn" type="button" data-size="20">20k</button>
+        </div>
+
+        <div class="lawn-estimate-output" aria-live="polite">
+          <div class="lawn-estimate-stat">
+            <span>Approximate lawn</span>
+            <strong id="ggl-estimate-sqft">5,000</strong>
+          </div>
+          <div class="lawn-estimate-stat">
+            <span>Estimated monthly</span>
+            <strong class="lawn-green" id="ggl-estimate-price">$39.00</strong>
+          </div>
+        </div>
+
+        <a class="lawn-btn lawn-btn--green" href="#ggl-quote" data-quote-source="Instant Estimator CTA">
+          Request My Exact Quote
+          <svg class="lawn-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"
+            ><path
+              d="M5 12h14m-5-5 5 5-5 5"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path></svg
+          >
+        </a>
+        <p class="lawn-estimator__disclaimer" id="ggl-estimator-note">
+          Planning estimate only. Final pricing is based on measured treatable lawn area, property
+          conditions, and selected services.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lawn-section lawn-process motion-rise" aria-labelledby="ggl-process-title">
+    <div class="lawn-inner">
+      <div class="lawn-process__head">
+        <p class="lawn-kicker">Simple from the start</p>
+        <h2 class="lawn-heading" id="ggl-process-title">From quote to a better lawn</h2>
+        <p class="lawn-lead">
+          No confusing packages and no high-pressure sales process. We measure, price, schedule, and
+          keep you informed.
+        </p>
+      </div>
+      <div class="lawn-process__grid">
+        {
+          process.map((step) => (
+            <article class="lawn-process__step">
+              <div class="lawn-step-num">{step.number}</div>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <div class="motion-rise">
+    <GoogleReviews
+      id="ggl-reviews"
+      heading="What neighbors say on Google"
+      lead="Recent five-star write-ups about our technicians, communication, and lawn treatments."
+    />
+  </div>
+
+  <section class="lawn-section lawn-faq motion-rise" aria-labelledby="ggl-faq-title">
+    <div class="lawn-inner">
+      <div class="lawn-faq__head">
+        <p class="lawn-kicker">Common questions</p>
+        <h2 class="lawn-heading" id="ggl-faq-title">Before your first treatment</h2>
+        <p class="lawn-lead">
+          Clear answers about timing, billing, pets, results, and what the program includes. Prefer to
+          talk? Call <a href={`tel:${phoneTel}`}>{phone}</a>.
+        </p>
+      </div>
+      <div class="lawn-faq__grid">
+        {
+          faqs.map((faq) => (
+            <details>
+              <summary>{faq.q}</summary>
+              <div class="lawn-faq__answer">{faq.a}</div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="lawn-section lawn-quote motion-rise" id="ggl-quote" aria-labelledby="ggl-quote-title">
+    <div class="lawn-inner lawn-quote__layout">
+      <div class="lawn-quote__copy">
+        <p class="lawn-kicker">Free custom quote</p>
+        <h2 class="lawn-heading" id="ggl-quote-title">
+          Let’s measure your lawn and give you a real price.
+        </h2>
+        <p class="lawn-lead">
+          Tell us where the lawn is located. Our local office will follow up during business hours with
+          clear pricing for your property. Pricing starts at $39/month—your exact monthly price depends
+          on measured lawn size and selected services.
+        </p>
+        <div class="lawn-quote__promise">
+          <div class="lawn-promise-row">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"
+              ><path
+                d="m5 12 4 4L19 6"
+                stroke="currentColor"
+                stroke-width="2.3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path></svg
+            >
+            <span>Month-to-month billing</span>
+          </div>
+          <div class="lawn-promise-row">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"
+              ><path
+                d="m5 12 4 4L19 6"
+                stroke="currentColor"
+                stroke-width="2.3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path></svg
+            >
+            <span>No pressure or obligation</span>
+          </div>
+          <div class="lawn-promise-row">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"
+              ><path
+                d="m5 12 4 4L19 6"
+                stroke="currentColor"
+                stroke-width="2.3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path></svg
+            >
+            <span>Clear monthly price</span>
+          </div>
+          <div class="lawn-promise-row">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"
+              ><path
+                d="m5 12 4 4L19 6"
+                stroke="currentColor"
+                stroke-width="2.3"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path></svg
+            >
+            <span>Local office support</span>
+          </div>
+        </div>
+        <p class="lawn-quote__chip" aria-hidden="true">Service noted: Lawn Fertilization & Weed Control</p>
+        <p class="lawn-quote__contact">
+          Prefer to talk? Call <a href={`tel:${phoneTel}`}>{phone}</a><br />
+          {site.hours.label}
+        </p>
+      </div>
+
+      <div class="lawn-form-card" id="ggl-form-card">
+        <QuoteForm
+          source={source}
+          leadSource={source}
+          heading="Request your free estimate"
+          subheading="Enter the service address and we’ll prepare an accurate, no-obligation estimate."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="lawn-final motion-rise" aria-label="Get a lawn treatment quote">
+    <div class="lawn-inner lawn-final__inner">
+      <div>
+        <h2>Ready for a lawn that looks professionally managed?</h2>
+        <p>Request your free custom price or call the local Grow Green team.</p>
+      </div>
+      <div class="lawn-final__actions">
+        <a class="lawn-btn lawn-btn--gold" href="#ggl-quote" data-quote-source="Final CTA">
+          Get my free quote →
+        </a>
+        <a class="lawn-btn lawn-btn--ghost" href={`tel:${phoneTel}`}>Call {phone}</a>
+      </div>
+    </div>
+  </section>
+
+  <nav class="lawn-mobile-bar" aria-label="Quick contact">
+    <a class="lawn-mobile-call" href={`tel:${phoneTel}`}>Call Now</a>
+    <a class="lawn-mobile-quote" href="#ggl-quote" data-quote-source="Mobile Sticky CTA"
+      >Get My Free Quote</a
+    >
+  </nav>
+</article>
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceJsonLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+
+<style>
+  .lawn-video__shell {
+    position: relative;
+  }
+  .lawn-video__play {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    min-width: 4.5rem;
+    min-height: 4.5rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--lawn-gold);
+    color: #172014;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+  }
+  .lawn-video__shell:has(video) .lawn-video__play {
+    display: none;
+  }
+</style>
+
+<script>
+  (function () {
+    const root = document.getElementById("gg-lawn-page");
+    if (!root || root.dataset.ggInitialized === "true") return;
+    root.dataset.ggInitialized = "true";
+
+    const slider = root.querySelector("#ggl-slider");
+    const sliderOutput = root.querySelector("#ggl-slider-output");
+    const sqftOutput = root.querySelector("#ggl-estimate-sqft");
+    const priceOutput = root.querySelector("#ggl-estimate-price");
+    const presetButtons = root.querySelectorAll(".lawn-size-btn");
+    const quoteForm = root.querySelector("[data-quote-form]");
+
+    function formatMoney(number) {
+      return number.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2,
+      });
+    }
+
+    function estimatePrice(squareFeet) {
+      const monthly = (squareFeet / 1000) * 10 * (9 / 12);
+      return Math.max(39, monthly);
+    }
+
+    function updateEstimator(sizeInThousands) {
+      if (!(slider instanceof HTMLInputElement)) return;
+      const size = Math.max(
+        Number(slider.min),
+        Math.min(Number(slider.max), Math.round(Number(sizeInThousands) || 5)),
+      );
+      const squareFeet = size * 1000;
+      const monthly = estimatePrice(squareFeet);
+      const fill = ((size - Number(slider.min)) / (Number(slider.max) - Number(slider.min))) * 100;
+
+      slider.value = String(size);
+      slider.style.setProperty("--lawn-fill", fill + "%");
+      if (sliderOutput) sliderOutput.textContent = squareFeet.toLocaleString("en-US") + " sq ft";
+      if (sqftOutput) sqftOutput.textContent = squareFeet.toLocaleString("en-US");
+      if (priceOutput) priceOutput.textContent = formatMoney(monthly);
+      presetButtons.forEach((button) => {
+        button.classList.toggle("is-active", Number(button.dataset.size) === size);
+      });
+
+      if (quoteForm instanceof HTMLElement) {
+        quoteForm.dataset.extraNotes = [
+          "Service requested: Lawn Fertilization & Weed Control",
+          `Estimator selection: ${squareFeet} sq ft / ${formatMoney(monthly)} estimated monthly`,
+        ].join("\n");
+      }
+    }
+
+    if (slider instanceof HTMLInputElement) {
+      slider.addEventListener("input", () => updateEstimator(slider.value));
+      presetButtons.forEach((button) => {
+        button.addEventListener("click", () => updateEstimator(button.dataset.size));
+      });
+      updateEstimator(slider.value);
+    }
+
+    root.querySelectorAll('a[href="#ggl-quote"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        if (quoteForm instanceof HTMLElement && link instanceof HTMLElement && link.dataset.quoteSource) {
+          const label = `Lawn Service Page — ${link.dataset.quoteSource}`;
+          quoteForm.dataset.source = label;
+          quoteForm.dataset.leadSource = label;
+        }
+        root.querySelector("#ggl-quote")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    const wrap = root.querySelector(".gg-video-wrap");
+    const playBtn = wrap?.querySelector(".lawn-video__play");
+    playBtn?.addEventListener("click", () => {
+      if (!(wrap instanceof HTMLElement)) return;
+      const src = wrap.getAttribute("data-video-src");
+      const poster = wrap.getAttribute("data-video-poster");
+      if (!src) return;
+      const posterImg = wrap.querySelector(".lawn-video__poster");
+      const player = document.createElement("video");
+      player.className = "lawn-video__poster";
+      player.controls = true;
+      player.playsInline = true;
+      player.setAttribute("preload", "metadata");
+      if (poster) player.setAttribute("poster", poster);
+      const source = document.createElement("source");
+      source.src = src;
+      source.type = "video/mp4";
+      player.appendChild(source);
+      posterImg?.replaceWith(player);
+      playBtn.remove();
+      player.play().catch(() => {});
+    });
+  })();
+</script>

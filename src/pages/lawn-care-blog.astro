@@ -1,0 +1,145 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { blogPosts } from "../data/blog-posts.generated";
+import { loadPageContent } from "../lib/content/loadPageContent";
+import { cleanExcerpt, thumbFor, topicFor } from "../lib/blog";
+import "../styles/blog-hub.css";
+
+export const prerender = true;
+
+const posts = [...blogPosts].sort((a, b) => Number(b.priority) - Number(a.priority));
+const featured = posts.filter((p) => p.priority).slice(0, 2);
+const remaining = posts.filter((p) => !featured.some((f) => f.slug === p.slug));
+
+const rich = loadPageContent("lawn-care-blog");
+
+const blogTitle =
+  rich?.headings[0] && /healthier lawn/i.test(rich.headings[0])
+    ? rich.headings[0].replace(/^Local advice\.\s*/i, "Local advice.<br />")
+    : "Local advice for a healthier lawn";
+
+const blogLead =
+  rich?.structured?.hero_sub ||
+  "Seasonal tips and local weed, turf, and fertilization articles — written for warm-season lawns in our South Louisiana service area.";
+---
+
+<BaseLayout
+  title={rich?.seo_title || "Lawn Care Blog | Grow Green Weed Control"}
+  description={
+    rich?.seo_desc ||
+    "Practical South Louisiana lawn care articles from Grow Green Weed Control — weeds, fertilization, disease, and insects."
+  }
+  canonicalPath="/lawn-care-blog/"
+>
+  <div class="blog-hub">
+    <header class="blog-hero">
+      <div class="blog-hero__inner">
+        <div class="motion-rise">
+          <p class="blog-hero__eyebrow">Grow Green Weed Control</p>
+          <h1 set:html={blogTitle} />
+          <p class="blog-hero__lead">{blogLead}</p>
+          <div class="blog-hero__actions">
+            <a class="blog-btn blog-btn--green" href="#blog-articles">Browse articles</a>
+            <a class="blog-btn blog-btn--ghost" href="/request-a-quote/">Get a free quote</a>
+          </div>
+        </div>
+        <div class="blog-hero__visual motion-rise" aria-hidden="true">
+          <img
+            class="blog-hero__mascot"
+            src="/images/mascot/thinking-240.webp"
+            srcset="/images/mascot/thinking-240.webp 240w, /images/mascot/thinking.png 512w"
+            sizes="(max-width: 860px) 140px, 220px"
+            width="220"
+            height="260"
+            alt=""
+            decoding="async"
+            fetchpriority="high"
+          />
+        </div>
+      </div>
+    </header>
+
+    {
+      featured.length > 0 && (
+        <section class="blog-featured" aria-labelledby="blog-featured-title">
+          <div class="blog-featured__inner motion-rise">
+            <div class="blog-featured__head">
+              <div>
+                <p class="blog-featured__kicker">Start here</p>
+                <h2 id="blog-featured-title">Popular local guides</h2>
+              </div>
+              <p class="blog-featured__note">
+                Start with these guides on weeds and fertilization for South Louisiana lawns.
+              </p>
+            </div>
+            <div class="blog-featured__grid">
+              {featured.map((post) => (
+                <a class="blog-feature" href={post.path}>
+                  <div class="blog-feature__media">
+                    <img
+                      src={thumbFor(post.slug)}
+                      alt=""
+                      width="640"
+                      height="420"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="blog-feature__body">
+                    <span class="blog-feature__tag">{topicFor(post.slug, post.title)}</span>
+                    <h3>{post.title}</h3>
+                    <p>{cleanExcerpt(post, 140)}</p>
+                    <span class="blog-feature__cta">Read article →</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    <section class="blog-index" id="blog-articles" aria-labelledby="blog-index-title">
+      <div class="blog-index__inner">
+        <div class="blog-index__head motion-rise">
+          <h2 id="blog-index-title">All lawn care articles</h2>
+          <p>
+            Browse tips written for warm-season turf around Baton Rouge, Prairieville, Ascension Parish, and nearby
+            communities we serve.
+          </p>
+        </div>
+
+        <div class="blog-list">
+          {
+            remaining.map((post, i) => (
+              <a class="blog-item motion-rise" href={post.path} style={`--i:${i}`}>
+                <div class="blog-item__media">
+                  <img
+                    src={thumbFor(post.slug)}
+                    alt=""
+                    width="320"
+                    height="210"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="blog-item__body">
+                  <div class="blog-item__meta">
+                    <span class="blog-item__topic">{topicFor(post.slug, post.title)}</span>
+                    {post.priority && <span class="blog-item__popular">Popular</span>}
+                  </div>
+                  <h3>{post.title}</h3>
+                  <p>{cleanExcerpt(post)}</p>
+                  <span class="blog-item__cta">Read article →</span>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <CtaBand />
+  </div>
+</BaseLayout>

@@ -1,0 +1,304 @@
+---
+import { louisianaParishMap } from "../data/louisiana-parish-paths";
+import { serviceAreas, serviceAreaHubs } from "../data/service-areas";
+
+interface Props {
+  id?: string;
+}
+
+const { id = "parish-coverage-map" } = Astro.props;
+
+const servedParishes = [
+  ...new Set(serviceAreas.map((a) => a.parish).filter(Boolean)),
+].sort((a, b) => a.localeCompare(b));
+
+const servedSet = new Set(servedParishes);
+const hubByParish = new Map(serviceAreaHubs.map((h) => [h.parish, h]));
+
+function parishHref(parish: string): string {
+  const hub = hubByParish.get(parish);
+  if (hub?.existingUrl) return hub.existingUrl;
+  const city = [...serviceAreas]
+    .filter((a) => a.parish === parish)
+    .sort((a, b) => a.name.localeCompare(b.name))[0];
+  return city ? `/service-areas/${city.slug}/` : "/service-areas/";
+}
+
+function cityCount(parish: string): number {
+  return serviceAreas.filter((a) => a.parish === parish).length;
+}
+
+function parishLabel(parish: string): string {
+  return /parish$/i.test(parish) ? parish : `${parish} Parish`;
+}
+---
+
+<section class="la-map" id={id} aria-labelledby={`${id}-title`}>
+  <div class="la-map__copy">
+    <p class="la-map__eyebrow">Coverage map</p>
+    <h2 id={`${id}-title`}>Parishes we serve in Louisiana</h2>
+    <p class="la-map__lead">
+      Highlighted parishes include the {serviceAreas.length} cities and communities where we accept customers. Tap a
+      green parish to open a local page.
+    </p>
+    <ul class="la-map__legend" aria-label="Map legend">
+      <li><span class="la-map__swatch la-map__swatch--served" aria-hidden="true"></span> Served parish</li>
+      <li><span class="la-map__swatch la-map__swatch--other" aria-hidden="true"></span> Outside current coverage</li>
+    </ul>
+    <ul class="la-map__parishes">
+      {
+        servedParishes.map((parish) => (
+          <li>
+            <a href={parishHref(parish)}>
+              <strong>{parishLabel(parish)}</strong>
+              <span>
+                {cityCount(parish)} location{cityCount(parish) === 1 ? "" : "s"}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="la-map__canvas">
+    <svg
+      class="la-map__svg"
+      viewBox={louisianaParishMap.viewBox}
+      role="img"
+      aria-label={`Map of Louisiana with ${servedParishes.length} served parishes highlighted`}
+    >
+      <title>Louisiana parish coverage map</title>
+      {
+        louisianaParishMap.parishes.map((parish) => {
+          const served = servedSet.has(parish.name);
+          if (served) {
+            return (
+              <a href={parishHref(parish.name)} class="la-map__hit">
+                <path
+                  class="la-map__parish la-map__parish--served"
+                  d={parish.path}
+                  data-parish={parish.name}
+                >
+                  <title>{parish.name} Parish — we serve here</title>
+                </path>
+              </a>
+            );
+          }
+          return (
+            <path
+              class="la-map__parish la-map__parish--other"
+              d={parish.path}
+              data-parish={parish.name}
+            >
+              <title>{parish.name} Parish</title>
+            </path>
+          );
+        })
+      }
+    </svg>
+  </div>
+</section>
+
+<style>
+  .la-map {
+    --la-ink: #14251a;
+    --la-copy: #53645a;
+    --la-served: #1f6b38;
+    --la-served-hover: #2f8a4a;
+    --la-other: #e4eee6;
+    --la-stroke: #9bb5a3;
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+    gap: clamp(1.35rem, 3.2vw, 2.75rem);
+    align-items: center;
+    width: min(1120px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: clamp(1.85rem, 4vw, 2.9rem) 0;
+  }
+
+  .la-map__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.55rem;
+    color: var(--green-600, #2f7a43);
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .la-map__eyebrow::before {
+    content: "";
+    width: 1.35rem;
+    height: 2px;
+    border-radius: 99px;
+    background: var(--gold, #f5a20a);
+  }
+
+  .la-map h2 {
+    margin: 0 0 0.6rem;
+    color: var(--la-ink);
+    font-size: clamp(1.55rem, 2.8vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  .la-map__lead {
+    margin: 0 0 1.1rem;
+    color: var(--la-copy);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 34rem;
+  }
+
+  .la-map__legend {
+    list-style: none;
+    margin: 0 0 1.1rem;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.15rem;
+    color: var(--la-copy);
+    font-size: 0.86rem;
+    font-weight: 700;
+  }
+
+  .la-map__legend li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .la-map__swatch {
+    width: 0.95rem;
+    height: 0.95rem;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+  }
+
+  .la-map__swatch--served {
+    background: var(--la-served);
+  }
+
+  .la-map__swatch--other {
+    background: var(--la-other);
+    border-color: var(--la-stroke);
+  }
+
+  .la-map__parishes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .la-map__parishes a {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid #dbe6de;
+    border-radius: 0.8rem;
+    background: #fff;
+    color: inherit;
+    text-decoration: none;
+    box-shadow: 0 8px 18px rgba(16, 44, 27, 0.04);
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .la-map__parishes a:hover {
+    border-color: #9bc2a6;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(16, 44, 27, 0.08);
+    color: inherit;
+  }
+
+  .la-map__parishes strong {
+    font-size: 0.9rem;
+    letter-spacing: -0.015em;
+  }
+
+  .la-map__parishes span {
+    color: var(--la-copy);
+    font-size: 0.76rem;
+  }
+
+  .la-map__canvas {
+    min-width: 0;
+    padding: 1.15rem;
+    border: 1px solid #dbe6de;
+    border-radius: 1.35rem;
+    background:
+      radial-gradient(circle at 80% 15%, rgba(245, 162, 10, 0.14), transparent 40%),
+      radial-gradient(circle at 10% 90%, rgba(47, 122, 67, 0.1), transparent 42%),
+      linear-gradient(180deg, #f8fcf8 0%, #eef5ef 100%);
+    box-shadow: 0 20px 44px rgba(16, 44, 27, 0.08);
+  }
+
+  .la-map__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .la-map__parish {
+    stroke: #fff;
+    stroke-width: 1.1;
+    stroke-linejoin: round;
+    transition: fill 0.18s ease, stroke 0.18s ease;
+  }
+
+  .la-map__parish--other {
+    fill: var(--la-other);
+    stroke: var(--la-stroke);
+    stroke-width: 0.7;
+  }
+
+  .la-map__parish--served {
+    fill: var(--la-served);
+    cursor: pointer;
+  }
+
+  .la-map__hit:hover .la-map__parish--served,
+  .la-map__hit:focus-visible .la-map__parish--served {
+    fill: var(--la-served-hover);
+    stroke: var(--gold, #f5a20a);
+    stroke-width: 1.6;
+  }
+
+  .la-map__hit:focus-visible {
+    outline: none;
+  }
+
+  @media (max-width: 900px) {
+    .la-map {
+      grid-template-columns: 1fr;
+    }
+
+    .la-map__canvas {
+      order: -1;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .la-map__parishes {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .la-map__parishes a,
+    .la-map__parish {
+      transition: none;
+    }
+
+    .la-map__parishes a:hover {
+      transform: none;
+    }
+  }
+</style>

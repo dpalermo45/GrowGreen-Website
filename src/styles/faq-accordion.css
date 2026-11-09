@@ -1,0 +1,243 @@
+/**
+ * Shared FAQ accordion polish for parish hubs, city geo pages, and /service-areas/.
+ * Scope by wrapping section class: .gg-faq
+ */
+.gg-faq {
+  display: grid;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.gg-faq__head {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 0.35rem;
+}
+
+.gg-faq__kicker {
+  margin: 0;
+  color: #8a5a10;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.gg-faq__kicker::before {
+  content: "";
+  display: inline-block;
+  width: 1.35rem;
+  height: 2px;
+  margin-right: 0.55rem;
+  margin-bottom: 0.2rem;
+  border-radius: 99px;
+  background: #f2ad2f;
+  vertical-align: middle;
+}
+
+.gg-faq h2 {
+  margin: 0;
+  color: var(--green-900, #0d2918);
+  font-size: clamp(1.3rem, 2.1vw, 1.65rem);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.gg-faq__lead {
+  margin: 0;
+  max-width: 40rem;
+  color: #51665a;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.gg-faq__list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.gg-faq details {
+  overflow: hidden;
+  border: 1px solid #d5e3d8;
+  border-radius: 0.95rem;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(16, 44, 27, 0.04);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.gg-faq details:hover {
+  border-color: #b9d0bf;
+}
+
+.gg-faq details[open] {
+  border-color: rgba(47, 139, 58, 0.35);
+  box-shadow: 0 12px 28px rgba(16, 44, 27, 0.07);
+}
+
+.gg-faq summary {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  cursor: pointer;
+  list-style: none;
+  color: #14291b;
+  font-size: 0.98rem;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.gg-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.gg-faq summary::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: 0.35rem;
+  border-right: 2px solid #2f8b3a;
+  border-bottom: 2px solid #2f8b3a;
+  transform: rotate(45deg);
+  transition: transform 180ms ease;
+}
+
+.gg-faq details[open] summary::after {
+  margin-top: 0.55rem;
+  transform: rotate(225deg);
+}
+
+.gg-faq summary:focus-visible {
+  outline: 3px solid rgba(242, 173, 47, 0.55);
+  outline-offset: 2px;
+  border-radius: 0.85rem;
+}
+
+.gg-faq__answer {
+  margin: 0;
+  padding: 0 1.1rem 1.05rem;
+  color: #43574a;
+  font-size: 0.94rem;
+  font-weight: 550;
+  line-height: 1.6;
+  border-top: 1px solid transparent;
+}
+
+.gg-faq details[open] .gg-faq__answer {
+  border-top-color: #e7efe9;
+  padding-top: 0.85rem;
+}
+
+/* Right-rail stack under estimate forms (not sticky — avoids overlap) */
+.gg-aside-rail {
+  display: grid;
+  gap: 1.35rem;
+  margin-top: 1.35rem;
+}
+
+.gg-aside-services {
+  display: grid;
+  gap: 0.65rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid #e4eee6;
+}
+
+.gg-aside-services__kicker {
+  margin: 0;
+  color: #8a5a10;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.gg-aside-services__kicker::before {
+  content: "";
+  display: inline-block;
+  width: 1.35rem;
+  height: 2px;
+  margin-right: 0.55rem;
+  margin-bottom: 0.2rem;
+  border-radius: 99px;
+  background: #f2ad2f;
+  vertical-align: middle;
+}
+
+.gg-aside-services h2 {
+  margin: 0;
+  color: var(--green-900, #0d2918);
+  font-size: clamp(1.12rem, 1.7vw, 1.32rem);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.gg-aside-services__lead {
+  margin: 0;
+  color: #51665a;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.gg-aside-services__list {
+  list-style: none;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.gg-aside-services__list a {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.7rem 0.15rem;
+  border-bottom: 1px solid #e4eee6;
+  text-decoration: none;
+  color: inherit;
+}
+
+.gg-aside-services__list a:hover strong,
+.gg-aside-services__list a:focus-visible strong {
+  color: var(--green-700, #2f7a43);
+}
+
+.gg-aside-services__list strong {
+  color: var(--green-900, #0d2918);
+  font-size: 0.95rem;
+}
+
+.gg-aside-services__list span {
+  color: #5a6f62;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.gg-faq--aside {
+  padding-top: 1.15rem;
+  border-top: 1px solid #e4eee6;
+}
+
+.gg-faq--aside .gg-faq__lead {
+  max-width: none;
+  font-size: 0.9rem;
+}
+
+.gg-faq--aside h2 {
+  font-size: clamp(1.12rem, 1.7vw, 1.32rem);
+}
+
+.gg-faq--aside summary {
+  padding: 0.85rem 0.95rem;
+  font-size: 0.92rem;
+}
+
+.gg-faq--aside .gg-faq__answer {
+  padding: 0 0.95rem 0.95rem;
+  font-size: 0.9rem;
+}

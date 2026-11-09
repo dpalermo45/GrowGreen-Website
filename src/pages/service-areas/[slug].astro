@@ -1,0 +1,420 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import QuoteForm from "../../components/QuoteForm.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { serviceAreas } from "../../data/service-areas";
+import {
+  assertAllServiceAreaContentPresent,
+  getServiceAreaPage,
+  nearbyServiceAreas,
+} from "../../data/service-area-content";
+import { services } from "../../data/services";
+import { site } from "../../data/site";
+import "../../styles/service-area.css";
+import "../../styles/faq-accordion.css";
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  const missing = assertAllServiceAreaContentPresent();
+  if (missing.length) {
+    throw new Error(`Missing service-area content for: ${missing.join(", ")}`);
+  }
+  return serviceAreas.map((a) => ({ params: { slug: a.slug } }));
+}
+
+const page = getServiceAreaPage(Astro.params.slug!);
+if (!page) {
+  throw new Error("Unknown service area");
+}
+
+const { content } = page;
+const regionLabel = `${page.parish} Parish`;
+const nearby = nearbyServiceAreas(page, 6);
+const featuredServices = services.slice(0, 6);
+const [firstSection, ...restSections] = content.sections;
+const gallery = content.images || [];
+const primaryImage = gallery[0] || content.image;
+const siteOrigin = "https://growgreenweedcontrol.com";
+
+const highlights = [
+  {
+    title: "Warm-season timing",
+    body: `Treatments for ${page.name} follow South Louisiana growing conditions—not a generic national calendar.`,
+  },
+  {
+    title: "Clear monthly pricing",
+    body: site.startingPrice.short,
+  },
+  {
+    title: "Local office support",
+    body: `Call or text ${site.phone} ${site.hours.label}. Estimates go to the Grow Green team in ${site.address.city}.`,
+  },
+];
+
+const steps = [
+  {
+    title: "Request an estimate",
+    body: `Share your ${page.name} service address and what you want help with. No payment is required to get pricing.`,
+  },
+  {
+    title: "We review the lawn",
+    body: "We look at treatable area, grass type, and conditions so the recommendation fits the property.",
+  },
+  {
+    title: "Approve a clear plan",
+    body: "Review the recommended program and monthly price, then choose a start when you are ready.",
+  },
+];
+
+/** Claims-safe city FAQs from confirmed site facts + this page’s location. */
+const faqs = [
+  {
+    q: `Do you serve ${page.name}?`,
+    a: `Yes. Grow Green Weed Control accepts customers in ${page.name} (${regionLabel}). Send your service address for a free estimate so we can confirm coverage for your property.`,
+  },
+  {
+    q: "How much does lawn fertilization and weed control cost?",
+    a: site.startingPrice.short,
+  },
+  {
+    q: "Do you offer mowing?",
+    a: "No. Grow Green is a lawn-treatment company focused on fertilization, weed control, and related treatments—not mowing.",
+  },
+  {
+    q: "How do I get a free estimate?",
+    a: `Use the estimate form on this page or call ${site.phone}. Include the ${page.name} service address and the services you are interested in.`,
+  },
+  {
+    q: "What are your office hours?",
+    a: `Our office is open ${site.hours.label} (${site.hours.timezone}).`,
+  },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: { "@type": "Answer", text: faq.a },
+  })),
+};
+
+const imageJsonLd =
+  gallery.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "ImageGallery",
+        name: `${page.name} lawn care photos | Grow Green Weed Control`,
+        about: content.headline,
+        image: gallery.map((img) => ({
+          "@type": "ImageObject",
+          contentUrl: `${siteOrigin}${img.src}`,
+          url: `${siteOrigin}${img.src}`,
+          caption: img.caption,
+          description: img.alt,
+          name: img.alt,
+          width: img.width,
+          height: img.height,
+        })),
+      }
+    : undefined;
+
+const jsonLd = [faqJsonLd, imageJsonLd].filter(Boolean);
+---
+
+<BaseLayout
+  title={`${content.headline} | Grow Green Weed Control`}
+  description={content.metaDescription}
+  canonicalPath={`/service-areas/${page.slug}/`}
+  ogImage={primaryImage?.src}
+  jsonLd={jsonLd}
+>
+  <link slot="head" rel="preload" as="image" href="/images/home/hero-lawn-640.webp" fetchpriority="high" />
+  <article class="sa-page">
+    <header class="sa-hero sa-hero--photo">
+      <div class="sa-hero__media" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 699px)" srcset="/images/home/hero-lawn-640.webp" type="image/webp" />
+          <source media="(max-width: 1099px)" srcset="/images/home/hero-lawn-960.webp" type="image/webp" />
+          <img
+            src="/images/home/hero-lawn-640.webp"
+            alt=""
+            width="1280"
+            height="720"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
+      </div>
+      <div class="sa-hero__shade" aria-hidden="true"></div>
+      <div class="sa-hero__inner">
+        <div class="sa-hero__copy motion-rise">
+          <div class="sa-hero__brand">
+            <img src="/images/brand/logo-128.webp" width="56" height="56" alt="" decoding="async" />
+            <span>Grow Green Weed Control</span>
+          </div>
+          <p class="sa-eyebrow">{page.name} · {regionLabel}</p>
+          <h1>{content.headline}</h1>
+          <p class="sa-hero__lead">{content.intro}</p>
+          <div class="sa-hero__actions">
+            <a class="sa-btn sa-btn--gold" href="#sa-estimate">Get My Free Quote</a>
+            <a class="sa-btn sa-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+          </div>
+          <ul class="sa-hero__proof" aria-label="Why Grow Green">
+            <li>Firefighter-owned</li>
+            <li>Family-operated</li>
+            <li>Based in {site.address.city}</li>
+          </ul>
+        </div>
+        <div class="sa-hero__visual motion-rise motion-delay-1" aria-hidden="true">
+          <img
+            class="sa-hero__mascot"
+            src="/images/mascot/backpack-sprayer-216.webp"
+            srcset="/images/mascot/backpack-sprayer-216.webp 216w, /images/mascot/backpack-sprayer-320.webp 320w"
+            sizes="(max-width: 960px) 130px, 250px"
+            width="280"
+            height="280"
+            alt=""
+            decoding="async"
+          />
+        </div>
+      </div>
+    </header>
+
+    <div class="sa-proof" aria-label="Grow Green credentials">
+      <div class="sa-proof__item motion-rise">
+        <strong>Firefighter-owned</strong>
+        <span>Local and family-operated</span>
+      </div>
+      <div class="sa-proof__item motion-rise motion-delay-1">
+        <strong>Lawn specialists</strong>
+        <span>Fertilization & weed control—not mowing</span>
+      </div>
+      <div class="sa-proof__item motion-rise motion-delay-2">
+        <strong>From $39/month</strong>
+        <span>Final pricing depends on lawn size</span>
+      </div>
+      <div class="sa-proof__item motion-rise motion-delay-3">
+        <strong>{regionLabel}</strong>
+        <span>Serving {page.name} and nearby communities</span>
+      </div>
+    </div>
+
+    <section class="sa-body">
+      <div class="sa-wrap sa-layout">
+        <div class="sa-prose motion-rise">
+          <p class="sa-price">{site.startingPrice.short}</p>
+
+          <div class="sa-highlights" aria-label="What to expect">
+            {
+              highlights.map((item) => (
+                <article class="sa-highlight">
+                  <h2>{item.title}</h2>
+                  <p>{item.body}</p>
+                </article>
+              ))
+            }
+          </div>
+
+          {
+            gallery.length > 0 && (
+              <div
+                class:list={["sa-gallery", gallery.length > 1 && "sa-gallery--multi"]}
+                aria-label={`Lawn care photos for ${page.name}, Louisiana`}
+              >
+                {gallery.map((img, index) => (
+                  <figure class:list={["sa-photo", index === 0 && "sa-photo--primary"]}>
+                    <img
+                      src={img.src}
+                      srcset={img.srcSet}
+                      sizes={img.sizes}
+                      alt={img.alt}
+                      title={img.caption}
+                      width={img.width}
+                      height={img.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <figcaption>{img.caption}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            )
+          }
+
+          <aside class="sa-trust">
+            <img
+              class="sa-trust__mascot"
+              src="/images/mascot/firefighter-240.webp"
+              width="112"
+              height="112"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+            <div>
+              <p class="sa-trust__title">Local crew. Local routes. Real accountability.</p>
+              <p>
+                Grow Green is family-owned and firefighter-owned, based in {site.address.city} and serving {page.name} with
+                fertilization, weed control, and related lawn treatments—not mowing.
+              </p>
+              <ul>
+                {site.identity.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+
+          {
+            firstSection && (
+              <section class="sa-section sa-section--lead">
+                <p class="sa-kicker">Serving {page.name}</p>
+                <h2>{firstSection.heading}</h2>
+                {firstSection.paragraphs.map((p) => (
+                  <p>{p}</p>
+                ))}
+              </section>
+            )
+          }
+
+          <aside class="sa-callout">
+            <img
+              src="/images/mascot/firefighter-240.webp"
+              width="96"
+              height="96"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+            <div>
+              <strong>Built for South Louisiana turf</strong>
+              <p>
+                Programs for {page.name} account for heat, humidity, clay soils, and the warm-season grasses common
+                across {regionLabel}.
+              </p>
+            </div>
+          </aside>
+
+          {
+            restSections.map((section) => (
+              <section class="sa-section">
+                <h2>{section.heading}</h2>
+                {section.paragraphs.map((p) => (
+                  <p>{p}</p>
+                ))}
+              </section>
+            ))
+          }
+
+          <section class="sa-steps" aria-labelledby="sa-steps-title">
+            <h2 id="sa-steps-title">From estimate to a clearer lawn plan</h2>
+            <ol class="sa-step-list">
+              {
+                steps.map((step, index) => (
+                  <li>
+                    <span class="sa-step-list__num">{index + 1}</span>
+                    <div>
+                      <h3>{step.title}</h3>
+                      <p>{step.body}</p>
+                    </div>
+                  </li>
+                ))
+              }
+            </ol>
+          </section>
+
+          {
+            nearby.length > 0 && (
+              <section class="sa-nearby" aria-labelledby="sa-nearby-title">
+                <h2 id="sa-nearby-title">Nearby coverage</h2>
+                <p>We also treat lawns in communities around {page.name}.</p>
+                <ul class="sa-chips">
+                  {nearby.map((n) => (
+                    <li>
+                      <a href={`/service-areas/${n.slug}/`}>{n.name}</a>
+                    </li>
+                  ))}
+                  <li>
+                    <a class="sa-chips__all" href="/service-areas/">
+                      All areas
+                    </a>
+                  </li>
+                </ul>
+              </section>
+            )
+          }
+        </div>
+
+        <aside class="sa-form-col motion-rise motion-delay-1" id="sa-estimate">
+          <QuoteForm
+            source={`service-area-${page.slug}`}
+            heading={`Estimate for ${page.name}`}
+            subheading={`Enter your ${page.name} service address so we can confirm coverage and prepare pricing.`}
+          />
+          <div class="sa-form-note">
+            <img
+              src="/images/mascot/thumbs-up-240.webp"
+              width="72"
+              height="72"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+            <p>
+              Questions before you request? Call <a href={`tel:${site.phoneTel}`}>{site.phone}</a>
+              <span> · {site.hours.label}</span>
+            </p>
+          </div>
+          <div class="gg-aside-rail">
+            <section class="gg-aside-services" aria-labelledby="sa-services-title">
+              <p class="gg-aside-services__kicker">Services</p>
+              <h2 id="sa-services-title">Available in {page.name}</h2>
+              <p class="gg-aside-services__lead">
+                Core lawn programs plus targeted add-ons when your property needs them.
+              </p>
+              <ul class="gg-aside-services__list">
+                {
+                  featuredServices.map((s) => (
+                    <li>
+                      <a href={s.path || `/${s.slug}/`}>
+                        <strong>{s.title}</strong>
+                        <span>{s.summary}</span>
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </section>
+            <section class="gg-faq gg-faq--aside sa-faqs" aria-labelledby="sa-faqs-title">
+              <div class="gg-faq__head">
+                <p class="gg-faq__kicker">FAQ</p>
+                <h2 id="sa-faqs-title">Common questions for {page.name}</h2>
+                <p class="gg-faq__lead">
+                  Coverage, pricing, and what Grow Green does—and does not—include for {page.name} lawns.
+                </p>
+              </div>
+              <div class="gg-faq__list">
+                {
+                  faqs.map((faq) => (
+                    <details>
+                      <summary>{faq.q}</summary>
+                      <p class="gg-faq__answer">{faq.a}</p>
+                    </details>
+                  ))
+                }
+              </div>
+            </section>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <CtaBand
+      heading={`Get a free estimate in ${page.name}`}
+      text={`Tell us the service address — our local office in ${site.address.city} follows up during business hours.`}
+    />
+  </article>
+</BaseLayout>

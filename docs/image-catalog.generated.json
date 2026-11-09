@@ -1,0 +1,369 @@
+{
+  "generatedAt": "2026-11-06T05:31:30.220Z",
+  "items": [
+    {
+      "id": "logo-primary",
+      "dest": "logos/grow-green-logo.png",
+      "source": "2021/07/Grow-Green-Logo.png",
+      "alt": "Grow Green Weed Control logo",
+      "use": "Primary brand mark (nav, hero, footer). Prefer over redraws.",
+      "ok": true,
+      "variants": [
+        "logos/grow-green-logo-640.png",
+        "logos/grow-green-logo-640.webp",
+        "logos/grow-green-logo-960.png",
+        "logos/grow-green-logo-960.webp",
+        "logos/grow-green-logo.webp"
+      ]
+    },
+    {
+      "id": "logo-com",
+      "dest": "logos/comlogo.png",
+      "source": "2021/07/comlogo.png",
+      "alt": "Grow Green Weed Control circular logo",
+      "use": "Compact mark / favicon source / small brand lockups.",
+      "ok": true,
+      "variants": [
+        "logos/comlogo-640.png",
+        "logos/comlogo-640.webp",
+        "logos/comlogo.webp"
+      ]
+    },
+    {
+      "id": "logo-words",
+      "dest": "logos/logo-words-only.png",
+      "source": "2021/07/logo-words-only.png",
+      "alt": "Grow Green Weed Control wordmark",
+      "use": "Horizontal wordmark where icon + text would clutter.",
+      "ok": true,
+      "variants": [
+        "logos/logo-words-only-245.png",
+        "logos/logo-words-only-245.webp",
+        "logos/logo-words-only.webp"
+      ]
+    },
+    {
+      "id": "logo-com-black",
+      "dest": "logos/comlogo-black.png",
+      "source": "2021/07/comlogoblack.png",
+      "alt": "Grow Green Weed Control logo (dark)",
+      "use": "Dark-surface / light-background inverse when needed.",
+      "ok": true,
+      "variants": [
+        "logos/comlogo-black-640.png",
+        "logos/comlogo-black-640.webp",
+        "logos/comlogo-black.webp"
+      ]
+    },
+    {
+      "id": "mascot",
+      "dest": "mascot/grow-green-mascot.png",
+      "source": "2022/12/grow-green-mascot.png",
+      "alt": "Grow Green Weed Control cartoon grass mascot",
+      "use": "Brand personality accents; not a substitute for photo hero.",
+      "ok": true,
+      "variants": [
+        "mascot/grow-green-mascot-640.png",
+        "mascot/grow-green-mascot-640.webp",
+        "mascot/grow-green-mascot-960.png",
+        "mascot/grow-green-mascot-960.webp",
+        "mascot/grow-green-mascot.webp"
+      ]
+    },
+    {
+      "id": "mascot-sprayer",
+      "dest": "mascot/mascot-sprayer-nozzle.png",
+      "source": "2025/11/grow-green-weed-control-mascot-sprayer-nozzle.png",
+      "alt": "Grow Green mascot with sprayer nozzle",
+      "use": "Service/treatment section accents.",
+      "ok": true,
+      "variants": [
+        "mascot/mascot-sprayer-nozzle-640.png",
+        "mascot/mascot-sprayer-nozzle-640.webp",
+        "mascot/mascot-sprayer-nozzle.webp"
+      ]
+    },
+    {
+      "id": "hero-truck-trailer",
+      "dest": "hero/truck-and-trailer.jpg",
+      "source": "2025/12/grow-green-truck-and-trailer.jpg",
+      "alt": "Grow Green Weed Control truck and trailer",
+      "use": "Primary homepage / brand hero candidate (authentic fleet).",
+      "ok": true,
+      "variants": [
+        "hero/truck-and-trailer-640.webp",
+        "hero/truck-and-trailer-640.avif",
+        "hero/truck-and-trailer-960.webp",
+        "hero/truck-and-trailer-960.avif",
+        "hero/truck-and-trailer-1280.webp",
+        "hero/truck-and-trailer-1280.avif",
+        "hero/truck-and-trailer-1920.webp",
+        "hero/truck-and-trailer-1920.avif",
+        "hero/truck-and-trailer.webp",
+        "hero/truck-and-trailer.avif"
+      ]
+    },
+    {
+      "id": "hero-f250",
+      "dest": "hero/f250-side-view.jpg",
+      "source": "2026/11/F250-2018-Pickup-Truck-Side-View.jpg",
+      "alt": "Grow Green Weed Control pickup truck side view",
+      "use": "Alternate truck hero / campaign trucklead imagery.",
+      "ok": true,
+      "variants": [
+        "hero/f250-side-view-640.webp",
+        "hero/f250-side-view-640.avif",
+        "hero/f250-side-view-960.webp",
+        "hero/f250-side-view-960.avif",
+        "hero/f250-side-view-1280.webp",
+        "hero/f250-side-view-1280.avif",
+        "hero/f250-side-view-1920.webp",
+        "hero/f250-side-view-1920.avif",
+        "hero/f250-side-view.webp",
+        "hero/f250-side-view.avif"
+      ]
+    },
+    {
+      "id": "hero-cover",
+      "dest": "hero/cover.jpg",
+      "source": "2025/10/Grow-Green-Weed-Control-Cover.jpg",
+      "alt": "Grow Green Weed Control lawn care cover photo",
+      "use": "Full-bleed hero or OG image candidate.",
+      "ok": true,
+      "variants": [
+        "hero/cover-640.webp",
+        "hero/cover-640.avif",
+        "hero/cover-960.webp",
+        "hero/cover-960.avif",
+        "hero/cover-1280.webp",
+        "hero/cover-1280.avif",
+        "hero/cover-1920.webp",
+        "hero/cover-1920.avif",
+        "hero/cover.webp",
+        "hero/cover.avif"
+      ]
+    },
+    {
+      "id": "hero-lawn-month",
+      "dest": "hero/lawn-of-the-month.jpg",
+      "source": "2026/11/Grow-green-lawn-of-the-month.jpg",
+      "alt": "Healthy treated lawn — Grow Green lawn of the month",
+      "use": "Lawn results hero (do not invent a city label).",
+      "ok": true,
+      "variants": [
+        "hero/lawn-of-the-month-640.webp",
+        "hero/lawn-of-the-month-640.avif",
+        "hero/lawn-of-the-month-960.webp",
+        "hero/lawn-of-the-month-960.avif",
+        "hero/lawn-of-the-month.webp",
+        "hero/lawn-of-the-month.avif"
+      ]
+    },
+    {
+      "id": "hero-lawn-results",
+      "dest": "hero/lawn-results.jpg",
+      "source": "2025/11/lawn-weed-control-results-gonzales-la-grow-green-weed-control.jpg",
+      "alt": "Lawn weed control results in Gonzales, LA by Grow Green Weed Control",
+      "use": "Results / services hero; city label supported by WP attachment title.",
+      "ok": true,
+      "variants": [
+        "hero/lawn-results-640.webp",
+        "hero/lawn-results-640.avif",
+        "hero/lawn-results-960.webp",
+        "hero/lawn-results-960.avif",
+        "hero/lawn-results-1280.webp",
+        "hero/lawn-results-1280.avif",
+        "hero/lawn-results.webp",
+        "hero/lawn-results.avif"
+      ]
+    },
+    {
+      "id": "hero-treatment-sign",
+      "dest": "hero/lawn-treatment-sign.jpg",
+      "source": "2024/12/lawn-treatment-advertisement-sign.jpg",
+      "alt": "Grow Green lawn treatment yard sign",
+      "use": "Treatment-in-progress / local service atmosphere.",
+      "ok": true,
+      "variants": [
+        "hero/lawn-treatment-sign-640.webp",
+        "hero/lawn-treatment-sign-640.avif",
+        "hero/lawn-treatment-sign-960.webp",
+        "hero/lawn-treatment-sign-960.avif",
+        "hero/lawn-treatment-sign.webp",
+        "hero/lawn-treatment-sign.avif"
+      ]
+    },
+    {
+      "id": "hero-winter-lawn",
+      "dest": "hero/winter-lawn.png",
+      "source": "2024/12/winter-pic.png",
+      "alt": "South Louisiana lawn during cooler season",
+      "use": "Seasonal lawn atmosphere (generic; no invented city).",
+      "ok": true,
+      "variants": [
+        "hero/winter-lawn-640.webp",
+        "hero/winter-lawn-640.avif",
+        "hero/winter-lawn-960.webp",
+        "hero/winter-lawn-960.avif",
+        "hero/winter-lawn.webp",
+        "hero/winter-lawn.avif"
+      ]
+    },
+    {
+      "id": "hero-ascension-lawn",
+      "dest": "hero/ascension-parish-lawn.png",
+      "source": "2024/12/fertilizer-and-weed-control-ascension-parish.png",
+      "alt": "Fertilizer and weed control lawn in Ascension Parish",
+      "use": "Parish/area pages where Ascension is supported by WP.",
+      "ok": true,
+      "variants": [
+        "hero/ascension-parish-lawn-640.webp",
+        "hero/ascension-parish-lawn-640.avif",
+        "hero/ascension-parish-lawn-960.webp",
+        "hero/ascension-parish-lawn-960.avif",
+        "hero/ascension-parish-lawn.webp",
+        "hero/ascension-parish-lawn.avif"
+      ]
+    },
+    {
+      "id": "about-owner",
+      "dest": "about/owner-with-son.jpg",
+      "source": "2026/04/grow-green-weed-control-family-owned-company-owner-with-his-son-scaled.jpg",
+      "alt": "Grow Green Weed Control owner Dereck Palermo with his son",
+      "use": "About page / family-owned storytelling (WP alt text).",
+      "ok": true,
+      "variants": [
+        "about/owner-with-son-640.webp",
+        "about/owner-with-son-640.avif",
+        "about/owner-with-son-960.webp",
+        "about/owner-with-son-960.avif",
+        "about/owner-with-son-1280.webp",
+        "about/owner-with-son-1280.avif",
+        "about/owner-with-son-1920.webp",
+        "about/owner-with-son-1920.avif",
+        "about/owner-with-son.webp",
+        "about/owner-with-son.avif"
+      ]
+    },
+    {
+      "id": "about-kyle-tree",
+      "dest": "about/kyle-tree-shrub-care.jpg",
+      "source": "2026/04/kyle-tree-shrub-care-baton-rouge-grow-green-weed-control-scaled.jpg",
+      "alt": "Grow Green technician providing tree and shrub care in Baton Rouge",
+      "use": "Tree & shrub / team imagery (WP-supported location).",
+      "ok": true,
+      "variants": [
+        "about/kyle-tree-shrub-care-640.webp",
+        "about/kyle-tree-shrub-care-640.avif",
+        "about/kyle-tree-shrub-care-960.webp",
+        "about/kyle-tree-shrub-care-960.avif",
+        "about/kyle-tree-shrub-care-1280.webp",
+        "about/kyle-tree-shrub-care-1280.avif",
+        "about/kyle-tree-shrub-care-1920.webp",
+        "about/kyle-tree-shrub-care-1920.avif",
+        "about/kyle-tree-shrub-care.webp",
+        "about/kyle-tree-shrub-care.avif"
+      ]
+    },
+    {
+      "id": "service-core-aeration",
+      "dest": "services/core-aeration.jpg",
+      "source": "2024/12/core-aeration.jpg",
+      "alt": "Core aeration plugs on a lawn",
+      "use": "Core aeration service page.",
+      "ok": true,
+      "variants": [
+        "services/core-aeration-640.webp",
+        "services/core-aeration-640.avif",
+        "services/core-aeration-960.webp",
+        "services/core-aeration-960.avif",
+        "services/core-aeration-1280.webp",
+        "services/core-aeration-1280.avif",
+        "services/core-aeration-1920.webp",
+        "services/core-aeration-1920.avif",
+        "services/core-aeration.webp",
+        "services/core-aeration.avif"
+      ]
+    },
+    {
+      "id": "service-ant-mound",
+      "dest": "services/ant-mound.jpg",
+      "source": "2024/12/ant-mound.jpg",
+      "alt": "Fire ant mound in a lawn",
+      "use": "Fire ant treatment page.",
+      "ok": true,
+      "variants": [
+        "services/ant-mound-640.webp",
+        "services/ant-mound-640.avif",
+        "services/ant-mound-960.webp",
+        "services/ant-mound-960.avif",
+        "services/ant-mound-1280.webp",
+        "services/ant-mound-1280.avif",
+        "services/ant-mound-1920.webp",
+        "services/ant-mound-1920.avif",
+        "services/ant-mound.webp",
+        "services/ant-mound.avif"
+      ]
+    },
+    {
+      "id": "service-flower-bed",
+      "dest": "services/flower-bed.jpg",
+      "source": "2024/12/flower-bed-stone-edging-and-mulch-installation.jpg",
+      "alt": "Landscaped flower bed with stone edging and mulch",
+      "use": "Flower bed weed control page (bed context only — not installation claim).",
+      "ok": true,
+      "variants": [
+        "services/flower-bed-640.webp",
+        "services/flower-bed-640.avif",
+        "services/flower-bed-960.webp",
+        "services/flower-bed-960.avif",
+        "services/flower-bed-1280.webp",
+        "services/flower-bed-1280.avif",
+        "services/flower-bed-1920.webp",
+        "services/flower-bed-1920.avif",
+        "services/flower-bed.webp",
+        "services/flower-bed.avif"
+      ]
+    },
+    {
+      "id": "service-soil-sample",
+      "dest": "services/soil-sampling.jpg",
+      "source": "2024/12/winfieldunited_soilsamplingmicronuteints.jpg",
+      "alt": "Soil sampling and micronutrient analysis",
+      "use": "Soil sample service page.",
+      "ok": true,
+      "variants": [
+        "services/soil-sampling-640.webp",
+        "services/soil-sampling-640.avif",
+        "services/soil-sampling-960.webp",
+        "services/soil-sampling-960.avif",
+        "services/soil-sampling-1280.webp",
+        "services/soil-sampling-1280.avif",
+        "services/soil-sampling-1920.webp",
+        "services/soil-sampling-1920.avif",
+        "services/soil-sampling.webp",
+        "services/soil-sampling.avif"
+      ]
+    },
+    {
+      "id": "service-mosquito",
+      "dest": "services/mosquito.jpg",
+      "source": "2024/12/Mosquito-insect-feeding-on-human-culex-pipiens.jpg",
+      "alt": "Mosquito on skin",
+      "use": "Mosquito / flea / tick treatments page (pest context).",
+      "ok": true,
+      "variants": [
+        "services/mosquito-640.webp",
+        "services/mosquito-640.avif",
+        "services/mosquito-960.webp",
+        "services/mosquito-960.avif",
+        "services/mosquito-1280.webp",
+        "services/mosquito-1280.avif",
+        "services/mosquito-1920.webp",
+        "services/mosquito-1920.avif",
+        "services/mosquito.webp",
+        "services/mosquito.avif"
+      ]
+    }
+  ]
+}

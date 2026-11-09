@@ -1,0 +1,196 @@
+---
+import type { PageContent } from "../lib/content/loadPageContent";
+import { contentToSections } from "../lib/content/loadPageContent";
+import type { BlogInlineImage } from "../data/blog-inline-images";
+
+interface Props {
+  content: PageContent;
+  maxSections?: number;
+  showLists?: boolean;
+  showFaqs?: boolean;
+  figures?: BlogInlineImage[];
+}
+
+const {
+  content,
+  maxSections = 16,
+  showLists = true,
+  showFaqs = true,
+  figures = [],
+} = Astro.props;
+
+const sections = contentToSections(content, maxSections);
+const lists = (content.list_items || [])
+  .filter((x) => x.length > 12 && x.length < 160)
+  .slice(0, 16);
+const faqs = showFaqs ? (content.faqs || []).slice(0, 16) : [];
+
+const pool = [...figures];
+const sectionFigures: BlogInlineImage[][] = sections.map(() => []);
+
+// 1) Pin images to matching headings first.
+for (let s = 0; s < sections.length; s++) {
+  const heading = (sections[s].heading || "").toLowerCase();
+  if (!heading) continue;
+  for (let i = pool.length - 1; i >= 0; i--) {
+    const fig = pool[i];
+    if (!fig.afterHeading) continue;
+    if (heading.includes(fig.afterHeading.toLowerCase())) {
+      sectionFigures[s].push(fig);
+      pool.splice(i, 1);
+    }
+  }
+}
+
+// 2) Fill empty early sections with unpinned images (original WP order).
+const unpinned = pool.filter((f) => !f.afterHeading);
+const pinnedMisses = pool.filter((f) => f.afterHeading);
+let cursor = 0;
+for (let s = 0; s < sections.length && cursor < unpinned.length; s++) {
+  if (sectionFigures[s].length === 0) {
+    sectionFigures[s].push(unpinned[cursor++]);
+  }
+}
+
+// Leftovers: remaining unpinned + any afterHeading that never matched.
+const leftoverFigures = [...unpinned.slice(cursor), ...pinnedMisses];
+---
+
+<div class="rich-body">
+  {
+    sections.map((section, index) => (
+      <section class="rich-section">
+        {section.heading && <h2>{section.heading}</h2>}
+        {
+          sectionFigures[index]?.map((fig) => (
+            <figure class="rich-figure">
+              <picture>
+                <source srcset={fig.src} type="image/webp" />
+                <img
+                  src={fig.fallback}
+                  alt={fig.alt}
+                  width="960"
+                  height="640"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+            </figure>
+          ))
+        }
+        {section.paragraphs.map((p) => (
+          <p>{p}</p>
+        ))}
+      </section>
+    ))
+  }
+
+  {
+    leftoverFigures.length > 0 && (
+      <section class="rich-section rich-section--figures">
+        {leftoverFigures.map((fig) => (
+          <figure class="rich-figure">
+            <picture>
+              <source srcset={fig.src} type="image/webp" />
+              <img
+                src={fig.fallback}
+                alt={fig.alt}
+                width="960"
+                height="640"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          </figure>
+        ))}
+      </section>
+    )
+  }
+
+  {
+    showLists && lists.length > 0 && (
+      <section class="rich-section">
+        <h2>What to expect</h2>
+        <ul>
+          {lists.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    faqs.length > 0 && (
+      <section class="rich-section faqs">
+        <h2>Common questions</h2>
+        {faqs.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </section>
+    )
+  }
+</div>
+
+<style>
+  .rich-body {
+    display: grid;
+    gap: 1.75rem;
+  }
+  .rich-section h2 {
+    margin-bottom: 0.55em;
+  }
+  .rich-section p {
+    color: var(--muted);
+  }
+  .rich-section ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.2rem;
+    color: var(--muted);
+  }
+  .rich-section li {
+    margin-bottom: 0.4rem;
+  }
+  .rich-figure {
+    margin: 0.85rem 0 1.15rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid #dbe6de;
+    background: #f4f9f4;
+    box-shadow: 0 12px 28px rgba(16, 44, 27, 0.06);
+  }
+  .rich-figure picture,
+  .rich-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .rich-figure img {
+    max-height: 28rem;
+    object-fit: cover;
+    object-position: center;
+  }
+  .rich-section--figures {
+    display: grid;
+    gap: 1rem;
+  }
+  .faqs details {
+    background: #fff;
+    border: 1px solid #dbe6de;
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    margin-bottom: 0.55rem;
+    box-shadow: 0 8px 20px rgba(17, 45, 27, 0.04);
+  }
+  .faqs summary {
+    cursor: pointer;
+    font-weight: 900;
+    color: var(--ink);
+  }
+  .faqs details p {
+    margin: 0.65rem 0 0;
+  }
+</style>

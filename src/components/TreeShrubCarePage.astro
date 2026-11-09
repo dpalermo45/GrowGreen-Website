@@ -1,0 +1,502 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { site } from "../data/site";
+import { coverageFaqAnswer, areaServedSchema } from "../data/service-areas";
+import "../styles/tree-shrub-care.css";
+
+const source = "Tree & Shrub Care Service Page";
+const leadSource = "Website - Tree & Shrub Care Service Page";
+
+const truths = [
+  {
+    title: "Six planned visits—not six identical sprays",
+    body: "Each round is adjusted for the season, plant needs, weather, and pressure we observe.",
+  },
+  {
+    title: "Prevention where it makes sense",
+    body: "Some problems are easier to manage before populations or symptoms become severe.",
+  },
+  {
+    title: "Nutrition with a purpose",
+    body: "Fertility and micronutrients support plant vigor, color, and recovery—not simply force growth.",
+  },
+  {
+    title: "Honest diagnosis matters",
+    body: "Drainage, root damage, wrong-site planting, and irrigation problems cannot be solved by spraying more product.",
+  },
+] as const;
+
+const rounds = [
+  {
+    n: "1",
+    season: "Late winter",
+    title: "Overwintering pest strategy",
+    body: "Inspection and season-appropriate treatment aimed at reducing overwintering insect pressure before spring growth accelerates.",
+    tag: "Scale · Eggs · Early pressure",
+  },
+  {
+    n: "2",
+    season: "Spring growth",
+    title: "New-growth protection",
+    body: "Support for fresh foliage, with monitoring and targeted treatment for pests and disease conditions emerging in spring.",
+    tag: "New growth · Aphids · Foliar health",
+  },
+  {
+    n: "3",
+    season: "Early summer",
+    title: "Nutrition + active-season defense",
+    body: "Micronutrient support combined with targeted insect and disease management when warm, humid conditions increase pressure.",
+    tag: "Micronutrients · Insects · Disease",
+  },
+  {
+    n: "4",
+    season: "Peak summer",
+    title: "Heat-season monitoring",
+    body: "Inspection for mite, insect, foliage, and stress symptoms, with treatment chosen for what the plants and conditions call for.",
+    tag: "Mites · Stress · Foliage",
+  },
+  {
+    n: "5",
+    season: "Early fall",
+    title: "Late-season protection",
+    body: "Continued pest and disease monitoring as rainfall, humidity, and plant growth patterns shift toward the end of the season.",
+    tag: "Leaf spots · Late pests · Recovery",
+  },
+  {
+    n: "6",
+    season: "Late fall",
+    title: "Root-zone + winter preparation",
+    body: "Season-appropriate root-zone, nutrition, or pest strategies selected to support the landscape heading into cooler weather.",
+    tag: "Roots · Vigor · Overwintering",
+  },
+] as const;
+
+const benefits = [
+  {
+    n: "01",
+    title: "Insect + mite management",
+    body: "Monitoring and targeted treatment for pests such as aphids, scale, whiteflies, lace bugs, mites, and caterpillars when appropriate.",
+  },
+  {
+    n: "02",
+    title: "Disease-pressure management",
+    body: "Preventive or targeted strategies for susceptible plants when weather and observed conditions favor common foliar diseases.",
+  },
+  {
+    n: "03",
+    title: "Nutrition + micronutrients",
+    body: "Plant-health inputs selected to support foliage color, vigor, and recovery where nutrition is an appropriate part of the solution.",
+  },
+  {
+    n: "04",
+    title: "Seasonal observation",
+    body: "Six visits create repeated opportunities to notice changes, communicate concerns, and adjust the treatment approach during the year.",
+  },
+] as const;
+
+const faqs = [
+  {
+    q: "What types of plants can be included?",
+    a: "The program is intended for eligible ornamental trees and shrubs that can be treated safely and effectively on residential properties. Common examples include azaleas, hollies, camellias, gardenias, and many other landscape plants. We confirm plant material, size, access, and scope during the estimate process.",
+  },
+  {
+    q: "Why are there six visits instead of one treatment?",
+    a: "Insects, disease pressure, plant growth, and nutritional needs change through the year. Six scheduled visits create better timing and repeated observation than waiting until a problem becomes severe and requesting a single rescue treatment.",
+  },
+  {
+    q: "Is the same product applied during every round?",
+    a: "No. A responsible program can change with the season, plant species, observed pest or disease pressure, weather, and product directions. The visit schedule is consistent, but the treatment strategy should respond to what the landscape needs.",
+  },
+  {
+    q: "Will the program guarantee that my plants never get insects or disease?",
+    a: "No responsible company can guarantee that living plants will never experience pest, disease, weather, or site stress. The program is designed to reduce and manage eligible pressure, support plant health, and improve the opportunity to catch concerns earlier.",
+  },
+  {
+    q: "Is service safe around children and pets?",
+    a: "We apply professional products according to their labels. Follow the re-entry instructions provided after each service and keep people and pets away from treated plants until the stated interval has passed.",
+  },
+  {
+    q: "Do you prune, remove, or diagnose hazardous trees?",
+    a: "No. This is a treatment and plant-health program, not pruning, removal, or structural tree work. Dead, storm-damaged, or potentially hazardous trees should be evaluated by an appropriately qualified tree professional.",
+  },
+  {
+    q: "Can Tree & Shrub Care be combined with Flower Bed Weed Control?",
+    a: "Yes. They address different needs and can complement each other: Tree & Shrub Care focuses on eligible ornamental plants, while Flower Bed Weed Control focuses on managing weeds in eligible landscape beds.",
+  },
+  {
+    q: "How is Tree & Shrub Care priced?",
+    a: "Pricing depends on the number, size, type, and accessibility of eligible plants, along with the service scope. Send the property address and any concerns through the form so our office can review the landscape and provide straightforward pricing.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Tree and Shrub Care",
+  url: "https://growgreenweedcontrol.com/tree-and-shrub-care/",
+  description:
+    "Six-visit ornamental tree and shrub care program with seasonal pest and disease management, nutrition, and monitoring for South Louisiana landscapes.",
+  serviceType: "Residential Ornamental Tree and Shrub Care Program",
+  provider: {
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    telephone: site.phoneTel,
+  },
+  areaServed: areaServedSchema(),
+};
+---
+
+<div class="tree-page tree-page--fit-first" data-tree-page>
+  <header class="tree-hero tree-hero--photo">
+    <div class="tree-hero__media" aria-hidden="true">
+      <img
+        src="/images/services/tree-shrub-hero-1280.webp"
+        srcset="/images/services/tree-shrub-hero-800.webp 800w, /images/services/tree-shrub-hero-1280.webp 1280w"
+        sizes="100vw"
+        width="1280"
+        height="853"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="tree-hero__shade" aria-hidden="true"></div>
+    <div class="f-inner tree-hero__grid">
+      <div class="motion-rise">
+        <div class="tree-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <p class="tree-hero__eyebrow">Tree &amp; shrub care · South Louisiana</p>
+        <h1>Protect the plants that make your landscape feel <em>finished.</em></h1>
+        <p class="tree-hero__lead">
+          Our six-visit ornamental program combines seasonal monitoring, targeted pest and disease treatments, and plant
+          nutrition to support healthier trees and shrubs throughout the year.
+        </p>
+        <div class="tree-hero__actions">
+          <a class="f-btn f-btn--gold" href="#tree-quote">Get my free estimate →</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+        <ul class="tree-hero__notes" aria-label="Service highlights">
+          <li>Six seasonal visits</li>
+          <li>Pest + disease focus</li>
+          <li>Not pruning or removal</li>
+        </ul>
+        <p class="tree-hero__truth">
+          A scheduled program creates repeated chances to inspect and respond—before visible damage becomes the first
+          warning.
+        </p>
+      </div>
+      <div class="tree-hero__visual motion-rise">
+        <img
+          class="tree-hero__mascot"
+          src="/images/mascot/checklist-320.webp"
+          srcset="/images/mascot/checklist-216.webp 216w, /images/mascot/checklist-320.webp 320w, /images/mascot/checklist-480.webp 480w"
+          sizes="(max-width: 960px) 55vw, 280px"
+          width="480"
+          height="560"
+          alt=""
+          decoding="async"
+        />
+      </div>
+    </div>
+  </header>
+
+  <div class="tree-proof f-inner" aria-label="Grow Green credentials">
+    <div class="tree-proof__item">
+      <strong>Firefighter-owned</strong>
+      <span>Local and family-operated</span>
+    </div>
+    <div class="tree-proof__item">
+      <strong>Treatment specialists</strong>
+      <span>Not pruning or removal</span>
+    </div>
+    <div class="tree-proof__item">
+      <strong>Honest recommendations</strong>
+      <span>Program fit—or another path</span>
+    </div>
+    <div class="tree-proof__item">
+      <strong>Seasonal program</strong>
+      <span>Six planned visits a year</span>
+    </div>
+  </div>
+
+  <section class="f-section tree-fit-block" aria-labelledby="tree-fit-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">The right expectations</p>
+      <h2 class="f-title f-center" id="tree-fit-title">What a treatment program can help—and what needs another solution.</h2>
+      <p class="f-lead f-center">
+        Good ornamental care begins with identifying the type of problem. Not every yellow leaf, bare branch, or declining
+        shrub is caused by an insect, disease, or nutrient deficiency.
+      </p>
+      <div class="tree-compare">
+        <article class="tree-choice tree-choice--featured">
+          <p class="tree-choice__tag tree-choice__tag--fit">A strong program fit</p>
+          <h3>Issues we can often help manage</h3>
+          <p>These are the kinds of recurring pressures a scheduled tree and shrub program is designed to monitor and address.</p>
+          <ul>
+            <li>Sucking and chewing insect activity on susceptible plants</li>
+            <li>Mites, scale, lace bugs, aphids, and similar ornamental pests</li>
+            <li>Selected foliar disease pressure when treatment is appropriate</li>
+            <li>Plant vigor or color concerns where nutrition is part of the cause</li>
+            <li>Preventive seasonal care for valuable ornamental plantings</li>
+          </ul>
+          <a href="#tree-quote">Request program pricing →</a>
+        </article>
+        <article class="tree-choice tree-choice--alt">
+          <p class="tree-choice__tag tree-choice__tag--refer">May need another specialist</p>
+          <h3>Problems spraying cannot repair</h3>
+          <p>We will not pretend another treatment fixes damage caused by the site, structure, or irrigation when it does not.</p>
+          <ul>
+            <li>Dead, structurally unsafe, or storm-damaged trees</li>
+            <li>Severe root damage, girdling roots, or plants installed too deeply</li>
+            <li>Constantly saturated soil, drainage failure, or chronic drought</li>
+            <li>Wrong plant for the available sunlight, space, or soil</li>
+            <li>Pruning, removal, stump grinding, or major arborist work</li>
+          </ul>
+          <a href="/plant-disease-or-pest/">Start with a symptom review →</a>
+        </article>
+      </div>
+      <p class="tree-honesty">
+        <strong>If the program is not the right answer, we will say so.</strong> The goal is to protect the landscape—not
+        sell an application that cannot solve the underlying problem.
+      </p>
+    </div>
+  </section>
+
+  <section class="f-section tree-guide" aria-labelledby="tree-benefits-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Protect color, foliage, and vigor</p>
+      <h2 class="f-title f-center" id="tree-benefits-title">Four parts of a healthier ornamental landscape.</h2>
+      <p class="f-lead f-center">
+        The program combines repeated observation with treatment categories chosen around the most common pressures
+        affecting residential trees and shrubs.
+      </p>
+      <div class="tree-steps">
+        {
+          benefits.map((b) => (
+            <article class="tree-step">
+              <span class="tree-step__num">{b.n}</span>
+              <h3>{b.title}</h3>
+              <p>{b.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section tree-process" id="tree-program" aria-labelledby="tree-program-title">
+    <div class="f-inner">
+      <p class="f-kicker f-kicker--light f-center">Six visits across the year</p>
+      <h2 class="f-title f-center" id="tree-program-title">A seasonal program built around what plants face next.</h2>
+      <p class="f-lead f-center">
+        The exact treatment changes with timing, plant material, observed activity, weather, and label directions. That
+        flexibility is what makes a professional program useful.
+      </p>
+      <div class="tree-rounds">
+        {
+          rounds.map((r) => (
+            <article class="tree-round">
+              <div class="tree-round__top">
+                <span class="tree-round__num">{r.n}</span>
+                <span class="tree-round__season">{r.season}</span>
+              </div>
+              <h3>{r.title}</h3>
+              <p>{r.body}</p>
+              <span class="tree-round__tag">{r.tag}</span>
+            </article>
+          ))
+        }
+      </div>
+      <p class="tree-program-note">
+        <strong>Why the descriptions are flexible:</strong> Responsible ornamental care is based on the plant, pest,
+        weather, product label, and observed need. We do not promise the same material on every property simply because it
+        is the same round number.
+      </p>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="tree-explainer-title">
+    <div class="f-inner tree-diag__grid">
+      <div>
+        <p class="f-kicker">Proactive ornamental care</p>
+        <h2 class="f-title" id="tree-explainer-title">Do not wait for visible damage to become the first warning.</h2>
+        <p class="f-lead">
+          Scale, aphids, mites, lace bugs, caterpillars, leaf spots, and nutrient stress can build before the landscape
+          looks seriously damaged. A scheduled program gives us repeated opportunities to inspect, respond to seasonal
+          pressure, and support the plants before decline becomes harder to reverse.
+        </p>
+        <ul class="tree-checks">
+          {
+            truths.map((t, i) => (
+              <li>
+                <span class="tree-checks__num" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <div>
+                  <strong>{t.title}</strong>
+                  <p>{t.body}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <figure class="tree-diagram">
+        <img
+          src="/images/services/tree-shrub-kyle-800.webp"
+          width="800"
+          height="1000"
+          alt="Grow Green technician Kyle applying a tree and shrub treatment at a local property"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>
+          Real Grow Green service—not a stock photo. Kyle applying a tree and shrub treatment at a local South Louisiana
+          property.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="f-section tree-program" aria-labelledby="tree-local-title">
+    <div class="f-inner tree-local__grid">
+      <figure class="tree-owner">
+        <img
+          class="tree-local__photo"
+          src="/images/services/tree-shrub-local-960.webp"
+          width="480"
+          height="600"
+          alt="Grow Green owner with his son beside a branded Grow Green service truck"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="tree-owner__badge">
+          <strong>Family-owned. Firefighter-owned.</strong>
+          <span>Treatment specialists—not pruning, removal, or mowing.</span>
+        </figcaption>
+      </figure>
+      <div>
+        <p class="f-kicker">Why Grow Green</p>
+        <h2 class="f-title" id="tree-local-title">A real local team protecting real local landscapes.</h2>
+        <p class="f-lead">
+          South Louisiana heat, humidity, rainfall, and long growing seasons create their own ornamental challenges. We
+          focus on treatment work, seasonal timing, and clear communication—not mowing, pruning, or generic landscape
+          maintenance.
+        </p>
+        <div class="tree-local__points">
+          <div class="tree-local__point">Locally owned</div>
+          <div class="tree-local__point">Family-operated</div>
+          <div class="tree-local__point">Firefighter-owned</div>
+          <div class="tree-local__point">No-pressure pricing</div>
+        </div>
+        <a class="f-btn f-btn--green" href="/flower-bed-weed-control-and-fertilization/"
+          >Also explore flower bed weed control →</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section tree-faq" aria-labelledby="tree-faq-title">
+    <div class="f-inner tree-faq__grid">
+      <div>
+        <p class="f-kicker">Good to know</p>
+        <h2 class="f-title" id="tree-faq-title">Tree and shrub care questions we hear most.</h2>
+        <p class="f-lead">
+          If your question is not here, call the local Grow Green team at{" "}
+          <a href={`tel:${site.phoneTel}`}>{site.phone}</a>.
+        </p>
+      </div>
+      <div class="tree-faq__list">
+        {
+          faqs.map((f) =>
+            f.q.startsWith("Can Tree & Shrub Care be combined") ? (
+              <details>
+                <summary>{f.q}</summary>
+                <p>
+                  Yes. They address different needs and can complement each other: Tree &amp; Shrub Care focuses on
+                  eligible ornamental plants, while{" "}
+                  <a href="/flower-bed-weed-control-and-fertilization/">Flower Bed Weed Control</a> focuses on managing
+                  weeds in eligible landscape beds.
+                </p>
+              </details>
+            ) : (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ),
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section tree-quote" id="tree-quote" aria-labelledby="tree-quote-title">
+    <div class="f-inner tree-quote__grid">
+      <div>
+        <p class="f-kicker f-kicker--light">Free custom estimate</p>
+        <h2 class="f-title" id="tree-quote-title">Request tree &amp; shrub care pricing.</h2>
+        <p class="f-lead">
+          Tell us where the property is and what you are noticing. Our local office will follow up with a straightforward
+          next step.
+        </p>
+        <ul class="tree-quote__benefits">
+          <li>No pressure or obligation</li>
+          <li>Most quote requests reviewed during business hours, {site.hours.label}</li>
+          <li>Your information goes directly to Grow Green</li>
+        </ul>
+        <p class="tree-quote__chip" aria-hidden="true">Service noted: Tree &amp; Shrub Care</p>
+        <a class="tree-quote__phone" href={`tel:${site.phoneTel}`}>
+          <span>Prefer to talk?</span>
+          <strong>Call {site.phone}</strong>
+        </a>
+      </div>
+      <div class="tree-form-shell">
+        <QuoteForm
+          source={source}
+          leadSource={leadSource}
+          heading="Get my free tree & shrub estimate"
+          subheading="Share the service address and what you are noticing—plant types, insects, spots, yellowing, decline, gate codes, or access notes."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="tree-final-title">
+    <div class="f-inner">
+      <div class="tree-final__card">
+        <div>
+          <h2 id="tree-final-title">Protect the landscape you have invested in.</h2>
+          <p>
+            Get a straightforward estimate for scheduled tree and shrub care from a local treatment company that
+            understands South Louisiana landscapes.
+          </p>
+        </div>
+        <div class="tree-final__actions">
+          <a class="f-btn f-btn--gold" href="#tree-quote">Get my free estimate</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

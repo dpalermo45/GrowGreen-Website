@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FlowerBedWeedControlPage from "../components/FlowerBedWeedControlPage.astro";
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Flower Bed Weed Control & Fertilization | Grow Green Weed Control"
+  description="Professional flower bed weed control, pre-emergent prevention, and optional fertilization for mulch, rock, and landscaped beds in South Louisiana. Free local estimate."
+  canonicalPath="/flower-bed-weed-control-and-fertilization/"
+>
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    href="/images/services/flower-beds/front-bed-pine-straw-white-home-960.webp"
+    fetchpriority="high"
+  />
+  <FlowerBedWeedControlPage />
+</BaseLayout>

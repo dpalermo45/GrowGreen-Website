@@ -1,0 +1,659 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { site } from "../data/site";
+import { coverageFaqAnswer, areaServedSchema } from "../data/service-areas";
+import "../styles/mosquito-flea-tick.css";
+
+const source = "Mosquito Flea Tick Page";
+const leadSource = "Website - Mosquito Flea Tick Page";
+
+const introChecks = [
+  "Target shaded resting areas",
+  "Inspect likely breeding sources",
+  "Treat labeled landscape zones",
+  "Adjust to weather and conditions",
+] as const;
+
+const pests = [
+  {
+    title: "Mosquitoes",
+    body: "Adults often rest in cool, shaded foliage during the day while water-holding containers and drainage problems can support new generations nearby.",
+    focus: "Focus: foliage, landscape edges, shaded harborage, and breeding-source awareness.",
+  },
+  {
+    title: "Fleas",
+    body: "Outdoor flea pressure often concentrates in shaded, humid areas used by pets or wildlife. Yard treatment works best when pet and indoor sources are addressed too.",
+    focus: "Focus: moist shade, animal resting areas, landscape beds, and coordinated source control.",
+  },
+  {
+    title: "Ticks",
+    body: "Ticks commonly use tall vegetation, leaf litter, landscape edges, and wildlife travel areas. Habitat management is an important partner to treatment.",
+    focus: "Focus: transition zones, dense growth, leaf litter, fence lines, and animal traffic.",
+  },
+] as const;
+
+const steps = [
+  {
+    n: "01",
+    title: "Inspect",
+    body: "We look for shade, dense foliage, water sources, pet areas, leaf litter, and likely pest activity.",
+  },
+  {
+    n: "02",
+    title: "Target",
+    body: "The technician treats appropriate harborage and landscape zones according to product labels.",
+  },
+  {
+    n: "03",
+    title: "Advise",
+    body: "You receive applicable re-entry guidance and practical notes about conditions that can rebuild pressure.",
+  },
+  {
+    n: "04",
+    title: "Maintain",
+    body: "Recurring visits interrupt the cycle and adapt the treatment as weather and pest pressure change.",
+  },
+] as const;
+
+const helpItems = [
+  {
+    title: "Empty unnecessary standing water",
+    body: "Check buckets, toys, tarps, plant saucers, clogged gutters, wheelbarrows, and other containers after rain.",
+  },
+  {
+    title: "Reduce dense, damp harborage",
+    body: "Trim overgrown vegetation, manage leaf litter, and improve airflow in persistently shaded areas where practical.",
+  },
+  {
+    title: "Coordinate pet flea and tick prevention",
+    body: "Outdoor treatment cannot replace veterinarian-directed prevention for pets or indoor treatment when fleas are already established inside.",
+  },
+  {
+    title: "Show us the problem areas",
+    body: "Tell your technician about drains, ponds, pet zones, wildlife activity, shady corners, or places where bites are worst.",
+  },
+] as const;
+
+const whyCards = [
+  {
+    title: "Professional application",
+    body: "Licensed, insured, and applied according to product labels by a trained local team.",
+  },
+  {
+    title: "Clear service updates",
+    body: "Applicable instructions, notes, and a real local office when you need help.",
+  },
+  {
+    title: "Results-focused service",
+    body: "We explain what outdoor control can reasonably accomplish before you approve anything.",
+  },
+  {
+    title: "Louisiana focused",
+    body: "Service built around our long warm season, rainfall, and local landscape conditions.",
+  },
+] as const;
+
+const pestConcerns = [
+  "Mosquitoes",
+  "Fleas",
+  "Ticks",
+  "Mosquitoes, fleas and ticks",
+  "Not sure",
+] as const;
+
+const planOptions = [
+  "Warm-Season Plan",
+  "One-Time Event Treatment",
+  "Not sure — recommend the right option",
+] as const;
+
+const faqs = [
+  {
+    q: "Will treatment eliminate every mosquito, flea, and tick?",
+    a: "No. Outdoor pest control is designed to significantly reduce activity in treated areas, not create a permanent insect-free bubble. Weather, neighboring properties, wildlife, vegetation, and new breeding can continually reintroduce pests.",
+  },
+  {
+    q: "How many treatments are in the seasonal program?",
+    a: "The warm-season plan uses a planned series of visits through the active season. Exact timing and visit count depend on weather, season length, property conditions, and the program quoted for your home.",
+  },
+  {
+    q: "When can children and pets return outside?",
+    a: "We apply products according to their labels and provide applicable re-entry instructions after service. Keep people and pets away from treated areas until the stated re-entry condition—often once treated surfaces are dry—has been met.",
+  },
+  {
+    q: "Do you treat standing water?",
+    a: "We inspect for likely breeding sources and may treat appropriate water-holding areas with a labeled larvicide when suitable. Containers that can be emptied should generally be drained, and permanent water features are evaluated individually.",
+  },
+  {
+    q: "What happens if rain is expected?",
+    a: "Product labels, drying time, rainfall timing, and treatment conditions determine whether service can proceed. Our team monitors the weather and will provide instructions or reschedule when conditions are not appropriate.",
+  },
+  {
+    q: "Can outdoor treatment solve fleas inside my home or on my pet?",
+    a: "No. Yard treatment addresses the outdoor component. Active indoor fleas may require an indoor pest professional, while pets should receive veterinarian-recommended flea and tick prevention. Coordinating all sources produces the best result.",
+  },
+  {
+    q: "How does a one-time event treatment work?",
+    a: "Tell us the event date when requesting your estimate. Our office will recommend practical timing based on scheduling, weather, and the property. One-time treatment is intended for temporary pressure reduction and does not replace recurring seasonal service.",
+  },
+  {
+    q: "Do I have to be home for service?",
+    a: "Usually not, provided we can safely access the treatment areas and pets are secured. Please give us any gate instructions and identify locked or inaccessible spaces before the visit.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Mosquito, Flea and Tick Treatments",
+  serviceType: "Outdoor Mosquito, Flea and Tick Control",
+  url: "https://growgreenweedcontrol.com/mosquito-flea-tick-treatments/",
+  image: "https://growgreenweedcontrol.com/images/services/mosquito-1280.webp",
+  description:
+    "Professional outdoor mosquito, flea and tick treatments with warm-season plans and one-time event treatments across 40 South Louisiana communities.",
+  provider: {
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    logo: "https://growgreenweedcontrol.com/images/brand/logo.png",
+    telephone: site.phoneTel,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.city,
+      addressRegion: site.address.state,
+      postalCode: site.address.zip,
+      addressCountry: "US",
+    },
+  },
+  areaServed: areaServedSchema(),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://growgreenweedcontrol.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Services",
+      item: "https://growgreenweedcontrol.com/services/",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Mosquito, Flea & Tick Treatments",
+      item: "https://growgreenweedcontrol.com/mosquito-flea-tick-treatments/",
+    },
+  ],
+};
+---
+
+<div class="pest-page" data-pest-page>
+  <header class="pest-hero pest-hero--photo">
+    <div class="pest-hero__media" aria-hidden="true">
+      <img
+        src="/images/services/mosquito-960.webp"
+        srcset="/images/services/mosquito-640.webp 640w, /images/services/mosquito-960.webp 960w, /images/services/mosquito-1280.webp 1280w, /images/services/mosquito-1920.webp 1920w"
+        sizes="100vw"
+        width="1920"
+        height="1280"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="pest-hero__shade" aria-hidden="true"></div>
+    <div class="f-inner pest-hero__grid">
+      <div class="pest-motion">
+        <div class="pest-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <p class="pest-hero__eyebrow">Mosquito · Flea · Tick Control</p>
+        <h1>Enjoy the yard. Leave the <em>biting pests</em> behind.</h1>
+        <p class="pest-hero__lead">
+          Professional outdoor treatments built for South Louisiana’s long warm season—targeting the shaded, protected
+          areas where mosquitoes rest and fleas and ticks are most likely to hide.
+        </p>
+        <div class="pest-hero__actions">
+          <a class="f-btn f-btn--gold" href="#pest-quote">Get my free estimate →</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+        <ul class="pest-hero__notes" aria-label="Service highlights">
+          <li>Warm-season plans</li>
+          <li>One-time event treatments</li>
+          <li>Family & pet considerate</li>
+        </ul>
+      </div>
+      <div class="pest-hero__visual pest-motion">
+        <img
+          class="pest-hero__mascot"
+          src="/images/mascot/backpack-sprayer-320.webp"
+          srcset="/images/mascot/backpack-sprayer-216.webp 216w, /images/mascot/backpack-sprayer-320.webp 320w, /images/mascot/backpack-sprayer-480.webp 480w"
+          sizes="180px"
+          width="320"
+          height="380"
+          alt=""
+          decoding="async"
+        />
+        <p class="pest-hero__caption">Outdoor mosquito, flea, and tick control for South Louisiana yards</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="pest-proof f-inner" aria-label="Grow Green credentials">
+    <div class="pest-proof__item">
+      <strong>Family-owned</strong>
+      <span>Local decisions, local service</span>
+    </div>
+    <div class="pest-proof__item">
+      <strong>Firefighter-owned</strong>
+      <span>Built in St. Amant, Louisiana</span>
+    </div>
+    <div class="pest-proof__item">
+      <strong>Licensed & insured</strong>
+      <span>Professional residential applications</span>
+    </div>
+    <div class="pest-proof__item">
+      <strong>Honest expectations</strong>
+      <span>Reduction—not an insect-free bubble</span>
+    </div>
+  </div>
+
+  <section class="f-section pest-season" aria-labelledby="pest-plans-title">
+    <div class="f-inner">
+      <p class="f-kicker f-kicker--light f-center">Choose the right level of control</p>
+      <h2 class="f-title f-center" id="pest-plans-title">Season-long reduction or event-focused help.</h2>
+      <p class="f-lead f-center pest-season__lead">
+        Both options have a purpose. The best choice depends on whether you want consistent backyard use or short-term
+        support before a specific gathering.
+      </p>
+      <div class="pest-plan-grid">
+        <article class="pest-plan pest-plan--featured">
+          <p class="pest-plan__badge">Most consistent option</p>
+          <h3>Warm-Season Plan</h3>
+          <p>A planned series of treatments through the active outdoor season.</p>
+          <ul>
+            <li>Built for recurring outdoor use and sustained pressure reduction</li>
+            <li>Regular inspection and treatment of appropriate harborage zones</li>
+            <li>Adjustments as rainfall, growth, and pest pressure change</li>
+            <li>Local office support when conditions or timing change</li>
+          </ul>
+          <a href="#pest-quote" data-plan-set="Warm-Season Plan">Get season-plan pricing →</a>
+        </article>
+        <article class="pest-plan pest-plan--on-dark">
+          <p class="pest-plan__badge">For a specific date</p>
+          <h3>One-Time Event Treatment</h3>
+          <p>Targeted short-term reduction before a party, wedding, cookout, or outdoor gathering.</p>
+          <ul>
+            <li>Recommended when there is a known event date</li>
+            <li>Our office helps select practical treatment timing</li>
+            <li>Designed for temporary reduction, not season-long control</li>
+            <li>Book early so weather and scheduling can be considered</li>
+          </ul>
+          <a href="#pest-quote" data-plan-set="One-Time Event Treatment">Request event pricing →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section pest-program pest-program--targets" aria-labelledby="pest-pests-title">
+    <div class="f-inner">
+      <div class="pest-program__head">
+        <div>
+          <p class="f-kicker">Three pests · different hiding places</p>
+          <h2 class="f-title" id="pest-pests-title">One outdoor plan, targeted with purpose.</h2>
+          <p class="f-lead">
+            A mosquito does not behave like a flea, and a flea does not behave like a tick. We look beyond open turf and
+            focus on the conditions and protected areas each pest prefers.
+          </p>
+        </div>
+      </div>
+      <div class="pest-program__grid">
+        {
+          pests.map((card, i) => (
+            <article class="pest-program__card">
+              <span class="pest-program__num">{String(i + 1).padStart(2, "0")}</span>
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+              <p class="pest-program__focus">{card.focus}</p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="pest-program__note">
+        Outdoor flea and tick service is not a substitute for veterinarian-directed pet prevention or treatment of an
+        active indoor infestation. We can treat the yard component while you coordinate the other sources.
+      </p>
+    </div>
+  </section>
+
+  <section class="f-section pest-process" aria-labelledby="pest-process-title">
+    <div class="f-inner">
+      <p class="f-kicker f-kicker--light f-center">What happens at service</p>
+      <h2 class="f-title f-center" id="pest-process-title">A targeted visit—not a blind blanket spray.</h2>
+      <p class="f-lead f-center">
+        Each stop starts with the conditions on your property, then focuses treatment where these pests actually rest and
+        hide.
+      </p>
+      <div class="pest-steps">
+        {
+          steps.map((step) => (
+            <article class="pest-step">
+              <span class="pest-step__num">{step.n}</span>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="pest-expect__grid">
+        <article class="pest-expect__card pest-expect__card--yes">
+          <h3>Before we arrive</h3>
+          <ul>
+            <li>Empty unnecessary standing water in buckets, toys, tarps, and plant saucers when practical</li>
+            <li>Unlock gates and secure pets so harborage areas can be treated safely</li>
+            <li>Point out drains, ponds, pet zones, shady corners, or places where bites are worst</li>
+          </ul>
+        </article>
+        <article class="pest-expect__card pest-expect__card--no">
+          <h3>After we leave</h3>
+          <ul>
+            <li>Follow the provided re-entry instructions before people or pets use treated areas</li>
+            <li>Expect meaningful reduction—not a permanent insect-free bubble</li>
+            <li>Keep pet flea prevention and indoor sources coordinated when fleas are a concern</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section pest-cycle" aria-labelledby="pest-cycle-title">
+    <div class="f-inner pest-diag__grid">
+      <figure class="pest-visual">
+        <img
+          src="/images/services/mosquito-960.webp"
+          srcset="/images/services/mosquito-640.webp 640w, /images/services/mosquito-960.webp 960w, /images/services/mosquito-1280.webp 1280w"
+          sizes="(max-width: 900px) 90vw, 420px"
+          width="960"
+          height="1200"
+          alt="Outdoor landscape area where mosquitoes and ticks often gather"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="pest-visual__badge">
+          <strong>One spray is a moment.</strong>
+          <span>Consistent service is what keeps pressure from rebuilding unchecked through the warm season.</span>
+        </div>
+      </figure>
+      <div>
+        <p class="f-kicker">Built around the pest life cycle</p>
+        <h2 class="f-title" id="pest-cycle-title">South Louisiana pest pressure does not take much of a break.</h2>
+        <p class="f-lead">
+          Heat, humidity, rainfall, dense plants, standing water, wildlife, and neighboring properties can continually
+          introduce new mosquitoes, fleas, and ticks. Effective outdoor control is about reducing the population and
+          repeatedly interrupting the cycle—not promising an impossible permanent barrier.
+        </p>
+        <ul class="pest-checks">
+          {
+            introChecks.map((item, i) => (
+              <li>
+                <span class="pest-checks__num" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <div>
+                  <strong>{item}</strong>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="pest-note">
+          <strong>What “control” means:</strong> The goal is a meaningful reduction in outdoor pest activity around
+          treated areas. No professional treatment can guarantee a yard with zero mosquitoes, fleas, ticks, or bites.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="pest-help-title">
+    <div class="f-inner pest-help-grid">
+      <div>
+        <p class="f-kicker">Make every treatment work harder</p>
+        <h2 class="f-title" id="pest-help-title">Small property changes can make a big difference.</h2>
+        <p class="f-lead">
+          Treatment performs best when the yard is not continually recreating ideal pest habitat between visits.
+        </p>
+      </div>
+      <div class="pest-help-items">
+        {
+          helpItems.map((item, i) => (
+            <article class="pest-help-item">
+              <span class="pest-help-num" aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <strong>{item.title}</strong>
+                <span>{item.body}</span>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section pest-why" aria-labelledby="pest-local-title">
+    <div class="f-inner pest-local__grid">
+      <figure class="pest-owner">
+        <img
+          src="/images/about/owner-with-son-960.webp"
+          srcset="/images/about/owner-with-son-640.webp 640w, /images/about/owner-with-son-960.webp 960w, /images/about/owner-with-son-1280.webp 1280w"
+          sizes="(max-width: 900px) 90vw, 420px"
+          width="960"
+          height="1200"
+          alt="Grow Green Weed Control owner with his son beside a branded service truck"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="pest-owner__badge">
+          <strong>Family-owned. Firefighter-owned.</strong>
+          <span>Proudly serving South Louisiana since 2021.</span>
+        </figcaption>
+      </figure>
+      <div>
+        <p class="f-kicker f-kicker--light">The Grow Green difference</p>
+        <h2 class="f-title" id="pest-local-title">Local people protecting the yards where local families gather.</h2>
+        <p class="f-lead pest-why__lead">
+          We are not a national franchise or a distant call center. Grow Green is a South Louisiana company with a real
+          local office, trained field technicians, and an owner whose name and reputation are attached to every service.
+        </p>
+        <div class="pest-why__cards">
+          {
+            whyCards.map((card) => (
+              <article class="pest-why__card">
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section pest-faq" aria-labelledby="pest-faq-title">
+    <div class="f-inner pest-local__grid">
+      <div>
+        <p class="f-kicker">Straight answers</p>
+        <h2 class="f-title" id="pest-faq-title">Mosquito, flea & tick FAQs</h2>
+        <p class="f-lead">Still unsure which option fits your property?</p>
+        <a class="f-btn f-btn--green" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+      </div>
+      <div class="pest-faq__list">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section pest-quote" id="pest-quote" aria-labelledby="pest-quote-title">
+    <div class="f-inner pest-quote__grid">
+      <div>
+        <p class="f-kicker f-kicker--light">Free outdoor pest estimate</p>
+        <h2 class="f-title" id="pest-quote-title">Ready to enjoy more time outside?</h2>
+        <p class="f-lead">
+          Tell us where the property is and what pest pressure you are seeing. Our local team will review the details and
+          prepare straightforward pricing.
+        </p>
+        <ul class="pest-quote__benefits">
+          <li>No pressure or obligation</li>
+          <li>Most quote requests reviewed during business hours, {site.hours.label}</li>
+          <li>Your information goes directly to Grow Green</li>
+        </ul>
+        <p class="pest-quote__chip" aria-hidden="true">Service noted: Mosquito, Flea & Tick</p>
+        <a class="pest-quote__phone" href={`tel:${site.phoneTel}`}>
+          <span>Prefer to talk?</span>
+          <strong>Call {site.phone}</strong>
+        </a>
+      </div>
+      <div>
+        <div class="pest-picks" data-pest-picks>
+          <div>
+            <label for="pest-concern">Main pest concern</label>
+            <select id="pest-concern" data-pest-concern>
+              {pestConcerns.map((opt) => <option value={opt}>{opt}</option>)}
+            </select>
+          </div>
+          <div>
+            <label for="pest-plan">Which option interests you?</label>
+            <select id="pest-plan" data-pest-plan>
+              {planOptions.map((opt) => <option value={opt}>{opt}</option>)}
+            </select>
+          </div>
+          <div data-event-date-wrap hidden>
+            <label for="pest-event-date">Event date (optional)</label>
+            <input id="pest-event-date" type="date" data-pest-event-date />
+          </div>
+        </div>
+        <QuoteForm
+          source={source}
+          leadSource={leadSource}
+          heading="Request your free estimate"
+          subheading="Share the service address and anything about shade, standing water, pets, gates, or an upcoming event that will help us prepare your quote."
+          compact
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="pest-final" aria-label="Request a mosquito, flea and tick treatment estimate">
+    <div class="f-inner">
+      <div class="pest-final__card">
+        <div>
+          <h2>Spend more evenings outside—and fewer swatting pests.</h2>
+          <p>
+            Let Grow Green recommend the right level of outdoor mosquito, flea, and tick control for your property and
+            how your family uses it.
+          </p>
+        </div>
+        <div class="pest-final__actions">
+          <a class="f-btn f-btn--gold" href="#pest-quote">Get my free estimate</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-pest-page]");
+  if (root) {
+    const notes = root.querySelector<HTMLTextAreaElement>('textarea[name="notes"]');
+    const concern = root.querySelector<HTMLSelectElement>("[data-pest-concern]");
+    const plan = root.querySelector<HTMLSelectElement>("[data-pest-plan]");
+    const eventDate = root.querySelector<HTMLInputElement>("[data-pest-event-date]");
+    const eventWrap = root.querySelector<HTMLElement>("[data-event-date-wrap]");
+    const SERVICE = "Service requested: Mosquito, Flea & Tick";
+
+    function syncEventVisibility() {
+      const isEvent = plan?.value === "One-Time Event Treatment";
+      if (eventWrap) eventWrap.hidden = !isEvent;
+      if (!isEvent && eventDate) eventDate.value = "";
+    }
+
+    function syncNotes() {
+      if (!notes) return;
+      const lines = (notes.value || "")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .filter(
+          (line) =>
+            !line.startsWith("Service requested:") &&
+            !line.startsWith("Main pest concern:") &&
+            !line.startsWith("Plan interest:") &&
+            !line.startsWith("Event date:"),
+        );
+      lines.unshift(SERVICE);
+      if (concern?.value) lines.push(`Main pest concern: ${concern.value}`);
+      if (plan?.value) lines.push(`Plan interest: ${plan.value}`);
+      if (eventDate?.value) lines.push(`Event date: ${eventDate.value}`);
+      notes.value = lines.join("\n");
+    }
+
+    concern?.addEventListener("change", syncNotes);
+    plan?.addEventListener("change", () => {
+      syncEventVisibility();
+      syncNotes();
+    });
+    eventDate?.addEventListener("change", syncNotes);
+    notes?.addEventListener("blur", syncNotes);
+
+    root.querySelectorAll<HTMLAnchorElement>("[data-plan-set]").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (!plan) return;
+        plan.value = link.dataset.planSet || plan.value;
+        syncEventVisibility();
+        syncNotes();
+        if (link.dataset.planSet === "One-Time Event Treatment") {
+          window.setTimeout(() => eventDate?.focus({ preventScroll: true }), 450);
+        }
+      });
+    });
+
+    syncEventVisibility();
+    syncNotes();
+  }
+</script>

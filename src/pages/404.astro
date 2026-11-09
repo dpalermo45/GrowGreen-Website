@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Page not found | Grow Green Weed Control"
+  description="The page you requested could not be found."
+  noindex
+>
+  <section class="ty-page">
+    <div class="ty-page__inner motion-rise">
+      <div class="ty-panel thank-you-panel">
+        <p class="ty-panel__eyebrow">Grow Green Weed Control</p>
+        <h1>Page not found</h1>
+        <p class="ty-panel__lead">
+          That URL is not available on this site. Try one of these common destinations—or call the office and we will
+          help you get where you need to go.
+        </p>
+        <ul class="ty-panel__links">
+          <li><a href="/">Homepage</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/service-areas/">Service areas</a></li>
+          <li><a href="/request-a-quote/">Request a quote</a></li>
+          <li><a href="/contact-us/">Contact us</a></li>
+        </ul>
+        <div class="ty-panel__actions">
+          <a class="btn btn-gold" href="/request-a-quote/">Get a free quote</a>
+          <a class="btn btn-soft" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

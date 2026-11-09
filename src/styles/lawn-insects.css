@@ -1,0 +1,1386 @@
+/* Lawn insects control — dedicated service landing */
+
+.insects-page {
+  --f-forest: #102c1b;
+  --f-forest-deep: #07180d;
+  --f-green: #2f7a43;
+  --f-gold: #f5a20a;
+  --f-ink: #14251a;
+  --f-copy: #53645a;
+  --f-muted: #64766c;
+  --f-soft: #f3f8f3;
+  --f-line: rgba(22, 56, 37, 0.12);
+  --f-cream: #f7faf6;
+  color: var(--f-ink);
+  background: #fff;
+  overflow-x: clip;
+}
+
+.insects-page *,
+.insects-page *::before,
+.insects-page *::after {
+  box-sizing: border-box;
+}
+
+.insects-page .f-inner {
+  width: min(1120px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.insects-page .f-section {
+  padding: clamp(3.25rem, 6.5vw, 5rem) 0;
+}
+
+.insects-page .f-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 0.75rem;
+  color: var(--f-green);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.insects-page .f-kicker::before {
+  content: "";
+  width: 1.4rem;
+  height: 2px;
+  border-radius: 99px;
+  background: var(--f-gold);
+}
+
+.insects-page .f-kicker--light {
+  color: #f0d48a;
+}
+
+.insects-page .f-kicker--light::before {
+  background: var(--f-gold);
+}
+
+.insects-page .f-title {
+  margin: 0 0 0.85rem;
+  max-width: 18ch;
+  font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  color: var(--f-ink);
+}
+
+.insects-page .f-lead {
+  margin: 0;
+  max-width: 40rem;
+  color: var(--f-copy);
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  line-height: 1.65;
+}
+
+.insects-page .f-center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.insects-page .f-center.f-kicker {
+  justify-content: center;
+}
+
+.insects-page .f-center.f-title,
+.insects-page .f-center.f-lead {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.insects-page .f-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 3.05rem;
+  padding: 0.8rem 1.3rem;
+  border-radius: 0.7rem;
+  font-weight: 900;
+  font-size: 0.96rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.insects-page .f-btn:hover {
+  transform: translateY(-2px);
+}
+
+.insects-page .f-btn--gold {
+  background: var(--f-gold);
+  color: #14200f;
+  box-shadow: 0 12px 28px rgba(196, 119, 0, 0.22);
+}
+
+.insects-page .f-btn--gold:hover {
+  background: #ffb429;
+  color: #14200f;
+}
+
+.insects-page .f-btn--ghost {
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  color: #fff;
+  background: transparent;
+}
+
+.insects-page .f-btn--ghost:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.insects-page .f-btn--green {
+  background: var(--f-forest);
+  color: #fff;
+}
+
+.insects-page .f-btn--green:hover {
+  background: #163522;
+  color: #fff;
+}
+
+/* —— Hero —— */
+.insects-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(2.6rem, 5.5vw, 3.8rem) 0 clamp(2.8rem, 5vw, 3.6rem);
+  background:
+    radial-gradient(ellipse 48% 60% at 100% 0%, rgba(45, 170, 72, 0.22), transparent 55%),
+    radial-gradient(ellipse 40% 50% at 0% 100%, rgba(242, 170, 43, 0.12), transparent 50%),
+    linear-gradient(145deg, #071d11 0%, #0b2817 52%, #123a22 100%);
+  color: #fff;
+}
+
+.insects-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(40%, 20rem);
+  height: 5px;
+  background: var(--f-gold);
+}
+
+.insects-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.insects-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.85rem;
+  color: #f0d48a;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.insects-hero__eyebrow::before {
+  content: "";
+  width: 1.35rem;
+  height: 2px;
+  background: var(--f-gold);
+  border-radius: 99px;
+}
+
+.insects-hero__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+  padding: 0.4rem 0.7rem 0.4rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.insects-hero__brand img {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+  background: #fff;
+  object-fit: contain;
+}
+
+.insects-hero__brand span {
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.insects-hero__notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.15rem;
+  padding: 0;
+  list-style: none;
+}
+
+.insects-hero__notes li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(232, 242, 234, 0.92);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.insects-hero h1 {
+  margin: 0 0 0.85rem;
+  max-width: 12ch;
+  font-size: clamp(2.35rem, 5vw, 3.75rem);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.insects-hero h1 em {
+  font-style: normal;
+  color: var(--f-gold);
+}
+
+.insects-hero__lead {
+  margin: 0 0 1.35rem;
+  max-width: 36rem;
+  color: rgba(220, 232, 224, 0.92);
+  font-size: clamp(1.02rem, 1.6vw, 1.14rem);
+  line-height: 1.55;
+}
+
+.insects-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-bottom: 1.1rem;
+}
+
+.insects-hero__truth {
+  margin: 0;
+  max-width: 34rem;
+  padding: 0.75rem 0.9rem;
+  border-left: 3px solid var(--f-gold);
+  border-radius: 0 0.65rem 0.65rem 0;
+  background: rgba(0, 0, 0, 0.22);
+  color: rgba(220, 232, 224, 0.88);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.insects-hero__visual {
+  position: relative;
+  display: grid;
+  justify-items: center;
+}
+
+.insects-hero__photo {
+  width: 100%;
+  max-width: 28rem;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  border-radius: 1.15rem;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+}
+
+.insects-hero__mascot {
+  position: absolute;
+  right: -4%;
+  bottom: -8%;
+  width: min(42%, 11rem);
+  height: auto;
+  filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
+}
+
+.insects-hero__caption {
+  margin: 0.65rem 0 0;
+  color: rgba(210, 224, 214, 0.7);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.insects-hero--photo {
+  padding: 0;
+  background: #071d11;
+}
+
+.insects-hero--photo::before {
+  display: none;
+}
+
+.insects-hero--photo .insects-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.insects-hero--photo .insects-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 40% 35%;
+}
+
+.insects-hero--photo .insects-hero__shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(108deg, rgba(7, 29, 17, 0.92) 0%, rgba(11, 40, 23, 0.78) 42%, rgba(7, 29, 17, 0.55) 100%),
+    linear-gradient(180deg, rgba(7, 29, 17, 0.2) 0%, rgba(7, 29, 17, 0.7) 100%);
+}
+
+.insects-hero--photo .insects-hero__grid {
+  padding: clamp(3.25rem, 7vw, 5rem) 0 clamp(2.75rem, 5.5vw, 4rem);
+  min-height: min(72vh, 38rem);
+  align-items: center;
+}
+
+.insects-hero--photo .insects-hero__visual {
+  position: relative;
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: min(100%, 20rem);
+  margin-bottom: 0;
+}
+
+.insects-hero--photo .insects-hero__mascot {
+  position: static;
+  display: block;
+  width: min(100%, 17.5rem);
+  height: auto;
+  filter:
+    drop-shadow(0 0 0.4rem rgba(255, 255, 255, 0.28))
+    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.42));
+}
+
+.insects-hero--photo .insects-hero__photo {
+  display: block;
+  width: min(100%, 20rem);
+  max-width: none;
+  aspect-ratio: 4 / 5;
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 0 0 1px rgba(7, 29, 17, 0.35),
+    0 22px 44px rgba(0, 0, 0, 0.42);
+}
+
+/* —— Proof strip (claims-safe) —— */
+.insects-proof {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  background: #fff;
+  border-bottom: 1px solid var(--f-line);
+  box-shadow: 0 10px 30px rgba(16, 44, 27, 0.06);
+}
+
+.insects-proof__item {
+  padding: 1.15rem 1.25rem;
+  border-right: 1px solid var(--f-line);
+  text-align: center;
+}
+
+.insects-proof__item:last-child {
+  border-right: 0;
+}
+
+.insects-proof__item strong {
+  display: block;
+  color: var(--f-forest);
+  font-size: 0.98rem;
+  font-weight: 900;
+}
+
+.insects-proof__item span {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--f-muted);
+  font-size: 0.82rem;
+}
+
+/* —— Diagnosis —— */
+.insects-diag__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(1.75rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.insects-checks {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+}
+
+.insects-checks li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+}
+
+.insects-checks__num {
+  display: grid;
+  place-items: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  border-radius: 0.55rem;
+  background: linear-gradient(160deg, #eaf6ea, #dff0df);
+  color: var(--f-forest);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.insects-checks strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-size: 1rem;
+}
+
+.insects-checks p {
+  margin: 0;
+  color: var(--f-muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.insects-equation {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  padding: 1.25rem;
+  border: 1px solid var(--f-line);
+  border-radius: 1.15rem;
+  background: linear-gradient(160deg, var(--f-soft), #fff);
+}
+
+.insects-equation__card {
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--f-line);
+  border-radius: 0.85rem;
+  background: #fff;
+}
+
+.insects-equation__card strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--f-forest);
+}
+
+.insects-equation__card span {
+  color: var(--f-muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.insects-equation__result {
+  grid-column: 1 / -1;
+  padding: 0.95rem 1rem;
+  border-left: 4px solid var(--f-gold);
+  border-radius: 0 0.85rem 0.85rem 0;
+  background: #fff8df;
+  color: #604812;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* —— Disease guide —— */
+.insects-guide {
+  background: var(--f-cream);
+}
+
+.insects-disease-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.insects-disease {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--f-line);
+  border-top: 4px solid var(--f-gold);
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(16, 44, 27, 0.05);
+}
+
+.insects-disease__art {
+  position: relative;
+  min-height: 11.5rem;
+  background: linear-gradient(145deg, #11552f, #062a19);
+}
+
+.insects-disease__art img {
+  width: 100%;
+  height: 100%;
+  min-height: 11.5rem;
+  object-fit: cover;
+  display: block;
+}
+
+.insects-disease__art-label {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.65rem;
+  left: 0.75rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.35;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+}
+
+.insects-disease__body {
+  padding: 1.2rem 1.25rem 1.3rem;
+}
+
+.insects-disease__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.55rem;
+}
+
+.insects-disease__season {
+  color: var(--f-green);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.insects-disease h3 {
+  margin: 0 0 0.45rem;
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--f-forest);
+}
+
+.insects-disease__body > p {
+  margin: 0 0 0.85rem;
+  color: var(--f-copy);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.insects-disease__body ul {
+  margin: 0 0 1rem;
+  padding-left: 1.1rem;
+  color: var(--f-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.insects-disease li + li {
+  margin-top: 0.3rem;
+}
+
+.insects-pick {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 0;
+  border-bottom: 2px solid var(--f-green);
+  padding: 0.2rem 0;
+  background: transparent;
+  color: var(--f-green);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.insects-note {
+  margin: 1.35rem 0 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid #e9d18d;
+  border-radius: 0.85rem;
+  background: #fff8df;
+  color: #604812;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* —— Look-alikes —— */
+.insects-look__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+  align-items: start;
+}
+
+.insects-look__cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.insects-look__card {
+  padding: 1.15rem 1.1rem;
+  border: 1px solid var(--f-line);
+  border-radius: 0.95rem;
+  background: var(--f-soft);
+}
+
+.insects-look__card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--f-forest);
+}
+
+.insects-look__card p {
+  margin: 0;
+  color: var(--f-copy);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.insects-text-link {
+  display: inline-flex;
+  margin-top: 1.15rem;
+  color: var(--f-green);
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+/* —— Video —— */
+.insects-video {
+  background:
+    radial-gradient(ellipse 40% 50% at 10% 20%, rgba(45, 170, 72, 0.2), transparent 50%),
+    linear-gradient(145deg, #071d11, #0d492a);
+  color: #fff;
+}
+
+.insects-video__grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.insects-video__frame {
+  position: relative;
+  width: min(100%, 22rem);
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-radius: 1.35rem;
+  background: #000;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+  margin-inline: auto;
+}
+
+.insects-video__frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.insects-video__copy .f-title {
+  color: #fff;
+}
+
+.insects-video__copy > p {
+  margin: 0;
+  max-width: 36rem;
+  color: rgba(220, 232, 224, 0.88);
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+.insects-video__points {
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.insects-video__points li {
+  color: rgba(220, 232, 224, 0.9);
+  font-size: 0.94rem;
+  font-weight: 700;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.insects-video__points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--f-gold);
+}
+
+/* —— Process / care / expect —— */
+.insects-steps,
+.insects-care-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.75rem;
+}
+
+.insects-step,
+.insects-care {
+  padding: 1.25rem 1.15rem;
+  border: 1px solid var(--f-line);
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(16, 44, 27, 0.05);
+}
+
+.insects-step__num {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.4rem;
+  height: 2.4rem;
+  margin-bottom: 1rem;
+  padding: 0 0.45rem;
+  border-radius: 0.55rem;
+  background: var(--f-forest);
+  color: var(--f-gold);
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.insects-step h3,
+.insects-care h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.08rem;
+  font-weight: 900;
+  color: var(--f-forest);
+}
+
+.insects-step p,
+.insects-care p {
+  margin: 0;
+  color: var(--f-copy);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.insects-expect {
+  background: var(--f-soft);
+}
+
+.insects-expect__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+.insects-expect__card {
+  padding: clamp(1.35rem, 3vw, 1.85rem);
+  border-radius: 1.1rem;
+}
+
+.insects-expect__card--yes {
+  background: var(--f-forest);
+  color: #fff;
+}
+
+.insects-expect__card--no {
+  background: #fff;
+  border: 1px solid var(--f-line);
+}
+
+.insects-expect__card h3 {
+  margin: 0 0 1rem;
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+
+.insects-expect__card--yes h3 {
+  color: #fff;
+}
+
+.insects-expect__card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.insects-expect__card li {
+  padding-left: 1.15rem;
+  position: relative;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.insects-expect__card--yes li {
+  color: rgba(220, 232, 224, 0.9);
+}
+
+.insects-expect__card--no li {
+  color: var(--f-copy);
+}
+
+.insects-expect__card li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+}
+
+.insects-expect__card--yes li::before {
+  background: var(--f-gold);
+}
+
+.insects-expect__card--no li::before {
+  background: #b65c2c;
+}
+
+.insects-routes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1.75rem;
+}
+
+.insects-route {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.25rem 1.15rem;
+  border: 1px solid var(--f-line);
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(16, 44, 27, 0.04);
+}
+
+.insects-route--current {
+  border-color: rgba(47, 122, 67, 0.45);
+  box-shadow: 0 14px 32px rgba(17, 85, 47, 0.1);
+}
+
+.insects-route h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 900;
+  color: var(--f-forest);
+}
+
+.insects-route p {
+  margin: 0;
+  color: var(--f-copy);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.insects-route a {
+  margin-top: 0.35rem;
+  color: var(--f-green);
+  font-size: 0.86rem;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.insects-source {
+  margin: 1.5rem 0 0;
+  color: var(--f-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.insects-source a {
+  color: var(--f-green);
+  font-weight: 800;
+}
+
+/* —— Program + local —— */
+.insects-program {
+  background: var(--f-cream);
+}
+
+.insects-program__card,
+.insects-local__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  align-items: center;
+}
+
+.insects-program__card {
+  padding: clamp(1.5rem, 4vw, 2.4rem);
+  border: 1px solid var(--f-line);
+  border-radius: 1.25rem;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(16, 44, 27, 0.07);
+}
+
+.insects-program__options {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.insects-program__option {
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--f-line);
+  border-radius: 0.85rem;
+  background: var(--f-soft);
+}
+
+.insects-program__option strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--f-forest);
+}
+
+.insects-program__option span {
+  color: var(--f-muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.insects-program__visual {
+  display: grid;
+  place-items: center;
+  min-height: 16rem;
+  padding: 1.5rem;
+  border-radius: 1.1rem;
+  background:
+    radial-gradient(circle at 70% 20%, rgba(242, 196, 80, 0.18), transparent 40%),
+    linear-gradient(145deg, #176a39, #071d11);
+}
+
+.insects-program__visual img {
+  width: min(100%, 16rem);
+  height: auto;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.35));
+}
+
+.insects-owner {
+  position: relative;
+  margin: 0;
+}
+
+.insects-local__photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 1.15rem;
+  box-shadow: 0 20px 44px rgba(16, 44, 27, 0.16);
+}
+
+.insects-owner__badge {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.85rem;
+  background: rgba(7, 29, 17, 0.88);
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+
+.insects-owner__badge strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.95rem;
+}
+
+.insects-owner__badge span {
+  display: block;
+  color: rgba(220, 232, 224, 0.85);
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.insects-local__points {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin: 1.25rem 0 1.35rem;
+}
+
+.insects-local__point {
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--f-line);
+  border-radius: 0.7rem;
+  color: var(--f-forest);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+/* —— Quote —— */
+.insects-quote {
+  background:
+    radial-gradient(ellipse 40% 50% at 8% 10%, rgba(45, 170, 72, 0.18), transparent 50%),
+    linear-gradient(145deg, #071d11, #0b2817);
+  color: #fff;
+  scroll-margin-top: 1rem;
+}
+
+.insects-quote__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+  align-items: start;
+}
+
+.insects-quote .f-title {
+  color: #fff;
+}
+
+.insects-quote .f-lead {
+  color: rgba(220, 232, 224, 0.88);
+}
+
+.insects-quote__benefits {
+  margin: 1.25rem 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.insects-quote__benefits li {
+  color: rgba(220, 232, 224, 0.9);
+  font-size: 0.92rem;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.insects-quote__benefits li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--f-gold);
+}
+
+.insects-quote__chip {
+  display: inline-flex;
+  margin: 0 0 1rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(240, 212, 138, 0.35);
+  background: rgba(245, 162, 10, 0.14);
+  color: #f0d48a;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.insects-quote__phone {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.95rem 1.05rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.85rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  text-decoration: none;
+}
+
+.insects-quote__phone span {
+  color: rgba(220, 232, 224, 0.7);
+  font-size: 0.78rem;
+}
+
+.insects-quote__phone strong {
+  font-size: 1.05rem;
+}
+
+.insects-concerns {
+  display: grid;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.insects-concerns__label {
+  margin: 0;
+  color: var(--f-ink);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.insects-concerns__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.insects-concerns__list button {
+  border: 1px solid var(--f-line);
+  border-radius: 0.55rem;
+  padding: 0.45rem 0.7rem;
+  background: #fff;
+  color: var(--f-forest);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.insects-concerns__list button.is-active,
+.insects-concerns__list button:hover {
+  border-color: rgba(47, 122, 67, 0.35);
+  background: var(--f-soft);
+}
+
+.insects-form-shell {
+  padding: clamp(1.15rem, 3vw, 1.5rem);
+  border-radius: 1.15rem;
+  background: #fff;
+  color: var(--f-ink);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28);
+}
+
+/* —— FAQ —— */
+.insects-faq {
+  background: linear-gradient(180deg, #fff 0%, var(--f-soft) 100%);
+}
+
+.insects-faq__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+}
+
+.insects-faq__list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.insects-faq__list details {
+  border: 1px solid var(--f-line);
+  border-radius: 0.85rem;
+  background: #fff;
+  padding: 0.85rem 1rem;
+  box-shadow: 0 8px 20px rgba(16, 44, 27, 0.04);
+}
+
+.insects-faq__list summary {
+  cursor: pointer;
+  font-weight: 900;
+  color: var(--f-ink);
+  list-style: none;
+}
+
+.insects-faq__list summary::-webkit-details-marker {
+  display: none;
+}
+
+.insects-faq__list details p {
+  margin: 0.65rem 0 0;
+  color: var(--f-copy);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.insects-faq__list a {
+  color: var(--f-green);
+  font-weight: 800;
+}
+
+/* —— Final —— */
+.insects-final__card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: 1.2rem;
+  background: linear-gradient(120deg, #176a39, #071d11);
+  color: #fff;
+  box-shadow: 0 20px 44px rgba(16, 44, 27, 0.18);
+}
+
+.insects-final__card h2 {
+  margin: 0 0 0.45rem;
+  max-width: 18ch;
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.insects-final__card p {
+  margin: 0;
+  max-width: 38rem;
+  color: rgba(220, 232, 224, 0.88);
+}
+
+.insects-final__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+@media (max-width: 960px) {
+  .insects-hero__grid,
+  .insects-diag__grid,
+  .insects-look__grid,
+  .insects-video__grid,
+  .insects-program__card,
+  .insects-local__grid,
+  .insects-quote__grid,
+  .insects-faq__grid,
+  .insects-final__card {
+    grid-template-columns: 1fr;
+  }
+
+  .insects-steps,
+  .insects-care-grid,
+  .insects-routes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .insects-routes .insects-route:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .insects-proof {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .insects-proof__item:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .insects-proof__item:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--f-line);
+  }
+
+  .insects-hero--photo .insects-hero__grid {
+    min-height: 0;
+    align-items: start;
+    gap: 1.5rem;
+    padding-bottom: 2.35rem;
+  }
+
+  .insects-hero--photo .insects-hero__visual {
+    justify-self: center;
+    width: min(100%, 14rem);
+    margin-inline: auto;
+  }
+
+  .insects-hero--photo .insects-hero__mascot {
+    width: min(100%, 12.5rem);
+  }
+
+  .insects-hero--photo .insects-hero__shade {
+    background:
+      linear-gradient(180deg, rgba(7, 29, 17, 0.55) 0%, rgba(7, 29, 17, 0.88) 52%, rgba(7, 29, 17, 0.95) 100%),
+      linear-gradient(105deg, rgba(7, 29, 17, 0.82) 0%, rgba(11, 40, 23, 0.58) 100%);
+  }
+
+  .insects-hero h1 {
+    max-width: 12ch;
+  }
+}
+
+@media (max-width: 720px) {
+  .insects-proof {
+    grid-template-columns: 1fr;
+  }
+
+  .insects-proof__item {
+    border-right: 0;
+    border-bottom: 1px solid var(--f-line);
+    text-align: left;
+  }
+
+  .insects-proof__item:nth-child(-n + 2),
+  .insects-proof__item:last-child {
+    border-bottom: 1px solid var(--f-line);
+  }
+
+  .insects-proof__item:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .insects-disease-grid,
+  .insects-look__cards,
+  .insects-steps,
+  .insects-care-grid,
+  .insects-expect__grid,
+  .insects-routes,
+  .insects-equation,
+  .insects-local__points {
+    grid-template-columns: 1fr;
+  }
+
+  .insects-routes .insects-route:last-child {
+    grid-column: auto;
+  }
+
+  .insects-hero__actions {
+    flex-direction: column;
+  }
+
+  .insects-hero__actions .f-btn,
+  .insects-final__actions .f-btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .insects-page .f-btn:hover {
+    transform: none;
+  }
+}
+
+/* Suspects-first layout rhythm */
+.insects-page--suspects .insects-guide--featured {
+  padding-top: clamp(2.5rem, 5vw, 3.75rem);
+  background:
+    linear-gradient(180deg, rgba(243, 248, 243, 0.95) 0%, rgba(247, 250, 246, 0.4) 55%, #fff 100%);
+}
+
+.insects-page--suspects .insects-guide--featured .insects-disease {
+  box-shadow: 0 16px 36px rgba(16, 44, 27, 0.08);
+}

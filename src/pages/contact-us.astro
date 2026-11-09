@@ -1,0 +1,303 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import QuoteForm from "../components/QuoteForm.astro";
+import GoogleReviews from "../components/GoogleReviews.astro";
+import { site } from "../data/site";
+import { coverageParishList, coverageShortPhrase, serviceAreaCount } from "../data/service-areas";
+import { loadPageContent } from "../lib/content/loadPageContent";
+import { readGoogleReviewsConfig } from "../lib/google-reviews/config";
+import { getDisplayReviews } from "../lib/google-reviews/service";
+import "../styles/contact.css";
+
+export const prerender = true;
+
+const rich = loadPageContent("contact-us");
+
+const officeIntro =
+  rich?.paragraphs.find((p) => p.startsWith("Our office team works directly")) ??
+  `Our office team works directly with Grow Green technicians and customer accounts across ${coverageShortPhrase()}.`;
+const localBlurb =
+  rich?.paragraphs.find((p) => p.startsWith("Grow Green is locally owned")) ??
+  "Grow Green is locally owned. That means your message reaches a nearby team that understands the lawns, weather, weeds, and expectations of South Louisiana homeowners.";
+const formIntro =
+  rich?.paragraphs.find((p) => p.startsWith("Give us a few details")) ??
+  "Give us a few details and the right person on our team will follow up. Current customers: including your service address in the message helps us locate your account faster.";
+
+const faqs = rich?.faqs ?? [];
+
+const mapsEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(site.address.full)}&z=14&output=embed`;
+const googleProfileUrl = site.social.google;
+
+let googleRating: number | null = null;
+let googleCount: number | null = null;
+try {
+  const payload = await getDisplayReviews(readGoogleReviewsConfig());
+  if (payload.averageRating != null) googleRating = payload.averageRating;
+  if (payload.totalReviewCount != null) googleCount = payload.totalReviewCount;
+} catch {
+  /* listing links still work without live ratings */
+}
+
+function starsLabel(n: number): string {
+  const clamped = Math.max(0, Math.min(5, Math.round(n)));
+  return "★".repeat(clamped) + "☆".repeat(5 - clamped);
+}
+---
+
+<BaseLayout
+  title={rich?.seo_title || "Contact Us | Grow Green Weed Control – Lawn Treatment Experts in Louisiana"}
+  description={
+    rich?.seo_desc ||
+    `Get in touch with Grow Green Weed Control for lawn fertilization, weed control, and pest treatment services across ${coverageShortPhrase()}.`
+  }
+  canonicalPath="/contact-us/"
+>
+  <div class="contact-page">
+    <header class="contact-hero">
+      <div class="contact-hero__inner">
+        <div class="motion-rise">
+          <p class="contact-hero__eyebrow">Contact Grow Green</p>
+          <h1>{rich?.headings[0] || "Real help from a local team."}</h1>
+          <p class="contact-hero__lead">
+            {
+              rich?.structured?.hero_sub ||
+              "Whether you have a service question, need account help, or want us to look at a lawn concern, you’ll hear from people who know South Louisiana lawns."
+            }
+          </p>
+        </div>
+        <div class="contact-hero__visual motion-rise motion-delay-2">
+          <img
+            class="contact-hero__mascot"
+            src="/images/mascot/lawn-app-320.webp"
+            srcset="/images/mascot/lawn-app-216.webp 216w, /images/mascot/lawn-app-320.webp 320w, /images/mascot/lawn-app-480.webp 480w"
+            sizes="(max-width: 700px) 46vw, 240px"
+            width="320"
+            height="292"
+            alt="Grow Green Weed Control mascot with customer app"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <aside class="contact-hero__badge" aria-label="Response timing">
+            <strong>Typically answered the same business day</strong>
+            <span>
+              Office hours {site.hours.label}. Messages after hours are answered the next business day.
+            </span>
+          </aside>
+        </div>
+      </div>
+    </header>
+
+    <nav class="contact-channels" aria-label="Contact options">
+      <a class="contact-channel" href={`tel:${site.phoneTel}`}>
+        <span class="contact-channel__icon" aria-hidden="true">Call</span>
+        <span>
+          <strong>Call our office</strong>
+          <em>{site.phone}</em>
+        </span>
+        <span class="contact-channel__arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="contact-channel" href={`sms:${site.phoneTel}`}>
+        <span class="contact-channel__icon" aria-hidden="true">Text</span>
+        <span>
+          <strong>Text our team</strong>
+          <em>Quick questions and service help</em>
+        </span>
+        <span class="contact-channel__arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="contact-channel" href="/request-a-quote/">
+        <span class="contact-channel__icon" aria-hidden="true">Quote</span>
+        <span>
+          <strong>Get a free quote</strong>
+          <em>Fast pricing for your property</em>
+        </span>
+        <span class="contact-channel__arrow" aria-hidden="true">→</span>
+      </a>
+    </nav>
+
+    <section class="contact-main">
+      <div class="contact-main__inner">
+        <div class="contact-form-col">
+          <p class="contact-form-intro">{formIntro}</p>
+          <div class="contact-form-shell">
+            <QuoteForm
+              source="contact-us"
+              heading="Request a free estimate"
+              subheading="Enter the service address and we’ll prepare an accurate, no-obligation estimate."
+            />
+          </div>
+          <ul class="contact-helpers">
+            <li>
+              Prefer the full quote wizard? Open <a href="/request-a-quote/">Request a Quote</a>.
+            </li>
+            <li>
+              Existing customers: <a href={site.portalUrl} rel="noopener">customer portal</a> for billing and
+              account help.
+            </li>
+            <li>
+              Job seekers: use <a href="/careers/">Careers</a> — applications are not routed as customer leads.
+            </li>
+          </ul>
+
+          <section class="contact-google" aria-label="Google Business Profile">
+            <img
+              class="contact-google__mascot"
+              src="/images/mascot/five-stars.png"
+              width="120"
+              height="140"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="contact-google__copy">
+              <p class="contact-kicker">Google listing</p>
+              <h3>Find us on Google</h3>
+              {
+                googleRating != null && googleCount != null ? (
+                  <div class="contact-google__rating">
+                    <strong>{googleRating.toFixed(1)}</strong>
+                    <span aria-hidden="true">{starsLabel(googleRating)}</span>
+                    <span>{googleCount.toLocaleString("en-US")} Google reviews</span>
+                  </div>
+                ) : null
+              }
+              <p>
+                Hours, photos, and reviews from our Google Business Profile—the live source for our public listing.
+              </p>
+            </div>
+            <div class="contact-google__actions">
+              <a
+                class="contact-btn contact-btn--light"
+                href={googleProfileUrl}
+                target="_blank"
+                rel="noopener noreferrer">View Google profile →</a
+              >
+              <a class="contact-btn contact-btn--ghost" href="/service-areas/">See service areas</a>
+            </div>
+          </section>
+        </div>
+
+        <aside class="contact-side" aria-label="Office and map">
+          <section class="contact-panel">
+            <div class="contact-panel__body">
+              <p class="contact-kicker">Our local office</p>
+              <h2>Reach the right people—without a call center.</h2>
+              <p>{officeIntro}</p>
+              <ul class="contact-facts">
+                <li>
+                  <strong>Address</strong>
+                  <span>{site.address.full}</span>
+                </li>
+                <li>
+                  <strong>Call or text</strong>
+                  <a href={`tel:${site.phoneTel}`}>{site.phone}</a>
+                </li>
+                <li>
+                  <strong>Email</strong>
+                  <a href={`mailto:${site.email}`}>{site.email}</a>
+                </li>
+                <li>
+                  <strong>Hours</strong>
+                  <span>{site.hours.label} · {site.hours.timezone}</span>
+                </li>
+                <li>
+                  <strong>Service area</strong>
+                  <span
+                    >{coverageParishList()} — {serviceAreaCount} communities. Confirm with your service address.</span
+                  >
+                </li>
+              </ul>
+              <p class="contact-note">Messages after 4 PM, weekends, or holidays are answered the next business day.</p>
+            </div>
+            <div class="contact-map">
+              <iframe
+                title="Grow Green Weed Control office location on Google Maps"
+                src={mapsEmbedSrc}
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen></iframe>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <GoogleReviews
+      id="gg-contact-reviews"
+      heading="What neighbors say on Google"
+      lead="Recent five-star write-ups from homeowners—pulled from our Google Business Profile."
+    />
+
+    <section class="contact-trust" aria-labelledby="contact-trust-title">
+      <div class="contact-trust__inner">
+        <div class="contact-trust__head">
+          <img
+            class="contact-trust__mascot"
+            src="/images/mascot/waving.png"
+            width="140"
+            height="160"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <h2 id="contact-trust-title">Local service should feel personal.</h2>
+            <p>{localBlurb}</p>
+          </div>
+        </div>
+        <div class="contact-trust__grid">
+          <article class="contact-trust__item">
+            <span class="contact-trust__num">01</span>
+            <strong>A real local office team</strong>
+            <span
+              >No nationwide queue. You speak with people who work directly with our field technicians.</span
+            >
+          </article>
+          <article class="contact-trust__item">
+            <span class="contact-trust__num">02</span>
+            <strong>Clear follow-through</strong>
+            <span
+              >Share your address and what you need so we can route the request and give a useful answer.</span
+            >
+          </article>
+          <article class="contact-trust__item">
+            <span class="contact-trust__num">03</span>
+            <strong>Built around local lawns</strong>
+            <span
+              >South Louisiana turf, weeds, insects, weather, and soil conditions—every day.</span
+            >
+          </article>
+        </div>
+      </div>
+    </section>
+
+    {
+      faqs.length > 0 && (
+        <section class="contact-faq" aria-labelledby="contact-faq-title">
+          <div class="contact-faq__inner">
+            <div class="contact-faq__intro">
+              <img
+                class="contact-faq__mascot"
+                src="/images/mascot/thinking.png"
+                width="100"
+                height="120"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+              <h2 id="contact-faq-title">Before you send your message.</h2>
+              <p>A few quick answers can help you choose the fastest way to reach us.</p>
+            </div>
+            <div>
+              {faqs.map((f) => (
+                <details>
+                  <summary>{f.q}</summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
+  </div>
+</BaseLayout>

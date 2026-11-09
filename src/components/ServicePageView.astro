@@ -1,0 +1,459 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import CtaBand from "./CtaBand.astro";
+import { site } from "../data/site";
+import { services } from "../data/services";
+import { serviceAreaCount } from "../data/service-areas";
+import { loadPageContent, normalizePlainText } from "../lib/content/loadPageContent";
+import "../styles/service-page.css";
+import "../styles/faq-accordion.css";
+
+interface Props {
+  title: string;
+  summary: string;
+  bullets: string[];
+  source: string;
+  slug?: string;
+  related?: { slug: string; title: string; summary: string }[];
+  parentHref?: string;
+  parentLabel?: string;
+}
+
+const { title, summary, bullets, source, slug, related, parentHref, parentLabel } = Astro.props;
+const rich = slug ? loadPageContent(slug) : null;
+const s = rich?.structured || {};
+
+const heroLead = (s.hero_sub && s.hero_sub.length > 40 ? s.hero_sub : summary) || summary;
+const features = (s.features || []).slice(0, 12);
+const rounds = (s.rounds || []).slice(0, 14);
+const process = (s.process || []).slice(0, 10);
+const faqs = (rich?.faqs || []).slice(0, 18);
+const asideServices = (
+  related && related.length > 0
+    ? related.map((r) => ({
+        title: r.title,
+        summary: r.summary,
+        href: `/${r.slug}/`,
+      }))
+    : services
+        .filter((s) => s.slug !== slug)
+        .slice(0, 6)
+        .map((s) => ({
+          title: s.title,
+          summary: s.summary,
+          href: s.path || `/${s.slug}/`,
+        }))
+);
+const storyTitle = s.local_title || `Why South Louisiana trusts ${site.shortName}`;
+const storyLead =
+  s.local_lead ||
+  `${site.name} is a firefighter-owned lawn treatment company based in ${site.address.city}. We specialize in fertilization, weed control, and related outdoor treatments timed for South Louisiana.`;
+const honest = s.honest_note || "";
+
+const highlights = [
+  {
+    title: "Firefighter-owned",
+    body: "Local, family-operated lawn treatment specialists—not a national franchise route.",
+  },
+  {
+    title: "Local office support",
+    body: `Call or text ${site.phone} Monday–Friday, 8 AM–4 PM. Your estimate goes to the Grow Green team in ${site.address.city}.`,
+  },
+  {
+    title: "Clear starting price",
+    body: "Lawn fertilization and weed control starts at $39/month. Final pricing depends on lawn size and selected services.",
+  },
+];
+
+const STORY_PARA_MIN = 55;
+const STORY_PARA_MAX = 1100;
+const REMAINING_PARA_MIN = 70;
+const REMAINING_MAX = 1200;
+
+function paragraphLikelyCtaOrForm(p: string) {
+  return (
+    /fields marked|\* are required|choose an address suggestion|enter your details manually|please enable javascript|couldn'?t confirm your request/i.test(
+      p,
+    ) ||
+    /^(free, no-obligation estimate|get clear pricing|let's put a plan|thanks for reaching out)/i.test(
+      p,
+    ) ||
+    /share your address and we.{0,80}pricing|no payment required\. your service address helps/i.test(p)
+  );
+}
+
+function paragraphLikelyRatingScrap(p: string) {
+  return /600\+|4\.9★|4\.9-star|\b5\.0\s*stars?\b|★★★★★/i.test(p) && p.length < 200;
+}
+
+function paragraphLikelyDevPaste(p: string) {
+  return /complete divi|code module|paste this complete file|suggested seo title|suggested meta description|theme builder|wp fastest cache|json post to.{0,40}crm/i.test(
+    p,
+  );
+}
+
+function collectStructuredPlainTexts(): Set<string> {
+  const out = new Set<string>();
+  const add = (t?: string) => {
+    const n = normalizePlainText(t || "");
+    if (n.length > 28) out.add(n);
+  };
+  add(s.hero_sub);
+  add(s.local_lead);
+  add(s.local_title);
+  add(honest);
+  for (const f of features) {
+    add(f.title);
+    add(f.body);
+  }
+  for (const r of rounds) {
+    add(r.title);
+    add(r.body);
+    add(r.date);
+  }
+  for (const step of process) {
+    add(step.title);
+    add(step.body);
+  }
+  for (const item of rich?.list_items ?? []) add(item);
+  for (const f of faqs) {
+    add(f.q);
+    add(f.a);
+  }
+  return out;
+}
+
+const structuredPlain = collectStructuredPlainTexts();
+
+const allParagraphs = rich?.paragraphs || [];
+
+const storyParas = allParagraphs
+  .filter((p) => p.length >= STORY_PARA_MIN && p.length <= STORY_PARA_MAX)
+  .filter((p) => !paragraphLikelyCtaOrForm(p))
+  .filter((p) => !paragraphLikelyRatingScrap(p))
+  .filter((p) => !paragraphLikelyDevPaste(p))
+  .filter(
+    (p) =>
+      !/starting at \$\d|request an estimate|get your free lawn estimate|^thanks for reaching/i.test(
+        p,
+      ),
+  )
+  .filter((p) => {
+    const n = normalizePlainText(p);
+    return n.length > 40 && !structuredPlain.has(n);
+  })
+  .slice(0, 10);
+
+const shownPlain = new Set(structuredPlain);
+for (const p of storyParas) shownPlain.add(normalizePlainText(p));
+
+const moreParas = allParagraphs
+  .filter((p) => p.length >= REMAINING_PARA_MIN && p.length <= REMAINING_MAX)
+  .filter((p) => !paragraphLikelyCtaOrForm(p))
+  .filter((p) => !paragraphLikelyRatingScrap(p))
+  .filter((p) => !paragraphLikelyDevPaste(p))
+  .filter((p) => {
+    const n = normalizePlainText(p);
+    return n.length > 50 && !shownPlain.has(n);
+  })
+  .slice(0, 14);
+
+const listItems = (rich?.list_items || [])
+  .filter((x) => x.length > 18 && x.length < 180)
+  .slice(0, 10);
+
+const showBullets = bullets.length > 0 && features.length < 3;
+---
+
+<section class="svc-hero" aria-labelledby="svc-hero-title">
+  <div class="container svc-hero__grid">
+    <div class="svc-hero__copy motion-rise">
+      {
+        parentHref && parentLabel && (
+          <p class="svc-hero__parent">
+            <a href={parentHref}>← {parentLabel}</a>
+          </p>
+        )
+      }
+      <p class="svc-eyebrow">Lawn treatment service</p>
+      <h1 id="svc-hero-title">{title}</h1>
+      <p class="svc-lead">{heroLead}</p>
+      <div class="svc-hero__actions">
+        <a class="btn btn-green" href="#svc-estimate">Get My Free Quote</a>
+        <a class="btn btn-soft svc-hero__phone" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+      </div>
+      <ul class="svc-hero__trust">
+        <li>Firefighter-owned</li>
+        <li>Family-operated</li>
+        <li>Based in {site.address.city}</li>
+      </ul>
+    </div>
+    <aside class="svc-hero__aside motion-rise motion-delay-1" aria-hidden="true">
+      <div class="svc-media-slot">
+        <div class="svc-media-slot__glow"></div>
+        <div class="svc-media-slot__panel">
+          <p class="svc-media-slot__label">{site.shortName}</p>
+          <p class="svc-media-slot__note">Season-smart care for warm-season turf</p>
+          <p>Free property estimate · Local office support</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section-tight svc-highlights">
+  <div class="container svc-highlights__grid">
+    {
+      highlights.map((item) => (
+        <article class="svc-highlight motion-rise">
+          <h2>{item.title}</h2>
+          <p>{item.body}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<section class="section-tight svc-main" id="svc-estimate">
+  <div class="container svc-main__grid">
+    <div class="svc-main__content motion-rise">
+      <p class="svc-kicker">{site.name}</p>
+
+      <section class="svc-block story">
+        <div class="svc-story-grid">
+          <div>
+            <h2>{storyTitle}</h2>
+            <p class="svc-lead-copy">{storyLead}</p>
+            {storyParas.map((p) => (
+              <p>{p}</p>
+            ))}
+            <p>
+              Grow Green is a lawn-treatment company. We do not advertise mowing. Programs are timed for
+              South Louisiana warm-season turf, with clear visit notes and local office support.
+            </p>
+          </div>
+          <figure class="svc-story-media">
+            <img
+              src="/images/about/owner-with-son.webp"
+              width="420"
+              height="320"
+              alt="Grow Green owner with family"
+              loading="lazy"
+            />
+            <figcaption>Family- and firefighter-owned · {site.address.city}, LA</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {
+        features.length > 0 && (
+          <section class="svc-block">
+            <h2>What this service covers</h2>
+            <div class="svc-feature-grid">
+              {features.map((f) => (
+                <article>
+                  <h3>{f.title}</h3>
+                  <p>{f.body}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      {
+        showBullets && (
+          <section class="svc-block">
+            <h2>What’s included</h2>
+            <ul class="bullet-list">
+              {bullets.map((b) => (
+                <li>{b}</li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      {
+        rounds.length > 0 && (
+          <section class="svc-block">
+            <div class="svc-rounds-head">
+              <img
+                src="/images/mascot/spray-wand.png"
+                width="72"
+                height="72"
+                alt=""
+                loading="lazy"
+              />
+              <div>
+                <h2>Program rounds</h2>
+                <p class="svc-muted">Season timing for South Louisiana warm-season turf.</p>
+              </div>
+            </div>
+            <ol class="svc-rounds">
+              {rounds.map((r) => (
+                <li>
+                  <div class="svc-round-meta">
+                    <span class="svc-round-num">{r.number}</span>
+                    {r.date && <span class="svc-round-date">{r.date}</span>}
+                  </div>
+                  <h3>{r.title}</h3>
+                  <p>{r.body}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )
+      }
+
+      {
+        process.length > 0 && (
+          <section class="svc-block">
+            <h2>How it works</h2>
+            <ol class="svc-process">
+              {process.map((step) => (
+                <li>
+                  <span class="svc-step-num">{step.number}</span>
+                  <div>
+                    <h3>{step.title}</h3>
+                    <p>{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )
+      }
+
+      {
+        listItems.length > 0 && features.length < 5 && (
+          <section class="svc-block">
+            <h2>What to expect</h2>
+            <ul class="bullet-list">
+              {listItems.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+
+      {
+        honest && (
+          <aside class="svc-honest">
+            <img
+              src="/images/mascot/waving.png"
+              width="64"
+              height="64"
+              alt=""
+              loading="lazy"
+            />
+            <p>{honest}</p>
+          </aside>
+        )
+      }
+
+      <section class="svc-block svc-truck-band">
+        <img
+          src="/images/hero/truck-and-trailer.webp"
+          width="720"
+          height="360"
+          alt="Grow Green Weed Control truck and trailer"
+          loading="lazy"
+        />
+        <div>
+          <p class="svc-brand-name">{site.name}</p>
+          <p>
+            Local techs. Real trucks. Treatment programs built for our {serviceAreaCount} accepted communities across
+            South Louisiana—with seasonal timing and clear visit notes.
+          </p>
+          <ul class="svc-identity">
+            {site.identity.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {
+        moreParas.length > 0 && (
+          <section class="svc-block more-copy">
+            <h2>More details</h2>
+            {moreParas.map((p) => (
+              <p>{p}</p>
+            ))}
+          </section>
+        )
+      }
+
+      <p class="svc-price-note">{site.startingPrice.short}</p>
+    </div>
+
+    <aside class="svc-main__form motion-rise motion-delay-1">
+      <QuoteForm
+        source={source}
+        heading={`Ask about ${title}`}
+        subheading="Share the service address and we’ll prepare a clear, no-obligation estimate."
+      />
+      <div class="svc-form-note">
+        <img
+          src="/images/mascot/thumbs-up.png"
+          width="96"
+          height="96"
+          alt=""
+          loading="lazy"
+        />
+        <p>Questions? Call {site.phone} · {site.hours.label}</p>
+      </div>
+      <div class="gg-aside-rail">
+        {
+          asideServices.length > 0 && (
+            <section class="gg-aside-services" aria-labelledby="svc-aside-services-title">
+              <p class="gg-aside-services__kicker">Services</p>
+              <h2 id="svc-aside-services-title">
+                {related && related.length > 0 ? "Related services" : "Other services"}
+              </h2>
+              <p class="gg-aside-services__lead">
+                Explore more Grow Green lawn and outdoor treatments for South Louisiana.
+              </p>
+              <ul class="gg-aside-services__list">
+                {asideServices.map((item) => (
+                  <li>
+                    <a href={item.href}>
+                      <strong>{item.title}</strong>
+                      <span>{item.summary}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+        {
+          faqs.length > 0 && (
+            <section class="gg-faq gg-faq--aside svc-faqs" aria-labelledby="svc-faqs-title">
+              <div class="gg-faq__head">
+                <p class="gg-faq__kicker">FAQ</p>
+                <h2 id="svc-faqs-title">Common questions</h2>
+                <p class="gg-faq__lead">Straight answers before you request an estimate.</p>
+              </div>
+              <div class="gg-faq__list">
+                {faqs.map((f) => (
+                  <details>
+                    <summary>{f.q}</summary>
+                    <p class="gg-faq__answer">{f.a}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
+          )
+        }
+      </div>
+    </aside>
+  </div>
+</section>
+
+<CtaBand
+  heading={`Get a clear plan for ${title}`}
+  text={`Tell us the service address — our local office in ${site.address.city} follows up during business hours.`}
+/>

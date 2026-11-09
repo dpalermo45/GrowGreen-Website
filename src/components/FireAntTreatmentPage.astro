@@ -1,0 +1,501 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { site } from "../data/site";
+import { coverageFaqAnswer, servedParishNames, areaServedSchema } from "../data/service-areas";
+import "../styles/fire-ant-treatment.css";
+
+const source = "Fire Ant Treatment Service Page";
+const leadSource = "Website - Fire Ant Treatment Page";
+
+const problems = [
+  {
+    n: "01",
+    title: "Painful stings",
+    body: "Fire ants aggressively defend disturbed colonies, making active areas of the lawn uncomfortable for people and pets.",
+  },
+  {
+    n: "02",
+    title: "Colonies you may not notice",
+    body: "Visible mounds are useful signs of activity, but the goal is controlling the colony rather than treating appearances alone.",
+  },
+  {
+    n: "03",
+    title: "Ongoing pressure",
+    body: "South Louisiana conditions can create continued fire ant pressure, which is why timing and a proactive approach matter.",
+  },
+] as const;
+
+const methods = [
+  {
+    n: "01",
+    title: "Inspect the lawn",
+    body: "We evaluate visible fire ant activity and the areas where colonies are creating the most immediate concern.",
+  },
+  {
+    n: "02",
+    title: "Treat active pressure",
+    body: "Visible problem areas can be addressed while the broader treatment strategy targets fire ant activity across the lawn.",
+  },
+  {
+    n: "03",
+    title: "Stay ahead of reinvasion",
+    body: "Properly timed service helps reduce fire ant pressure before your lawn fills with new active mounds again.",
+  },
+] as const;
+
+const timeline = [
+  {
+    n: "01",
+    title: "Request your estimate",
+    body: "Share your address and contact information so our office can prepare your fire ant service quote.",
+  },
+  {
+    n: "02",
+    title: "Approve your service",
+    body: "Once you are ready to move forward, we get your property into the appropriate service schedule.",
+  },
+  {
+    n: "03",
+    title: "We treat the lawn",
+    body: "Your technician performs the scheduled fire ant treatment using the application strategy for your service.",
+  },
+  {
+    n: "04",
+    title: "Enjoy the yard with less pressure",
+    body: "The goal is a lawn where you spend less time hunting individual mounds and more time using your property.",
+  },
+] as const;
+
+const areas = servedParishNames().map((parish) =>
+  /parish$/i.test(parish) ? parish : `${parish} Parish`,
+);
+
+const faqs = [
+  {
+    q: "Do you treat only the fire ant mounds I can see?",
+    a: "No. Visible mounds are important signs of activity, but our approach is designed around broader fire ant and colony control rather than simply treating one visible mound at a time.",
+  },
+  {
+    q: "How many fire ant treatments will my lawn need?",
+    a: "Treatment frequency depends on the service program and fire ant pressure on the property. Our team can explain the recommended service schedule with your estimate.",
+  },
+  {
+    q: "Will I never see another fire ant after treatment?",
+    a: "No outdoor treatment can permanently prevent every new fire ant from entering a property. The goal of a professional program is to reduce colony pressure and keep activity more manageable over time.",
+  },
+  {
+    q: "What about children and pets?",
+    a: "We apply professional products according to their label directions. Follow the specific re-entry and post-treatment instructions provided for your service before allowing people or pets back into treated areas.",
+  },
+  {
+    q: "Can I add fire ant treatment to my lawn program?",
+    a: "Yes. Fire ant treatment can be paired with Grow Green lawn fertilization and weed control so you can manage both services through the same local team.",
+  },
+  {
+    q: "What areas do you service?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Fire Ant Treatment",
+  url: "https://growgreenweedcontrol.com/fire-ant-treatment/",
+  description:
+    "Professional fire ant control for South Louisiana lawns—colony-focused treatment that goes beyond knocking down visible mounds. Serving Baton Rouge, Ascension, and Livingston.",
+  serviceType: "Professional Fire Ant Control",
+  provider: {
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    telephone: site.phoneTel,
+  },
+  areaServed: areaServedSchema(),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://growgreenweedcontrol.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Services",
+      item: "https://growgreenweedcontrol.com/services/",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Fire Ant Treatment",
+      item: "https://growgreenweedcontrol.com/fire-ant-treatment/",
+    },
+  ],
+};
+---
+
+<div class="ants-page" data-ants-page>
+  <header class="ants-hero ants-hero--photo">
+    <div class="ants-hero__media" aria-hidden="true">
+      <img
+        src="/images/services/ant-mound-960.webp"
+        srcset="/images/services/ant-mound-640.webp 640w, /images/services/ant-mound-960.webp 960w, /images/services/ant-mound-1280.webp 1280w, /images/services/ant-mound-1920.webp 1920w"
+        sizes="100vw"
+        width="1920"
+        height="1280"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="ants-hero__shade" aria-hidden="true"></div>
+    <div class="f-inner ants-hero__grid">
+      <div class="ants-motion">
+        <div class="ants-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <p class="ants-hero__eyebrow">Professional fire ant control</p>
+        <h1>Take back your yard from <em>fire ants.</em></h1>
+        <p class="ants-hero__lead">
+          Fire ant control should go beyond knocking down the mounds you can see. Grow Green combines visible mound
+          treatment with colony-focused control designed for South Louisiana lawns.
+        </p>
+        <div class="ants-hero__actions">
+          <a class="f-btn f-btn--gold" href="#ants-quote">Get my free estimate →</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+        <ul class="ants-hero__notes" aria-label="Service highlights">
+          <li>Colony-focused control</li>
+          <li>Visible mound treatment</li>
+          <li>South Louisiana lawns</li>
+        </ul>
+        <p class="ants-hero__truth">
+          Outdoor fire ant programs reduce colony pressure—they cannot permanently prevent every new ant from entering a
+          property.
+        </p>
+      </div>
+      <div class="ants-hero__visual ants-motion">
+        <img
+          class="ants-hero__mascot"
+          src="/images/mascot/fire-ants.png"
+          width="320"
+          height="380"
+          alt=""
+          decoding="async"
+        />
+      </div>
+    </div>
+  </header>
+
+  <div class="ants-proof ants-proof--scroll f-inner" aria-label="Grow Green credentials">
+    <div class="ants-proof__track">
+      <div class="ants-proof__item">
+        <strong>Firefighter-owned</strong>
+        <span>Local and family-operated</span>
+      </div>
+      <div class="ants-proof__item">
+        <strong>Lawn specialists</strong>
+        <span>Not a mowing or landscape crew</span>
+      </div>
+      <div class="ants-proof__item">
+        <strong>Colony-focused control</strong>
+        <span>Not simply a cosmetic mound treatment</span>
+      </div>
+      <div class="ants-proof__item">
+        <strong>Label-directed applications</strong>
+        <span>Clear post-treatment guidance</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="f-section ants-problem" aria-labelledby="ants-problem-title">
+    <div class="f-inner ants-diag__grid">
+      <figure class="ants-visual">
+        <img
+          src="/images/services/ant-mound-960.webp"
+          srcset="/images/services/ant-mound-640.webp 640w, /images/services/ant-mound-960.webp 960w, /images/services/ant-mound-1280.webp 1280w"
+          sizes="(max-width: 900px) 90vw, 420px"
+          width="960"
+          height="1200"
+          alt="Fire ant mound in a South Louisiana lawn"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="ants-visual__badge">
+          <strong>The mound is only the part you see.</strong>
+          <span>Effective fire ant management focuses on colony activity, not simply flattening visible mounds.</span>
+        </div>
+      </figure>
+      <div>
+        <p class="f-kicker">More than a mound problem</p>
+        <h2 class="f-title" id="ants-problem-title">Fire ants can turn a good lawn into a yard nobody wants to use.</h2>
+        <p class="f-lead">
+          A few visible mounds can quickly become a frustrating problem around play areas, walkways, pets, and the places
+          your family spends time outside. Treating only what appears above ground can leave the larger colony problem
+          unaddressed.
+        </p>
+        <ul class="ants-checks ants-checks--dense">
+          {
+            problems.map((p) => (
+              <li>
+                <span class="ants-checks__num" aria-hidden="true">
+                  {p.n.replace(/^0/, "")}
+                </span>
+                <div>
+                  <strong>{p.title}</strong>
+                  <p>{p.body}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section ants-guide ants-plan" aria-labelledby="ants-method-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Our approach</p>
+      <h2 class="f-title f-center" id="ants-method-title">We target the problem above ground and below it.</h2>
+      <p class="f-lead f-center">
+        The program is designed around professional treatment, colony control, and properly timed follow-up—rather than
+        waiting until mounds become a major nuisance.
+      </p>
+      <div class="ants-steps ants-steps--dense ants-steps--three">
+        {
+          methods.map((m) => (
+            <article class="ants-step">
+              <span class="ants-step__num">{m.n}</span>
+              <h3>{m.title}</h3>
+              <p>{m.body}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="ants-compare ants-compare--plan">
+        <article class="ants-choice ants-choice--muted">
+          <p class="ants-choice__tag">Mound-only approach</p>
+          <h3>Reactive control</h3>
+          <p>You see a mound, treat a mound, and repeat whenever another problem appears.</p>
+          <ul>
+            <li>Focuses primarily on visible activity</li>
+            <li>Requires repeated homeowner monitoring</li>
+            <li>Can become an ongoing game of whack-a-mole</li>
+          </ul>
+        </article>
+        <article class="ants-choice ants-choice--pro">
+          <p class="ants-choice__tag">Grow Green approach</p>
+          <h3>Lawn-wide fire ant management</h3>
+          <p>
+            Our service is designed to address existing fire ant activity while putting broader pressure on colonies
+            throughout the treated area.
+          </p>
+          <ul>
+            <li>Visible mound and activity assessment</li>
+            <li>Colony-focused treatment strategy</li>
+            <li>Professional products and timing</li>
+            <li>Ongoing program option instead of waiting for major pressure</li>
+          </ul>
+          <a href="#ants-quote">Request fire ant pricing →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section ants-process" aria-labelledby="ants-expect-title">
+    <div class="f-inner">
+      <p class="f-kicker f-kicker--light f-center">What to expect</p>
+      <h2 class="f-title f-center" id="ants-expect-title">Simple from estimate to treatment.</h2>
+      <p class="f-lead f-center">
+        You shouldn’t have to chase down a lawn company just to understand what happens next. We keep the process
+        straightforward.
+      </p>
+      <div class="ants-steps ants-steps--dense">
+        {
+          timeline.map((t) => (
+            <article class="ants-step">
+              <span class="ants-step__num">{t.n}</span>
+              <h3>{t.title}</h3>
+              <p>{t.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="ants-expect__grid">
+        <article class="ants-expect__card ants-expect__card--yes">
+          <h3>Before we arrive</h3>
+          <ul>
+            <li>Unlock gates and move toys, hoses, furniture, and pet waste from the treatment area</li>
+            <li>Note heavy mound activity or areas your family uses most often</li>
+            <li>Secure pets so the technician can treat safely and thoroughly</li>
+          </ul>
+        </article>
+        <article class="ants-expect__card ants-expect__card--no">
+          <h3>After we leave</h3>
+          <ul>
+            <li>Follow the re-entry instructions before people or pets return to treated areas</li>
+            <li>Expect reduced pressure over time—not a permanent insect-free guarantee</li>
+            <li>Ask about adding fire ant protection to an existing lawn program</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="ants-safety">
+    <div class="f-inner ants-safety__grid">
+      <div>
+        <h3>Professional products. Responsible application.</h3>
+        <p>
+          Treatments are applied according to product label directions. Follow any re-entry or post-treatment
+          instructions provided by your technician before people or pets return to treated areas.
+        </p>
+      </div>
+      <a class="f-btn f-btn--green" href="#ants-quote">Request estimate</a>
+    </div>
+  </div>
+
+  <section class="f-section ants-local-band" aria-labelledby="ants-local-title">
+    <div class="f-inner ants-local__grid">
+      <div>
+        <p class="f-kicker f-kicker--light">Locally focused</p>
+        <h2 class="f-title" id="ants-local-title">Fire ant control built for South Louisiana lawns.</h2>
+        <p class="f-lead ants-local-band__lead">
+          Grow Green Weed Control is a local lawn treatment company accepting customers in 40 communities across 10 South
+          Louisiana parishes from our office in {site.address.city}.
+        </p>
+        <div class="ants-areas">
+          {areas.map((area) => <span class="ants-area">{area}</span>)}
+        </div>
+      </div>
+      <div class="ants-local-box">
+        <p class="ants-local-box__label">Already a Grow Green customer?</p>
+        <h3>Add fire ant protection to your lawn care.</h3>
+        <p>
+          Fire ant treatment pairs naturally with your lawn fertilization and weed control program, making it easier to
+          manage more of your lawn through one local team.
+        </p>
+        <div class="ants-local-box__actions">
+          <a class="f-btn f-btn--gold" href="#ants-quote">Get fire ant pricing</a>
+          <a class="f-btn f-btn--ghost" href="/lawn-fertilization-weed-control/">View lawn program</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section ants-faq" aria-labelledby="ants-faq-title">
+    <div class="f-inner ants-local__grid">
+      <div>
+        <p class="f-kicker">Fire ant FAQs</p>
+        <h2 class="f-title" id="ants-faq-title">Questions before you get started?</h2>
+        <p class="f-lead">
+          Here are some of the most common questions homeowners have about professional fire ant treatment.
+        </p>
+      </div>
+      <div class="ants-faq__list">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section ants-quote" id="ants-quote" aria-labelledby="ants-quote-title">
+    <div class="f-inner ants-quote__grid">
+      <div>
+        <p class="f-kicker f-kicker--light">Free fire ant estimate</p>
+        <h2 class="f-title" id="ants-quote-title">Tell us where to treat.</h2>
+        <p class="f-lead">
+          Send your property information and our team will get your fire ant treatment quote started. Your request goes
+          directly to the Grow Green office.
+        </p>
+        <ul class="ants-quote__benefits">
+          <li>No pressure or obligation</li>
+          <li>Most quote requests reviewed during business hours, {site.hours.label}</li>
+          <li>Your information goes directly to Grow Green</li>
+        </ul>
+        <p class="ants-quote__chip" aria-hidden="true">Service noted: Fire Ant Treatment</p>
+        <a class="ants-quote__phone" href={`tel:${site.phoneTel}`}>
+          <span>Prefer to talk?</span>
+          <strong>Call {site.phone}</strong>
+        </a>
+      </div>
+      <div class="ants-form-shell">
+        <QuoteForm
+          source={source}
+          leadSource={leadSource}
+          heading="Request your free estimate"
+          subheading="Share the service address and any mound activity, pets, or access notes that will help us prepare your quote."
+          compact
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="ants-final" aria-label="Request a fire ant estimate">
+    <div class="f-inner">
+      <div class="ants-final__card">
+        <div>
+          <h2>Stop chasing fire ant mounds one at a time.</h2>
+          <p>
+            Request your free estimate and let Grow Green build a professional fire ant treatment plan for your
+            property.
+          </p>
+        </div>
+        <div class="ants-final__actions">
+          <a class="f-btn f-btn--gold" href="#ants-quote">Get my free estimate</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-ants-page]");
+  if (root) {
+    const notes = root.querySelector<HTMLTextAreaElement>('textarea[name="notes"]');
+    const PREFIX = "Service requested: Fire Ant Treatment";
+
+    function ensureServiceNote() {
+      if (!notes) return;
+      const lines = (notes.value || "")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .filter((line) => !line.startsWith("Service requested:"));
+      lines.unshift(PREFIX);
+      notes.value = lines.join("\n");
+    }
+
+    ensureServiceNote();
+    notes?.addEventListener("blur", ensureServiceNote);
+  }
+</script>

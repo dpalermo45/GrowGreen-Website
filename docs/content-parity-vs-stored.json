@@ -1,0 +1,961 @@
+{
+  "method": "stored WP/Divi paragraphs+faqs+structured blocks vs local <main> text",
+  "skipped": [
+    "customer-login-pay-bill",
+    "home",
+    "liquid-aeration-quote-request-received",
+    "test",
+    "thank-you",
+    "thank-you-core-aeration",
+    "thank-you-nextdoor"
+  ],
+  "counts": {
+    "strong": 54,
+    "weak": 1,
+    "partial": 2
+  },
+  "results": [
+    {
+      "slug": "contact-us",
+      "path": "/contact-us/",
+      "verdict": "strong",
+      "stored_plain_len": 4901,
+      "local_len": 2626,
+      "coverage": {
+        "checked": 10,
+        "hits": 9,
+        "rate": 0.9,
+        "misses": [
+          "Thanks for reaching out. The Grow Green team will review your message and follow up as soon as possible during business hours."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "about-us",
+      "path": "/about-us/",
+      "verdict": "strong",
+      "stored_plain_len": 6252,
+      "local_len": 5729,
+      "coverage": {
+        "checked": 25,
+        "hits": 25,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "services",
+      "path": "/services/",
+      "verdict": "strong",
+      "stored_plain_len": 12515,
+      "local_len": 8556,
+      "coverage": {
+        "checked": 37,
+        "hits": 34,
+        "rate": 0.919,
+        "misses": [
+          "These common symptoms can point toward the right next step. They are a starting point\u2014not a diagnosis from a webpage.",
+          "Select everything you are considering. Our team can separate the recommendations and pricing so you can decide what makes sense.",
+          "Choose one service, combine several, or simply tell us the problem. Grow Green will provide a clear local recommendation and custom price."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-fertilization-weed-control",
+      "path": "/lawn-fertilization-weed-control/",
+      "verdict": "strong",
+      "stored_plain_len": 9100,
+      "local_len": 7499,
+      "coverage": {
+        "checked": 32,
+        "hits": 32,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "flower-bed-weed-control-and-fertilization",
+      "path": "/flower-bed-weed-control-and-fertilization/",
+      "verdict": "strong",
+      "stored_plain_len": 9511,
+      "local_len": 6505,
+      "coverage": {
+        "checked": 28,
+        "hits": 28,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "request-a-quote",
+      "path": "/request-a-quote/",
+      "verdict": "strong",
+      "stored_plain_len": 4653,
+      "local_len": 2321,
+      "coverage": {
+        "checked": 9,
+        "hits": 8,
+        "rate": 0.889,
+        "misses": [
+          "Liquid Aeration A soil-loosening alternative to cores. Lawn Fungus Treatment Help for large patch and other diseases. Soil Analysis Lab results with practical recommendations. Orna"
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "fire-ant-treatment",
+      "path": "/fire-ant-treatment/",
+      "verdict": "strong",
+      "stored_plain_len": 8342,
+      "local_len": 5918,
+      "coverage": {
+        "checked": 30,
+        "hits": 30,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "mosquito-flea-tick-treatments",
+      "path": "/mosquito-flea-tick-treatments/",
+      "verdict": "strong",
+      "stored_plain_len": 10688,
+      "local_len": 7257,
+      "coverage": {
+        "checked": 33,
+        "hits": 33,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "plant-disease-or-pest",
+      "path": "/plant-disease-or-pest/",
+      "verdict": "strong",
+      "stored_plain_len": 13180,
+      "local_len": 7945,
+      "coverage": {
+        "checked": 42,
+        "hits": 39,
+        "rate": 0.929,
+        "misses": [
+          "Request a free estimate for ornamental pest or disease care. Our office usually follows up within one business day, Monday\u2013Friday, to review the concern and next steps. Fields mark",
+          "Please enable JavaScript to use the plant care form, or call (225) 461-3199 for your estimate.",
+          "Thanks for reaching out to Grow Green. Our team will review your plant concerns and contact you about the next steps. Have any photos ready to share when we follow up. This request"
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-fertilization-gonzales",
+      "path": "/lawn-fertilization-gonzales/",
+      "verdict": "strong",
+      "stored_plain_len": 11586,
+      "local_len": 11724,
+      "coverage": {
+        "checked": 32,
+        "hits": 29,
+        "rate": 0.906,
+        "misses": [
+          "Share your property details. We\u2019ll review the treatable lawn area and contact you with pricing. Fields marked * are required.",
+          "No payment required. Your service address helps us prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-fertilization-baton-rouge",
+      "path": "/lawn-fertilization-baton-rouge/",
+      "verdict": "strong",
+      "stored_plain_len": 11750,
+      "local_len": 11951,
+      "coverage": {
+        "checked": 32,
+        "hits": 29,
+        "rate": 0.906,
+        "misses": [
+          "Share your address and we\u2019ll prepare pricing for your lawn. No payment required. Fields marked * are required.",
+          "No payment required. Your service address helps us prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-fertilization-denham-springs",
+      "path": "/lawn-fertilization-denham-springs/",
+      "verdict": "strong",
+      "stored_plain_len": 11603,
+      "local_len": 11783,
+      "coverage": {
+        "checked": 32,
+        "hits": 29,
+        "rate": 0.906,
+        "misses": [
+          "Start with your service address. We\u2019ll review the lawn area and contact you with program pricing. Fields marked * are required.",
+          "No payment required. Your service address helps us prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-fertilization-plaquemine",
+      "path": "/lawn-fertilization-plaquemine/",
+      "verdict": "strong",
+      "stored_plain_len": 12980,
+      "local_len": 12000,
+      "coverage": {
+        "checked": 34,
+        "hits": 31,
+        "rate": 0.912,
+        "misses": [
+          "Share your service address and what you\u2019d like to improve. Our team will review your property details and contact you with pricing and next steps. Fields marked * are required.",
+          "No payment required. Your service address helps us prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-fertilization-lutcher",
+      "path": "/lawn-fertilization-lutcher/",
+      "verdict": "strong",
+      "stored_plain_len": 12748,
+      "local_len": 12116,
+      "coverage": {
+        "checked": 34,
+        "hits": 31,
+        "rate": 0.912,
+        "misses": [
+          "Start with the service address and tell us what you\u2019d like to improve. Our team will review the property details and contact you with pricing. Fields marked * are required.",
+          "No payment required. Your service address helps us prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-fertilization-laplace",
+      "path": "/lawn-fertilization-laplace/",
+      "verdict": "strong",
+      "stored_plain_len": 12922,
+      "local_len": 12205,
+      "coverage": {
+        "checked": 34,
+        "hits": 31,
+        "rate": 0.912,
+        "misses": [
+          "Tell us where to look and what you\u2019re seeing. We\u2019ll review your property details and follow up with your lawn program price. Fields marked * are required.",
+          "No payment required. Your service address helps us prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-fertilization-prairieville",
+      "path": "/lawn-fertilization-prairieville/",
+      "verdict": "strong",
+      "stored_plain_len": 12695,
+      "local_len": 11866,
+      "coverage": {
+        "checked": 34,
+        "hits": 31,
+        "rate": 0.912,
+        "misses": [
+          "Tell us where the lawn is and what you\u2019d like to improve. We\u2019ll review the treatable area and follow up with pricing for your property. Fields marked * are required.",
+          "No payment required. Your service address helps us prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-fertilization-ascension",
+      "path": "/lawn-fertilization-ascension/",
+      "verdict": "strong",
+      "stored_plain_len": 11415,
+      "local_len": 11574,
+      "coverage": {
+        "checked": 32,
+        "hits": 28,
+        "rate": 0.875,
+        "misses": [
+          "Tell us where you need service. We\u2019ll review your property and contact you with lawn-program pricing. Fields marked * are required.",
+          "No payment required. Your service address helps us prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate.",
+          "Thanks for reaching out to Grow Green. Our team will review your property details and contact you about your lawn fertilization and weed control estimate. This is a quote request, "
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "weed-control-baton-rouge",
+      "path": "/weed-control-baton-rouge/",
+      "verdict": "strong",
+      "stored_plain_len": 13101,
+      "local_len": 13700,
+      "coverage": {
+        "checked": 41,
+        "hits": 38,
+        "rate": 0.927,
+        "misses": [
+          "Tell us where your lawn is and what you\u2019re seeing. Most estimates are reviewed within one business day, Monday\u2013Friday. Fields marked * are required.",
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "weed-control-ascension",
+      "path": "/weed-control-ascension/",
+      "verdict": "strong",
+      "stored_plain_len": 12285,
+      "local_len": 12441,
+      "coverage": {
+        "checked": 39,
+        "hits": 36,
+        "rate": 0.923,
+        "misses": [
+          "Tell us where your lawn is and what you\u2019re seeing. Most estimates are reviewed within one business day, Monday\u2013Friday. Fields marked * are required.",
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "fire-ant-treatments-baton-rouge",
+      "path": "/fire-ant-treatments-baton-rouge/",
+      "verdict": "strong",
+      "stored_plain_len": 8970,
+      "local_len": 9870,
+      "coverage": {
+        "checked": 30,
+        "hits": 27,
+        "rate": 0.9,
+        "misses": [
+          "No payment required. Your service address helps us prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate.",
+          "Thanks for reaching out to Grow Green. Our team will review your property details and contact you about your fire ant estimate. This is a quote request, not a scheduled treatment."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-treatments-ascension",
+      "path": "/lawn-treatments-ascension/",
+      "verdict": "strong",
+      "stored_plain_len": 13349,
+      "local_len": 11796,
+      "coverage": {
+        "checked": 35,
+        "hits": 33,
+        "rate": 0.943,
+        "misses": [
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "liquid-aeration",
+      "path": "/liquid-aeration/",
+      "verdict": "strong",
+      "stored_plain_len": 10054,
+      "local_len": 6491,
+      "coverage": {
+        "checked": 29,
+        "hits": 29,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-treatments-livingston-parish",
+      "path": "/lawn-treatments-livingston-parish/",
+      "verdict": "strong",
+      "stored_plain_len": 15953,
+      "local_len": 14748,
+      "coverage": {
+        "checked": 43,
+        "hits": 40,
+        "rate": 0.93,
+        "misses": [
+          "Share your Livingston Parish service address and what your lawn needs. Most estimates are reviewed within one business day, Monday\u2013Friday. Fields marked * are required.",
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "soil-sample",
+      "path": "/soil-sample/",
+      "verdict": "strong",
+      "stored_plain_len": 5126,
+      "local_len": 5166,
+      "coverage": {
+        "checked": 16,
+        "hits": 16,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "request-an-estimate-facebook-50",
+      "path": "/request-an-estimate-facebook-50/",
+      "verdict": "strong",
+      "stored_plain_len": 54,
+      "local_len": 4727,
+      "coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-care-blog",
+      "path": "/lawn-care-blog/",
+      "verdict": "strong",
+      "stored_plain_len": 1609,
+      "local_len": 2462,
+      "coverage": {
+        "checked": 2,
+        "hits": 2,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-treatments-baton-rouge",
+      "path": "/lawn-treatments-baton-rouge/",
+      "verdict": "strong",
+      "stored_plain_len": 16200,
+      "local_len": 15455,
+      "coverage": {
+        "checked": 44,
+        "hits": 41,
+        "rate": 0.932,
+        "misses": [
+          "Tell us where your lawn is and what you\u2019re seeing. Most estimates are reviewed within one business day, Monday\u2013Friday. Fields marked * are required.",
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-treatment-west-baton-rouge-la",
+      "path": "/lawn-treatment-west-baton-rouge-la/",
+      "verdict": "strong",
+      "stored_plain_len": 15354,
+      "local_len": 14360,
+      "coverage": {
+        "checked": 43,
+        "hits": 40,
+        "rate": 0.93,
+        "misses": [
+          "Share your West Baton Rouge service address and what your lawn needs. Most estimates are reviewed within one business day, Monday\u2013Friday. Fields marked * are required.",
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "careers",
+      "path": "/careers/",
+      "verdict": "strong",
+      "stored_plain_len": 4949,
+      "local_len": 2895,
+      "coverage": {
+        "checked": 17,
+        "hits": 15,
+        "rate": 0.882,
+        "misses": [
+          "Please answer each question honestly. The essential-functions question includes reasonable accommodation.",
+          "By submitting, you agree that Grow Green Weed Control may contact you about this employment application. Text-message consent above is optional and separate. See our Privacy Policy"
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "core-aeration",
+      "path": "/core-aeration/",
+      "verdict": "strong",
+      "stored_plain_len": 9277,
+      "local_len": 6249,
+      "coverage": {
+        "checked": 31,
+        "hits": 31,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-treatment-and-weed-control-in-iberville-parish",
+      "path": "/lawn-treatment-and-weed-control-in-iberville-parish/",
+      "verdict": "strong",
+      "stored_plain_len": 13478,
+      "local_len": 12236,
+      "coverage": {
+        "checked": 35,
+        "hits": 32,
+        "rate": 0.914,
+        "misses": [
+          "Enter your service address and tell us what your lawn needs. We\u2019ll confirm coverage in Iberville Parish and prepare your treatment price. Fields marked * are required.",
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-treatment-service-in-denham-springs-la",
+      "path": "/lawn-treatment-service-in-denham-springs-la/",
+      "verdict": "strong",
+      "stored_plain_len": 15149,
+      "local_len": 14583,
+      "coverage": {
+        "checked": 42,
+        "hits": 39,
+        "rate": 0.929,
+        "misses": [
+          "Tell us where your lawn is and what you\u2019re seeing. Most estimates are reviewed within one business day, Monday\u2013Friday. Fields marked * are required.",
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-treatment-addis-la",
+      "path": "/lawn-treatment-addis-la/",
+      "verdict": "strong",
+      "stored_plain_len": 12607,
+      "local_len": 11363,
+      "coverage": {
+        "checked": 33,
+        "hits": 30,
+        "rate": 0.909,
+        "misses": [
+          "Start with your service address and tell us what you\u2019re seeing. We\u2019ll review the property details and contact you with your lawn treatment price. Fields marked * are required.",
+          "No payment required. Your service address helps us prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-fungus",
+      "path": "/lawn-fungus/",
+      "verdict": "strong",
+      "stored_plain_len": 15487,
+      "local_len": 10503,
+      "coverage": {
+        "checked": 42,
+        "hits": 42,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-treatment-service-prairieville-la",
+      "path": "/lawn-treatment-service-prairieville-la/",
+      "verdict": "strong",
+      "stored_plain_len": 16279,
+      "local_len": 15238,
+      "coverage": {
+        "checked": 45,
+        "hits": 42,
+        "rate": 0.933,
+        "misses": [
+          "Tell us where your lawn is and what you\u2019re seeing. Most estimates are reviewed within one business day, Monday\u2013Friday. Fields marked * are required.",
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-treatment-service-in-gonzales-la",
+      "path": "/lawn-treatment-service-in-gonzales-la/",
+      "verdict": "strong",
+      "stored_plain_len": 15254,
+      "local_len": 14624,
+      "coverage": {
+        "checked": 42,
+        "hits": 39,
+        "rate": 0.929,
+        "misses": [
+          "Tell us where your lawn is and what you\u2019re seeing. Most estimates are reviewed within one business day, Monday\u2013Friday. Fields marked * are required.",
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-treatment-service-in-walker-la",
+      "path": "/lawn-treatment-service-in-walker-la/",
+      "verdict": "strong",
+      "stored_plain_len": 14944,
+      "local_len": 14005,
+      "coverage": {
+        "checked": 42,
+        "hits": 39,
+        "rate": 0.929,
+        "misses": [
+          "Tell us where your lawn is and what you\u2019re seeing. Most estimates are reviewed within one business day, Monday\u2013Friday. Fields marked * are required.",
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-treatment-service-in-central-la",
+      "path": "/lawn-treatment-service-in-central-la/",
+      "verdict": "strong",
+      "stored_plain_len": 14555,
+      "local_len": 13838,
+      "coverage": {
+        "checked": 40,
+        "hits": 37,
+        "rate": 0.925,
+        "misses": [
+          "Tell us where your lawn is and what you\u2019re seeing. Most estimates are reviewed within one business day, Monday\u2013Friday. Fields marked * are required.",
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-treatment-in-saint-gabriel-la",
+      "path": "/lawn-treatment-in-saint-gabriel-la/",
+      "verdict": "strong",
+      "stored_plain_len": 14907,
+      "local_len": 14261,
+      "coverage": {
+        "checked": 40,
+        "hits": 37,
+        "rate": 0.925,
+        "misses": [
+          "Tell us about your home or light commercial property and the lawn concerns you want addressed. We\u2019ll review the details and prepare your treatment price. Fields marked * are requir",
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "facebook-estimate-request",
+      "path": "/facebook-estimate-request/",
+      "verdict": "strong",
+      "stored_plain_len": 5625,
+      "local_len": 4727,
+      "coverage": {
+        "checked": 22,
+        "hits": 19,
+        "rate": 0.864,
+        "misses": [
+          "By submitting, you agree we may call or email you about this estimate. Your information is used to respond to this request.",
+          "No long-term lawn service contract is required. Review your estimate and service terms before accepting.",
+          "Our core lawn program includes eight treatments per year, generally about five to seven weeks apart. Treatment timing and products change with the season and lawn needs."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "post-card-estimate-request",
+      "path": "/post-card-estimate-request/",
+      "verdict": "strong",
+      "stored_plain_len": 1965,
+      "local_len": 2106,
+      "coverage": {
+        "checked": 6,
+        "hits": 6,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "tree-and-shrub-care",
+      "path": "/tree-and-shrub-care/",
+      "verdict": "strong",
+      "stored_plain_len": 10933,
+      "local_len": 7683,
+      "coverage": {
+        "checked": 32,
+        "hits": 32,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-treatment-springfield-la",
+      "path": "/lawn-treatment-springfield-la/",
+      "verdict": "strong",
+      "stored_plain_len": 15013,
+      "local_len": 14158,
+      "coverage": {
+        "checked": 41,
+        "hits": 38,
+        "rate": 0.927,
+        "misses": [
+          "Tell us where your lawn is and what you\u2019re seeing. Most estimates are reviewed within one business day, Monday\u2013Friday. Fields marked * are required.",
+          "No payment required. Your service address helps us confirm coverage and prepare accurate pricing.",
+          "Please enable JavaScript to use the quote form, or call (225) 461-3199 for your estimate."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "trucklead",
+      "path": "/trucklead/",
+      "verdict": "weak",
+      "stored_plain_len": 3070,
+      "local_len": 1857,
+      "coverage": {
+        "checked": 12,
+        "hits": 7,
+        "rate": 0.583,
+        "misses": [
+          "By checking this box, I agree to receive SMS messages from Grow Green Weed Control about estimates, appointments, service, billing, and customer support. Message frequency varies. ",
+          "Please enable JavaScript to send this form, or call (225) 461-3199 for your free estimate.",
+          "Thanks for reaching out! We\u2019ve received your estimate request. Our local team will review your property and follow up with pricing, usually within one business day.",
+          "No need to submit again. If you have a question in the meantime, give us a call.",
+          "Need extra help in the yard? Ask about fire ant control, fungus and insect treatments, and soil health options. We\u2019ll explain any additional recommendations and pricing."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "gym-member-lawn-care-special",
+      "path": "/gym-member-lawn-care-special/",
+      "verdict": "strong",
+      "stored_plain_len": 1284,
+      "local_len": 811,
+      "coverage": {
+        "checked": 2,
+        "hits": 2,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "nextdoor-estimate-request",
+      "path": "/nextdoor-estimate-request/",
+      "verdict": "strong",
+      "stored_plain_len": 5537,
+      "local_len": 4228,
+      "coverage": {
+        "checked": 19,
+        "hits": 17,
+        "rate": 0.895,
+        "misses": [
+          "\u201cWithin a short time there was a drastic improvement. Timely, competitive pricing\u2014highly recommend.\u201d",
+          "You should never have to wonder when your lawn was treated, what was applied, or who to call when something looks wrong."
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "privacy-policy",
+      "path": "/privacy-policy/",
+      "verdict": "partial",
+      "stored_plain_len": 12550,
+      "local_len": 7273,
+      "coverage": {
+        "checked": 35,
+        "hits": 22,
+        "rate": 0.629,
+        "misses": [
+          "Contact our local office team to ask about your information or communication preferences.",
+          "If you affirmatively opt in, Grow Green may send SMS or MMS messages concerning estimate notifications and follow-ups, appointments, scheduling, technician arrival, service updates",
+          "You may opt out by replying STOP to a message or by contacting us. Reply HELP for assistance. We may retain opt-in and opt-out records to document and honor your communication choi",
+          "Payments may be processed by a third-party payment processor. Payment-card information is submitted to and handled by that processor under its security practices and privacy policy",
+          "We retain personal information for as long as reasonably necessary for the purposes described in this policy, including providing services, maintaining customer and treatment recor",
+          "We use reasonable administrative, technical, and physical safeguards designed to protect personal information against unauthorized access, loss, misuse, alteration, or disclosure. "
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "terms-and-conditions",
+      "path": "/terms-and-conditions/",
+      "verdict": "partial",
+      "stored_plain_len": 9960,
+      "local_len": 7366,
+      "coverage": {
+        "checked": 34,
+        "hits": 23,
+        "rate": 0.676,
+        "misses": [
+          "Our local office team can answer questions about these terms or your messaging preferences.",
+          "These terms cover this website and our SMS program. Lawn-care services are governed by the written estimate, service authorization, account terms, or other service documents provid",
+          "To the fullest extent permitted by law, Grow Green Weed Control and its owners, employees, and agents will not be liable for indirect, incidental, special, consequential, exemplary",
+          "This limitation concerns the Site and does not replace or expand any rights, obligations, limitations, or remedies contained in an applicable customer service document. Some laws d",
+          "Our Privacy Policy explains how we collect, use, disclose, and protect personal information. By using the Site, you acknowledge that information will be handled as described in tha",
+          "We may update the Site and these Terms from time to time. When we make changes, we will post the revised Terms here and update the effective date. Changes apply prospectively when "
+        ]
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "lawn-insects",
+      "path": "/lawn-insects/",
+      "verdict": "strong",
+      "stored_plain_len": 15816,
+      "local_len": 9765,
+      "coverage": {
+        "checked": 41,
+        "hits": 41,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "pages"
+    },
+    {
+      "slug": "common-lawn-insects-in-prairieville",
+      "path": "/common-lawn-insects-in-prairieville/",
+      "verdict": "strong",
+      "stored_plain_len": 4096,
+      "local_len": 4432,
+      "coverage": {
+        "checked": 13,
+        "hits": 13,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "posts"
+    },
+    {
+      "slug": "creating-a-thriving-centipede-lawn-in-baton-rouge-louisiana",
+      "path": "/creating-a-thriving-centipede-lawn-in-baton-rouge-louisiana/",
+      "verdict": "strong",
+      "stored_plain_len": 4687,
+      "local_len": 6454,
+      "coverage": {
+        "checked": 16,
+        "hits": 16,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "posts"
+    },
+    {
+      "slug": "how-to-kill-pickers-stickers-burweed-in-louisiana",
+      "path": "/how-to-kill-pickers-stickers-burweed-in-louisiana/",
+      "verdict": "strong",
+      "stored_plain_len": 9362,
+      "local_len": 8020,
+      "coverage": {
+        "checked": 25,
+        "hits": 25,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "posts"
+    },
+    {
+      "slug": "excellent-results-with-our-lawn-treatment-program",
+      "path": "/excellent-results-with-our-lawn-treatment-program/",
+      "verdict": "strong",
+      "stored_plain_len": 0,
+      "local_len": 589,
+      "coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "posts"
+    },
+    {
+      "slug": "battling-large-patch-disease-a-guide-to-protecting-your-baton-rouge-lawn",
+      "path": "/battling-large-patch-disease-a-guide-to-protecting-your-baton-rouge-lawn/",
+      "verdict": "strong",
+      "stored_plain_len": 3172,
+      "local_len": 2542,
+      "coverage": {
+        "checked": 6,
+        "hits": 6,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "posts"
+    },
+    {
+      "slug": "the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana",
+      "path": "/the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/",
+      "verdict": "strong",
+      "stored_plain_len": 3675,
+      "local_len": 6702,
+      "coverage": {
+        "checked": 10,
+        "hits": 10,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "posts"
+    },
+    {
+      "slug": "battling-dallis-grass-the-challenge-of-eliminating-a-stubborn-weed-in-warm-season-grasses",
+      "path": "/battling-dallis-grass-the-challenge-of-eliminating-a-stubborn-weed-in-warm-season-grasses/",
+      "verdict": "strong",
+      "stored_plain_len": 3982,
+      "local_len": 3293,
+      "coverage": {
+        "checked": 7,
+        "hits": 7,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "posts"
+    },
+    {
+      "slug": "importance-of-winterizing-your-lawn-and-pre-emergents-in-south-louisiana",
+      "path": "/importance-of-winterizing-your-lawn-and-pre-emergents-in-south-louisiana/",
+      "verdict": "strong",
+      "stored_plain_len": 18,
+      "local_len": 615,
+      "coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "kind": "posts"
+    }
+  ],
+  "caveats": [
+    "Scrubbed social-proof claims are excluded from expected copy.",
+    "Homepage intentionally redesigned (skipped).",
+    "Hub/campaign/careers pages may be partial by design if rebuilt shorter.",
+    "Exact HTML/order match is not required \u2014 this checks whether original substance is present."
+  ]
+}

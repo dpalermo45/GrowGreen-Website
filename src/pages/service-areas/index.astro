@@ -1,0 +1,208 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import LouisianaParishMap from "../../components/LouisianaParishMap.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { coverageCorridorPhrase, serviceAreas, serviceAreaHubs } from "../../data/service-areas";
+import { site } from "../../data/site";
+import "../../styles/service-areas-hub.css";
+
+export const prerender = true;
+
+const parishGroups = [...serviceAreas]
+  .reduce<Map<string, typeof serviceAreas>>((map, area) => {
+    const key = area.parish || "Other";
+    const list = map.get(key) || [];
+    list.push(area);
+    map.set(key, list);
+    return map;
+  }, new Map());
+
+const groupedParishes = [...parishGroups.entries()]
+  .map(([parish, areas]) => ({
+    parish,
+    label: /parish$/i.test(parish) ? parish : `${parish} Parish`,
+    areas: [...areas].sort((a, b) => a.name.localeCompare(b.name)),
+    hub: serviceAreaHubs.find((h) => h.parish === parish),
+  }))
+  .sort((a, b) => a.label.localeCompare(b.label));
+
+const parishCount = groupedParishes.length;
+---
+
+<BaseLayout
+  title="Service Areas | Grow Green Weed Control"
+  description={`Grow Green Weed Control serves ${serviceAreas.length} communities across ${parishCount} South Louisiana parishes, including Ascension, East Baton Rouge, Livingston, West Baton Rouge, Iberville, and more. Confirm coverage with your service address.`}
+  canonicalPath="/service-areas/"
+>
+  <div class="sah">
+    <header class="sah-hero sah-hero--photo">
+      <div class="sah-hero__media" aria-hidden="true">
+        <img
+          src="/images/home/hero-lawn-1280.webp"
+          srcset="/images/home/hero-lawn-640.webp 640w, /images/home/hero-lawn-960.webp 960w, /images/home/hero-lawn-1280.webp 1280w, /images/home/hero-lawn-1600.webp 1600w"
+          sizes="100vw"
+          width="1280"
+          height="853"
+          alt=""
+          decoding="async"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="sah-hero__shade" aria-hidden="true"></div>
+      <div class="sah-inner sah-hero__inner">
+        <div class="motion-rise">
+          <div class="sah-hero__brand">
+            <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+            <span>Grow Green Weed Control</span>
+          </div>
+          <p class="sah-eyebrow">South Louisiana coverage</p>
+          <h1>Where we serve</h1>
+          <p class="sah-hero__lead">
+            Family-owned lawn fertilization and weed control across {serviceAreas.length} cities and communities in
+            {parishCount} parishes. Request an estimate with your service address to confirm coverage for your property.
+          </p>
+          <div class="sah-hero__actions">
+            <a class="sah-btn sah-btn--gold" href="/request-a-quote/">Get my free quote →</a>
+            <a class="sah-btn sah-btn--ghost" href="#sah-locations">Browse locations</a>
+          </div>
+          <ul class="sah-hero__notes" aria-label="Coverage highlights">
+            <li>{serviceAreas.length} communities</li>
+            <li>{parishCount} parishes</li>
+            <li>Based in {site.address.city}</li>
+          </ul>
+        </div>
+        <div class="sah-hero__visual motion-rise motion-delay-1" aria-hidden="true">
+          <img
+            class="sah-hero__mascot"
+            src="/images/mascot/service-area-map-320.webp"
+            srcset="/images/mascot/service-area-map-216.webp 216w, /images/mascot/service-area-map-320.webp 320w, /images/mascot/service-area-map-480.webp 480w"
+            sizes="(max-width: 900px) 42vw, 240px"
+            width="320"
+            height="480"
+            alt=""
+            decoding="async"
+          />
+        </div>
+      </div>
+    </header>
+
+    <div class="sah-trust" aria-label="Coverage highlights">
+      <div class="sah-inner sah-trust__grid">
+        <div class="sah-trust__item motion-rise">
+          <strong>{serviceAreas.length} local communities</strong>
+          <span>Accepted service locations across our area</span>
+        </div>
+        <div class="sah-trust__item motion-rise motion-delay-1">
+          <strong>{parishCount} Louisiana parishes</strong>
+          <span>{coverageCorridorPhrase()}</span>
+        </div>
+        <div class="sah-trust__item motion-rise motion-delay-2">
+          <strong>St. Amant based</strong>
+          <span>Family-owned · firefighter-owned</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="sah-intro" aria-labelledby="sah-intro-title">
+      <div class="sah-inner sah-intro__grid">
+        <div class="motion-rise">
+          <p class="sah-kicker">How coverage works</p>
+          <h2 id="sah-intro-title">Pick a city page—or send any nearby address.</h2>
+        </div>
+        <div class="sah-intro__copy motion-rise motion-delay-1">
+          <p>
+            Each city page shares local lawn-care context for warm-season turf, weeds, and common South Louisiana
+            pressures. Prefer a wider view? Use the parish map or a regional overview page.
+          </p>
+          <p>
+            Not sure if you are inside a listed community? Send the service address for a free estimate—we confirm
+            coverage from the property, not just the city name on the mailbox.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sah-map" aria-label="Parish coverage map">
+      <LouisianaParishMap />
+    </section>
+
+    <section class="sah-locations" id="sah-locations" aria-labelledby="sah-locations-title">
+      <div class="sah-inner">
+        <div class="sah-locations__head motion-rise">
+          <p class="sah-kicker">City & community pages</p>
+          <h2 id="sah-locations-title">All {serviceAreas.length} service locations</h2>
+          <p>
+            Browse by parish, open your city for local detail, or request an estimate if you are nearby and want to
+            confirm coverage.
+          </p>
+        </div>
+
+        {
+          groupedParishes.map((group, index) => (
+            <section
+              class:list={["sah-parish", "motion-rise", index % 3 === 1 && "motion-delay-1", index % 3 === 2 && "motion-delay-2"]}
+              aria-labelledby={`parish-${group.parish.replace(/\s+/g, "-").toLowerCase()}`}
+            >
+              <div class="sah-parish__head">
+                <div class="sah-parish__title-row">
+                  <h3 id={`parish-${group.parish.replace(/\s+/g, "-").toLowerCase()}`}>{group.label}</h3>
+                  <span class="sah-parish__count">
+                    {group.areas.length} location{group.areas.length === 1 ? "" : "s"}
+                  </span>
+                </div>
+                {group.hub && (
+                  <a class="sah-parish__hub" href={group.hub.existingUrl}>
+                    Parish overview →
+                  </a>
+                )}
+              </div>
+              <ul class="sah-city-grid">
+                {group.areas.map((area) => (
+                  <li>
+                    <a href={`/service-areas/${area.slug}/`}>
+                      {area.name}
+                      <span aria-hidden="true">→</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="sah-hubs" aria-labelledby="sah-hubs-title">
+      <div class="sah-inner">
+        <div class="sah-hubs__head motion-rise">
+          <p class="sah-kicker">Broader coverage pages</p>
+          <h2 id="sah-hubs-title">Parish & regional pages</h2>
+          <p>
+            Prefer a wider view? These pages cover multi-city corridors with local lawn care context for South Louisiana.
+          </p>
+        </div>
+        <div class="sah-hubs__grid">
+          {
+            serviceAreaHubs.map((hub) => {
+              const count = serviceAreas.filter((a) => a.parish === hub.parish).length;
+              return (
+                <a class="sah-hub-card motion-rise" href={hub.existingUrl}>
+                  <strong>{hub.name}</strong>
+                  <span>
+                    {count} community page{count === 1 ? "" : "s"} in this parish corridor
+                  </span>
+                  <em>View regional page →</em>
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+    </section>
+
+    <CtaBand
+      heading="Confirm coverage for your address"
+      text={`Plans start at $39/month for lawn fertilization and weed control. Your estimate depends on lawn size and selected services. Call ${site.phone} or request a quote online.`}
+    />
+  </div>
+</BaseLayout>

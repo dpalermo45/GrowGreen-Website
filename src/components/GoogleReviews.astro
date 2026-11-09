@@ -1,0 +1,336 @@
+---
+import { readGoogleReviewsConfig } from "../lib/google-reviews/config";
+import { getDisplayReviews } from "../lib/google-reviews/service";
+import type { DisplayReviewsPayload } from "../lib/google-reviews/types";
+import { site } from "../data/site";
+import "../styles/google-reviews.css";
+
+interface Props {
+  heading?: string;
+  lead?: string;
+  compact?: boolean;
+  /** When true, skip server fetch (client-only). Default false. */
+  clientOnly?: boolean;
+  id?: string;
+}
+
+const {
+  heading = "What neighbors say on Google",
+  lead = "Recent five-star write-ups about our technicians, communication, and lawn treatments.",
+  compact = false,
+  clientOnly = false,
+  id = "gg-home-reviews",
+} = Astro.props;
+
+const config = readGoogleReviewsConfig();
+let initial: DisplayReviewsPayload | null = null;
+
+if (!clientOnly) {
+  try {
+    initial = await getDisplayReviews(config);
+  } catch {
+    initial = null;
+  }
+}
+
+const googleUrl = site.social.google;
+const available = Boolean(initial?.available && initial.reviews.length > 0);
+const averageRating = initial?.averageRating ?? null;
+const totalReviewCount = initial?.totalReviewCount ?? null;
+
+function starsLabel(n: number): string {
+  const clamped = Math.max(0, Math.min(5, Math.round(n)));
+  return "★".repeat(clamped) + "☆".repeat(5 - clamped);
+}
+
+function formatDate(iso: string): string {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "America/Chicago",
+  });
+}
+
+/** Light display polish for all-lowercase Google display names only. */
+function displayName(name: string): string {
+  const trimmed = name.trim();
+  if (!trimmed) return "Google user";
+  if (trimmed !== trimmed.toLowerCase()) return trimmed;
+  return trimmed.replace(/\b[a-z]/g, (ch) => ch.toUpperCase());
+}
+
+const CLAMP_CHARS = 160;
+---
+
+<section
+  class:list={["gg-reviews", compact && "gg-reviews--compact"]}
+  id={id}
+  aria-labelledby={`${id}-title`}
+  data-google-reviews
+  data-state={available ? "ready" : "fallback"}
+  data-endpoint="/api/google-reviews/display/"
+  data-clamp-chars={String(CLAMP_CHARS)}
+>
+  <div class:list={["gg-reviews__inner", compact && "gg-reviews__inner--compact"]}>
+    <header class="gg-reviews__head">
+      <p class="gg-reviews__eyebrow">Customer feedback</p>
+      <h2 id={`${id}-title`}>{heading}</h2>
+      <p class="gg-reviews__lead">{lead}</p>
+    </header>
+
+    <div data-reviews-live hidden={!available}>
+      <div class="gg-reviews__summary" data-summary>
+        {
+          averageRating != null && (
+            <div class="gg-reviews__rating">
+              <span class="gg-reviews__rating-value" data-avg>
+                {averageRating.toFixed(1)}
+              </span>
+              <span
+                class="gg-reviews__stars"
+                data-avg-stars
+                aria-label={`${averageRating.toFixed(1)} out of 5 stars`}
+              >
+                {starsLabel(averageRating)}
+              </span>
+            </div>
+          )
+        }
+        {
+          totalReviewCount != null && (
+            <p class="gg-reviews__count" data-count>
+              {totalReviewCount.toLocaleString("en-US")} Google reviews
+            </p>
+          )
+        }
+      </div>
+      <p class="gg-reviews__attribution">From Google · five-star write-ups · newest first</p>
+      <div class="gg-reviews__grid" data-grid>
+        {
+          available &&
+            initial!.reviews.map((review) => {
+              const comment = review.comment.trim();
+              const long = comment.length > CLAMP_CHARS;
+              return (
+                <article class="gg-reviews__card">
+                  <div class="gg-reviews__card-top">
+                    <span class="gg-reviews__author">{displayName(review.reviewerName)}</span>
+                    <time class="gg-reviews__date" datetime={review.updateTime || review.createTime}>
+                      {formatDate(review.updateTime || review.createTime)}
+                    </time>
+                  </div>
+                  <div
+                    class="gg-reviews__card-stars"
+                    aria-label={`${review.starRating} out of 5 stars`}
+                  >
+                    {starsLabel(review.starRating)}
+                  </div>
+                  <p class="gg-reviews__comment" data-full={comment}>
+                    {comment}
+                  </p>
+                  {long && (
+                    <button class="gg-reviews__toggle" type="button" data-expand>
+                      Read more
+                    </button>
+                  )}
+                </article>
+              );
+            })
+        }
+      </div>
+      <p class="gg-reviews__sample-note" data-sample-note>
+        {initial?.sampleNote || "Sample of recent 5-star write-ups. Overall rating and total count come from Google."}
+      </p>
+    </div>
+
+    <div class="gg-reviews__fallback" data-fallback hidden={available}>
+      <p class="gg-reviews__lead">
+        Google is the live source for current reviews. Open the profile to read what neighbors are
+        saying.
+      </p>
+    </div>
+
+    <div class="gg-reviews__cta">
+      <a class="gg-reviews__btn" href={googleUrl} target="_blank" rel="noopener noreferrer">
+        Read more on Google →
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  function starsLabel(n) {
+    const clamped = Math.max(0, Math.min(5, Math.round(Number(n) || 0)));
+    return "★".repeat(clamped) + "☆".repeat(5 - clamped);
+  }
+
+  function formatDate(iso) {
+    if (!iso) return "";
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return "";
+    return d.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      timeZone: "America/Chicago",
+    });
+  }
+
+  function displayName(name) {
+    const trimmed = String(name || "").trim();
+    if (!trimmed) return "Google user";
+    if (trimmed !== trimmed.toLowerCase()) return trimmed;
+    return trimmed.replace(/\b[a-z]/g, (ch) => ch.toUpperCase());
+  }
+
+  function isFeaturedReview(review) {
+    return Number(review?.starRating) === 5 && String(review?.comment || "").trim().length > 0;
+  }
+
+  function bindExpand(root) {
+    root.querySelectorAll("[data-expand]").forEach((btn) => {
+      if (!(btn instanceof HTMLButtonElement)) return;
+      if (btn.dataset.bound === "1") return;
+      btn.dataset.bound = "1";
+      btn.addEventListener("click", () => {
+        const comment = btn.previousElementSibling;
+        if (!(comment instanceof HTMLElement)) return;
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        if (expanded) {
+          comment.dataset.expanded = "false";
+          btn.textContent = "Read more";
+          btn.setAttribute("aria-expanded", "false");
+        } else {
+          comment.dataset.expanded = "true";
+          btn.textContent = "Read less";
+          btn.setAttribute("aria-expanded", "true");
+        }
+      });
+      btn.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  function renderPayload(root, payload) {
+    const live = root.querySelector("[data-reviews-live]");
+    const fallback = root.querySelector("[data-fallback]");
+    const grid = root.querySelector("[data-grid]");
+    const summary = root.querySelector("[data-summary]");
+    const clampChars = Number(root.dataset.clampChars || 160);
+    const featured = (payload?.reviews || []).filter(isFeaturedReview);
+
+    if (!payload?.available || !featured.length) {
+      root.dataset.state = "fallback";
+      if (live instanceof HTMLElement) live.hidden = true;
+      if (fallback instanceof HTMLElement) fallback.hidden = false;
+      return;
+    }
+
+    root.dataset.state = "ready";
+    if (live instanceof HTMLElement) live.hidden = false;
+    if (fallback instanceof HTMLElement) fallback.hidden = true;
+
+    if (summary instanceof HTMLElement) {
+      const parts = [];
+      if (payload.averageRating != null) {
+        parts.push(
+          `<div class="gg-reviews__rating"><span class="gg-reviews__rating-value">${payload.averageRating.toFixed(1)}</span><span class="gg-reviews__stars" aria-label="${payload.averageRating.toFixed(1)} out of 5 stars">${starsLabel(payload.averageRating)}</span></div>`,
+        );
+      }
+      if (payload.totalReviewCount != null) {
+        parts.push(
+          `<p class="gg-reviews__count">${Number(payload.totalReviewCount).toLocaleString("en-US")} Google reviews</p>`,
+        );
+      }
+      summary.innerHTML = parts.join("");
+    }
+
+    if (grid instanceof HTMLElement) {
+      grid.replaceChildren();
+      for (const review of featured) {
+        const article = document.createElement("article");
+        article.className = "gg-reviews__card";
+
+        const top = document.createElement("div");
+        top.className = "gg-reviews__card-top";
+        const author = document.createElement("span");
+        author.className = "gg-reviews__author";
+        author.textContent = displayName(review.reviewerName);
+        const time = document.createElement("time");
+        time.className = "gg-reviews__date";
+        const when = review.updateTime || review.createTime || "";
+        time.dateTime = when;
+        time.textContent = formatDate(when);
+        top.append(author, time);
+
+        const starEl = document.createElement("div");
+        starEl.className = "gg-reviews__card-stars";
+        starEl.setAttribute("aria-label", `${review.starRating} out of 5 stars`);
+        starEl.textContent = starsLabel(review.starRating);
+
+        const commentText = String(review.comment || "").trim();
+        const p = document.createElement("p");
+        p.className = "gg-reviews__comment";
+        p.dataset.full = commentText;
+        p.textContent = commentText;
+
+        article.append(top, starEl, p);
+        if (commentText.length > clampChars) {
+          const btn = document.createElement("button");
+          btn.className = "gg-reviews__toggle";
+          btn.type = "button";
+          btn.dataset.expand = "1";
+          btn.textContent = "Read more";
+          article.append(btn);
+        }
+
+        grid.append(article);
+      }
+    }
+
+    const note = root.querySelector("[data-sample-note]");
+    if (note instanceof HTMLElement && payload.sampleNote) {
+      note.textContent = payload.sampleNote;
+    }
+
+    bindExpand(root);
+  }
+
+  document.querySelectorAll("[data-google-reviews]").forEach((root) => {
+    if (!(root instanceof HTMLElement)) return;
+    if (root.dataset.bound === "1") return;
+    root.dataset.bound = "1";
+    bindExpand(root);
+
+    // SSR already painted reviews — do not refetch on first paint (avoids competing with LCP).
+    // Soft-refresh only when the document was backgrounded and becomes visible again.
+    const endpoint = root.dataset.endpoint || "/api/google-reviews/display/";
+    const alreadyReady = root.dataset.state === "ready";
+    const refresh = () => {
+      fetch(endpoint, { headers: { Accept: "application/json" } })
+        .then((res) => res.json())
+        .then((payload) => renderPayload(root, payload))
+        .catch(() => {
+          /* keep SSR/fallback content */
+        });
+    };
+
+    if (alreadyReady) {
+      let armed = false;
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") armed = true;
+        if (armed && document.visibilityState === "visible") {
+          armed = false;
+          refresh();
+        }
+      });
+      return;
+    }
+
+    root.dataset.state = "loading";
+    refresh();
+  });
+</script>

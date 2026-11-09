@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ServicesHubPage from "../components/ServicesHubPage.astro";
+import { loadPageContent } from "../lib/content/loadPageContent";
+
+export const prerender = true;
+
+const rich = loadPageContent("services");
+---
+
+<BaseLayout
+  title={rich?.seo_title || "Lawn & Outdoor Services | Grow Green Weed Control"}
+  description={
+    rich?.seo_desc ||
+    "Explore Grow Green lawn fertilization, weed control, aeration, fungus, insect, tree and shrub, flower bed, fire ant, mosquito, flea, and tick services for South Louisiana."
+  }
+  canonicalPath="/services/"
+>
+  <ServicesHubPage />
+</BaseLayout>

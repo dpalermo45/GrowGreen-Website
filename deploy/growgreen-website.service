@@ -1,0 +1,26 @@
+# Example systemd unit for KnownHost / VPS Node hosting.
+# Adjust User, WorkingDirectory, and EnvironmentFile paths before enabling.
+#
+#   sudo cp deploy/growgreen-website.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now growgreen-website
+
+[Unit]
+Description=Grow Green Weed Control website (Astro Node standalone)
+After=network.target
+
+[Service]
+Type=simple
+User=growgreen
+WorkingDirectory=/var/www/growgreen-website
+EnvironmentFile=/var/www/growgreen-website/.env.production
+# Apply deploy/litespeed-redirects.conf on the edge for alias/case redirects.
+ExecStart=/usr/bin/node ./dist/server/entry.mjs
+Restart=on-failure
+RestartSec=5
+Environment=HOST=127.0.0.1
+Environment=PORT=4321
+# Prefer binding to localhost when LiteSpeed proxies to this process.
+
+[Install]
+WantedBy=multi-user.target

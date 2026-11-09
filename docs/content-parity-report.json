@@ -1,0 +1,1442 @@
+{
+  "compared": 58,
+  "counts": {
+    "strong": 38,
+    "thin_local": 12,
+    "weak": 7,
+    "partial": 1
+  },
+  "live_base": "https://growgreenweedcontrol.com",
+  "local_base": "http://127.0.0.1:4321",
+  "results": [
+    {
+      "path": "/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.112,
+      "live_plain_len": 368,
+      "local_plain_len": 3932,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Grow Green Weed Control | Baton Rouge Lawn Treatment & Fertilization Experts",
+      "local_title": "Grow Green Weed Control | Lawn Fertilization & Weed Control"
+    },
+    {
+      "path": "/contact-us/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "thin_local",
+      "similarity": 0.117,
+      "live_plain_len": 948,
+      "local_plain_len": 862,
+      "paragraph_coverage": {
+        "checked": 4,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Give us a few details and the right person on our team will follow up. Current customers: including your service address in the message helps us locate your acc",
+          "Your message has been sent. Thanks for reaching out. The Grow Green team will review your message and follow up as soon as possible during business hours.",
+          "Our office team works directly with Grow Green technicians and customer accounts throughout the Greater Baton Rouge area.",
+          "It collects your property address and service needs so our team can prepare a faster, more accurate quote."
+        ]
+      },
+      "heading_coverage": {
+        "checked": 4,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "How can we help?",
+          "Your message has been sent.",
+          "Reach the right people\u2014without a call center.",
+          "Use the dedicated quote form."
+        ]
+      },
+      "live_title": "Contact Us | Grow Green Weed Control \u2013 Lawn Treatment Experts in Louisiana",
+      "local_title": "Contact Us | Grow Green Weed Control \u2013 Lawn Treatment Experts in Louisiana"
+    },
+    {
+      "path": "/about-us/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.041,
+      "live_plain_len": 276,
+      "local_plain_len": 5376,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "About Us | Grow Green Weed Control \u2013 Firefighter-Owned Lawn Experts",
+      "local_title": "About Us | Grow Green Weed Control \u2013 Firefighter-Owned Lawn Experts"
+    },
+    {
+      "path": "/services/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "thin_local",
+      "similarity": 0.05,
+      "live_plain_len": 326,
+      "local_plain_len": 1971,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "From our signature lawn program to aeration, ornamental care, and targeted pest services, Grow Green helps you choose what your property actually needs\u2014without "
+        ]
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "One local team. A complete plan for your property."
+        ]
+      },
+      "live_title": "Lawn Care Services | Grow Green Weed Control \u2013 Fertilization, Weed & Pest Control",
+      "local_title": "Lawn & Pest Services | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-fertilization-weed-control/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.001,
+      "live_plain_len": 33,
+      "local_plain_len": 6802,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Fertilization & Weed Control | Grow Green Weed Control \u2013 Expert Lawn Care in Louisiana",
+      "local_title": "Lawn Fertilization & Weed Control | Grow Green Weed Control"
+    },
+    {
+      "path": "/flower-bed-weed-control-and-fertilization/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "weak",
+      "similarity": 0.06,
+      "live_plain_len": 281,
+      "local_plain_len": 5648,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Flower beds that stay cleaner, longer."
+        ]
+      },
+      "live_title": "Flower Bed Weed Control & Fertilization | Grow Green Weed Control \u2013 Keep Beds Clean Year-Round",
+      "local_title": "Flower Bed Weed Control & Fertilization | Grow Green Weed Control"
+    },
+    {
+      "path": "/request-a-quote/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "thin_local",
+      "similarity": 0.057,
+      "live_plain_len": 234,
+      "local_plain_len": 433,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Tell us what your lawn needs. Our local team will review your property and send straightforward pricing\u2014with no pressure and no long-term contract."
+        ]
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "A better lawn starts with a better plan."
+        ]
+      },
+      "live_title": "Request a Quote | Grow Green Weed Control \u2013 Lawn Treatment Estimates in Louisiana",
+      "local_title": "Request a Quote | Grow Green Weed Control"
+    },
+    {
+      "path": "/fire-ant-treatment/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 29,
+      "local_plain_len": 4138,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Fire Ant Treatment | Grow Green Weed Control \u2013 Lawn Protection in Louisiana",
+      "local_title": "Fire Ant Treatment | Grow Green Weed Control"
+    },
+    {
+      "path": "/mosquito-flea-tick-treatments/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "weak",
+      "similarity": 0.018,
+      "live_plain_len": 302,
+      "local_plain_len": 5698,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Enjoy the yard. Leave the biting pests behind."
+        ]
+      },
+      "live_title": "Mosquito, Flea, & Tick Treatments | Grow Green Weed Control \u2013 Outdoor Pest Control Experts",
+      "local_title": "Mosquito, Flea, & Tick Treatments | Grow Green Weed Control"
+    },
+    {
+      "path": "/plant-disease-or-pest/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "thin_local",
+      "similarity": 0.007,
+      "live_plain_len": 68,
+      "local_plain_len": 6024,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Your local, firefighter-owned team. Care for the landscape you love."
+        ]
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Plant Disease Or Pest - Grow Green Weed Control",
+      "local_title": "Plant Disease Or Pest | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-fertilization-gonzales/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 8833,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Fertilization Gonzales, LA | Grow Green Weed Control",
+      "local_title": "Lawn Fertilization & Weed Control Gonzales LA"
+    },
+    {
+      "path": "/lawn-fertilization-baton-rouge/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 9316,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Fertilization Baton Rouge, LA | Grow Green Weed Control",
+      "local_title": "Lawn Fertilization & Weed Control | Baton Rouge LA"
+    },
+    {
+      "path": "/lawn-fertilization-denham-springs/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 8837,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Fertilization Denham Springs, LA | Grow Green Weed Control",
+      "local_title": "Lawn Fertilization Denham Springs, LA | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-fertilization-plaquemine/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 8926,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Fertilization Plaquemine - Grow Green Weed Control",
+      "local_title": "Lawn Fertilization Plaquemine | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-fertilization-lutcher/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 9015,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lutcher Lawn Fertilization & Weed Control | Grow Green Weed Control",
+      "local_title": "Lutcher Lawn Fertilization & Weed Control | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-fertilization-laplace/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "partial",
+      "similarity": 0.061,
+      "live_plain_len": 2123,
+      "local_plain_len": 8830,
+      "paragraph_coverage": {
+        "checked": 6,
+        "hits": 6,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 5,
+        "hits": 3,
+        "rate": 0.6,
+        "misses": [
+          "Lawn fertilization & weed control in LaPlace, LA.",
+          "One lawn program. A plan for every season."
+        ]
+      },
+      "live_title": "Lawn Fertilization LaPlace - Grow Green Weed Control",
+      "local_title": "Lawn Fertilization LaPlace | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-fertilization-prairieville/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 9015,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Fertilization Prairieville, LA | Grow Green Weed Control",
+      "local_title": "Lawn Fertilization & Weed Control Prairieville LA"
+    },
+    {
+      "path": "/lawn-fertilization-ascension/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.001,
+      "live_plain_len": 63,
+      "local_plain_len": 9125,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Fertilization Ascension | Grow Green Weed Control \u2013 Local Lawn Experts",
+      "local_title": "Lawn Fertilization Ascension | Grow Green Weed Control \u2013 Local Lawn Experts"
+    },
+    {
+      "path": "/weed-control-baton-rouge/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.001,
+      "live_plain_len": 77,
+      "local_plain_len": 9587,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Weed Control Baton Rouge - Grow Green Weed Control",
+      "local_title": "Weed Control Baton Rouge | Grow Green Weed Control"
+    },
+    {
+      "path": "/weed-control-ascension/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 66,
+      "local_plain_len": 9300,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Weed Control Ascension - Grow Green Weed Control",
+      "local_title": "Weed Control Ascension | Grow Green Weed Control"
+    },
+    {
+      "path": "/fire-ant-treatments-baton-rouge/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 6976,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Fire Ant Treatments Baton Rouge | Grow Green Weed Control \u2013 Local Lawn Protection",
+      "local_title": "Fire Ant Treatments Baton Rouge | Grow Green Weed Control \u2013 Local Lawn Protection"
+    },
+    {
+      "path": "/lawn-treatments-ascension/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 8752,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Treatment Ascension Parish, LA | Grow Green Weed Control",
+      "local_title": "Lawn Treatment Ascension Parish, LA | Grow Green Weed Control"
+    },
+    {
+      "path": "/liquid-aeration/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "weak",
+      "similarity": 0.02,
+      "live_plain_len": 459,
+      "local_plain_len": 5362,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Better Water Movement\u2014Without Pulling a Single Plug"
+        ]
+      },
+      "live_title": "Liquid Aeration | Grow Green Weed Control \u2013 Deep Lawn Conditioning in Louisiana",
+      "local_title": "Liquid Aeration | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-treatments-livingston-parish/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 9691,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Treatments in Livingston Parish, LA | Grow Green Weed Control",
+      "local_title": "Lawn Treatments in Livingston Parish, LA | Grow Green Weed Control"
+    },
+    {
+      "path": "/soil-sample/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "weak",
+      "similarity": 0.195,
+      "live_plain_len": 493,
+      "local_plain_len": 3936,
+      "paragraph_coverage": {
+        "checked": 2,
+        "hits": 2,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Soil Sample & pH Balance"
+        ]
+      },
+      "live_title": "Soil Sample - Grow Green Weed Control",
+      "local_title": "Soil Sampling | Grow Green Weed Control"
+    },
+    {
+      "path": "/request-an-estimate-facebook-50/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 773,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Request An Estimate \u2013 Facebook 50 - Grow Green Weed Control",
+      "local_title": "Request An Estimate \u2014 Facebook 50 | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-care-blog/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "thin_local",
+      "similarity": 0.011,
+      "live_plain_len": 223,
+      "local_plain_len": 2173,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Practical answers to South Louisiana's lawn questions\u2014from stubborn weeds and brown patches to better year-round care."
+        ]
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Local advice. A healthier lawn."
+        ]
+      },
+      "live_title": "Lawn Care Tips & Weed Control Advice | Grow Green Weed Control Blog",
+      "local_title": "Lawn Care Blog | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-treatments-baton-rouge/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 9555,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Treatment & Weed Control in Baton Rouge, LA | Grow Green Weed Control",
+      "local_title": "Lawn Treatment & Weed Control in Baton Rouge, LA | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-treatment-west-baton-rouge-la/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 9477,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Treatment West Baton Rouge LA - Grow Green Weed Control",
+      "local_title": "Lawn Treatment West Baton Rouge LA | Grow Green Weed Control"
+    },
+    {
+      "path": "/careers/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "thin_local",
+      "similarity": 0.025,
+      "live_plain_len": 2084,
+      "local_plain_len": 749,
+      "paragraph_coverage": {
+        "checked": 14,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Open positions and pay are updated directly by our hiring team, so what you see here is current.",
+          "You will be trusted to own your work, communicate clearly, and take care of customers as if their lawn were your own.",
+          "Handle your responsibilities confidently while knowing the team is available when something needs attention.",
+          "Whether you are treating lawns or supporting routes, your effort is visible in the customer experience.",
+          "Quality, reliability, efficiency, and follow-through are recognized\u2014not lost inside a huge company.",
+          "Learn practical systems, sharpen your judgment, and earn greater responsibility as the company grows.",
+          "Eligible full-time positions may include health, dental, vision, 401(k) matching, and paid time off. Eligibility varies by position and will be confirmed during",
+          "Give us a clear picture of your experience and availability. If there is a fit, our team will contact you about the next step."
+        ]
+      },
+      "heading_coverage": {
+        "checked": 13,
+        "hits": 2,
+        "rate": 0.154,
+        "misses": [
+          "Find the role that fits you.",
+          "A small team with high standards.",
+          "Work that has a result",
+          "Performance matters",
+          "Grow your skills",
+          "Straightforward from the start.",
+          "We review it",
+          "We reach out",
+          "Ready to apply?",
+          "Join the Grow Green team"
+        ]
+      },
+      "live_title": "Careers | Join Grow Green Weed Control \u2013 Lawn Treatment Jobs in Louisiana",
+      "local_title": "Careers | Join Grow Green Weed Control \u2013 Lawn Treatment Jobs in Louisiana"
+    },
+    {
+      "path": "/core-aeration/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "weak",
+      "similarity": 0.07,
+      "live_plain_len": 399,
+      "local_plain_len": 5079,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Give Compacted Soil Room to Breathe"
+        ]
+      },
+      "live_title": "Core Aeration | Grow Green Weed Control \u2013 Improve Lawn Health in Louisiana",
+      "local_title": "Core Aeration | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-treatment-and-weed-control-in-iberville-parish/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 8844,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Iberville Parish Lawn Treatment & Weed Control | Grow Green",
+      "local_title": "Iberville Parish Lawn Treatment & Weed Control | Grow Green"
+    },
+    {
+      "path": "/lawn-treatment-service-in-denham-springs-la/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 9565,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Treatment & Weed Control in Denham Springs, LA | Grow Green Weed Control",
+      "local_title": "Lawn Treatment & Weed Control in Denham Springs, LA | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-treatment-addis-la/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 8641,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Treatment in Addis, LA | Weed Control & Fertilization - Grow Green Weed Control",
+      "local_title": "Lawn Treatment in Addis, LA | Weed Control & Fertilization - Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-fungus/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.068,
+      "live_plain_len": 385,
+      "local_plain_len": 7640,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Fungus Treatment | Grow Green Weed Control \u2013 Fungicide & Lawn Disease Control",
+      "local_title": "Lawn Fungus | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-treatment-service-prairieville-la/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 9449,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Treatment & Weed Control in Prairieville, LA | Grow Green Weed Control",
+      "local_title": "Lawn Treatment & Weed Control in Prairieville, LA | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-treatment-service-in-gonzales-la/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 9271,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Treatment in Gonzales, LA | Grow Green Weed Control",
+      "local_title": "Lawn Treatment in Gonzales, LA | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-treatment-service-in-walker-la/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 9181,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Treatment & Weed Control in Walker LA | Grow Green Weed Control",
+      "local_title": "Lawn Treatment & Weed Control in Walker LA | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-treatment-service-in-central-la/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 9307,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Treatment Service in Central LA | Grow Green Weed Control",
+      "local_title": "Lawn Treatment Service in Central LA | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-treatment-in-saint-gabriel-la/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 9474,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Lawn Treatment & Weed Control in Saint Gabriel, LA | Grow Green Weed Control",
+      "local_title": "Lawn Treatment & Weed Control in Saint Gabriel, LA | Grow Green Weed Control"
+    },
+    {
+      "path": "/facebook-estimate-request/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.038,
+      "live_plain_len": 68,
+      "local_plain_len": 743,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Facebook Estimate Request - Grow Green Weed Control",
+      "local_title": "Facebook Estimate Request | Grow Green Weed Control"
+    },
+    {
+      "path": "/post-card-estimate-request/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "thin_local",
+      "similarity": 0.055,
+      "live_plain_len": 1343,
+      "local_plain_len": 795,
+      "paragraph_coverage": {
+        "checked": 8,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Your lawn could be next. Get a free, no-pressure estimate from the local lawn care team already working in your neighborhood.",
+          "Tell us where your lawn is. We'll review your property and follow up with your personalized estimate.",
+          "Our local team will review your lawn and follow up with your estimate.",
+          "A local team, professional treatments, and a straightforward way to get started.",
+          "We're a South Louisiana business that cares about the neighborhoods we serve.",
+          "Our crews are treating lawns nearby, so getting started is simple.",
+          "Seasonal weed prevention and fertilization designed around South Louisiana turf.",
+          "Get your custom price and ask about your $25 neighbor discount."
+        ]
+      },
+      "heading_coverage": {
+        "checked": 10,
+        "hits": 2,
+        "rate": 0.2,
+        "misses": [
+          "Claim your neighbor offer",
+          "Request received!",
+          "Why your neighbors choose Grow Green",
+          "Already in your area",
+          "Care built for local lawns",
+          "Firefighter-owned. Community focused.",
+          "Great service starts with trust.",
+          "A healthier-looking lawn starts with a simple estimate."
+        ]
+      },
+      "live_title": "Post Card Estimate Request - Grow Green Weed Control",
+      "local_title": "Post Card Estimate Request | Grow Green Weed Control"
+    },
+    {
+      "path": "/tree-and-shrub-care/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "weak",
+      "similarity": 0.065,
+      "live_plain_len": 448,
+      "local_plain_len": 6328,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Protect the Plants That Make Your Landscape Feel Finished"
+        ]
+      },
+      "live_title": "Tree and Shrub Care - Grow Green Weed Control",
+      "local_title": "Tree and Shrub Care | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-treatment-springfield-la/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 9630,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Springfield, LA Weed Control & Lawn Fertilization | Grow Green Weed Control",
+      "local_title": "Springfield, LA Weed Control & Lawn Fertilization | Grow Green Weed Control"
+    },
+    {
+      "path": "/trucklead/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "thin_local",
+      "similarity": 0.11,
+      "live_plain_len": 317,
+      "local_plain_len": 696,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "A healthier, better-looking lawn could be your next stop. Get local, firefighter-owned lawn care with a plan built around your yard."
+        ]
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "You Saw Our Truck \u2013 Get Your Lawn Treatment Estimate - Grow Green Weed Control",
+      "local_title": "You Saw Our Truck | Grow Green Weed Control"
+    },
+    {
+      "path": "/gym-member-lawn-care-special/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.0,
+      "live_plain_len": 0,
+      "local_plain_len": 703,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Gym Member Lawn Care Special | Grow Green Weed Control",
+      "local_title": "Gym Member Lawn Care Special | Grow Green Weed Control"
+    },
+    {
+      "path": "/nextdoor-estimate-request/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.064,
+      "live_plain_len": 95,
+      "local_plain_len": 691,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Nextdoor Estimate Request - Grow Green Weed Control",
+      "local_title": "Nextdoor Estimate Request | Grow Green Weed Control"
+    },
+    {
+      "path": "/privacy-policy/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.038,
+      "live_plain_len": 235,
+      "local_plain_len": 7468,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Privacy Policy - Grow Green Weed Control",
+      "local_title": "Privacy Policy | Grow Green Weed Control"
+    },
+    {
+      "path": "/terms-and-conditions/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.038,
+      "live_plain_len": 210,
+      "local_plain_len": 7509,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Terms and Conditions - Grow Green Weed Control",
+      "local_title": "Terms & Conditions | Grow Green Weed Control"
+    },
+    {
+      "path": "/lawn-insects/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "weak",
+      "similarity": 0.038,
+      "live_plain_len": 376,
+      "local_plain_len": 6776,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Lawn insect control that starts with the right pest."
+        ]
+      },
+      "live_title": "Lawn Insects - Grow Green Weed Control",
+      "local_title": "Lawn Insects | Grow Green Weed Control"
+    },
+    {
+      "path": "/common-lawn-insects-in-prairieville/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.017,
+      "live_plain_len": 123,
+      "local_plain_len": 4566,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Common Lawn Insects In Prairieville - Grow Green Weed Control",
+      "local_title": "Common Lawn Insects In Prairieville | Grow Green Weed Control"
+    },
+    {
+      "path": "/creating-a-thriving-centipede-lawn-in-baton-rouge-louisiana/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.019,
+      "live_plain_len": 139,
+      "local_plain_len": 6626,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Creating A Thriving Centipede Lawn In Baton Rouge Louisiana - Grow Green Weed Control",
+      "local_title": "Creating A Thriving Centipede Lawn In Baton Rouge Louisiana | Grow Green Weed Control"
+    },
+    {
+      "path": "/how-to-kill-pickers-stickers-burweed-in-louisiana/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.014,
+      "live_plain_len": 103,
+      "local_plain_len": 8183,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "How To Kill Pickers, Stickers, Burweed, in Louisiana - Grow Green Weed Control",
+      "local_title": "How To Kill Pickers, Stickers, Burweed, in Louisiana | Grow Green Weed Control"
+    },
+    {
+      "path": "/excellent-results-with-our-lawn-treatment-program/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "strong",
+      "similarity": 0.159,
+      "live_plain_len": 110,
+      "local_plain_len": 592,
+      "paragraph_coverage": {
+        "checked": 0,
+        "hits": 0,
+        "rate": 1.0,
+        "misses": []
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Excellent Results With Our Lawn Treatment Program - Grow Green Weed Control",
+      "local_title": "Excellent Results With Our Lawn Treatment Program | Grow Green Weed Control"
+    },
+    {
+      "path": "/battling-large-patch-disease-a-guide-to-protecting-your-baton-rouge-lawn/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "thin_local",
+      "similarity": 0.008,
+      "live_plain_len": 177,
+      "local_plain_len": 2708,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Dec 28, 2023 | Baton Rouge LA , Brown Patch , Large Patch , Lawn Care Tips , Lawn Disease , Lawn Fungus"
+        ]
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Battling Large Patch Disease: A Guide to Protecting Your Baton Rouge Lawn - Grow Green Weed Control",
+      "local_title": "Battling Large Patch Disease: A Guide to Protecting Your Baton Rouge Lawn | Grow Green Weed Control"
+    },
+    {
+      "path": "/the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "thin_local",
+      "similarity": 0.019,
+      "live_plain_len": 143,
+      "local_plain_len": 7006,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Feb 19, 2024 | Centipede Lawn , Fertilization , Lawn Care Tips , Prairieville LA"
+        ]
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "The Ultimate Guide to Fertilizing Your Lawn in South Louisiana - Grow Green Weed Control",
+      "local_title": "The Ultimate Guide to Fertilizing Your Lawn in South Louisiana | Grow Green Weed Control"
+    },
+    {
+      "path": "/battling-dallis-grass-the-challenge-of-eliminating-a-stubborn-weed-in-warm-season-grasses/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "thin_local",
+      "similarity": 0.002,
+      "live_plain_len": 175,
+      "local_plain_len": 3464,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "May 14, 2024 | Baton Rouge LA , Dallis Grass , Prairieville LA , Weed , Weed Control"
+        ]
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Battling Dallis Grass: The Challenge of Eliminating a Stubborn Weed in Warm Season Grasses - Grow Green Weed Control",
+      "local_title": "Battling Dallis Grass: The Challenge of Eliminating a Stubborn Weed in Warm Season Grasses | Grow Green Weed Control"
+    },
+    {
+      "path": "/importance-of-winterizing-your-lawn-and-pre-emergents-in-south-louisiana/",
+      "live_status": 200,
+      "local_status": 200,
+      "verdict": "thin_local",
+      "similarity": 0.206,
+      "live_plain_len": 164,
+      "local_plain_len": 621,
+      "paragraph_coverage": {
+        "checked": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "misses": [
+          "Dec 18, 2024 | Baton Rouge LA , Lawn Care Tips , Pre Emergents , Weed Control , Winterizier"
+        ]
+      },
+      "heading_coverage": {
+        "checked": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "misses": []
+      },
+      "live_title": "Importance of Winterizing your Lawn and Pre-Emergents in South Louisiana - Grow Green Weed Control",
+      "local_title": "Importance of Winterizing your Lawn and Pre-Emergents in South Louisiana | Grow Green Weed Control"
+    }
+  ],
+  "notes": [
+    "Exact 1:1 HTML match is not expected: scrubbed claims, rebuilt forms, pricing wording polish, and structured Divi \u2192 Astro conversion.",
+    "strong = most substantial live paragraphs and headings present in local body text.",
+    "partial/weak/divergent = content gaps vs live; review missed paragraph samples.",
+    "Thank-you / test / portal handoff pages were skipped as non-article surfaces."
+  ]
+}

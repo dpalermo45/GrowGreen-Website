@@ -1,0 +1,608 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { site } from "../data/site";
+import { coverageFaqAnswer, areaServedSchema } from "../data/service-areas";
+import "../styles/soil-sample.css";
+
+const source = "Soil Sample Page";
+const leadSource = "Website - Soil Sample Page";
+
+const learnItems = [
+  {
+    title: "Precise pH reading",
+    body: "Guides whether lime, sulfur, or no pH correction is the right next step for your turf type.",
+  },
+  {
+    title: "Major nutrients & bases",
+    body: "Looks at phosphorus, potassium, calcium, magnesium, and related balance that affect growth.",
+  },
+  {
+    title: "Micronutrient status",
+    body: "Checks iron, manganese, zinc, copper, and related micros that often show up as color problems.",
+  },
+  {
+    title: "Organic matter & salts",
+    body: "Helps explain conditioning needs and salinity or sodium concerns common in warm-season lawns.",
+  },
+] as const;
+
+const signs = [
+  {
+    n: "01",
+    title: "Yellowing despite fertilizer",
+    body: "Chlorosis can show up when nutrients are present but not available—especially when pH is off.",
+  },
+  {
+    n: "02",
+    title: "Thin or slow warm-season growth",
+    body: "Patchy turf and weak response can point to chemistry issues, not only irrigation or insects.",
+  },
+  {
+    n: "03",
+    title: "Hard soil, runoff, or puddling",
+    body: "Physical soil problems and chemistry problems often travel together. Testing clarifies the chemistry side.",
+  },
+  {
+    n: "04",
+    title: "Poor response to prior treatments",
+    body: "If fertility or weed programs underperform, a soil report can show whether the foundation needs work first.",
+  },
+] as const;
+
+const corrections = [
+  {
+    n: "01",
+    title: "pH correction",
+    body: "Lime to raise pH or elemental sulfur to lower it—selected for your turf, soil type, and lab results.",
+  },
+  {
+    n: "02",
+    title: "Targeted micronutrients",
+    body: "Iron, manganese, zinc, and related micros when the report shows a clear deficiency.",
+  },
+  {
+    n: "03",
+    title: "Soil conditioners",
+    body: "Conditioners or wetting agents when infiltration and moisture behavior need support.",
+  },
+  {
+    n: "04",
+    title: "Program timing",
+    body: "Corrections are scheduled to work with your warm-season lawn and ongoing fertility visits when applicable.",
+  },
+] as const;
+
+const steps = [
+  {
+    n: "01",
+    title: "Request a soil test",
+    body: "Share the service address and what you are seeing so our office can schedule sample collection.",
+  },
+  {
+    n: "02",
+    title: "We collect the sample",
+    body: "A technician gathers a representative sample from the lawn using professional sampling practices.",
+  },
+  {
+    n: "03",
+    title: "Lab analysis + report",
+    body: "A professional lab evaluates pH, nutrients, organic matter, salts, and key micronutrients.",
+  },
+  {
+    n: "04",
+    title: "Plain-English next steps",
+    body: "We explain the report and outline a practical plan—and pricing—for any recommended corrections.",
+  },
+] as const;
+
+const concernOptions = [
+  "Not sure — recommend based on the lawn",
+  "Yellowing or poor color",
+  "Thin or slow growth",
+  "Hard soil / water issues",
+  "Poor fertilizer response",
+  "Recurring weeds despite control",
+  "Want a baseline before a new program",
+] as const;
+
+const faqs = [
+  {
+    q: "How do I know if my soil pH is off?",
+    a: "Yellowing despite fertilizer, poor response to treatments, and recurring weeds can all point to a pH or soil chemistry issue. A soil test is the reliable way to know—guessing from symptoms alone can waste product and time.",
+  },
+  {
+    q: "What does the $55 soil sample include?",
+    a: "The $55 fee covers professional sample collection coordination, lab analysis, and a graphic report with Grow Green’s plain-English explanation. Any pH correction or soil amendment work is quoted separately after results are reviewed.",
+  },
+  {
+    q: "Do you handle both acidic and alkaline soils?",
+    a: "Yes. When results support it, we can raise pH with the appropriate lime product or lower pH with elemental sulfur, using rates and timing suited to your turf species and soil conditions.",
+  },
+  {
+    q: "Will I need micronutrients?",
+    a: "Sometimes. Iron, manganese, and zinc deficiencies are more common when pH is high. Your report shows what is low; micros can be added as a stand-alone application or blended into a regular round when appropriate.",
+  },
+  {
+    q: "How fast will I see results after corrections?",
+    a: "Micronutrient applications can improve color relatively quickly when deficiency is the cause. pH correction is a process—some change can begin soon after application, while fuller movement may take months and follow-up checks.",
+  },
+  {
+    q: "Is a soil sample the same as aeration?",
+    a: "No. Soil sampling measures chemistry and related soil properties. Core or liquid aeration address physical soil conditions such as compaction and water movement. Many lawns benefit from understanding both sides.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Soil Sampling",
+  serviceType: "Lawn Soil Testing and pH Balance",
+  url: "https://growgreenweedcontrol.com/soil-sample/",
+  image: "https://growgreenweedcontrol.com/images/services/soil-sampling-1280.webp",
+  description:
+    "Professional lawn soil sampling with lab analysis, graphic report, and plain-English recommendations for pH and nutrient balance across 40 South Louisiana communities.",
+  provider: {
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    logo: "https://growgreenweedcontrol.com/images/brand/logo.png",
+    telephone: site.phoneTel,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.city,
+      addressRegion: site.address.state,
+      postalCode: site.address.zip,
+      addressCountry: "US",
+    },
+  },
+  areaServed: areaServedSchema(),
+  offers: {
+    "@type": "Offer",
+    price: "55",
+    priceCurrency: "USD",
+    description: "Soil sample including lab analysis and graphic report. Amendments quoted separately after results.",
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://growgreenweedcontrol.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Services",
+      item: "https://growgreenweedcontrol.com/services/",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Soil Sampling",
+      item: "https://growgreenweedcontrol.com/soil-sample/",
+    },
+  ],
+};
+---
+
+<div class="soil-page soil-page--offer-first" data-soil-page>
+  <header class="soil-hero soil-hero--photo">
+    <div class="soil-hero__media" aria-hidden="true">
+      <img
+        src="/images/services/soil-sampling-1280.webp"
+        srcset="/images/services/soil-sampling-640.webp 640w, /images/services/soil-sampling-960.webp 960w, /images/services/soil-sampling-1280.webp 1280w"
+        sizes="100vw"
+        width="1280"
+        height="853"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="soil-hero__shade" aria-hidden="true"></div>
+    <div class="f-inner soil-hero__grid">
+      <div class="soil-motion">
+        <div class="soil-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <p class="soil-hero__eyebrow">Soil sampling · pH &amp; nutrient clarity</p>
+        <h1>Healthy turf starts <em>underground.</em></h1>
+        <p class="soil-hero__lead">
+          A professional soil sample reveals the pH, nutrients, salts, and micronutrients driving warm-season lawn
+          performance—then we explain the report in plain English and build a practical next step.
+        </p>
+        <div class="soil-hero__actions">
+          <a class="f-btn f-btn--gold" href="#soil-quote">Request a soil test →</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+        <ul class="soil-hero__notes" aria-label="Service highlights">
+          <li>$55 per sample</li>
+          <li>Lab analysis + report</li>
+          <li>Plain-English next steps</li>
+        </ul>
+        <p class="soil-hero__truth">
+          Testing measures chemistry. It does not replace aeration, irrigation repair, or every other lawn-care need.
+        </p>
+      </div>
+      <div class="soil-hero__visual soil-motion">
+        <img
+          class="soil-hero__mascot"
+          src="/images/mascot/soil-testing-320.webp"
+          srcset="/images/mascot/soil-testing-216.webp 216w, /images/mascot/soil-testing-320.webp 320w, /images/mascot/soil-testing-480.webp 480w"
+          sizes="(max-width: 960px) 55vw, 280px"
+          width="480"
+          height="768"
+          alt=""
+          decoding="async"
+        />
+      </div>
+    </div>
+  </header>
+
+  <div class="soil-proof f-inner" aria-label="Grow Green credentials">
+    <div class="soil-proof__item">
+      <strong>$55 per sample</strong>
+      <span>Lab analysis + graphic report</span>
+    </div>
+    <div class="soil-proof__item">
+      <strong>Plain-English review</strong>
+      <span>What the numbers mean for your lawn</span>
+    </div>
+    <div class="soil-proof__item">
+      <strong>Local follow-through</strong>
+      <span>Correction plan when results support it</span>
+    </div>
+    <div class="soil-proof__item">
+      <strong>Firefighter-owned</strong>
+      <span>Local and family-operated</span>
+    </div>
+  </div>
+
+  <section class="f-section soil-offer-block" aria-labelledby="soil-offer-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Straightforward pricing</p>
+      <h2 class="f-title f-center" id="soil-offer-title">$55 soil sample. Clear report. Practical plan.</h2>
+      <p class="f-lead f-center">
+        The sample fee covers testing and explanation. Any lime, sulfur, micronutrient, or conditioner work is priced
+        after we review your results—not before.
+      </p>
+      <div class="soil-offer">
+        <article class="soil-offer__price">
+          <p class="soil-offer__amount">$55</p>
+          <p>Per sample · Includes lab analysis and graphic report</p>
+          <ul>
+            <li>Lab-grade analysis (pH, nutrients, OM, salts, micros)</li>
+            <li>Easy-to-read chart and summary</li>
+            <li>Local, lawn-specific recommendations</li>
+          </ul>
+          <a class="f-btn f-btn--gold" href="#soil-quote">Schedule my soil test →</a>
+        </article>
+        <article class="soil-offer__next">
+          <h3>What happens after the test?</h3>
+          <p>
+            We walk you through a simple plan that can pair with your fertilization and weed-control schedule when you
+            already have a Grow Green program—or stand alone when you need clarity first.
+          </p>
+          <ul>
+            {corrections.map((c) => (
+              <li>
+                <strong>{c.title}:</strong> {c.body}
+              </li>
+            ))}
+          </ul>
+          <p>
+            Related options:{" "}
+            <a href="/core-aeration/">core aeration</a>, <a href="/liquid-aeration/">liquid aeration</a>,{" "}
+            <a href="/lawn-fertilization-weed-control/">lawn fertilization &amp; weed control</a>.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="soil-learn-title">
+    <div class="f-inner soil-diag__grid">
+      <div>
+        <p class="f-kicker">What you’ll learn</p>
+        <h2 class="f-title" id="soil-learn-title">Stop guessing why the lawn will not respond.</h2>
+        <p class="f-lead">
+          We use professional labs to analyze your soil. Results arrive with an at-a-glance chart plus Grow Green’s
+          recommendations—no jargon dump and no one-size-fits-all guesswork.
+        </p>
+        <ul class="soil-checks">
+          {
+            learnItems.map((item, i) => (
+              <li>
+                <span class="soil-checks__num" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <div>
+                  <strong>{item.title}</strong>
+                  <p>{item.body}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="soil-note">
+          <strong>Why pH comes first:</strong> When pH is too low or too high, nutrients can lock up even if you are
+          fertilizing. Balancing chemistry helps every dollar in a treatment program reach the plant.
+        </div>
+      </div>
+      <figure class="soil-diagram">
+        <div class="soil-diagram__media">
+          <img
+            class="soil-diagram__photo"
+            src="/images/services/soil-sampling-960.webp"
+            srcset="/images/services/soil-sampling-640.webp 640w, /images/services/soil-sampling-960.webp 960w, /images/services/soil-sampling-1280.webp 1280w"
+            sizes="(max-width: 900px) 90vw, 420px"
+            width="960"
+            height="720"
+            alt="Close view of soil sampling materials used for lawn testing"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            class="soil-diagram__mascot"
+            src="/images/mascot/soil-testing-320.webp"
+            srcset="/images/mascot/soil-testing-216.webp 216w, /images/mascot/soil-testing-320.webp 320w, /images/mascot/soil-testing-480.webp 480w"
+            sizes="(max-width: 900px) 38vw, 170px"
+            width="320"
+            height="512"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption>
+          Typical warm-season ranges: Bermuda, zoysia, and St. Augustine often prefer roughly pH 6.0–6.5; centipede can
+          tolerate slightly lower, but still benefits from balance.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="f-section soil-guide" aria-labelledby="soil-signs-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Common South Louisiana signals</p>
+      <h2 class="f-title f-center" id="soil-signs-title">Signs your soil may need a closer look.</h2>
+      <p class="f-lead f-center">
+        These symptoms have more than one cause. A soil sample tells you whether chemistry is part of the story.
+      </p>
+      <div class="soil-steps">
+        {
+          signs.map((s) => (
+            <article class="soil-step">
+              <span class="soil-step__num">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section soil-process" aria-labelledby="soil-process-title">
+    <div class="f-inner">
+      <p class="f-kicker f-kicker--light f-center">Simple from start to finish</p>
+      <h2 class="f-title f-center" id="soil-process-title">From request to a clear soil plan.</h2>
+      <p class="f-lead f-center">
+        Your request goes straight to Grow Green. We follow up with next steps during business hours and walk you through
+        the report when results are ready.
+      </p>
+      <div class="soil-steps">
+        {
+          steps.map((s) => (
+            <article class="soil-step">
+              <span class="soil-step__num">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="soil-expect__grid">
+        <article class="soil-expect__card soil-expect__card--yes">
+          <h3>What testing helps clarify</h3>
+          <ul>
+            <li>Whether pH is limiting nutrient availability</li>
+            <li>Which macros or micros are actually low</li>
+            <li>Whether salts or sodium deserve attention</li>
+            <li>Whether amendment spending is justified</li>
+          </ul>
+        </article>
+        <article class="soil-expect__card soil-expect__card--no">
+          <h3>What a soil test cannot do alone</h3>
+          <ul>
+            <li>Fix unmarked irrigation or drainage problems</li>
+            <li>Replace compaction relief when roots need physical space</li>
+            <li>Guarantee overnight green-up after every correction</li>
+            <li>Diagnose insects or disease without a field look</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section soil-program" aria-labelledby="soil-local-title">
+    <div class="f-inner soil-local__grid">
+      <figure class="soil-owner">
+        <img
+          class="soil-local__photo"
+          src="/images/about/owner-with-son-960.webp"
+          srcset="/images/about/owner-with-son-640.webp 640w, /images/about/owner-with-son-960.webp 960w, /images/about/owner-with-son-1280.webp 1280w"
+          sizes="(max-width: 900px) 90vw, 420px"
+          width="960"
+          height="1200"
+          alt="Grow Green Weed Control owner with his son beside a branded service truck"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="soil-owner__badge">
+          <strong>Family-owned. Firefighter-owned.</strong>
+          <span>Lawn treatment specialists—not a call-center script.</span>
+        </figcaption>
+      </figure>
+      <div>
+        <p class="f-kicker">Why Grow Green</p>
+        <h2 class="f-title" id="soil-local-title">Local soil advice from a lawn-treatment company—not a call center.</h2>
+        <p class="f-lead">
+          South Louisiana turf faces heat, humidity, rainfall, and soils that do not behave like generic national guides.
+          Grow Green is family-owned and firefighter-owned in {site.address.city}, with a real office when you need
+          follow-up.
+        </p>
+        <div class="soil-local__points">
+          <div class="soil-local__point">Locally owned</div>
+          <div class="soil-local__point">Family-operated</div>
+          <div class="soil-local__point">Firefighter-owned</div>
+          <div class="soil-local__point">No-pressure next steps</div>
+        </div>
+        <a class="f-btn f-btn--green" href="/about-us/">Meet Grow Green →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section soil-faq" aria-labelledby="soil-faq-title">
+    <div class="f-inner soil-faq__grid">
+      <div>
+        <p class="f-kicker">Good to know</p>
+        <h2 class="f-title" id="soil-faq-title">Soil sample questions we hear most.</h2>
+        <p class="f-lead">
+          Still unsure whether testing is the right next step? Call{" "}
+          <a href={`tel:${site.phoneTel}`}>{site.phone}</a>.
+        </p>
+      </div>
+      <div class="soil-faq__list">
+        {
+          faqs.map((f) =>
+            f.q.includes("aeration") ? (
+              <details>
+                <summary>{f.q}</summary>
+                <p>
+                  No. Soil sampling measures chemistry and related soil properties.{" "}
+                  <a href="/core-aeration/">Core aeration</a> or <a href="/liquid-aeration/">liquid aeration</a> address
+                  physical soil conditions such as compaction and water movement. Many lawns benefit from understanding
+                  both sides.
+                </p>
+              </details>
+            ) : (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ),
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section soil-quote" id="soil-quote" aria-labelledby="soil-quote-title">
+    <div class="f-inner soil-quote__grid">
+      <div>
+        <p class="f-kicker f-kicker--light">$55 soil sample request</p>
+        <h2 class="f-title" id="soil-quote-title">Get your soil tested.</h2>
+        <p class="f-lead">
+          Tell us where the property is and what you are seeing. Our local team will follow up to collect the sample and
+          walk you through the report.
+        </p>
+        <ul class="soil-quote__benefits">
+          <li>$55 per sample with lab analysis and graphic report</li>
+          <li>Amendment pricing only after results are reviewed</li>
+          <li>Most requests reviewed during business hours, {site.hours.label}</li>
+        </ul>
+        <p class="soil-quote__chip" aria-hidden="true">Service noted: Soil Sampling</p>
+        <a class="soil-quote__phone" href={`tel:${site.phoneTel}`}>
+          <span>Prefer to talk?</span>
+          <strong>Call {site.phone}</strong>
+        </a>
+      </div>
+      <div class="soil-form-shell">
+        <div class="soil-picks" data-soil-picks>
+          <div>
+            <label for="soil-concern">What are you noticing?</label>
+            <select id="soil-concern" data-soil-concern>
+              {concernOptions.map((opt) => <option value={opt}>{opt}</option>)}
+            </select>
+          </div>
+        </div>
+        <QuoteForm
+          source={source}
+          leadSource={leadSource}
+          heading="Request my soil test"
+          subheading="Share the service address and anything about yellowing, thin turf, hard soil, or prior treatments that will help us prepare."
+          compact
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="soil-final-title">
+    <div class="f-inner">
+      <div class="soil-final__card">
+        <div>
+          <h2 id="soil-final-title">Build a better lawn from the soil up.</h2>
+          <p>
+            Start with a $55 soil sample from a local lawn-treatment company that will explain the report and help you
+            decide what—if anything—to correct next.
+          </p>
+        </div>
+        <div class="soil-final__actions">
+          <a class="f-btn f-btn--gold" href="#soil-quote">Request a soil test</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-soil-page]");
+  if (root) {
+    const notes = root.querySelector<HTMLTextAreaElement>('textarea[name="notes"]');
+    const concern = root.querySelector<HTMLSelectElement>("[data-soil-concern]");
+    const SERVICE = "Service requested: Soil Sampling";
+
+    function syncNotes() {
+      if (!notes) return;
+      const lines = (notes.value || "")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .filter((line) => !line.startsWith("Service requested:") && !line.startsWith("Lawn concern:"));
+      lines.unshift(SERVICE);
+      if (concern?.value) lines.push(`Lawn concern: ${concern.value}`);
+      notes.value = lines.join("\n");
+    }
+
+    concern?.addEventListener("change", syncNotes);
+    notes?.addEventListener("blur", syncNotes);
+    syncNotes();
+  }
+</script>

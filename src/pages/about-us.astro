@@ -1,0 +1,439 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+import {
+  areaServedSchema,
+  coverageMetaPhrase,
+  coverageParishList,
+  coverageServingBlurb,
+  coverageShortPhrase,
+} from "../data/service-areas";
+import { readGoogleReviewsConfig } from "../lib/google-reviews/config";
+import { getDisplayReviews } from "../lib/google-reviews/service";
+import "../styles/about.css";
+
+export const prerender = true;
+
+let googleRating: number | null = null;
+let googleCount: number | null = null;
+try {
+  const payload = await getDisplayReviews(readGoogleReviewsConfig());
+  if (payload.averageRating != null) googleRating = payload.averageRating;
+  if (payload.totalReviewCount != null) googleCount = payload.totalReviewCount;
+} catch {
+  /* proof bar still works without live ratings */
+}
+
+const team = [
+  {
+    name: "Dereck Palermo",
+    role: "Owner",
+    bio: "Sets the standard for service, team development, and long-term care of every customer.",
+    src: "/images/about/owner-with-son.webp",
+    alt: "Dereck Palermo, owner of Grow Green Weed Control, with his son",
+    photoClass: "about-member__photo--dereck",
+  },
+  {
+    name: "Kyle Robison",
+    role: "Lead Technician",
+    bio: "Leads precise field applications and helps keep treatment quality consistent from lawn to lawn.",
+    src: "/images/about/kyle-robison.webp",
+    alt: "Kyle Robison, lead technician at Grow Green Weed Control",
+    photoClass: "about-member__photo--kyle",
+  },
+  {
+    name: "Chase",
+    role: "Specialty Technician",
+    bio: "Handles specialized treatments and extra attention jobs that call for a focused, detail-driven approach.",
+    src: "/images/about/chase-specialty-tech.webp",
+    alt: "Chase, specialty technician at Grow Green Weed Control",
+    photoClass: "about-member__photo--chase",
+  },
+  {
+    name: "Gavin Broussard",
+    role: "Technician",
+    bio: "Brings careful application work, close attention, and dependable service to every route.",
+    src: "/images/about/gavin-broussard.webp",
+    alt: "Gavin Broussard, technician at Grow Green Weed Control",
+    photoClass: "",
+  },
+  {
+    name: "Stuart",
+    role: "Technician",
+    bio: "Delivers dependable route service with careful applications and a clear eye for lawn conditions.",
+    src: "/images/about/stuart-technician.webp",
+    alt: "Stuart, technician at Grow Green Weed Control",
+    photoClass: "about-member__photo--stuart",
+  },
+  {
+    name: "Moses Sunseri",
+    role: "Office Administrator",
+    bio: "Keeps scheduling, communication, and customer support organized and moving smoothly.",
+    src: "/images/about/moses-sunseri.webp",
+    alt: "Moses Sunseri, office administrator at Grow Green Weed Control",
+    photoClass: "",
+  },
+] as const;
+---
+
+<BaseLayout
+  title="About Us | Grow Green Weed Control – Firefighter-Owned Lawn Experts"
+  description={`Grow Green Weed Control is a firefighter-owned, family-operated lawn treatment company serving ${coverageShortPhrase()}.`}
+  canonicalPath="/about-us/"
+>
+  <div class="about-page">
+    <header class="about-hero">
+      <div class="about-hero__inner">
+        <div class="motion-rise">
+          <p class="about-hero__brand">Grow Green Weed Control</p>
+          <p class="about-kicker about-kicker--light">Locally owned in South Louisiana</p>
+          <h1>Local roots. <em>Higher standards.</em></h1>
+          <p class="about-hero__lead">
+            Grow Green was built to give local homeowners something better: lawn treatments designed for our climate,
+            dependable people who show up, and clear communication after every visit.
+          </p>
+          <div class="about-hero__actions">
+            <a class="about-btn about-btn--gold" href="/request-a-quote/">Get My Free Quote</a>
+            <a class="about-btn about-btn--ghost" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+          </div>
+        </div>
+        <figure class="about-hero__visual motion-rise motion-delay-2">
+          <div class="about-hero__frame">
+            <img
+              src="/images/about/owner-with-son.webp"
+              width="720"
+              height="900"
+              alt="Grow Green Weed Control owner Dereck Palermo with his son"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </div>
+          <figcaption class="about-hero__caption">
+            Firefighter owned · Family rooted · Led by founder Dereck Palermo
+          </figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <div class="about-wrap about-proof" aria-label="Grow Green at a glance">
+      <div class="about-proof__bar">
+        <div class="about-proof__item">
+          <strong>Since 2021</strong>
+          <span>Built here in South Louisiana</span>
+        </div>
+        <div class="about-proof__item">
+          <strong>Firefighter owned</strong>
+          <span>Family-operated local team</span>
+        </div>
+        <div class="about-proof__item">
+          {
+            googleRating != null && googleCount != null ? (
+              <>
+                <strong>{googleRating.toFixed(1)}★ Google</strong>
+                <span>{googleCount.toLocaleString("en-US")} reviews on our listing</span>
+              </>
+            ) : (
+              <>
+                <strong>Google reviews</strong>
+                <span>Live ratings on our Business Profile</span>
+              </>
+            )
+          }
+        </div>
+        <div class="about-proof__item">
+          <strong>100% local</strong>
+          <span>No national call center</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="about-section" aria-labelledby="about-story-title">
+      <div class="about-wrap about-story">
+        <div class="about-story__copy">
+          <p class="about-kicker">Our story</p>
+          <h2 id="about-story-title">Built on service, responsibility, and doing the job right.</h2>
+          <p>
+            <strong>Dereck Palermo founded Grow Green Weed Control with a straightforward idea:</strong> South
+            Louisiana homeowners deserved reliable lawn care from a local team that would take ownership of the result.
+          </p>
+          <p>
+            As a professional firefighter, Dereck built the company around the same habits his other career
+            demands—show up prepared, pay attention to details, communicate clearly, and be accountable when people
+            count on you.
+          </p>
+          <p>
+            What began as one local owner serving his neighbors has grown into a dedicated team caring for lawns across
+            {coverageParishList()}. The company has grown, but the standard has not changed: treat every property
+            carefully, explain what was done, and never make a customer chase us for an answer.
+          </p>
+        </div>
+        <aside class="about-story__panel" aria-label="A note from the owner">
+          <blockquote>
+            “I want every customer to feel like they know who is caring for their lawn—and that our team genuinely
+            stands behind the work.”
+          </blockquote>
+          <cite>Dereck Palermo, Owner</cite>
+          <ul class="about-story__list">
+            <li>Locally owned and operated</li>
+            <li>Firefighter-owned and family-operated</li>
+            <li>Office hours {site.hours.label}</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="about-section about-section--soft" aria-labelledby="about-why-title">
+      <div class="about-wrap">
+        <div class="about-head about-head--center">
+          <p class="about-kicker">Why Grow Green</p>
+          <h2 id="about-why-title">We do not try to be every kind of lawn company.</h2>
+          <p>
+            We are lawn-treatment specialists. That focus gives our team more time to understand local turf, improve
+            application quality, and catch problems before they become expensive.
+          </p>
+        </div>
+        <div class="about-values">
+          <article class="about-value">
+            <span class="about-value__num">01</span>
+            <strong>Louisiana lawn expertise</strong>
+            <p>
+              Programs account for South Louisiana heat, humidity, rainfall, soil conditions, and the pressures that
+              affect centipede, St. Augustine, zoysia, and bermuda.
+            </p>
+          </article>
+          <article class="about-value">
+            <span class="about-value__num">02</span>
+            <strong>Careful, calibrated treatments</strong>
+            <p>
+              Professional equipment, measured application rates, and weather-aware timing help us treat the lawn
+              precisely while protecting beds, hardscapes, and surrounding plants.
+            </p>
+          </article>
+          <article class="about-value">
+            <span class="about-value__num">03</span>
+            <strong>Communication you can count on</strong>
+            <p>
+              Service reminders, gate and pet notes, clear visit updates, and a responsive local office mean you know
+              when we came, what we did, and what comes next.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-approach-title">
+      <div class="about-wrap about-approach">
+        <div class="about-mosaic" aria-label="Lawns and work from Grow Green Weed Control">
+          <figure>
+            <img
+              src="/images/hero/cover.webp"
+              alt="Healthy South Louisiana lawn with a Grow Green yard sign"
+              loading="lazy"
+              width="900"
+              height="1100"
+            />
+          </figure>
+          <figure>
+            <img
+              src="/images/home/hero-lawn.webp"
+              alt="Residential lawn cared for by Grow Green Weed Control"
+              loading="lazy"
+              width="700"
+              height="500"
+            />
+          </figure>
+          <figure>
+            <img
+              src="/images/about/kyle-tree-shrub-care.webp"
+              alt="Grow Green technician providing ornamental plant care"
+              loading="lazy"
+              width="700"
+              height="500"
+            />
+          </figure>
+        </div>
+        <div>
+          <p class="about-kicker">What better service looks like</p>
+          <h2 id="about-approach-title">A program—not a random spray.</h2>
+          <p>
+            Healthy turf takes consistent care. Our seasonal lawn program follows the lawn through the year and adjusts
+            to the conditions we see at each visit. {site.startingPrice.short}
+          </p>
+          <ul class="about-checks">
+            <li>
+              <span class="about-checks__mark" aria-hidden="true">✓</span>
+              <span>
+                <strong>We inspect before treating.</strong>
+                <span>Technicians look for weeds, turf stress, disease pressure, and conditions that may change the plan.</span>
+              </span>
+            </li>
+            <li>
+              <span class="about-checks__mark" aria-hidden="true">✓</span>
+              <span>
+                <strong>We document the visit.</strong>
+                <span>You receive useful information about the service—not a vague “we were here” notification.</span>
+              </span>
+            </li>
+            <li>
+              <span class="about-checks__mark" aria-hidden="true">✓</span>
+              <span>
+                <strong>We keep watching the lawn.</strong>
+                <span>Progress is tracked from visit to visit so emerging issues can be addressed at the right time.</span>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section about-section--forest" aria-labelledby="about-process-title">
+      <div class="about-wrap">
+        <div class="about-head">
+          <p class="about-kicker about-kicker--light">Our approach</p>
+          <h2 id="about-process-title">Clear from the first quote to every treatment after it.</h2>
+          <p>
+            You should never have to wonder what is happening with your lawn. Our process is built to keep the service
+            simple and the expectations clear.
+          </p>
+        </div>
+        <div class="about-steps">
+          <article class="about-step">
+            <span class="about-step__num">01</span>
+            <h3>Measure &amp; understand</h3>
+            <p>We learn about the property, identify the turf, and understand the issues you want solved.</p>
+          </article>
+          <article class="about-step">
+            <span class="about-step__num">02</span>
+            <h3>Build the right plan</h3>
+            <p>Your quote is based on the lawn and the services that make sense—not a generic package full of extras.</p>
+          </article>
+          <article class="about-step">
+            <span class="about-step__num">03</span>
+            <h3>Treat with precision</h3>
+            <p>Technicians apply the right products at calibrated rates with care around the entire property.</p>
+          </article>
+          <article class="about-step">
+            <span class="about-step__num">04</span>
+            <h3>Report &amp; adjust</h3>
+            <p>We share what we found, explain what to expect, and adjust future visits as conditions change.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-team-title">
+      <div class="about-wrap">
+        <div class="about-head">
+          <p class="about-kicker">The people behind the service</p>
+          <h2 id="about-team-title">Meet your local Grow Green team.</h2>
+          <p>
+            Real people answer your questions, schedule your visits, and care for your property. We are proud of the
+            team—and the reputation—we are building here at home.
+          </p>
+        </div>
+        <div class="about-team">
+          {
+            team.map((member) => (
+              <article class="about-member">
+                <div class="about-member__photo">
+                  <img
+                    class={member.photoClass || undefined}
+                    src={member.src}
+                    alt={member.alt}
+                    width="480"
+                    height="528"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="about-member__body">
+                  <h3>{member.name}</h3>
+                  <span class="about-member__role">{member.role}</span>
+                  <p>{member.bio}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section about-section--soft" aria-labelledby="about-local-title">
+      <div class="about-wrap about-local">
+        <div class="about-local__intro">
+          <p class="about-kicker about-kicker--light">Made for lawns here</p>
+          <h2 id="about-local-title">South Louisiana is not an easy place to grow great turf.</h2>
+          <p>
+            Extreme heat, heavy rainfall, humidity, compacted soil, and long growing seasons create challenges that
+            national, one-size-fits-all schedules can miss.
+          </p>
+          <p>Our plans are built around the turf and conditions we see every day.</p>
+          <p class="about-local__areas">
+            {coverageServingBlurb()}{" "}
+            <a href="/service-areas/">View all service areas →</a>
+          </p>
+        </div>
+        <div class="about-turf" aria-label="Local turf expertise">
+          <article>
+            <strong>Centipede</strong>
+            <p>Careful nutrition and well-timed weed control that respects this grass’s lower-input needs.</p>
+          </article>
+          <article>
+            <strong>St. Augustine</strong>
+            <p>Season-aware treatments with attention to insects, disease pressure, and summer stress.</p>
+          </article>
+          <article>
+            <strong>Zoysia</strong>
+            <p>Balanced fertility and proactive monitoring for the fungus pressure created by heat and humidity.</p>
+          </article>
+          <article>
+            <strong>Bermuda</strong>
+            <p>Consistent nutrition and strategic weed-prevention timing for dense, actively growing turf.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-cta" aria-labelledby="about-cta-title">
+      <div class="about-wrap">
+        <div class="about-cta__card">
+          <div>
+            <p class="about-kicker about-kicker--light">Ready for a better lawn?</p>
+            <h2 id="about-cta-title">Let’s take a closer look at your property.</h2>
+            <p>
+              Tell us where you are and what you want to improve. We’ll prepare a clear, no-pressure estimate built for
+              your lawn size and selected services.
+            </p>
+          </div>
+          <div class="about-cta__actions">
+            <a class="about-btn about-btn--gold" href="/request-a-quote/">Start My Free Quote</a>
+            <a class="about-btn about-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+            <span class="about-cta__note">Local team · {site.startingPrice.short}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    telephone: site.phoneTel,
+    email: site.email,
+    image: "https://growgreenweedcontrol.com/images/brand/logo.png",
+    description: `Locally owned lawn treatment company providing fertilization, weed control, and related outdoor treatments across ${coverageMetaPhrase()}.`,
+    founder: { "@type": "Person", name: "Dereck Palermo" },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.city,
+      addressRegion: site.address.state,
+      postalCode: site.address.zip,
+      addressCountry: "US",
+    },
+    areaServed: areaServedSchema(),
+    sameAs: [site.social.facebook, site.social.instagram, site.social.google].filter(Boolean),
+  })} />
+</BaseLayout>

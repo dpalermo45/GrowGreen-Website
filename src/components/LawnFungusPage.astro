@@ -1,0 +1,710 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { site } from "../data/site";
+import { coverageFaqAnswer, areaServedSchema } from "../data/service-areas";
+import "../styles/lawn-fungus.css";
+
+const source = "Lawn Fungus Page";
+const leadSource = "Website - Lawn Fungus Page";
+
+const diseases = [
+  {
+    title: "Large Patch",
+    season: "Spring & fall risk",
+    body: "Often associated with warm-season turf during cooler, wet transition periods. The active edge can be more useful than the dead-looking center.",
+    clues: [
+      "Large circular or irregular yellow-to-brown patches that may expand",
+      "An orange or bronze margin may appear where disease is active",
+      "Common concern in St. Augustine, centipede, and zoysia lawns",
+    ],
+    pick: "Large circular or orange-edged patches",
+    image: "/images/services/lawn-fungus-large-patch-720.webp",
+    imageAlt:
+      "Yellow-brown circular patch in an otherwise green St. Augustine lawn beside a mulched bed—an example of large patch disease",
+  },
+  {
+    title: "Gray Leaf Spot",
+    season: "Hot & humid periods",
+    body: "A foliage disease seen most often on St. Augustine in Louisiana, particularly when heat, humidity, and prolonged leaf wetness line up.",
+    clues: [
+      "Small brown lesions that expand along the leaf blade",
+      "Tan or gray centers with darker brown-to-purple margins",
+      "Severe pressure can make turf look scorched or thin",
+    ],
+    pick: "Spots or lesions on grass blades",
+  },
+  {
+    title: "Dollar Spot",
+    season: "Often spring & fall",
+    body: "A leaf disease that can create scattered straw-colored spots. Individual spots can merge into larger damaged areas as pressure increases.",
+    clues: [
+      "Small bleached or straw-colored spots across the lawn",
+      "Light tan leaf lesions with darker brown borders",
+      "Commonly reported on bermudagrass in Louisiana",
+    ],
+    pick: "Small straw-colored spots that may merge",
+  },
+  {
+    title: "Take-All Root Rot",
+    season: "Root & stress complex",
+    body: "A soil-borne root disease. Aboveground decline may become most obvious after roots are already damaged and heat or drought adds stress.",
+    clues: [
+      "Yellow, thin, drought-stressed appearance that persists",
+      "Short, dark, brittle roots and low root density",
+      "Integrated stress management matters; established cases can be difficult",
+    ],
+    pick: "Yellowing, thinning, or weak roots",
+  },
+] as const;
+
+const lookalikes = [
+  {
+    title: "Chinch bugs & other insects",
+    body: "Feeding injury can create spreading yellow or brown areas, especially during hot weather. Turf and pest inspection help separate it from disease.",
+  },
+  {
+    title: "Drought or irrigation gaps",
+    body: "Missed zones, clogged heads, poor coverage, and water stress can make sharp or irregular brown patterns that track the irrigation system.",
+  },
+  {
+    title: "Mowing injury",
+    body: "Scalping, dull blades, cutting wet turf, or removing too much at once can leave discoloration and wounds that resemble or contribute to disease.",
+  },
+  {
+    title: "Compaction, drainage & shade",
+    body: "Restricted roots, saturated soil, runoff, and low light weaken turf. These conditions may be the primary problem or increase disease pressure.",
+  },
+] as const;
+
+const steps = [
+  {
+    n: "01",
+    title: "Tell us what changed",
+    body: "Share the grass type, pattern, timing, weather, watering, and anything already applied. Photos may help us decide what needs a closer look.",
+  },
+  {
+    n: "02",
+    title: "Narrow the likely cause",
+    body: "We compare disease clues with insects, irrigation gaps, mowing injury, root stress, compaction, and other common look-alikes.",
+  },
+  {
+    n: "03",
+    title: "Choose the right response",
+    body: "When a susceptible disease is the best fit, we select a labeled fungicide strategy. When it is not, we explain the better next step.",
+  },
+  {
+    n: "04",
+    title: "Protect the recovery",
+    body: "You receive practical watering, mowing, and stress-reduction guidance. Follow-up depends on the disease, severity, weather, and turf response.",
+  },
+] as const;
+
+const care = [
+  {
+    title: "Water with purpose",
+    body: "Favor early-morning irrigation and avoid frequent cycles that keep leaves wet for long periods. Check coverage instead of assuming every zone is equal.",
+  },
+  {
+    title: "Mow for the grass",
+    body: "Use the appropriate height and a sharp blade. Avoid scalping and, when practical, avoid mowing actively diseased turf while it is wet.",
+  },
+  {
+    title: "Reduce root stress",
+    body: "Compaction, thatch, poor drainage, and shade can weaken turf or extend wetness. These site limits need management even when fungicide is justified.",
+  },
+  {
+    title: "Use balanced fertility",
+    body: "Too much or poorly timed quick-release nitrogen can increase pressure for some diseases. Base pH changes such as lime on a soil test—not a guess.",
+  },
+] as const;
+
+const faqs = [
+  {
+    q: "How do I know whether a brown patch is actually fungus?",
+    a: "You usually cannot confirm the cause from color alone. Pattern, turf species, leaf or root symptoms, moisture, weather, mowing, irrigation, and insect evidence all help. Photos may narrow the possibilities, but an on-site look or additional testing can be appropriate when the clues conflict.",
+  },
+  {
+    q: "Will fungicide make dead grass green again?",
+    a: "No. Fungicide may manage susceptible disease and protect living tissue, but it does not revive dead leaves, crowns, stolons, or roots. Visual recovery depends on how much viable turf remains, the grass species, growing conditions, season, and whether re-sodding or repair is needed.",
+  },
+  {
+    q: "How quickly should I expect improvement?",
+    a: "There is no responsible one-size-fits-all timetable. Disease suppression, new turf growth, and full cosmetic recovery happen on different schedules. The pathogen, product, severity, weather, turf health, and whether the underlying stress is corrected all affect progress.",
+  },
+  {
+    q: "Is preventive treatment different from treating an outbreak?",
+    a: "Yes. Preventive timing aims to protect susceptible turf before or near a predictable disease window. An active outbreak may need a different product, timing, repeat interval, and recovery plan. The current product label and actual disease pressure guide the recommendation.",
+  },
+  {
+    q: "Is fungus control included in the regular lawn program?",
+    a: "Seasonal disease attention may be included as described in your specific plan. Active, severe, repeated, or specialized fungicide treatments may be priced separately; we review that scope with you first.",
+  },
+  {
+    q: "Should I water or mow after a fungicide application?",
+    a: "Follow the instructions Grow Green leaves for that application. Some products need time on the foliage, while others may need to be watered into the root zone. Mowing and irrigation timing can vary by product and disease, so the current label controls.",
+  },
+  {
+    q: "When can children and pets return to the lawn?",
+    a: "Keep people and pets out of the treatment area during application and until the product label’s re-entry directions have been satisfied. This often includes allowing the treated surface to dry, but instructions can vary. Grow Green will provide the applicable guidance for your service.",
+  },
+  {
+    q: "Why is Take-All Root Rot harder to manage?",
+    a: "It damages roots below the surface, and aboveground symptoms may show after root loss is already advanced. Reducing drought, compaction, drainage, mowing, thatch, or pH stress is central to management. Fungicide may be one part of an integrated plan, but established cases can respond less predictably.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+];
+
+const concernOptions = [
+  "Not sure — please help identify it",
+  "Large circular or orange-edged patches",
+  "Small straw-colored spots that may merge",
+  "Spots or lesions on grass blades",
+  "Yellowing, thinning, or weak roots",
+  "Rapid or widespread decline",
+  "Known or recurring fungus problem",
+] as const;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Lawn Fungus Control",
+  url: "https://growgreenweedcontrol.com/lawn-fungus/",
+  description:
+    "Evaluation and targeted lawn fungus control for warm-season turf in Baton Rouge, Ascension Parish, Livingston Parish, and nearby South Louisiana communities.",
+  serviceType: "Lawn disease evaluation and fungicide treatment",
+  provider: {
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    telephone: site.phoneTel,
+  },
+  areaServed: areaServedSchema(),
+};
+---
+
+<div class="fungus-page fungus-page--evidence" data-fungus-page>
+  <header class="fungus-hero fungus-hero--photo">
+    <div class="fungus-hero__media" aria-hidden="true">
+      <img
+        src="/images/services/lawn-fungus-large-patch.webp"
+        width="480"
+        height="640"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="fungus-hero__shade" aria-hidden="true"></div>
+    <div class="f-inner fungus-hero__grid">
+      <div class="motion-rise">
+        <div class="fungus-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <p class="fungus-hero__eyebrow">Lawn fungus · South Louisiana</p>
+        <h1>Lawn fungus control built for <em>South Louisiana.</em></h1>
+        <p class="fungus-hero__lead">
+          Brown rings, yellow turf, leaf spots, and thinning can point to disease—but they can also come from insects,
+          drought, irrigation, mowing, or root stress. Grow Green evaluates the clues first, then recommends targeted
+          treatment only when it fits.
+        </p>
+        <div class="fungus-hero__actions">
+          <a class="f-btn f-btn--gold" href="#fungus-quote">Request a fungus-control quote →</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+        <ul class="fungus-hero__notes" aria-label="Service highlights">
+          <li>Diagnosis before spray</li>
+          <li>Warm-season turf</li>
+          <li>Honest recovery limits</li>
+        </ul>
+        <p class="fungus-hero__truth">
+          Fungicide can help manage susceptible disease and protect living turf. It cannot turn dead leaf, crown, or root
+          tissue green again.
+        </p>
+      </div>
+      <div class="fungus-hero__visual motion-rise">
+        <img
+          class="fungus-hero__photo"
+          src="/images/services/lawn-fungus-large-patch-720.webp"
+          width="480"
+          height="600"
+          alt="Yellow-brown circular patch in an otherwise green St. Augustine lawn—an example of large patch disease"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </header>
+
+  <div class="fungus-proof f-inner" aria-label="Grow Green credentials">
+    <div class="fungus-proof__item">
+      <strong>Firefighter-owned</strong>
+      <span>Local and family-operated</span>
+    </div>
+    <div class="fungus-proof__item">
+      <strong>Lawn specialists</strong>
+      <span>Not a mowing or landscape crew</span>
+    </div>
+    <div class="fungus-proof__item">
+      <strong>Diagnosis before product</strong>
+      <span>Right problem, right response</span>
+    </div>
+    <div class="fungus-proof__item">
+      <strong>Straight answers</strong>
+      <span>What fungicide can—and cannot—do</span>
+    </div>
+  </div>
+
+  <section class="f-section fungus-video fungus-video--featured" id="fungus-video" aria-labelledby="fungus-video-title">
+    <div class="f-inner fungus-video__grid">
+      <div class="fungus-video__frame">
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          poster="/images/services/lawn-fungus-video-poster.webp"
+          controlslist="nodownload"
+          aria-label="Grow Green walkthrough of a real lawn with large circular brown areas"
+        >
+          <source src="/videos/lawn-fungus-case.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="fungus-video__copy">
+        <p class="f-kicker f-kicker--light">Real lawn. Real conversation.</p>
+        <h2 class="f-title" id="fungus-video-title">See what widespread patch damage can look like.</h2>
+        <p>
+          This short walkthrough shows severe circular damage on an actual customer lawn. It is a useful visual
+          example—not proof that every similar patch has the same cause. The closer look, recent conditions, and turf
+          history still matter.
+        </p>
+        <ul class="fungus-video__points">
+          <li>Full square frame with no social-media crop</li>
+          <li>Actual South Louisiana property conditions</li>
+          <li>A clear reason to act before living turf is lost</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="fungus-diag-title">
+    <div class="f-inner fungus-diag__grid">
+      <div>
+        <p class="f-kicker">Diagnosis before treatment</p>
+        <h2 class="f-title" id="fungus-diag-title">Brown grass is a symptom. Fungus is one possible cause.</h2>
+        <p class="f-lead">
+          A useful recommendation comes from the whole picture—not one photo or one ring in the lawn. We look at the
+          pattern, grass species, affected plant parts, weather, moisture, maintenance, and how quickly the problem
+          changed.
+        </p>
+        <ul class="fungus-checks">
+          <li>
+            <span class="fungus-checks__num" aria-hidden="true">1</span>
+            <div>
+              <strong>Pattern in the lawn</strong>
+              <p>Large rings, scattered straw-colored spots, irregular thinning, or rapid decline provide different clues.</p>
+            </div>
+          </li>
+          <li>
+            <span class="fungus-checks__num" aria-hidden="true">2</span>
+            <div>
+              <strong>Leaves, stolons, crowns, and roots</strong>
+              <p>Surface spots and weak root systems can call for very different expectations and management.</p>
+            </div>
+          </li>
+          <li>
+            <span class="fungus-checks__num" aria-hidden="true">3</span>
+            <div>
+              <strong>Conditions around the turf</strong>
+              <p>Temperature, humidity, leaf-wetness duration, shade, drainage, fertility, and mowing all matter.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <aside class="fungus-equation" aria-label="Conditions needed for turf disease">
+        <div class="fungus-equation__card">
+          <strong>Susceptible turf</strong>
+          <span>St. Augustine, centipede, bermuda, and zoysia do not share identical disease risks.</span>
+        </div>
+        <div class="fungus-equation__card">
+          <strong>Active pathogen</strong>
+          <span>A disease-causing organism must be present; appearance alone does not confirm one.</span>
+        </div>
+        <div class="fungus-equation__card">
+          <strong>Favorable environment</strong>
+          <span>Warmth or cool transitions, high humidity, extended wetness, and plant stress can open the disease window.</span>
+        </div>
+        <p class="fungus-equation__result">
+          All three pieces help explain disease. That is why “spray the brown spot” is not a reliable diagnosis or recovery
+          plan.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="f-section fungus-guide" aria-labelledby="fungus-guide-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Common local possibilities</p>
+      <h2 class="f-title f-center" id="fungus-guide-title">Four lawn diseases worth knowing.</h2>
+      <p class="f-lead f-center">
+        These are field clues—not a remote diagnosis. Similar symptoms can overlap, and turf may have more than one stress
+        at a time.
+      </p>
+      <div class="fungus-disease-grid">
+        {
+          diseases.map((d) => (
+            <article class="fungus-disease">
+              {"image" in d && d.image ? (
+                <img
+                  class="fungus-disease__photo"
+                  src={d.image}
+                  width="480"
+                  height="600"
+                  alt={d.imageAlt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : null}
+              <div class="fungus-disease__meta">
+                <span class="fungus-disease__season">{d.season}</span>
+              </div>
+              <h3>{d.title}</h3>
+              <p>{d.body}</p>
+              <ul>
+                {d.clues.map((c) => (
+                  <li>{c}</li>
+                ))}
+              </ul>
+              <button class="fungus-pick" type="button" data-pick-concern={d.pick}>
+                Add this clue to my request →
+              </button>
+            </article>
+          ))
+        }
+      </div>
+      <p class="fungus-note">
+        A photo can help show the pattern, but it may not show the leaf lesions, crowns, roots, soil moisture, insects, or
+        maintenance conditions needed to narrow the cause.
+      </p>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="fungus-look-title">
+    <div class="f-inner fungus-look__grid">
+      <div>
+        <p class="f-kicker">Common look-alikes</p>
+        <h2 class="f-title" id="fungus-look-title">When fungicide is not the first answer.</h2>
+        <p class="f-lead">
+          Using a disease product on the wrong problem costs time while the actual cause keeps working. These issues can
+          closely resemble lawn fungus.
+        </p>
+        <a class="fungus-text-link" href="/lawn-insects/">Explore lawn insect control →</a>
+      </div>
+      <div class="fungus-look__cards">
+        {
+          lookalikes.map((item) => (
+            <article class="fungus-look__card">
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="fungus-process-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Our treatment process</p>
+      <h2 class="f-title f-center" id="fungus-process-title">A plan built around the cause—not the color.</h2>
+      <p class="f-lead f-center">
+        Disease management works best when product choice, timing, turf condition, and maintenance guidance all point in
+        the same direction.
+      </p>
+      <div class="fungus-steps">
+        {
+          steps.map((s) => (
+            <article class="fungus-step">
+              <span class="fungus-step__num">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section fungus-expect" aria-labelledby="fungus-expect-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Clear expectations</p>
+      <h2 class="f-title f-center" id="fungus-expect-title">What treatment can—and cannot—do.</h2>
+      <p class="f-lead f-center">
+        Disease activity and visual recovery are not the same thing. New healthy growth may need time to replace damaged
+        tissue.
+      </p>
+      <div class="fungus-expect__grid">
+        <article class="fungus-expect__card fungus-expect__card--yes">
+          <h3>Treatment may help</h3>
+          <ul>
+            <li>Manage active pressure from a susceptible fungal disease</li>
+            <li>Protect living turf while favorable disease conditions continue</li>
+            <li>Reduce recurrence risk when paired with better turf-care conditions</li>
+            <li>Give surviving turf a better opportunity to recover and fill</li>
+          </ul>
+        </article>
+        <article class="fungus-expect__card fungus-expect__card--no">
+          <h3>Treatment cannot</h3>
+          <ul>
+            <li>Revive grass whose leaves, crowns, stolons, or roots are already dead</li>
+            <li>Repair irrigation coverage, drainage, compaction, shade, or mowing problems</li>
+            <li>Guarantee a cosmetic recovery date regardless of season and severity</li>
+            <li>Replace laboratory or specialist testing when the diagnosis remains uncertain</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="fungus-care-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Make the lawn less inviting to disease</p>
+      <h2 class="f-title f-center" id="fungus-care-title">The application is only one part of the plan.</h2>
+      <p class="f-lead f-center">
+        Small maintenance changes can shorten leaf wetness, reduce plant stress, and support stronger roots.
+        Recommendations should still match your turf type and site.
+      </p>
+      <div class="fungus-care-grid">
+        {
+          care.map((c) => (
+            <article class="fungus-care">
+              <h3>{c.title}</h3>
+              <p>{c.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="fungus-source">
+        Disease and maintenance guidance informed by{" "}
+        <a
+          href="https://www.lsuagcenter.com/topics/lawn_garden/commercial_horticulture/turfgrass/turfgrass-diseases"
+          target="_blank"
+          rel="noopener noreferrer">LSU AgCenter turfgrass disease resources</a
+        >{" "}
+        and{" "}
+        <a href="https://site.extension.uga.edu/camdenanr/2023/01/lawn-diseases-101/" target="_blank" rel="noopener noreferrer"
+          >University of Georgia Extension disease guidance</a
+        >. Product selection and directions always follow the current label.
+      </p>
+    </div>
+  </section>
+
+  <section class="f-section fungus-program" aria-labelledby="fungus-program-title">
+    <div class="f-inner">
+      <div class="fungus-program__card">
+        <div>
+          <p class="f-kicker">Where fungus control fits</p>
+          <h2 class="f-title" id="fungus-program-title">Routine prevention and active outbreaks are different jobs.</h2>
+          <p class="f-lead">
+            Seasonal disease attention may be built into an ongoing lawn plan where included, while active, severe,
+            repeated, or specialized disease work may require a separately priced treatment strategy.
+          </p>
+          <div class="fungus-program__options">
+            <div class="fungus-program__option">
+              <strong>Ongoing lawn customer</strong>
+              <span>We review your program, service history, current pressure, and what disease coverage is already planned.</span>
+            </div>
+            <div class="fungus-program__option">
+              <strong>New or outbreak-only request</strong>
+              <span>We scope the affected lawn, likely cause, treatment objective, expected limitations, and quote before service.</span>
+            </div>
+          </div>
+        </div>
+        <div class="fungus-program__visual" aria-hidden="true">
+          <img src="/images/mascot/spray-wand-240.webp" width="240" height="280" alt="" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="fungus-local-title">
+    <div class="f-inner fungus-local__grid">
+      <figure class="fungus-owner">
+        <img
+          class="fungus-local__photo"
+          src="/images/services/lawn-fungus-local-960.webp"
+          width="480"
+          height="600"
+          alt="Grow Green owner with his son beside a branded Grow Green service truck"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="fungus-owner__badge">
+          <strong>Family-owned. Firefighter-owned.</strong>
+          <span>Lawn treatment specialists—not a mowing route add-on.</span>
+        </figcaption>
+      </figure>
+      <div>
+        <p class="f-kicker">A genuinely local company</p>
+        <h2 class="f-title" id="fungus-local-title">Local experience matters when weather drives the problem.</h2>
+        <p class="f-lead">
+          Grow Green was built in South Louisiana by owner and firefighter Dereck Palermo. Our team works in the same heat,
+          humidity, heavy rain, and seasonal transitions that shape disease pressure across area lawns.
+        </p>
+        <div class="fungus-local__points">
+          <div class="fungus-local__point">Locally owned</div>
+          <div class="fungus-local__point">Family-operated</div>
+          <div class="fungus-local__point">Firefighter-owned</div>
+          <div class="fungus-local__point">Local office support</div>
+        </div>
+        <a class="f-btn f-btn--green" href="/about-us/">Meet Grow Green →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section fungus-faq" aria-labelledby="fungus-faq-title">
+    <div class="f-inner fungus-faq__grid">
+      <div>
+        <p class="f-kicker">Common questions</p>
+        <h2 class="f-title" id="fungus-faq-title">Straight answers about lawn fungus.</h2>
+        <p class="f-lead">
+          Good disease control starts with realistic expectations. If your question is not here, call our local team at{" "}
+          <a href={`tel:${site.phoneTel}`}>{site.phone}</a>.
+        </p>
+      </div>
+      <div class="fungus-faq__list">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section fungus-quote" id="fungus-quote" aria-labelledby="fungus-quote-title">
+    <div class="f-inner fungus-quote__grid">
+      <div>
+        <p class="f-kicker f-kicker--light">Free custom estimate</p>
+        <h2 class="f-title" id="fungus-quote-title">Show us what your lawn is doing.</h2>
+        <p class="f-lead">
+          You do not need to name the disease. Choose the closest description, share the address, and our local team will
+          review the next step.
+        </p>
+        <ul class="fungus-quote__benefits">
+          <li>No pressure or obligation</li>
+          <li>Most quote requests reviewed during business hours, {site.hours.label}</li>
+          <li>Your information goes directly to Grow Green</li>
+        </ul>
+        <p class="fungus-quote__chip" aria-hidden="true">Service noted: Lawn Fungus Control</p>
+        <a class="fungus-quote__phone" href={`tel:${site.phoneTel}`}>
+          <span>Prefer to talk?</span>
+          <strong>Call {site.phone}</strong>
+        </a>
+      </div>
+      <div class="fungus-form-shell">
+        <div class="fungus-concerns" data-fungus-concerns>
+          <p class="fungus-concerns__label">Closest description (optional)</p>
+          <div class="fungus-concerns__list" role="group" aria-label="Symptom description">
+            {
+              concernOptions.map((opt) => (
+                <button type="button" data-pick-concern={opt}>
+                  {opt}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+        <QuoteForm
+          source={source}
+          leadSource={leadSource}
+          heading="Request your free quote"
+          subheading="Share the service address and what you are seeing. Not sure what it is? That is normal—choose the closest clue above."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="fungus-final-title">
+    <div class="f-inner">
+      <div class="fungus-final__card">
+        <div>
+          <h2 id="fungus-final-title">Do not let a guess choose the treatment.</h2>
+          <p>
+            Tell Grow Green what you are seeing. We will help separate likely disease from common look-alikes and build a
+            clear lawn-specific recommendation.
+          </p>
+        </div>
+        <div class="fungus-final__actions">
+          <a class="f-btn f-btn--gold" href="#fungus-quote">Request my free quote</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-fungus-page]");
+  if (root) {
+    const notes = root.querySelector<HTMLTextAreaElement>('textarea[name="notes"]');
+    const buttons = root.querySelectorAll<HTMLButtonElement>("[data-pick-concern]");
+    const SERVICE_PREFIX = "Service requested: Lawn Fungus Control";
+
+    function ensureServiceNote() {
+      if (!notes) return;
+      const lines = (notes.value || "")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .filter((line) => !line.startsWith("Service requested:"));
+      lines.unshift(SERVICE_PREFIX);
+      notes.value = lines.join("\n");
+    }
+
+    function applyConcern(value: string) {
+      if (!notes) return;
+      const prefix = "Closest description: ";
+      const lines = (notes.value || "")
+        .split("\n")
+        .map((l) => l.trim())
+        .filter(Boolean)
+        .filter((l) => !l.startsWith(prefix) && !l.startsWith("Service requested:"));
+      lines.unshift(`${prefix}${value}`);
+      lines.unshift(SERVICE_PREFIX);
+      notes.value = lines.join("\n");
+      buttons.forEach((b) => b.classList.toggle("is-active", b.dataset.pickConcern === value));
+    }
+
+    ensureServiceNote();
+    notes?.addEventListener("blur", ensureServiceNote);
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const value = button.dataset.pickConcern || "";
+        if (!value) return;
+        applyConcern(value);
+        const quote = document.getElementById("fungus-quote");
+        quote?.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.setTimeout(() => notes?.focus({ preventScroll: true }), 500);
+      });
+    });
+  }
+</script>

@@ -1,0 +1,1547 @@
+/* Lawn fertilization & weed control — dedicated service landing */
+
+.lawn-page {
+  --lawn-forest: #102c1b;
+  --lawn-forest-deep: #07180d;
+  --lawn-green: #2f7a43;
+  --lawn-green-bright: #3a9452;
+  --lawn-lime: #c5ea6e;
+  --lawn-gold: #f5a20a;
+  --lawn-gold-hover: #ffb225;
+  --lawn-ink: #14251a;
+  --lawn-copy: #53645a;
+  --lawn-muted: #64766c;
+  --lawn-soft: #f4f8f4;
+  --lawn-soft-2: #e7f2ea;
+  --lawn-line: rgba(22, 56, 37, 0.12);
+  --lawn-radius: 18px;
+  --lawn-shadow: 0 22px 60px rgba(9, 47, 25, 0.12);
+  --lawn-shadow-soft: 0 12px 34px rgba(9, 47, 25, 0.08);
+  color: var(--lawn-ink);
+  background: #fff;
+  overflow: clip;
+}
+
+.lawn-page .lawn-inner {
+  width: min(1180px, calc(100% - 2.25rem));
+  margin-inline: auto;
+}
+
+.lawn-page .lawn-section {
+  padding: clamp(3.25rem, 6.5vw, 5rem) 0;
+}
+
+.lawn-page .lawn-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0 0 0.9rem;
+  color: var(--lawn-forest);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.lawn-page .lawn-kicker::before {
+  content: "";
+  width: 2rem;
+  height: 3px;
+  border-radius: 99px;
+  background: var(--lawn-gold);
+}
+
+.lawn-page .lawn-heading {
+  margin: 0 0 0.85rem;
+  font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: var(--lawn-ink);
+  max-width: 36rem;
+  text-wrap: balance;
+}
+
+.lawn-page .lawn-lead {
+  margin: 0;
+  max-width: 40rem;
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  line-height: 1.65;
+  color: var(--lawn-copy);
+}
+
+.lawn-page .lawn-btn {
+  min-height: 3.05rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.8rem 1.3rem;
+  border: 1.5px solid transparent;
+  border-radius: 0.7rem;
+  font-weight: 900;
+  font-size: 0.96rem;
+  line-height: 1.1;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lawn-page .lawn-btn:hover {
+  transform: translateY(-2px);
+}
+
+.lawn-page .lawn-btn--gold {
+  background: var(--lawn-gold);
+  color: #14200f;
+  box-shadow: 0 12px 28px rgba(196, 119, 0, 0.22);
+}
+
+.lawn-page .lawn-btn--gold:hover {
+  background: var(--lawn-gold-hover);
+  color: #14200f;
+}
+
+.lawn-page .lawn-btn--green {
+  background: var(--lawn-green);
+  color: #fff;
+  box-shadow: 0 13px 30px rgba(47, 122, 67, 0.25);
+}
+
+.lawn-page .lawn-btn--green:hover {
+  background: #238e3d;
+  color: #fff;
+}
+
+.lawn-page .lawn-btn--ghost {
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+  background: transparent;
+}
+
+.lawn-page .lawn-btn--ghost:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.lawn-page .lawn-btn--outline {
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+  background: transparent;
+}
+
+.lawn-page .lawn-btn--outline:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #fff;
+  color: #fff;
+}
+
+.lawn-page .lawn-arrow {
+  width: 1.1rem;
+  height: 1.1rem;
+  transition: transform 0.22s ease;
+}
+
+.lawn-page .lawn-btn:hover .lawn-arrow {
+  transform: translateX(3px);
+}
+
+/* —— Hero —— */
+.lawn-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 0;
+  background: #071d11;
+  color: #fff;
+}
+
+.lawn-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.lawn-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+}
+
+.lawn-hero__shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(108deg, rgba(7, 29, 17, 0.92) 0%, rgba(11, 40, 23, 0.78) 42%, rgba(7, 29, 17, 0.55) 100%),
+    linear-gradient(180deg, rgba(7, 29, 17, 0.2) 0%, rgba(7, 29, 17, 0.7) 100%);
+}
+
+.lawn-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  padding: clamp(3.25rem, 7vw, 5rem) 0 clamp(2.75rem, 5.5vw, 4rem);
+  min-height: min(72vh, 38rem);
+}
+
+.lawn-hero__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+  padding: 0.4rem 0.7rem 0.4rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.lawn-hero__brand img {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+  background: #fff;
+  object-fit: contain;
+}
+
+.lawn-hero__brand span {
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.lawn-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.85rem;
+  color: #f0d48a;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.lawn-hero__eyebrow::before {
+  content: "";
+  width: 1.35rem;
+  height: 2px;
+  background: var(--lawn-gold);
+  border-radius: 99px;
+}
+
+.lawn-hero h1 {
+  margin: 0 0 0.85rem;
+  max-width: 14ch;
+  font-size: clamp(2.2rem, 4.6vw, 3.45rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.lawn-hero h1 em {
+  font-style: normal;
+  color: var(--lawn-gold);
+}
+
+.lawn-hero__lead {
+  margin: 0 0 1.35rem;
+  max-width: 36rem;
+  font-size: clamp(1.02rem, 1.6vw, 1.14rem);
+  line-height: 1.55;
+  color: rgba(220, 232, 224, 0.92);
+}
+
+.lawn-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-bottom: 1.1rem;
+}
+
+.lawn-hero__notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.15rem;
+  padding: 0;
+  list-style: none;
+}
+
+.lawn-hero__notes li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(232, 242, 234, 0.92);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.lawn-hero__truth {
+  margin: 0;
+  max-width: 34rem;
+  padding: 0.75rem 0.9rem;
+  border-left: 3px solid var(--lawn-gold);
+  border-radius: 0 0.65rem 0.65rem 0;
+  background: rgba(0, 0, 0, 0.22);
+  color: rgba(220, 232, 224, 0.88);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.lawn-hero__visual {
+  position: relative;
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: min(100%, 20rem);
+}
+
+.lawn-hero__mascot {
+  display: block;
+  width: min(100%, 17.5rem);
+  height: auto;
+  filter:
+    drop-shadow(0 0 0.4rem rgba(255, 255, 255, 0.28))
+    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.42));
+}
+
+/* —— Proof strip (claims-safe) —— */
+.lawn-proof {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  background: #fff;
+  border-bottom: 1px solid var(--lawn-line);
+  box-shadow: 0 10px 30px rgba(16, 44, 27, 0.06);
+}
+
+.lawn-proof__item {
+  padding: 1.15rem 1.25rem;
+  border-right: 1px solid var(--lawn-line);
+  text-align: center;
+}
+
+.lawn-proof__item:last-child {
+  border-right: 0;
+}
+
+.lawn-proof__item strong {
+  display: block;
+  color: var(--lawn-forest);
+  font-size: 0.98rem;
+  font-weight: 900;
+}
+
+.lawn-proof__item span {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--lawn-muted);
+  font-size: 0.82rem;
+}
+
+/* —— Intro / video —— */
+.lawn-intro {
+  background: var(--lawn-soft);
+}
+
+.lawn-intro__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.lawn-intro__points {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem 1.25rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lawn-intro__points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.95rem;
+  font-weight: 750;
+  color: var(--lawn-ink);
+}
+
+.lawn-check {
+  flex: 0 0 1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.1rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(47, 122, 67, 0.14);
+  color: var(--lawn-green);
+}
+
+.lawn-check svg {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.lawn-video {
+  position: relative;
+}
+
+.lawn-video__shell {
+  padding: 0.55rem;
+  border-radius: 1.5rem;
+  background: rgba(16, 44, 27, 0.08);
+  border: 1px solid rgba(16, 44, 27, 0.12);
+  box-shadow: var(--lawn-shadow);
+}
+
+.lawn-video__shell video,
+.lawn-video__poster {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 1.1rem;
+  background: #071b10;
+}
+
+.lawn-video__caption {
+  margin: 0.85rem 0 0;
+  font-size: 0.92rem;
+  color: var(--lawn-copy);
+}
+
+.lawn-video__caption strong {
+  color: var(--lawn-forest);
+}
+
+/* —— Local features —— */
+.lawn-local {
+  background: var(--lawn-soft);
+}
+
+.lawn-local__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2.5rem, 7vw, 5.5rem);
+  align-items: start;
+}
+
+.lawn-local__copy {
+  position: sticky;
+  top: calc(var(--header-h) + 1.25rem);
+}
+
+.lawn-turf-line {
+  margin: 1.6rem 0 0;
+  padding: 1.1rem 0 0;
+  border-top: 1px solid #ccdccc;
+  color: var(--lawn-forest);
+  font-weight: 850;
+  font-size: 0.92rem;
+}
+
+.lawn-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid #cbdcce;
+  border-left: 1px solid #cbdcce;
+}
+
+.lawn-feature {
+  min-height: 13.5rem;
+  padding: 1.7rem 1.55rem;
+  border-right: 1px solid #cbdcce;
+  border-bottom: 1px solid #cbdcce;
+  background: rgba(255, 255, 255, 0.4);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lawn-feature:hover {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  box-shadow: var(--lawn-shadow-soft);
+  transform: translateY(-2px);
+}
+
+.lawn-feature__icon {
+  width: 2.9rem;
+  height: 2.9rem;
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.15rem;
+  border-radius: 0.9rem;
+  background: #dcefe1;
+  color: var(--lawn-forest);
+}
+
+.lawn-feature__icon svg {
+  width: 1.45rem;
+  height: 1.45rem;
+}
+
+.lawn-feature h3 {
+  margin: 0 0 0.55rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.lawn-feature p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--lawn-copy);
+}
+
+.lawn-honest {
+  grid-column: 1 / -1;
+  margin-top: 1.4rem;
+  padding: 1.35rem 1.5rem;
+  border-left: 5px solid var(--lawn-gold);
+  background: #fff;
+  border-radius: 0 1rem 1rem 0;
+  box-shadow: 0 10px 28px rgba(9, 47, 25, 0.06);
+}
+
+.lawn-honest strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--lawn-ink);
+  font-size: 1.05rem;
+}
+
+.lawn-honest p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--lawn-copy);
+}
+
+/* —— Program seasons —— */
+.lawn-program {
+  background: #fff;
+}
+
+.lawn-program__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 2rem;
+}
+
+.lawn-program__note {
+  max-width: 26rem;
+  margin: 0;
+  color: var(--lawn-muted);
+  font-size: 0.92rem;
+}
+
+.lawn-seasons {
+  border-top: 1px solid var(--lawn-line);
+}
+
+.lawn-season {
+  display: grid;
+  grid-template-columns: 11.5rem 1fr 1fr;
+  border-bottom: 1px solid var(--lawn-line);
+}
+
+.lawn-season__label {
+  padding: 2rem 1.5rem 2rem 0;
+  border-right: 1px solid var(--lawn-line);
+}
+
+.lawn-season__label span {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--lawn-green);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.lawn-season__label strong {
+  display: block;
+  color: var(--lawn-ink);
+  font-size: 1.45rem;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.lawn-round {
+  padding: 2rem 2rem;
+  border-right: 1px solid var(--lawn-line);
+  transition: background 0.2s ease;
+}
+
+.lawn-round:last-child {
+  border-right: 0;
+}
+
+.lawn-round:hover {
+  background: var(--lawn-soft);
+}
+
+.lawn-round__top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.lawn-round__num {
+  width: 2.2rem;
+  height: 2.2rem;
+  flex: 0 0 2.2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--lawn-forest);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.lawn-round__date {
+  color: var(--lawn-forest);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.lawn-round h3 {
+  margin: 0 0 0.55rem;
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.lawn-round p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--lawn-copy);
+}
+
+.lawn-program__foot {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+  color: var(--lawn-muted);
+  font-size: 0.85rem;
+}
+
+.lawn-program__foot svg {
+  flex: 0 0 1.1rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.15rem;
+  color: var(--lawn-green);
+}
+
+/* —— Pricing + estimator —— */
+.lawn-pricing {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(184, 220, 86, 0.16), transparent 28%),
+    radial-gradient(circle at 88% 75%, rgba(45, 170, 72, 0.18), transparent 32%),
+    var(--lawn-forest-deep);
+  color: #fff;
+}
+
+.lawn-pricing__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.03fr) minmax(0, 0.97fr);
+  gap: clamp(2.5rem, 7vw, 5.5rem);
+  align-items: center;
+}
+
+.lawn-pricing .lawn-kicker {
+  color: #cdebd5;
+}
+
+.lawn-pricing .lawn-heading {
+  color: #fff;
+}
+
+.lawn-pricing .lawn-lead {
+  color: #dcebe1;
+}
+
+.lawn-start-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 1.7rem 0 1rem;
+  color: #fff;
+}
+
+.lawn-start-price strong {
+  font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.lawn-start-price span {
+  font-weight: 750;
+  color: #cfe5d5;
+}
+
+.lawn-price-list {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1.35rem 0 1.7rem;
+  padding: 0;
+  list-style: none;
+}
+
+.lawn-price-list li {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+  color: #eef8f1;
+  font-size: 0.98rem;
+}
+
+.lawn-price-list svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 1.15rem;
+  margin-top: 0.2rem;
+  color: var(--lawn-lime);
+}
+
+.lawn-estimator {
+  padding: clamp(1.5rem, 3.5vw, 2.4rem);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--lawn-radius);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+  color: var(--lawn-ink);
+}
+
+.lawn-estimator__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.1rem;
+  align-items: start;
+  margin-bottom: 1.4rem;
+}
+
+.lawn-estimator h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--lawn-ink);
+}
+
+.lawn-estimator__head p {
+  margin: 0;
+  color: var(--lawn-muted);
+  font-size: 0.9rem;
+}
+
+.lawn-estimator__badge {
+  flex: 0 0 auto;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  background: #e2f3e6;
+  color: var(--lawn-forest);
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.lawn-slider-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.65rem;
+  color: var(--lawn-copy);
+  font-size: 0.85rem;
+  font-weight: 850;
+}
+
+.lawn-slider-label output {
+  color: var(--lawn-forest);
+  font-weight: 900;
+}
+
+.lawn-slider {
+  width: 100%;
+  height: 0.5rem;
+  margin: 0.3rem 0 1rem;
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  outline: 0;
+  background: linear-gradient(
+    90deg,
+    var(--lawn-green) 0%,
+    var(--lawn-green) var(--lawn-fill, 0%),
+    #dfe9e1 var(--lawn-fill, 0%),
+    #dfe9e1 100%
+  );
+}
+
+.lawn-slider::-webkit-slider-thumb {
+  width: 1.5rem;
+  height: 1.5rem;
+  appearance: none;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--lawn-green);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+}
+
+.lawn-slider::-moz-range-thumb {
+  width: 1.35rem;
+  height: 1.35rem;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--lawn-green);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+}
+
+.lawn-size-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.35rem;
+}
+
+.lawn-size-btn {
+  appearance: none;
+  border: 1px solid #cadbce;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--lawn-copy);
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 850;
+  transition: 0.18s ease;
+}
+
+.lawn-size-btn:hover,
+.lawn-size-btn.is-active {
+  border-color: var(--lawn-green);
+  background: var(--lawn-green);
+  color: #fff;
+}
+
+.lawn-estimate-output {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 0 1.2rem;
+  border: 1px solid var(--lawn-line);
+  border-radius: 1rem;
+  background: var(--lawn-soft);
+  overflow: hidden;
+}
+
+.lawn-estimate-stat {
+  padding: 1rem 1.1rem;
+}
+
+.lawn-estimate-stat + .lawn-estimate-stat {
+  border-left: 1px solid var(--lawn-line);
+}
+
+.lawn-estimate-stat span {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: var(--lawn-muted);
+  font-size: 0.7rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.lawn-estimate-stat strong {
+  display: block;
+  color: var(--lawn-ink);
+  font-size: clamp(1.45rem, 2.8vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.lawn-estimate-stat strong.lawn-green {
+  color: var(--lawn-forest);
+}
+
+.lawn-estimator .lawn-btn {
+  width: 100%;
+}
+
+.lawn-estimator__disclaimer {
+  margin: 0.8rem 0 0;
+  text-align: center;
+  color: var(--lawn-muted);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+/* —— Process —— */
+.lawn-process {
+  background: linear-gradient(180deg, #f7faf7, #eef6f0);
+}
+
+.lawn-process__head {
+  max-width: 42rem;
+  margin: 0 auto 2.1rem;
+  text-align: center;
+}
+
+.lawn-process__head .lawn-kicker {
+  justify-content: center;
+}
+
+.lawn-process__head .lawn-heading {
+  margin-inline: auto;
+}
+
+.lawn-process__head .lawn-lead {
+  margin-inline: auto;
+}
+
+.lawn-process__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+}
+
+.lawn-process__grid::before {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 1.75rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--lawn-green), #9bc66a, var(--lawn-gold));
+  opacity: 0.5;
+}
+
+.lawn-process__step {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.lawn-step-num {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 1.1rem;
+  border: 7px solid #eef6f0;
+  border-radius: 50%;
+  background: var(--lawn-forest);
+  color: #fff;
+  box-shadow: 0 0 0 1px #bdd5c3;
+  font-weight: 900;
+}
+
+.lawn-process__step:last-child .lawn-step-num {
+  background: var(--lawn-gold);
+  color: #162217;
+}
+
+.lawn-process__step h3 {
+  margin: 0 0 0.45rem;
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.lawn-process__step p {
+  margin: 0;
+  color: var(--lawn-copy);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* —— Quote —— */
+.lawn-quote {
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+  scroll-margin-top: 1rem;
+}
+
+.lawn-quote::before {
+  content: "";
+  position: absolute;
+  right: -13rem;
+  top: -12rem;
+  width: 30rem;
+  height: 30rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #e4f4e8, transparent 68%);
+  pointer-events: none;
+}
+
+.lawn-quote__layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(2.25rem, 6vw, 4.5rem);
+  align-items: start;
+}
+
+.lawn-quote__copy {
+  padding-top: 1.25rem;
+}
+
+.lawn-quote__promise {
+  margin: 1.6rem 0 0;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--lawn-line);
+  border-bottom: 1px solid var(--lawn-line);
+}
+
+.lawn-promise-row {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  margin: 0.65rem 0;
+  color: var(--lawn-copy);
+  font-size: 0.92rem;
+  font-weight: 750;
+}
+
+.lawn-promise-row svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: 0 0 1.2rem;
+  margin-top: 0.1rem;
+  color: var(--lawn-green);
+}
+
+.lawn-quote__chip {
+  display: inline-flex;
+  margin: 1rem 0 0;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(47, 122, 67, 0.22);
+  background: rgba(47, 122, 67, 0.08);
+  color: var(--lawn-forest);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.lawn-quote__contact {
+  margin: 1.25rem 0 0;
+  color: var(--lawn-muted);
+  font-size: 0.92rem;
+}
+
+.lawn-quote__contact a {
+  color: var(--lawn-forest);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.lawn-form-card {
+  position: relative;
+  padding: clamp(1.35rem, 3.5vw, 2.2rem);
+  border: 1px solid var(--lawn-line);
+  border-radius: var(--lawn-radius);
+  background: #fff;
+  box-shadow: var(--lawn-shadow);
+}
+
+.lawn-form-card :global(.quote-panel) {
+  box-shadow: none;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+/* —— Reviews / FAQ / Final —— */
+.lawn-reviews {
+  background: var(--lawn-soft);
+}
+
+.lawn-reviews__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  max-width: 44rem;
+}
+
+.lawn-reviews__cta {
+  margin-top: 1.25rem;
+}
+
+.lawn-faq {
+  background: #fff;
+}
+
+.lawn-faq__head {
+  max-width: 42rem;
+  margin: 0 auto 2.4rem;
+  text-align: center;
+}
+
+.lawn-faq__head .lawn-kicker {
+  justify-content: center;
+}
+
+.lawn-faq__head .lawn-heading,
+.lawn-faq__head .lawn-lead {
+  margin-inline: auto;
+}
+
+.lawn-faq__head .lawn-lead a {
+  color: var(--lawn-forest);
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.lawn-faq__head .lawn-lead a:hover {
+  text-decoration: underline;
+}
+
+.lawn-faq__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  align-items: start;
+}
+
+.lawn-faq details {
+  border: 1px solid var(--lawn-line);
+  border-radius: 0.9rem;
+  background: #fff;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lawn-faq details[open] {
+  border-color: #bad6c1;
+  box-shadow: 0 12px 28px rgba(9, 47, 25, 0.07);
+}
+
+.lawn-faq summary {
+  position: relative;
+  display: block;
+  padding: 1.1rem 3.1rem 1.1rem 1.15rem;
+  color: var(--lawn-ink);
+  cursor: pointer;
+  font-weight: 850;
+  line-height: 1.4;
+  list-style: none;
+}
+
+.lawn-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.lawn-faq summary::before,
+.lawn-faq summary::after {
+  content: "";
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  width: 0.85rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--lawn-forest);
+  transition: transform 0.2s ease;
+}
+
+.lawn-faq summary::after {
+  transform: rotate(90deg);
+}
+
+.lawn-faq details[open] summary::after {
+  transform: rotate(0);
+}
+
+.lawn-faq__answer {
+  padding: 0 1.15rem 1.15rem;
+  color: var(--lawn-copy);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.lawn-final {
+  padding: clamp(3.8rem, 7vw, 5.5rem) 0;
+  background-color: #053119;
+  background-image:
+    linear-gradient(115deg, rgba(5, 49, 25, 0.95), rgba(17, 91, 44, 0.9)),
+    url("/images/home/hero-lawn-640.webp");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+@media (min-width: 900px) {
+  .lawn-final {
+    background-image:
+      linear-gradient(115deg, rgba(5, 49, 25, 0.95), rgba(17, 91, 44, 0.9)),
+      url("/images/home/hero-lawn-1280.webp");
+  }
+}
+
+.lawn-final__inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 2.25rem;
+  align-items: center;
+}
+
+.lawn-final h2 {
+  max-width: 38rem;
+  margin: 0 0 0.55rem;
+  color: #fff;
+  font-size: clamp(2rem, 3.8vw, 3.1rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.lawn-final p {
+  margin: 0;
+  color: #dceee2;
+  font-size: 1.05rem;
+}
+
+.lawn-final__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  flex: 0 0 auto;
+}
+
+.lawn-mobile-bar {
+  display: none;
+}
+
+/* —— Motion —— */
+@media (prefers-reduced-motion: no-preference) {
+  .lawn-feature,
+  .lawn-round,
+  .lawn-process__step {
+    transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+  }
+
+  .lawn-page > .lawn-section.motion-rise:nth-of-type(odd),
+  .lawn-page > .motion-rise:nth-of-type(odd) {
+    animation-delay: 40ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lawn-page .lawn-btn:hover {
+    transform: none;
+  }
+}
+
+/* —— Responsive —— */
+@media (max-width: 1050px) {
+  .lawn-hero__grid {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .lawn-hero__visual {
+    justify-self: center;
+    order: -1;
+    width: min(100%, 14rem);
+  }
+
+  .lawn-hero__mascot {
+    width: min(100%, 12.5rem);
+  }
+
+  .lawn-hero h1 {
+    max-width: 18ch;
+  }
+
+  .lawn-intro__grid,
+  .lawn-local__grid,
+  .lawn-quote__layout,
+  .lawn-pricing__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lawn-local__copy {
+    position: static;
+    max-width: 46rem;
+  }
+
+  .lawn-quote__copy {
+    padding-top: 0;
+    max-width: 44rem;
+  }
+
+  .lawn-quote__promise {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.5rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .lawn-proof {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lawn-proof__item:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .lawn-proof__item:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--lawn-line);
+  }
+
+  .lawn-intro__points {
+    grid-template-columns: 1fr;
+  }
+
+  .lawn-program__head {
+    display: block;
+  }
+
+  .lawn-program__head .lawn-heading {
+    margin-bottom: 0.9rem;
+  }
+
+  .lawn-season {
+    grid-template-columns: 9rem 1fr;
+  }
+
+  .lawn-season__label {
+    grid-row: 1 / 3;
+  }
+
+  .lawn-round {
+    border-right: 0;
+    border-bottom: 1px solid var(--lawn-line);
+  }
+
+  .lawn-round:last-child {
+    border-bottom: 0;
+  }
+
+  .lawn-process__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.2rem 1.5rem;
+  }
+
+  .lawn-process__grid::before {
+    display: none;
+  }
+
+  .lawn-faq__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lawn-final__inner {
+    display: block;
+    text-align: center;
+  }
+
+  .lawn-final h2 {
+    margin-inline: auto;
+  }
+
+  .lawn-final__actions {
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .lawn-page {
+    padding-bottom: 4.25rem;
+  }
+
+  .lawn-page .lawn-inner {
+    width: min(100% - 1.5rem, 1180px);
+  }
+
+  .lawn-hero__grid {
+    padding: 4.5rem 0 3.25rem;
+  }
+
+  .lawn-hero__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .lawn-hero__actions .lawn-btn {
+    width: 100%;
+  }
+
+  .lawn-hero__visual {
+    display: none;
+  }
+
+  .lawn-proof {
+    grid-template-columns: 1fr;
+  }
+
+  .lawn-proof__item {
+    border-right: 0;
+    border-bottom: 1px solid var(--lawn-line);
+    text-align: left;
+  }
+
+  .lawn-proof__item:nth-child(-n + 2),
+  .lawn-proof__item:last-child {
+    border-bottom: 1px solid var(--lawn-line);
+  }
+
+  .lawn-proof__item:last-child {
+    border-bottom: 0;
+  }
+
+  .lawn-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lawn-feature {
+    min-height: auto;
+  }
+
+  .lawn-season {
+    display: block;
+  }
+
+  .lawn-season__label {
+    padding: 1.35rem 1.2rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--lawn-line);
+    background: var(--lawn-soft);
+  }
+
+  .lawn-round {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .lawn-estimator__head {
+    display: block;
+  }
+
+  .lawn-estimator__badge {
+    display: inline-block;
+    margin-top: 0.65rem;
+  }
+
+  .lawn-estimate-output {
+    grid-template-columns: 1fr;
+  }
+
+  .lawn-estimate-stat + .lawn-estimate-stat {
+    border-left: 0;
+    border-top: 1px solid var(--lawn-line);
+  }
+
+  .lawn-process__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lawn-process__step {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 0 1rem;
+    text-align: left;
+  }
+
+  .lawn-step-num {
+    grid-row: 1 / 3;
+    margin: 0;
+  }
+
+  .lawn-quote__promise {
+    display: block;
+  }
+
+  .lawn-final__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .lawn-final__actions .lawn-btn {
+    width: 100%;
+  }
+
+  .lawn-mobile-bar {
+    position: fixed;
+    z-index: 40;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4.25rem;
+    display: grid;
+    grid-template-columns: 0.72fr 1.28fr;
+    gap: 0.55rem;
+    padding: 0.55rem 0.75rem calc(0.55rem + env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, 0.96);
+    border-top: 1px solid #d7e3da;
+    box-shadow: 0 -12px 35px rgba(7, 41, 21, 0.16);
+    backdrop-filter: blur(12px);
+  }
+
+  .lawn-mobile-bar a {
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 900;
+  }
+
+  .lawn-mobile-call {
+    border: 1px solid #bdd2c2;
+    color: var(--lawn-forest);
+    background: #fff;
+  }
+
+  .lawn-mobile-quote {
+    background: var(--lawn-gold);
+    color: #182318;
+  }
+}
+
+/* Calendar-first layout rhythm */
+.lawn-page--calendar-first .lawn-program--featured {
+  padding-top: clamp(2.35rem, 4.5vw, 3.5rem);
+  background:
+    linear-gradient(180deg, rgba(243, 248, 243, 0.98) 0%, rgba(247, 250, 246, 0.45) 50%, #fff 100%);
+}
+
+.lawn-page--calendar-first .lawn-program--featured .lawn-seasons {
+  margin-top: 1.35rem;
+}

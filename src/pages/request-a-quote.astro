@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import RequestQuotePage from "../components/RequestQuotePage.astro";
+import { site } from "../data/site";
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Request a Quote | Grow Green Weed Control"
+  description={`Request a free lawn care estimate from Grow Green Weed Control. ${site.startingPrice.short}`}
+  canonicalPath="/request-a-quote/"
+>
+  <RequestQuotePage />
+</BaseLayout>

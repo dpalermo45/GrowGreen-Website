@@ -1,0 +1,332 @@
+---
+import RichPageBody from "./RichPageBody.astro";
+import CtaBand from "./CtaBand.astro";
+import { site } from "../data/site";
+import type { BlogPost } from "../data/blog-posts.generated";
+import type { PageContent } from "../lib/content/loadPageContent";
+import {
+  blogVideoEmbeds,
+  cleanExcerpt,
+  readingMinutes,
+  relatedPostsFor,
+  relatedServicesFor,
+  thumbFor,
+  topicFor,
+} from "../lib/blog";
+import { readableToArticleHtml } from "../lib/content/articleHtml";
+import { inlineImagesFor } from "../data/blog-inline-images";
+import "../styles/blog-post.css";
+
+interface Props {
+  post: BlogPost;
+  rich: PageContent | null;
+  articleHtml?: string | null;
+}
+
+const { post, rich, articleHtml = null } = Astro.props;
+
+const topic = topicFor(post.slug, post.title);
+const thumb = thumbFor(post.slug);
+const lead = cleanExcerpt(post, 180);
+const minutes = readingMinutes(post, rich?.paragraphs || []);
+const related = relatedPostsFor(post.slug, topic, 3);
+const services = relatedServicesFor(topic);
+const video = blogVideoEmbeds[post.slug];
+const inlineImages = inlineImagesFor(post.slug);
+const hasRichBody = Boolean(rich && (rich.paragraphs.length > 0 || rich.headings.length > 0 || rich.faqs.length > 0));
+const generatedFallbackHtml =
+  !hasRichBody && !(articleHtml && articleHtml.trim().length > 40)
+    ? readableToArticleHtml(
+        {
+          headings: post.headings,
+          paragraphs: post.paragraphs,
+          list_items: post.list_items,
+        },
+        { prioritize: post.priority || (post.paragraphs?.length || 0) > 8 },
+      )
+    : null;
+const resolvedArticleHtml = (articleHtml && articleHtml.trim().length > 40 ? articleHtml : generatedFallbackHtml) || "";
+const hasFallbackHtml = Boolean(resolvedArticleHtml.trim().length > 40);
+const takeaways = (rich?.list_items || [])
+  .filter((item) => item.length > 20 && item.length < 140)
+  .slice(0, 4);
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.title,
+  description: post.seoDesc || lead,
+  image: `https://growgreenweedcontrol.com${thumb}`,
+  url: `https://growgreenweedcontrol.com${post.path}`,
+  mainEntityOfPage: `https://growgreenweedcontrol.com${post.path}`,
+  author: {
+    "@type": "Organization",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: site.name,
+    logo: {
+      "@type": "ImageObject",
+      url: "https://growgreenweedcontrol.com/images/brand/logo.png",
+    },
+  },
+  about: topic,
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://growgreenweedcontrol.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Lawn Care Blog",
+      item: "https://growgreenweedcontrol.com/lawn-care-blog/",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: post.title,
+      item: `https://growgreenweedcontrol.com${post.path}`,
+    },
+  ],
+};
+
+const faqSchema =
+  rich?.faqs && rich.faqs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: rich.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      }
+    : null;
+---
+
+<div class="blog-post" data-blog-post>
+  <header class="bp-hero">
+    <div class="bp-hero__media" aria-hidden="true">
+      <img
+        src={thumb}
+        alt=""
+        width="640"
+        height="400"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="bp-hero__shade" aria-hidden="true"></div>
+    <div class="bp-inner bp-hero__grid">
+      <div class="bp-hero__content motion-rise">
+        <div class="bp-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <div class="bp-hero__meta">
+          <span class="bp-hero__topic">{topic}</span>
+          <span>~{minutes} min read</span>
+        </div>
+        <h1>{post.title}</h1>
+        <p class="bp-hero__lead">{lead}</p>
+        <div class="bp-hero__actions">
+          <a class="bp-btn bp-btn--gold" href="/request-a-quote/">Get a free estimate →</a>
+          <a class="bp-btn bp-btn--ghost" href="/lawn-care-blog/">All articles</a>
+        </div>
+      </div>
+      <div class="bp-hero__visual motion-rise" aria-hidden="true">
+        <img
+          class="bp-hero__mascot"
+          src="/images/mascot/helpful-tip-320.webp"
+          srcset="/images/mascot/helpful-tip-216.webp 216w, /images/mascot/helpful-tip-320.webp 320w, /images/mascot/helpful-tip-480.webp 480w"
+          sizes="(max-width: 900px) 42vw, 240px"
+          width="320"
+          height="480"
+          alt=""
+          decoding="async"
+        />
+      </div>
+    </div>
+  </header>
+
+  <section class="bp-body">
+    <div class="bp-inner bp-layout">
+      <article class="bp-article">
+        <nav class="bp-crumb bp-crumb--body" aria-label="Breadcrumb">
+          <a href="/lawn-care-blog/">Lawn care blog</a>
+          <span class="bp-crumb__sep" aria-hidden="true">/</span>
+          <span>{topic}</span>
+          <span class="bp-crumb__sep" aria-hidden="true">·</span>
+          <span>~{minutes} min read</span>
+        </nav>
+
+        {
+          video && (
+            <div class="bp-video">
+              <div class="bp-video__frame">
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.youtubeId}`}
+                  title={video.title}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                />
+              </div>
+              <p class="bp-video__caption">{video.title}</p>
+            </div>
+          )
+        }
+
+        {
+          takeaways.length > 0 && (
+            <aside class="bp-takeaways" aria-label="Key takeaways">
+              <h2>Key takeaways</h2>
+              <ul>
+                {takeaways.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </aside>
+          )
+        }
+
+        {
+          hasRichBody && rich ? (
+            <RichPageBody content={rich} maxSections={18} figures={inlineImages} />
+          ) : hasFallbackHtml ? (
+            <div class="rich-body" set:html={resolvedArticleHtml} />
+          ) : !video ? (
+            <p class="bp-empty">
+              This article is being refreshed. In the meantime,
+              <a href="/request-a-quote/">request a free estimate</a>
+              and our local team can help with the lawn issue you are seeing.
+            </p>
+          ) : (
+            <p class="bp-empty">
+              Watch the video above for a look at Grow Green results in the field. Prefer a plan for your own yard? Send
+              your address and we will prepare a free local estimate.
+            </p>
+          )
+        }
+
+        <div class="bp-article-cta" id="bp-quote">
+          <div>
+            <strong>Seeing this in your lawn?</strong>
+            <p>Get a free local estimate — or call and tell us what you are dealing with.</p>
+          </div>
+          <div class="bp-article-cta__actions">
+            <a class="bp-btn bp-btn--gold" href="/request-a-quote/">Get a free estimate →</a>
+            <a class="bp-btn bp-btn--ghost-ink" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+          </div>
+        </div>
+
+        <div class="bp-byline">
+          <img
+            src="/images/mascot/thinking-240.webp"
+            width="96"
+            height="96"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <strong>Written for South Louisiana lawns</strong>
+            <span>
+              Practical guidance from Grow Green Weed Control — a family-owned, firefighter-owned lawn treatment company
+              based in {site.address.city}, LA.
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <aside class="bp-aside" aria-label="Next steps for this lawn issue">
+        <div class="bp-aside-card bp-aside-cta">
+          <h2>Need help with this?</h2>
+          <p>When you are ready for a local plan, request a free estimate or call the office.</p>
+          <div class="bp-aside-cta__actions">
+            <a class="bp-btn bp-btn--gold" href="/request-a-quote/">Get a free estimate →</a>
+            <a class="bp-btn bp-btn--ghost-ink" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+          </div>
+        </div>
+
+        {
+          services.length > 0 && (
+            <div class="bp-aside-card">
+              <h2>Related services</h2>
+              <p>Useful next steps if this issue matches what you are dealing with at home.</p>
+              <ul class="bp-services">
+                {services.map((s) => (
+                  <li>
+                    <a href={s.href}>
+                      {s.label}
+                      <span aria-hidden="true">→</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+
+        <a class="bp-aside-phone" href={`tel:${site.phoneTel}`}>
+          <small>Talk with our office</small>
+          <strong>{site.phone}</strong>
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  {
+    related.length > 0 && (
+      <section class="bp-related" aria-labelledby="bp-related-title">
+        <div class="bp-inner">
+          <div class="bp-related__head">
+            <h2 id="bp-related-title">Keep reading</h2>
+            <a href="/lawn-care-blog/">Browse all articles →</a>
+          </div>
+          <div class="bp-related__grid">
+            {related.map((item) => (
+              <a class="bp-related__card" href={item.path}>
+                <div class="bp-related__media">
+                  <img
+                    src={thumbFor(item.slug)}
+                    alt=""
+                    width="640"
+                    height="400"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="bp-related__body">
+                  <span class="bp-related__topic">{topicFor(item.slug, item.title)}</span>
+                  <h3>{item.title}</h3>
+                  <p>{cleanExcerpt(item, 110)}</p>
+                  <span class="bp-related__cta">Read article →</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <CtaBand
+    heading="Ready for a clearer plan for your lawn?"
+    text="Programs start at $39/month for lawn fertilization and weed control. Final pricing depends on lawn size and selected services."
+  />
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+{faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}

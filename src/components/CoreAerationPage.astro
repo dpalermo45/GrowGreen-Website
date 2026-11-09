@@ -1,0 +1,544 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { site } from "../data/site";
+import { coverageFaqAnswer, areaServedSchema } from "../data/service-areas";
+import "../styles/core-aeration.css";
+
+const source = "Core Aeration Service Page";
+const leadSource = "Website - Core Aeration Service Page";
+
+const signals = [
+  {
+    n: "01",
+    title: "Water puddles or runs off",
+    body: "Tight soil can slow infiltration before moisture reaches the active root zone.",
+  },
+  {
+    n: "02",
+    title: "The ground feels hard",
+    body: "Heavy traffic and repeated mower passes can compress the soil beneath the turf.",
+  },
+  {
+    n: "03",
+    title: "Turf stays thin or stressed",
+    body: "A weak root environment makes it harder for grass to spread and recover.",
+  },
+  {
+    n: "04",
+    title: "High-use areas decline first",
+    body: "Play areas, walk paths, and turning zones often show compaction earliest.",
+  },
+] as const;
+
+const benefits = [
+  {
+    n: "01",
+    title: "Move water into the soil",
+    body: "Open channels can improve infiltration and reduce irrigation lost to surface runoff in compacted areas.",
+  },
+  {
+    n: "02",
+    title: "Build a deeper root system",
+    body: "More room and better gas exchange support root growth, helping turf handle Louisiana heat and everyday stress.",
+  },
+  {
+    n: "03",
+    title: "Improve nutrient access",
+    body: "Aeration helps water and applied nutrients move beyond the surface and closer to the active roots.",
+  },
+  {
+    n: "04",
+    title: "Support natural thatch breakdown",
+    body: "Bringing soil and microorganisms into contact with the thatch layer can help it break down over time.",
+  },
+] as const;
+
+const steps = [
+  {
+    n: "01",
+    title: "Prepare the lawn",
+    body: "Mow beforehand, water if the soil is dry, and clearly mark sprinkler heads, shallow lines, invisible fencing, and other hidden obstacles.",
+  },
+  {
+    n: "02",
+    title: "We pull soil cores",
+    body: "Professional equipment removes small plugs throughout accessible turf areas. Actual plug depth varies with soil moisture and conditions.",
+  },
+  {
+    n: "03",
+    title: "The lawn recovers naturally",
+    body: "The openings begin closing as the turf grows, while the cores dry, crumble, and return organic material to the soil.",
+  },
+  {
+    n: "04",
+    title: "Keep the program moving",
+    body: "Resume normal watering unless directed otherwise, and continue your lawn program so the improved root zone has support.",
+  },
+] as const;
+
+const faqs = [
+  {
+    q: "When is the best time to core aerate in South Louisiana?",
+    a: "Warm-season grasses recover best while they are actively growing. For St. Augustine, centipede, zoysia, and bermuda, that generally means the warmer growing season—not while the lawn is dormant or severely stressed.",
+  },
+  {
+    q: "Do the soil plugs need to be picked up?",
+    a: "No. Leave them on the lawn. They dry, crumble, and work back into the turf through mowing, watering, and normal weather. That returns soil and organic material to the surface.",
+  },
+  {
+    q: "How should I prepare my sprinklers and other hidden obstacles?",
+    a: "Clearly mark every sprinkler head, valve box, drain cap, invisible-fence line, shallow cable, and other object that may not be visible from the surface. Aeration equipment cannot safely avoid obstacles that are not marked.",
+  },
+  {
+    q: "Should I water before core aeration?",
+    a: "If the ground is very dry, light watering beforehand can help the machine pull cleaner cores. The lawn should be moist enough to penetrate but not saturated, soft, or muddy. We can give timing guidance when your service is scheduled.",
+  },
+  {
+    q: "Will aeration repair bare spots or fix every lawn problem?",
+    a: "No single aeration service can correct every cause of thinning. It improves the soil environment, but bare areas may also involve shade, drainage, insects, disease, irrigation, traffic, or the need for sod. We will be straightforward about what your lawn needs.",
+  },
+  {
+    q: "What is the difference between core and liquid aeration?",
+    a: "Core aeration physically removes plugs for immediate openings in the soil. Liquid aeration uses a soil-conditioning application without holes or heavy equipment and works more gradually. Access, soil condition, and your preference help determine the better fit.",
+  },
+  {
+    q: "How is core aeration priced?",
+    a: "Pricing depends primarily on the amount of turf being aerated, property access, and site conditions. Send the address through the estimate form and our office can review the property and provide straightforward pricing.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Core Aeration",
+  url: "https://growgreenweedcontrol.com/core-aeration/",
+  image: "https://growgreenweedcontrol.com/images/services/core-aeration-hero-1280.webp",
+  description:
+    "Professional core aeration for warm-season lawns in Baton Rouge, Ascension Parish, Livingston Parish, and surrounding South Louisiana communities.",
+  serviceType: "Lawn Core Aeration",
+  provider: {
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    logo: "https://growgreenweedcontrol.com/images/brand/logo.png",
+    telephone: site.phoneTel,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.city,
+      addressRegion: site.address.state,
+      postalCode: site.address.zip,
+      addressCountry: "US",
+    },
+  },
+  areaServed: areaServedSchema(),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://growgreenweedcontrol.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Services",
+      item: "https://growgreenweedcontrol.com/services/",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Core Aeration",
+      item: "https://growgreenweedcontrol.com/core-aeration/",
+    },
+  ],
+};
+---
+
+<div class="core-page" data-core-page>
+  <header class="core-hero core-hero--photo">
+    <div class="core-hero__media" aria-hidden="true">
+      <img
+        src="/images/services/core-aeration-hero-1280.webp"
+        srcset="/images/services/core-aeration-hero-800.webp 800w, /images/services/core-aeration-hero-1280.webp 1280w"
+        sizes="100vw"
+        width="1280"
+        height="853"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="core-hero__shade" aria-hidden="true"></div>
+    <div class="f-inner core-hero__grid">
+      <div class="motion-rise">
+        <div class="core-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <p class="core-hero__eyebrow">Core aeration · South Louisiana</p>
+        <h1>Give compacted soil room to <em>breathe.</em></h1>
+        <p class="core-hero__lead">
+          Professional core aeration opens tight soil so air, water, and nutrients can reach the root zone—helping
+          warm-season turf build deeper roots and a stronger foundation.
+        </p>
+        <div class="core-hero__actions">
+          <a class="f-btn f-btn--gold" href="#core-quote">Get my free estimate →</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+        <ul class="core-hero__notes" aria-label="Service highlights">
+          <li>Physical plug removal</li>
+          <li>Warm-season timing</li>
+          <li>Leave the plugs in place</li>
+        </ul>
+        <p class="core-hero__truth">
+          Aeration improves the soil environment—it does not instantly green dead turf or replace every other lawn care
+          need.
+        </p>
+      </div>
+      <div class="core-hero__visual motion-rise">
+        <img
+          class="core-hero__mascot"
+          src="/images/mascot/aerator-480.webp"
+          srcset="/images/mascot/aerator-320.webp 320w, /images/mascot/aerator-480.webp 480w"
+          sizes="(max-width: 960px) 55vw, 280px"
+          width="480"
+          height="708"
+          alt=""
+          decoding="async"
+        />
+      </div>
+    </div>
+  </header>
+
+  <div class="core-proof f-inner" aria-label="Grow Green credentials">
+    <div class="core-proof__item">
+      <strong>Firefighter-owned</strong>
+      <span>Local and family-operated</span>
+    </div>
+    <div class="core-proof__item">
+      <strong>Lawn specialists</strong>
+      <span>Not a mowing or landscape crew</span>
+    </div>
+    <div class="core-proof__item">
+      <strong>Straight answers</strong>
+      <span>What aeration can—and cannot—do</span>
+    </div>
+    <div class="core-proof__item">
+      <strong>Core or liquid</strong>
+      <span>We recommend the better fit</span>
+    </div>
+  </div>
+
+  <section class="f-section core-process core-process--wash" aria-labelledby="core-process-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">How it works</p>
+      <h2 class="f-title f-center" id="core-process-title">What to expect on aeration day.</h2>
+      <p class="f-lead f-center">
+        We keep the process clear, protect marked obstacles, and leave the plugs in place so they can break down
+        naturally.
+      </p>
+      <div class="core-steps">
+        {
+          steps.map((s) => (
+            <article class="core-step">
+              <span class="core-step__num">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="core-expect__grid">
+        <article class="core-expect__card core-expect__card--yes">
+          <h3>Before we arrive</h3>
+          <ul>
+            <li>Mark irrigation heads, valve boxes, drain caps, invisible fencing, and shallow cables</li>
+            <li>Unlock gates and move toys, hoses, furniture, and pet waste from the treatment area</li>
+            <li>Water lightly in advance if the soil is very dry; soft—not muddy—soil generally cores best</li>
+          </ul>
+        </article>
+        <article class="core-expect__card core-expect__card--no">
+          <h3>After we leave</h3>
+          <ul>
+            <li>Leave the soil plugs on the lawn; mowing and weather will break them down</li>
+            <li>Resume normal watering unless your technician gives a different recommendation</li>
+            <li>Continue your lawn-treatment program so the improved root zone has the support it needs</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="core-compare-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Choose the right approach</p>
+      <h2 class="f-title f-center" id="core-compare-title">Core aeration or liquid aeration?</h2>
+      <p class="f-lead f-center">
+        Both target soil conditions, but they work differently. The best fit depends on your lawn, access, and the kind of
+        compaction you are trying to address.
+      </p>
+      <div class="core-compare">
+        <article class="core-choice core-choice--featured">
+          <p class="core-choice__tag">Physical plug removal</p>
+          <h3>Core aeration</h3>
+          <p>A machine physically removes soil plugs, creating visible openings through the compacted surface layer.</p>
+          <ul>
+            <li>Best when immediate physical decompaction is the priority</li>
+            <li>Leaves temporary cores and holes that disappear naturally</li>
+            <li>Requires access for aeration equipment</li>
+            <li>Hidden shallow obstacles must be marked before service</li>
+          </ul>
+          <a href="#core-quote">Request core aeration pricing →</a>
+        </article>
+        <article class="core-choice">
+          <p class="core-choice__tag">No plugs or machinery</p>
+          <h3>Liquid aeration</h3>
+          <p>
+            A soil-conditioning treatment is applied across the lawn without pulling plugs or running a core machine over
+            the turf.
+          </p>
+          <ul>
+            <li>No visible cores left across the lawn</li>
+            <li>Useful for tight access, slopes, or heavily irrigated properties</li>
+            <li>No risk of a machine striking an unmarked shallow obstacle</li>
+            <li>Works gradually as part of a soil-health approach</li>
+          </ul>
+          <a href="/liquid-aeration/">Explore liquid aeration →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="core-compaction-title">
+    <div class="f-inner core-diag__grid">
+      <div>
+        <p class="f-kicker">What compaction does</p>
+        <h2 class="f-title" id="core-compaction-title">Your lawn can be watered—and still struggle to use it.</h2>
+        <p class="f-lead">
+          Foot traffic, mowers, construction, and naturally tight soil press particles together over time. Roots get less
+          space, water moves poorly, and the lawn has to work harder. Core aeration physically removes small plugs to
+          create temporary channels through that compacted layer.
+        </p>
+        <ul class="core-checks">
+          {
+            signals.map((s) => (
+              <li>
+                <span class="core-checks__num" aria-hidden="true">
+                  {s.n.replace(/^0/, "")}
+                </span>
+                <div>
+                  <strong>{s.title}</strong>
+                  <p>{s.body}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <figure class="core-diagram">
+        <img
+          src="/images/services/core-aeration-diagram-960.webp"
+          width="960"
+          height="720"
+          alt="Close view of a lawn after core aeration with soil plugs on the surface"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>
+          The holes are temporary. The improved access to the root zone is the point: better movement of air, moisture,
+          and nutrients where turf can use them.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="f-section core-guide" aria-labelledby="core-results-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">A stronger foundation</p>
+      <h2 class="f-title f-center" id="core-results-title">What core aeration helps your lawn do better.</h2>
+      <p class="f-lead f-center">
+        Aeration is a soil-health service. It improves the growing environment so the turf—and the treatments applied to
+        it—can work more effectively.
+      </p>
+      <div class="core-steps">
+        {
+          benefits.map((b) => (
+            <article class="core-step">
+              <span class="core-step__num">{b.n}</span>
+              <h3>{b.title}</h3>
+              <p>{b.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section core-program" aria-labelledby="core-local-title">
+    <div class="f-inner core-local__grid">
+      <figure class="core-owner">
+        <img
+          class="core-local__photo"
+          src="/images/services/core-aeration-local-960.webp"
+          srcset="/images/about/owner-with-son-640.webp 640w, /images/services/core-aeration-local-960.webp 960w, /images/about/owner-with-son-1280.webp 1280w"
+          sizes="(max-width: 900px) 90vw, 420px"
+          width="960"
+          height="1200"
+          alt="Grow Green owner with his son beside a branded Grow Green service truck"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="core-owner__badge">
+          <strong>Family-owned. Firefighter-owned.</strong>
+          <span>Lawn treatment specialists—not a mowing route add-on.</span>
+        </figcaption>
+      </figure>
+      <div>
+        <p class="f-kicker">Why Grow Green</p>
+        <h2 class="f-title" id="core-local-title">Lawn treatment is our specialty—not an add-on to a mowing route.</h2>
+        <p class="f-lead">
+          South Louisiana turf does not need generic advice. We work with warm-season lawns, local soil conditions, and
+          the heat, humidity, and rainfall patterns that shape how grass grows here.
+        </p>
+        <div class="core-local__points">
+          <div class="core-local__point">Locally owned</div>
+          <div class="core-local__point">Family-operated</div>
+          <div class="core-local__point">Firefighter-owned</div>
+          <div class="core-local__point">No-pressure pricing</div>
+        </div>
+        <a class="f-btn f-btn--green" href="/about-us/">Meet Grow Green →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section core-faq" aria-labelledby="core-faq-title">
+    <div class="f-inner core-faq__grid">
+      <div>
+        <p class="f-kicker">Good to know</p>
+        <h2 class="f-title" id="core-faq-title">Core aeration questions we hear most.</h2>
+        <p class="f-lead">
+          If your question is not here, call the local Grow Green team at{" "}
+          <a href={`tel:${site.phoneTel}`}>{site.phone}</a>.
+        </p>
+      </div>
+      <div class="core-faq__list">
+        {
+          faqs.map((f) =>
+            f.q.startsWith("What is the difference between core and liquid") ? (
+              <details>
+                <summary>{f.q}</summary>
+                <p>
+                  Core aeration physically removes plugs for immediate openings in the soil.{" "}
+                  <a href="/liquid-aeration/">Liquid aeration</a> uses a soil-conditioning application without holes or
+                  heavy equipment and works more gradually. Access, soil condition, and your preference help determine
+                  the better fit.
+                </p>
+              </details>
+            ) : (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ),
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section core-quote" id="core-quote" aria-labelledby="core-quote-title">
+    <div class="f-inner core-quote__grid">
+      <div>
+        <p class="f-kicker f-kicker--light">Free custom estimate</p>
+        <h2 class="f-title" id="core-quote-title">Request core aeration pricing.</h2>
+        <p class="f-lead">
+          Tell us where the lawn is. Our local office will review the property and follow up with straightforward next
+          steps.
+        </p>
+        <ul class="core-quote__benefits">
+          <li>No pressure or obligation</li>
+          <li>Most quote requests reviewed during business hours, {site.hours.label}</li>
+          <li>Your information goes directly to Grow Green</li>
+        </ul>
+        <p class="core-quote__chip" aria-hidden="true">Service noted: Core Aeration</p>
+        <a class="core-quote__phone" href={`tel:${site.phoneTel}`}>
+          <span>Prefer to talk?</span>
+          <strong>Call {site.phone}</strong>
+        </a>
+      </div>
+      <div class="core-form-shell">
+        <QuoteForm
+          source={source}
+          leadSource={leadSource}
+          heading="Get my free aeration estimate"
+          subheading="Share the service address and anything we should know—gate codes, sprinklers, access notes, or questions."
+          compact
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="core-final" aria-label="Request a core aeration estimate">
+    <div class="f-inner">
+      <div class="core-final__card">
+        <div>
+          <h2>Build a better lawn from the soil up.</h2>
+          <p>
+            Get a straightforward core aeration estimate from a local lawn-treatment company that understands South
+            Louisiana turf.
+          </p>
+        </div>
+        <div class="core-final__actions">
+          <a class="f-btn f-btn--gold" href="#core-quote">Get my free estimate</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-core-page]");
+  if (root) {
+    const notes = root.querySelector<HTMLTextAreaElement>('textarea[name="notes"]');
+    const PREFIX = "Service requested: Core Aeration";
+
+    function ensureServiceNote() {
+      if (!notes) return;
+      const lines = (notes.value || "")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .filter((line) => !line.startsWith("Service requested:"));
+      lines.unshift(PREFIX);
+      notes.value = lines.join("\n");
+    }
+
+    ensureServiceNote();
+    notes?.addEventListener("blur", ensureServiceNote);
+  }
+</script>

@@ -1,0 +1,296 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import CtaBand from "./CtaBand.astro";
+import RichPageBody from "./RichPageBody.astro";
+import { site } from "../data/site";
+import { services } from "../data/services";
+import { serviceAreas, serviceAreaCount } from "../data/service-areas";
+import type { GeoPage } from "../data/geo-pages.generated";
+import { loadPageContent, normalizePlainText } from "../lib/content/loadPageContent";
+import "../styles/city-page.css";
+import "../styles/faq-accordion.css";
+
+interface Props {
+  page: GeoPage;
+}
+
+const { page } = Astro.props;
+const featured = services.slice(0, 6);
+const rich = loadPageContent(page.slug);
+const features = (rich?.structured?.features || []).slice(0, 6);
+const faqs = (rich?.faqs || []).slice(0, 14);
+
+/** Avoid "X Parish · X Parish" / "Name Parish Parish" eyebrow duplicates. */
+function parishLabel(parish: string | null | undefined): string | null {
+  if (!parish) return null;
+  const trimmed = parish.trim();
+  if (!trimmed) return null;
+  return /parish$/i.test(trimmed) ? trimmed : `${trimmed} Parish`;
+}
+
+function cityEyebrow(cityName: string, parish: string | null): string {
+  const label = parishLabel(parish);
+  if (!label) return cityName;
+  if (/parish$/i.test(cityName.trim())) return cityName;
+  const cityNorm = cityName.trim().toLowerCase();
+  const parishCore = label.replace(/\s+parish$/i, "").toLowerCase();
+  if (cityNorm === parishCore || cityNorm === label.toLowerCase()) return label;
+  return `${cityName} · ${label}`;
+}
+
+function normalizePlaceName(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/\./g, "")
+    .replace(/'/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const areaByName = new Map(
+  serviceAreas.map((area) => [normalizePlaceName(area.name), area] as const),
+);
+
+const nearbyPlaces = (page.nearby || []).map((name) => {
+  const match = areaByName.get(normalizePlaceName(name));
+  return match
+    ? { name: match.name, href: `/service-areas/${match.slug}/` as string | null }
+    : { name, href: null as string | null };
+});
+
+const eyebrow = cityEyebrow(page.cityName, page.parish);
+const parishNote = parishLabel(page.parish);
+
+const highlights = [
+  {
+    title: "Firefighter-owned",
+    body: "A local, family-operated lawn treatment company—not a national spray franchise.",
+  },
+  {
+    title: "Local office support",
+    body: `Call or text ${site.phone} Monday–Friday, 8 AM–4 PM. Estimates go to our team in ${site.address.city}.`,
+  },
+  {
+    title: "Clear starting price",
+    body: "Lawn fertilization and weed control starts at $39/month. Final pricing depends on lawn size and selected services.",
+  },
+];
+
+function geoBodyLikelyNoise(p: string) {
+  return (
+    /^(home\s*\/|choose an address|enter your details manually|please enable javascript|couldn'?t confirm)/i.test(
+      p,
+    ) ||
+    /complete divi|code module|paste this complete file|suggested seo title/i.test(p) ||
+    /fields marked|\* are required/i.test(p)
+  );
+}
+
+const richParaKeys = new Set((rich?.paragraphs || []).map((p) => normalizePlainText(p)));
+const geoBodyExtras = (page.bodyParas || [])
+  .filter((p) => p.length >= 48 && p.length < 1200)
+  .filter((p) => !geoBodyLikelyNoise(p))
+  .filter((p) => {
+    const n = normalizePlainText(p);
+    return n.length > 35 && !richParaKeys.has(n);
+  })
+  .slice(0, 12);
+
+const geoBodyFallback = (page.bodyParas || [])
+  .filter((p) => p.length >= 40 && p.length < 1200)
+  .filter((p) => !geoBodyLikelyNoise(p))
+  .slice(0, 10);
+---
+
+<section class="city-hero" aria-labelledby="city-hero-title">
+  <div class="container city-hero__grid">
+    <div class="city-hero__copy motion-rise">
+      <p class="city-eyebrow">{eyebrow}</p>
+      <h1 id="city-hero-title">{page.title}</h1>
+      <p class="city-lead">{page.intro}</p>
+      <div class="city-hero__actions">
+        <a class="btn btn-green" href="#city-estimate">Get My Free Quote</a>
+        <a class="btn btn-soft city-hero__phone" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+      </div>
+      <ul class="city-hero__trust">
+        <li>Firefighter-owned</li>
+        <li>Family-operated</li>
+        <li>Based in {site.address.city}</li>
+      </ul>
+    </div>
+    <aside class="city-hero__aside motion-rise motion-delay-1" aria-hidden="true">
+      <div class="city-media-slot">
+        <div class="city-media-slot__glow"></div>
+        <div class="city-media-slot__panel">
+          <p class="city-media-slot__label">{page.cityName}</p>
+          <p class="city-media-slot__note">Local lawn treatment coverage</p>
+          <ul>
+            {parishNote && <li>{parishNote}</li>}
+            <li>Season-smart applications</li>
+            <li>Free property estimate</li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section-tight city-highlights">
+  <div class="container city-highlights__grid">
+    {
+      highlights.map((item) => (
+        <article class="city-highlight motion-rise">
+          <h2>{item.title}</h2>
+          <p>{item.body}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<section class="section-tight city-main" id="city-estimate">
+  <div class="container city-main__grid">
+    <div class="city-main__content motion-rise">
+      <p class="city-kicker">Serving {page.cityName}</p>
+      <h2>Lawn care matched to local turf—not a one-size spray route.</h2>
+      <p class="city-copy">{page.focusBlurb}</p>
+      <p class="city-copy">
+        Grow Green is a lawn-treatment company. We do not advertise mowing. The core program combines
+        fertilization and weed control for St. Augustine, centipede, zoysia, and bermuda lawns, with
+        optional add-ons when your property needs them.
+      </p>
+
+      {
+        features.length > 0 && (
+          <section class="city-section" aria-labelledby="city-features-title">
+            <h2 id="city-features-title">Local lawn care focus</h2>
+            <div class="city-feature-grid">
+              {features.map((f) => (
+                <article>
+                  <h3>{f.title}</h3>
+                  <p>{f.body}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      {
+        rich && rich.plain_len > 1000 ? (
+          <>
+            <RichPageBody content={rich} maxSections={14} showFaqs={false} />
+            {
+              geoBodyExtras.length > 0 && (
+                <section class="city-extra-copy">
+                  {geoBodyExtras.map((p) => (
+                    <p>{p}</p>
+                  ))}
+                </section>
+              )
+            }
+          </>
+        ) : (
+          geoBodyFallback.length > 0 && (
+            <section class="city-extra-copy">
+              {geoBodyFallback.map((p) => (
+                <p>{p}</p>
+              ))}
+            </section>
+          )
+        )
+      }
+
+      {
+        nearbyPlaces.length > 0 && (
+          <section class="city-section" aria-labelledby="city-nearby-title">
+            <h2 id="city-nearby-title">Nearby areas we also serve</h2>
+            <p class="city-copy">
+              Open a nearby city page for local detail, or send any address for a coverage check.
+            </p>
+            <ul class="city-nearby-list">
+              {nearbyPlaces.map((place) => (
+                <li>
+                  {place.href ? <a href={place.href}>{place.name}</a> : <span>{place.name}</span>}
+                </li>
+              ))}
+            </ul>
+            <p class="city-nearby__more">
+              <a href="/service-areas/">View all {serviceAreaCount} service areas →</a>
+            </p>
+          </section>
+        )
+      }
+
+      <p class="city-price-note">{site.startingPrice.short}</p>
+    </div>
+
+    <aside class="city-main__form motion-rise motion-delay-1">
+      <QuoteForm
+        source={`geo-${page.slug}`}
+        leadSource="Website"
+        heading={`Free estimate for ${page.cityName}`}
+        subheading="Enter the service address and we’ll prepare a clear, no-obligation estimate for your property."
+      />
+      <div class="gg-aside-rail">
+        <section class="gg-aside-services" aria-labelledby="city-services-title">
+          <p class="gg-aside-services__kicker">Services</p>
+          <h2 id="city-services-title">Available near {page.cityName}</h2>
+          <p class="gg-aside-services__lead">
+            Core lawn programs plus targeted add-ons when your property needs them.
+          </p>
+          <ul class="gg-aside-services__list">
+            {
+              featured.map((service) => (
+                <li>
+                  <a href={service.path || `/${service.slug}/`}>
+                    <strong>{service.title}</strong>
+                    <span>{service.summary}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+        {
+          faqs.length > 0 && (
+            <section class="gg-faq gg-faq--aside city-faqs" aria-labelledby="city-faqs-title">
+              <div class="gg-faq__head">
+                <p class="gg-faq__kicker">FAQ</p>
+                <h2 id="city-faqs-title">Common questions for {page.cityName}</h2>
+                <p class="gg-faq__lead">
+                  Local coverage, pricing, and how Grow Green lawn treatments work.
+                </p>
+              </div>
+              <div class="gg-faq__list">
+                {faqs.map((faq) => (
+                  <details>
+                    <summary>{faq.q}</summary>
+                    <p class="gg-faq__answer">{faq.a}</p>
+                  </details>
+                ))}
+              </div>
+              <script
+                type="application/ld+json"
+                set:html={JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "FAQPage",
+                  mainEntity: faqs.map((faq) => ({
+                    "@type": "Question",
+                    name: faq.q,
+                    acceptedAnswer: { "@type": "Answer", text: faq.a },
+                  })),
+                })}
+              />
+            </section>
+          )
+        }
+      </div>
+    </aside>
+  </div>
+</section>
+
+<CtaBand
+  heading={`Get a lawn plan for ${page.cityName}`}
+  text={`Tell us the service address — our local office in ${site.address.city} follows up during business hours.`}
+/>

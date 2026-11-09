@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FireAntTreatmentPage from "../components/FireAntTreatmentPage.astro";
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Fire Ant Treatment | Grow Green Weed Control – Colony-Focused Control"
+  description="Professional fire ant control for South Louisiana lawns. Colony-focused treatment that goes beyond knocking down visible mounds. Free local estimate."
+  canonicalPath="/fire-ant-treatment/"
+>
+  <link slot="head" rel="preload" as="image" href="/images/services/ant-mound-960.webp" fetchpriority="high" />
+  <FireAntTreatmentPage />
+</BaseLayout>

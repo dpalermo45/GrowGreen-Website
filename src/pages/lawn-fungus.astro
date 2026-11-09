@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LawnFungusPage from "../components/LawnFungusPage.astro";
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Lawn Fungus Treatment | Grow Green Weed Control – Fungicide & Lawn Disease Control"
+  description="Protect your lawn from brown patch, dollar spot, and other turf diseases with professional lawn fungus evaluation and treatment from Grow Green Weed Control. Serving South Louisiana."
+  canonicalPath="/lawn-fungus/"
+>
+  <link slot="head" rel="preload" as="image" href="/images/services/lawn-fungus-large-patch-720.webp" fetchpriority="high" />
+  <LawnFungusPage />
+</BaseLayout>

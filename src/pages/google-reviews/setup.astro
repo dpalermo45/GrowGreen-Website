@@ -1,0 +1,310 @@
+---
+import { readGoogleReviewsConfig } from "../../lib/google-reviews/config";
+import { isSetupAccessAllowed } from "../../lib/google-reviews/loopback";
+import { getConnectionStatus } from "../../lib/google-reviews/service";
+
+export const prerender = false;
+
+const config = readGoogleReviewsConfig();
+const allowed = isSetupAccessAllowed(Astro.request, Astro.url, config);
+
+if (!allowed) {
+  return new Response("Not found", { status: 404 });
+}
+
+const status = await getConnectionStatus(config);
+const step = Astro.url.searchParams.get("step") || "home";
+const reason = Astro.url.searchParams.get("reason") || "";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Google Reviews setup — Grow Green Website</title>
+    <style>
+      :root {
+        --ink: #14251a;
+        --muted: #53645a;
+        --forest: #102c1b;
+        --gold: #f5a20a;
+        --line: #d7e3da;
+        --soft: #f4f8f4;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", system-ui, sans-serif;
+        color: var(--ink);
+        background: var(--soft);
+        line-height: 1.5;
+      }
+      main {
+        width: min(720px, calc(100% - 2rem));
+        margin: 2rem auto 3rem;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 1.75rem;
+        box-shadow: 0 16px 40px rgba(7, 24, 13, 0.08);
+      }
+      h1 {
+        margin: 0 0 0.5rem;
+        font-size: 1.6rem;
+      }
+      p {
+        color: var(--muted);
+      }
+      .status {
+        background: var(--soft);
+        border-radius: 12px;
+        padding: 1rem;
+        margin: 1.25rem 0;
+        font-size: 0.95rem;
+      }
+      .status strong {
+        color: var(--ink);
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+      }
+      a.btn,
+      button.btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0.65rem 1.1rem;
+        border-radius: 999px;
+        border: 0;
+        font: inherit;
+        font-weight: 800;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .btn-primary {
+        background: var(--gold);
+        color: #172014;
+      }
+      .btn-dark {
+        background: var(--forest);
+        color: #fff;
+      }
+      .btn-outline {
+        background: #fff;
+        border: 2px solid var(--forest);
+        color: var(--forest);
+      }
+      .error {
+        border-left: 4px solid #9b1c1c;
+        background: #fff5f5;
+        padding: 0.85rem 1rem;
+        border-radius: 8px;
+        color: #7a1d1d;
+      }
+      .loc {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 0.9rem 1rem;
+        margin: 0.65rem 0;
+        display: grid;
+        gap: 0.35rem;
+      }
+      .loc button {
+        justify-self: start;
+      }
+      .note {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      code {
+        background: var(--soft);
+        padding: 0.1rem 0.35rem;
+        border-radius: 4px;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Google Reviews setup</h1>
+      <p>
+        Local owner authorization for the <strong>website</strong> OAuth client only. This does not
+        touch the CRM Google client, CRM tokens, or CRM database.
+      </p>
+
+      {
+        step === "error" && (
+          <div class="error" role="alert">
+            Authorization did not complete ({reason || "unknown"}). You can try again. Secrets and
+            codes are never shown here.
+          </div>
+        )
+      }
+
+      <div class="status" id="status-box">
+        <div>
+          <strong>Credentials configured:</strong>
+          {status.configured ? "yes" : "no — add values to local .env first"}
+        </div>
+        <div><strong>Connected:</strong> {status.connected ? "yes" : "no"}</div>
+        <div>
+          <strong>Refresh token:</strong>
+          {status.hasRefreshToken ? "present" : "missing (re-authorize with consent)"}
+        </div>
+        <div>
+          <strong>Selected location:</strong>
+          {
+            status.selection
+              ? `${status.selection.title} (${status.selection.locationId})`
+              : "not selected yet"
+          }
+        </div>
+        <div>
+          <strong>Cached reviews:</strong>
+          {
+            status.cache
+              ? `${status.cache.count} (fetched ${status.cache.fetchedAt})`
+              : "none"
+          }
+        </div>
+        <p class="note">
+          Redirect URI must match Google Console exactly:<br />
+          <code>{config.redirectUri}</code>
+        </p>
+      </div>
+
+      <div class="actions">
+        {
+          status.configured && (
+            <a class="btn btn-primary" href="/api/google-reviews/oauth/start/">
+              {status.connected ? "Re-authorize Google" : "Authorize with Google"}
+            </a>
+          )
+        }
+        {
+          status.connected && (
+            <button class="btn btn-dark" type="button" id="load-locations">
+              Choose business location
+            </button>
+          )
+        }
+        {
+          status.selection && (
+            <button class="btn btn-outline" type="button" id="refresh-now">Refresh reviews now</button>
+          )
+        }
+        {
+          status.connected && (
+            <button class="btn btn-outline" type="button" id="disconnect">Disconnect & clear cache</button>
+          )
+        }
+      </div>
+
+      <div id="locations" hidden>
+        <h2>Confirm your Grow Green location</h2>
+        <p class="note">
+          Nothing is stored until you click Confirm. The first listed location is never auto-selected.
+        </p>
+        <div id="location-list"></div>
+      </div>
+
+      <p class="note" style="margin-top:1.5rem">
+        After a location is confirmed, open the homepage to see the reviews section. Setup routes
+        return 404 off loopback unless a setup token is provided.
+      </p>
+    </main>
+
+    <script>
+      const listEl = document.getElementById("location-list");
+      const wrap = document.getElementById("locations");
+
+      document.getElementById("load-locations")?.addEventListener("click", async () => {
+        if (!(listEl instanceof HTMLElement) || !(wrap instanceof HTMLElement)) return;
+        wrap.hidden = false;
+        listEl.textContent = "Loading locations…";
+        const res = await fetch("/api/google-reviews/locations/");
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) {
+          listEl.textContent = "Could not load locations. Re-authorize if access was revoked.";
+          return;
+        }
+        listEl.innerHTML = "";
+        if (!data.locations?.length) {
+          listEl.textContent = "No locations returned for this Google account.";
+          return;
+        }
+        for (const loc of data.locations) {
+          const row = document.createElement("div");
+          row.className = "loc";
+          const title = document.createElement("strong");
+          title.textContent = loc.title || loc.locationId;
+          const meta = document.createElement("div");
+          meta.className = "note";
+          meta.textContent = [
+            loc.storefrontAddress,
+            `account ${loc.accountId}`,
+            `location ${loc.locationId}`,
+          ]
+            .filter(Boolean)
+            .join(" · ");
+          const btn = document.createElement("button");
+          btn.className = "btn btn-primary";
+          btn.type = "button";
+          btn.textContent = "Confirm this location";
+          btn.addEventListener("click", async () => {
+            btn.disabled = true;
+            btn.textContent = "Saving…";
+            const save = await fetch("/api/google-reviews/select/", {
+              method: "POST",
+              headers: { "Content-Type": "application/json", Accept: "application/json" },
+              body: JSON.stringify({
+                accountId: loc.accountId,
+                locationId: loc.locationId,
+                title: loc.title,
+                storefrontAddress: loc.storefrontAddress,
+              }),
+            });
+            const out = await save.json().catch(() => ({}));
+            if (!save.ok || !out.ok) {
+              btn.disabled = false;
+              btn.textContent = "Confirm this location";
+              alert("Could not save selection. Try again.");
+              return;
+            }
+            location.href = "/google-reviews/setup/?step=done";
+          });
+          row.append(title, meta, btn);
+          listEl.append(row);
+        }
+      });
+
+      document.getElementById("refresh-now")?.addEventListener("click", async () => {
+        const res = await fetch("/api/google-reviews/refresh/", { method: "POST" });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) {
+          alert("Refresh failed. Check connection and try again.");
+          return;
+        }
+        location.reload();
+      });
+
+      document.getElementById("disconnect")?.addEventListener("click", async () => {
+        if (!confirm("Disconnect Google and delete local tokens + review cache?")) return;
+        await fetch("/api/google-reviews/disconnect/", { method: "POST" });
+        location.href = "/google-reviews/setup/";
+      });
+
+      if (new URLSearchParams(location.search).get("step") === "select") {
+        document.getElementById("load-locations")?.dispatchEvent(new Event("click"));
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MosquitoFleaTickPage from "../components/MosquitoFleaTickPage.astro";
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Mosquito, Flea & Tick Treatments | Grow Green Weed Control"
+  description="Professional outdoor mosquito, flea, and tick treatments for South Louisiana yards. Warm-season plans and one-time event options. Free local estimate."
+  canonicalPath="/mosquito-flea-tick-treatments/"
+>
+  <link slot="head" rel="preload" as="image" href="/images/services/mosquito-960.webp" fetchpriority="high" />
+  <MosquitoFleaTickPage />
+</BaseLayout>

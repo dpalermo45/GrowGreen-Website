@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LiquidAerationPage from "../components/LiquidAerationPage.astro";
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Liquid Aeration | Grow Green Weed Control – Soil Conditioning Without Plugs"
+  description="Liquid aeration for South Louisiana lawns—soil-conditioning support for better wetting and water movement without cores or holes. Free local estimate from a firefighter-owned team."
+  canonicalPath="/liquid-aeration/"
+>
+  <link slot="head" rel="preload" as="image" href="/images/services/liquid-aeration-hero-800.webp" fetchpriority="high" />
+  <LiquidAerationPage />
+</BaseLayout>

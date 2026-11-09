@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { privacy } from "../data/legal-content.generated";
+import { site } from "../data/site";
+
+export const prerender = true;
+
+function slugify(s: string) {
+  return s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+---
+
+<BaseLayout
+  title="Privacy Policy | Grow Green Weed Control"
+  description="How Grow Green Weed Control collects, uses, and protects personal information. We do not sell mobile information or SMS consent for marketing."
+  canonicalPath="/privacy-policy/"
+>
+  <PageHero
+    eyebrow="Legal"
+    title="Privacy Policy"
+    lead="A clear explanation of what information Grow Green Weed Control collects, why we use it, and the choices available to you."
+  />
+
+  <section class="legal-page">
+    <div class="legal-page__inner">
+      <aside class="legal-toc" aria-label="Privacy policy contents">
+        <strong>On this page</strong>
+        <ol>
+          {privacy.toc.map((h) => (
+            <li>
+              <a href={`#${slugify(h)}`}>{h}</a>
+            </li>
+          ))}
+        </ol>
+        <p class="legal-toc__help">
+          Privacy question? Contact <a href={`mailto:${site.email}`}>{site.email}</a> or call{" "}
+          <a href={`tel:${site.phoneTel}`}>{site.phone}</a>. Address: {site.address.full}.
+        </p>
+      </aside>
+      <article class="legal-prose prose" set:html={privacy.html} />
+    </div>
+  </section>
+</BaseLayout>

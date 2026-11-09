@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LawnFungusInsectsPage from "../components/LawnFungusInsectsPage.astro";
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Lawn Fungus and Insect Treatments | Grow Green Weed Control"
+  description="Evaluation-first lawn fungus and insect treatments for South Louisiana turf. Separate disease from insects and look-alikes, then get the right response."
+  canonicalPath="/lawn-fungus-and-insects/"
+>
+  <link slot="head" rel="preload" as="image" href="/images/services/lawn-fungus-large-patch-720.webp" fetchpriority="high" />
+  <LawnFungusInsectsPage />
+</BaseLayout>

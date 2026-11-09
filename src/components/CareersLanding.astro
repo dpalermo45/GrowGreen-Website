@@ -1,0 +1,435 @@
+---
+import { site } from "../data/site";
+import "../styles/careers-landing.css";
+---
+
+<section id="gg-careers-v3" aria-labelledby="ggc-page-title" data-careers-landing>
+  <header class="ggc-hero">
+    <div class="ggc-shell ggc-hero-grid">
+      <div class="motion-rise">
+        <p class="ggc-kicker">Careers at Grow Green</p>
+        <h1 id="ggc-page-title">Good work. Real responsibility. A team that notices.</h1>
+        <p class="ggc-hero-lead">
+          Build a career with a firefighter-owned lawn treatment company trusted across South
+          Louisiana. We train good people, reward strong performance, and take pride in doing the
+          job right.
+        </p>
+        <div class="ggc-hero-actions">
+          <a class="ggc-button" href="#ggc-openings">See open positions <span aria-hidden="true">↓</span></a>
+          <a class="ggc-button ggc-button--light" id="ggc-hero-apply" href="#ggc-apply">Apply now</a>
+        </div>
+        <div class="ggc-open-status" id="ggc-opening-count" role="status" aria-live="polite">
+          Loading current openings…
+        </div>
+        <ul class="ggc-hero-points" aria-label="Career highlights">
+          <li>Local routes</li>
+          <li>Hands-on training</li>
+          <li>Performance rewarded</li>
+        </ul>
+      </div>
+      <div class="ggc-hero-visual motion-rise motion-delay-2" aria-label="Grow Green team mascot">
+        <div class="ggc-mascot-stage">
+          <img
+            src="/images/mascot/firefighter.png"
+            alt="Grow Green Weed Control mascot"
+            width="430"
+            height="560"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+        <div class="ggc-visual-note">
+          <strong>Specialized work</strong>
+          We specialize in lawn treatments and outdoor pest care for South Louisiana properties.
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="ggc-value-rail" aria-label="Why work at Grow Green">
+    <div class="ggc-shell ggc-value-grid">
+      <div class="ggc-value">
+        <strong>Competitive pay</strong>
+        <span>Current ranges appear with each open position.</span>
+      </div>
+      <div class="ggc-value">
+        <strong>Production commission</strong>
+        <span>Strong field performance can earn more.</span>
+      </div>
+      <div class="ggc-value">
+        <strong>Paid training</strong>
+        <span>Learn our standards, tools, and lawn program.</span>
+      </div>
+      <div class="ggc-value">
+        <strong>Room to advance</strong>
+        <span>Build skill, ownership, and responsibility.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main landmark: parity tooling compares stored careers.json text to rendered <main> -->
+  <main>
+    <section class="ggc-section ggc-openings-section" id="ggc-openings" aria-labelledby="ggc-openings-title">
+      <div class="ggc-shell">
+        <div class="ggc-section-head">
+          <div>
+            <p class="ggc-kicker">Current opportunities</p>
+            <h2 id="ggc-openings-title">Find the role that fits you.</h2>
+          </div>
+          <p>Open positions and pay are updated directly by our hiring team, so what you see here is current.</p>
+        </div>
+        <div class="ggc-openings-grid" id="ggc-openings-list" aria-live="polite" aria-busy="true">
+          <div class="ggc-loading-card" aria-hidden="true"></div>
+          <div class="ggc-loading-card" aria-hidden="true"></div>
+        </div>
+        <div class="ggc-role-panel" id="ggc-role-panel" hidden aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="ggc-section ggc-why-section" aria-labelledby="ggc-why-title">
+      <div class="ggc-shell">
+        <div class="ggc-section-head">
+          <div>
+            <p class="ggc-kicker">What you can expect</p>
+            <h2 id="ggc-why-title">A small team with high standards.</h2>
+          </div>
+          <p>
+            You will be trusted to own your work, communicate clearly, and take care of customers as
+            if their lawn were your own.
+          </p>
+        </div>
+        <div class="ggc-why-grid">
+          <article class="ggc-why-item">
+            <span class="ggc-why-number">01</span>
+            <h3>Independence with support</h3>
+            <p>Handle your responsibilities confidently while knowing the team is available when something needs attention.</p>
+          </article>
+          <article class="ggc-why-item">
+            <span class="ggc-why-number">02</span>
+            <h3>Work that has a result</h3>
+            <p>Whether you are treating lawns or supporting routes, your effort is visible in the customer experience.</p>
+          </article>
+          <article class="ggc-why-item">
+            <span class="ggc-why-number">03</span>
+            <h3>Performance matters</h3>
+            <p>Quality, reliability, efficiency, and follow-through are recognized—not lost inside a huge company.</p>
+          </article>
+          <article class="ggc-why-item">
+            <span class="ggc-why-number">04</span>
+            <h3>Grow your skills</h3>
+            <p>Learn practical systems, sharpen your judgment, and earn greater responsibility as the company grows.</p>
+          </article>
+        </div>
+        <p class="ggc-benefit-note">
+          Eligible full-time positions may include health, dental, vision, 401(k) matching, and paid
+          time off. Eligibility varies by position and will be confirmed during the hiring process.
+        </p>
+      </div>
+    </section>
+
+    <section class="ggc-section ggc-process" aria-labelledby="ggc-process-title">
+      <div class="ggc-shell">
+        <div class="ggc-section-head">
+          <div>
+            <p class="ggc-kicker">The hiring process</p>
+            <h2 id="ggc-process-title">Straightforward from the start.</h2>
+          </div>
+          <p>
+            Give us a clear picture of your experience and availability. If there is a fit, our team
+            will contact you about the next step.
+          </p>
+        </div>
+        <div class="ggc-process-grid">
+          <article class="ggc-process-step">
+            <h3>Apply online</h3>
+            <p>Choose an open role and complete the short application. A résumé is helpful but optional.</p>
+          </article>
+          <article class="ggc-process-step">
+            <h3>We review it</h3>
+            <p>Our hiring team reviews your application, experience, availability, and role-specific answers.</p>
+          </article>
+          <article class="ggc-process-step">
+            <h3>We reach out</h3>
+            <p>If your background matches the role, we will contact you to discuss the opportunity and next steps.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="ggc-section ggc-apply-section" id="ggc-apply" aria-labelledby="ggc-form-title">
+      <div class="ggc-shell ggc-apply-grid">
+        <aside class="ggc-apply-aside">
+          <h3>Ready to apply?</h3>
+          <p>The application is broken into three short steps and usually takes only a few minutes.</p>
+          <div class="ggc-aside-role">
+            <span>Selected position</span>
+            <strong id="ggc-selected-role-label">Loading openings…</strong>
+          </div>
+          <ul class="ggc-aside-list">
+            <li>Your résumé is optional.</li>
+            <li>Your information goes directly to our private hiring workflow.</li>
+            <li>Applications are kept separate from customer leads.</li>
+          </ul>
+        </aside>
+
+        <div class="ggc-form-card">
+          <div id="ggc-form-experience">
+            <div class="ggc-form-top">
+              <h2 id="ggc-form-title">Join the Grow Green team</h2>
+              <p>Fields marked with <span aria-hidden="true">*</span> are required.</p>
+            </div>
+            <div class="ggc-form-progress" aria-hidden="true"><span id="ggc-progress-bar"></span></div>
+            <div class="ggc-step-pills" aria-label="Application progress">
+              <div class="ggc-step-pill is-active" data-step-pill="0"><span>1</span><b>About you</b></div>
+              <div class="ggc-step-pill" data-step-pill="1"><span>2</span><b>Experience</b></div>
+              <div class="ggc-step-pill" data-step-pill="2"><span>3</span><b>Finish</b></div>
+            </div>
+
+            <form id="ggc-application-form" class="ggc-form-body" enctype="multipart/form-data" novalidate>
+              <div class="ggc-form-step" data-form-step="0">
+                <h3 tabindex="-1">Start with the basics</h3>
+                <p class="ggc-step-intro">Choose your position and tell us how to reach you.</p>
+                <div class="ggc-fields">
+                  <div class="ggc-field ggc-field--full">
+                    <label class="ggc-required" for="ggc-job">Position</label>
+                    <select id="ggc-job" name="job_opening_slug" required disabled>
+                      <option value="">Loading current openings…</option>
+                    </select>
+                  </div>
+                  <div class="ggc-field">
+                    <label class="ggc-required" for="ggc-first-name">First name</label>
+                    <input id="ggc-first-name" name="first_name" type="text" autocomplete="given-name" maxlength="80" required />
+                  </div>
+                  <div class="ggc-field">
+                    <label class="ggc-required" for="ggc-last-name">Last name</label>
+                    <input id="ggc-last-name" name="last_name" type="text" autocomplete="family-name" maxlength="80" required />
+                  </div>
+                  <div class="ggc-field">
+                    <label class="ggc-required" for="ggc-email">Email</label>
+                    <input id="ggc-email" name="email" type="email" autocomplete="email" maxlength="254" required />
+                  </div>
+                  <div class="ggc-field">
+                    <label class="ggc-required" for="ggc-phone">Phone</label>
+                    <input id="ggc-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="24" placeholder="(225) 555-0123" required />
+                  </div>
+                  <div class="ggc-field ggc-field--third">
+                    <label class="ggc-required" for="ggc-city">City</label>
+                    <input id="ggc-city" name="city" type="text" autocomplete="address-level2" maxlength="100" required />
+                  </div>
+                  <div class="ggc-field ggc-field--third">
+                    <label class="ggc-required" for="ggc-state">State</label>
+                    <select id="ggc-state" name="state" autocomplete="address-level1" required>
+                      <option value="LA" selected>Louisiana</option>
+                      <option value="MS">Mississippi</option>
+                      <option value="TX">Texas</option>
+                      <option value="AL">Alabama</option>
+                      <option value="AR">Arkansas</option>
+                    </select>
+                  </div>
+                  <div class="ggc-field ggc-field--third">
+                    <label class="ggc-required" for="ggc-zip">ZIP code</label>
+                    <input id="ggc-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="10" placeholder="70737" required />
+                  </div>
+                </div>
+                <div class="ggc-form-actions">
+                  <span></span>
+                  <div class="ggc-action-right">
+                    <button class="ggc-button ggc-button--green" id="ggc-first-next" type="button" data-next disabled>
+                      Continue <span aria-hidden="true">→</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ggc-form-step" data-form-step="1" hidden>
+                <h3 tabindex="-1">Experience and availability</h3>
+                <p class="ggc-step-intro">No lawn-treatment experience? That is okay—we train the right people.</p>
+                <div class="ggc-fields">
+                  <div class="ggc-field">
+                    <label class="ggc-required" for="ggc-start-date">Earliest start date</label>
+                    <input id="ggc-start-date" name="earliest_start_date" type="date" required />
+                  </div>
+                  <div class="ggc-field">
+                    <label class="ggc-required" for="ggc-availability">General availability</label>
+                    <input id="ggc-availability" name="availability" type="text" maxlength="300" placeholder="Days, times, and any schedule limits" required />
+                  </div>
+                  <div class="ggc-field">
+                    <label class="ggc-required" for="ggc-work-auth">Authorized to work in the U.S.?</label>
+                    <select id="ggc-work-auth" name="work_authorized" required>
+                      <option value="">Select an answer</option>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                    </select>
+                  </div>
+                  <div class="ggc-field">
+                    <label class="ggc-required" for="ggc-sponsorship">Will you require employment sponsorship?</label>
+                    <select id="ggc-sponsorship" name="sponsorship_required" required>
+                      <option value="">Select an answer</option>
+                      <option value="no">No</option>
+                      <option value="yes">Yes</option>
+                    </select>
+                  </div>
+                  <div class="ggc-field ggc-field--full">
+                    <label class="ggc-required" for="ggc-experience">Relevant experience or work history</label>
+                    <textarea id="ggc-experience" name="experience_summary" maxlength="3000" placeholder="Tell us about your recent work, useful skills, customer service experience, equipment experience, or why you are ready to learn." required></textarea>
+                  </div>
+
+                  <div class="ggc-screening-box" id="ggc-tech-screening" hidden>
+                    <h4>Field-role requirements</h4>
+                    <p>Please answer each question honestly. The essential-functions question includes reasonable accommodation.</p>
+                    <div class="ggc-screening-fields">
+                      <div class="ggc-field ggc-field--full">
+                        <label class="ggc-required" for="ggc-license">Do you have a valid driver’s license?</label>
+                        <select id="ggc-license" name="valid_drivers_license" disabled>
+                          <option value="">Select an answer</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
+                      </div>
+                      <div class="ggc-field ggc-field--full">
+                        <label class="ggc-required" for="ggc-driving">Do you have an insurable driving record?</label>
+                        <select id="ggc-driving" name="insurable_driving_record" disabled>
+                          <option value="">Select an answer</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
+                      </div>
+                      <div class="ggc-field ggc-field--full">
+                        <label class="ggc-required" for="ggc-functions">Can you perform the essential functions of this job, with or without reasonable accommodation?</label>
+                        <select id="ggc-functions" name="can_perform_essential_functions" disabled>
+                          <option value="">Select an answer</option>
+                          <option value="yes">Yes</option>
+                          <option value="no">No</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="ggc-field">
+                    <label for="ggc-source">How did you hear about us?</label>
+                    <select id="ggc-source" name="referral_source">
+                      <option value="website">Grow Green website</option>
+                      <option value="indeed">Indeed</option>
+                      <option value="facebook">Facebook</option>
+                      <option value="google">Google</option>
+                      <option value="employee">Current employee</option>
+                      <option value="craigslist">Craigslist</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="ggc-field" id="ggc-referral-name-wrap" hidden>
+                    <label for="ggc-referral-name">Employee’s name</label>
+                    <input id="ggc-referral-name" name="referral_employee_name" type="text" maxlength="150" />
+                  </div>
+                </div>
+                <div class="ggc-form-actions">
+                  <button class="ggc-button ggc-button--ghost" type="button" data-prev><span aria-hidden="true">←</span> Back</button>
+                  <div class="ggc-action-right">
+                    <button class="ggc-button ggc-button--green" type="button" data-next>Continue <span aria-hidden="true">→</span></button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ggc-form-step" data-form-step="2" hidden>
+                <h3 tabindex="-1">Finish your application</h3>
+                <p class="ggc-step-intro">Tell us why this role interests you. A résumé is optional.</p>
+                <div class="ggc-fields">
+                  <div class="ggc-field ggc-field--full">
+                    <label class="ggc-required" for="ggc-fit">Why would you be a good fit for Grow Green?</label>
+                    <textarea id="ggc-fit" name="why_good_fit" maxlength="3000" placeholder="A few thoughtful sentences are perfect." required></textarea>
+                  </div>
+                  <div class="ggc-field ggc-field--full">
+                    <span class="ggc-help ggc-file-label">Résumé <span>(optional)</span></span>
+                    <div class="ggc-file-zone">
+                      <input
+                        id="ggc-resume"
+                        name="resume"
+                        type="file"
+                        accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                      />
+                      <label for="ggc-resume">
+                        <strong id="ggc-file-title">Choose your résumé</strong>
+                        <span id="ggc-file-detail">PDF, DOC, or DOCX · maximum 10 MB</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="ggc-field ggc-field--full">
+                    <label for="ggc-notes">Anything else we should know? <span class="ggc-optional">(optional)</span></label>
+                    <textarea id="ggc-notes" name="additional_notes" maxlength="3000" placeholder="Certifications, scheduling details, or anything else that may help us review your application."></textarea>
+                  </div>
+                  <div class="ggc-field ggc-field--full">
+                    <div class="ggc-checkbox-row">
+                      <input id="ggc-sms-opt-in" name="sms_opt_in" type="checkbox" value="yes" />
+                      <label for="ggc-sms-opt-in">
+                        I agree to receive text messages from Grow Green Weed Control about my job
+                        application, including interview scheduling and application updates. Message
+                        and data rates may apply. Reply STOP to opt out. This is optional and is not
+                        consent to marketing.
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="ggc-submit-note">
+                  By submitting, you agree that Grow Green Weed Control may contact you about this
+                  employment application. Text-message consent above is optional and separate. See
+                  our <a href="/privacy-policy/">Privacy Policy</a>.
+                </p>
+
+                <input type="hidden" name="sms_consent_language" id="ggc-sms-language" value="" />
+                <input type="hidden" name="utm_source" id="ggc-utm-source" value="" />
+                <input type="hidden" name="utm_medium" id="ggc-utm-medium" value="" />
+                <input type="hidden" name="utm_campaign" id="ggc-utm-campaign" value="" />
+                <input type="hidden" name="utm_term" id="ggc-utm-term" value="" />
+                <input type="hidden" name="utm_content" id="ggc-utm-content" value="" />
+                <input type="hidden" name="gclid" id="ggc-gclid" value="" />
+                <input type="hidden" name="fbclid" id="ggc-fbclid" value="" />
+                <input type="hidden" name="page_url" id="ggc-page-url" value="" />
+                <input type="hidden" name="referrer" id="ggc-referrer" value="" />
+                <input type="hidden" name="device_info" id="ggc-device" value="" />
+                <input type="hidden" name="idempotency_key" id="ggc-idempotency" value="" />
+                <div aria-hidden="true" class="ggc-honeypot">
+                  <label for="ggc-website">Website</label>
+                  <input id="ggc-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+                </div>
+
+                <div class="ggc-form-actions">
+                  <button class="ggc-button ggc-button--ghost" type="button" data-prev><span aria-hidden="true">←</span> Back</button>
+                  <div class="ggc-action-right">
+                    <button class="ggc-button ggc-submit-button" id="ggc-submit" type="submit">Submit application</button>
+                  </div>
+                </div>
+              </div>
+
+              <div id="ggc-form-message" role="alert" aria-live="assertive" hidden></div>
+            </form>
+          </div>
+
+          <div class="ggc-success-panel" id="ggc-success" role="status" tabindex="-1" hidden>
+            <div class="ggc-success-icon" aria-hidden="true">✓</div>
+            <h3>Application received.</h3>
+            <p>
+              Thank you for your interest in Grow Green. Our hiring team will review your information
+              and contact you if your background matches the position.
+            </p>
+            <button class="ggc-button ggc-button--ghost" id="ggc-submit-another" type="button">
+              Submit another application
+            </button>
+          </div>
+
+          <noscript>
+            <p class="ggc-noscript">
+              JavaScript is required to load current openings and securely submit this application.
+              Please call <a href={`tel:${site.phoneTel}`}>{site.phone}</a> for assistance.
+            </p>
+          </noscript>
+        </div>
+      </div>
+    </section>
+  </main>
+</section>
+
+<script>
+  import "../scripts/careers-page.ts";
+</script>

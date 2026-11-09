@@ -1,0 +1,912 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { site } from "../data/site";
+import { coverageFaqAnswer, areaServedSchema } from "../data/service-areas";
+import "../styles/services-hub.css";
+
+const source = "Services Page";
+const leadSource = "Website - Services Page";
+
+type CatalogItem = {
+  id: string;
+  href: string;
+  category: string;
+  featured?: boolean;
+  tag: string;
+  title: string;
+  body: string;
+  points?: string[];
+  meta: string[];
+  image: string;
+  imageSrcset?: string;
+  imageAlt: string;
+};
+
+const catalog: CatalogItem[] = [
+  {
+    id: "Lawn Fertilization & Weed Control",
+    href: "/lawn-fertilization-weed-control/",
+    category: "lawn",
+    featured: true,
+    tag: "Signature service",
+    title: "Lawn Fertilization & Weed Control",
+    body: "A year-round program built around South Louisiana weather, weed pressure, warm-season turf, and what the lawn needs at each stage of the season.",
+    points: [
+      "Seasonally timed nutrition and monitoring",
+      "Pre- and post-emergent weed control",
+      "Built for local warm-season turf",
+      "Plans start at $39/month; final pricing depends on lawn size and services",
+    ],
+    meta: ["St. Augustine", "Centipede", "Zoysia", "Bermuda"],
+    image: "/images/hero/lawn-results.webp",
+    imageAlt: "Healthy green South Louisiana lawn after Grow Green treatment",
+  },
+  {
+    id: "Lawn Insect Control",
+    href: "/lawn-insects/",
+    category: "lawn pests",
+    tag: "Targeted diagnosis",
+    title: "Lawn Insect Control",
+    body: "Help identifying and targeting chinch bugs, armyworms, mole crickets, sod webworms, and other turf-feeding pests when symptoms fit insect activity.",
+    meta: ["Fast damage", "Warm-season turf"],
+    image: "/images/services/lawn-insects-hero-800.webp",
+    imageSrcset:
+      "/images/services/lawn-insects-hero-800.webp 800w, /images/services/lawn-insects-hero-1280.webp 1280w",
+    imageAlt: "Chinch bug among damaged and healthy grass blades",
+  },
+  {
+    id: "Lawn Fungus Control",
+    href: "/lawn-fungus/",
+    category: "lawn",
+    tag: "Disease care",
+    title: "Lawn Fungus Control",
+    body: "Inspection, treatment, and practical recovery guidance for suspected large patch, dollar spot, gray leaf spot, and other lawn disease concerns.",
+    meta: ["Identify first", "Targeted fungicides"],
+    image: "/images/services/lawn-fungus-large-patch-720.webp",
+    imageSrcset: "/images/services/lawn-fungus-large-patch-720.webp 480w, /images/services/lawn-fungus-large-patch.webp 480w",
+    imageAlt:
+      "Yellow-brown circular patch in an otherwise green St. Augustine lawn—an example of large patch disease",
+  },
+  {
+    id: "Core Aeration",
+    href: "/core-aeration/",
+    category: "soil",
+    tag: "Mechanical aeration",
+    title: "Core Aeration",
+    body: "Mechanical removal of small soil plugs to create pathways for air, water, and nutrients while relieving surface compaction.",
+    meta: ["Physical cores", "Root-zone access"],
+    image: "/images/services/core-aeration-hero-800.webp",
+    imageSrcset:
+      "/images/services/core-aeration-hero-800.webp 800w, /images/services/core-aeration-hero-1280.webp 1280w",
+    imageAlt: "Mechanical core aeration creating plugs in a lawn",
+  },
+  {
+    id: "Liquid Aeration",
+    href: "/liquid-aeration/",
+    category: "soil",
+    tag: "No-core option",
+    title: "Liquid Aeration",
+    body: "A liquid soil-conditioning option designed to improve water movement and complement an overall lawn and soil program without pulling plugs.",
+    meta: ["Soil conditioning", "No visible cores"],
+    image: "/images/services/liquid-aeration-hero-800.webp",
+    imageSrcset:
+      "/images/services/liquid-aeration-hero-800.webp 800w, /images/services/liquid-aeration-hero-1280.webp 1280w",
+    imageAlt: "Lawn receiving a liquid soil-conditioning application",
+  },
+  {
+    id: "Soil Sampling",
+    href: "/soil-sample/",
+    category: "soil",
+    tag: "Lab analysis",
+    title: "Soil Sampling",
+    body: "Professional soil sampling and lab analysis to reveal nutrients, salts, and pH that drive warm-season lawn performance—plus a clear explanation of what the results mean.",
+    meta: ["pH & nutrients", "Actionable report"],
+    image: "/images/services/soil-sampling.webp",
+    imageAlt: "Soil sampling tools on a lawn",
+  },
+  {
+    id: "Tree & Shrub Care",
+    href: "/tree-and-shrub-care/",
+    category: "landscape",
+    tag: "Ornamental program",
+    title: "Tree & Shrub Care",
+    body: "A seasonal ornamental program combining nutrition, inspection, and labeled insect and disease treatments for trees and shrubs.",
+    meta: ["Ornamental care", "Seasonal timing"],
+    image: "/images/services/tree-shrub-hero-800.webp",
+    imageSrcset:
+      "/images/services/tree-shrub-hero-800.webp 800w, /images/services/tree-shrub-hero-1280.webp 1280w",
+    imageAlt: "Healthy trees and ornamental landscape plants",
+  },
+  {
+    id: "Flower Bed Weed Control",
+    href: "/flower-bed-weed-control-and-fertilization/",
+    category: "landscape",
+    tag: "Cleaner landscape beds",
+    title: "Flower Bed Weed Control",
+    body: "Pre-emergent prevention, careful spot treatment, inspection, and realistic maintenance expectations for established landscape beds.",
+    meta: ["Prevention", "Targeted control"],
+    image: "/images/services/flower-bed-card.webp",
+    imageAlt: "Clean mulched flower bed with ornamental plants",
+  },
+  {
+    id: "Fire Ant Control",
+    href: "/fire-ant-treatment/",
+    category: "pests",
+    tag: "Outdoor pest program",
+    title: "Fire Ant Control",
+    body: "Planned treatment that targets fire ant pressure across the lawn, helping reduce active mounds and the chance of painful encounters.",
+    meta: ["Whole-lawn strategy", "Recurring option"],
+    image: "/images/services/ant-mound.webp",
+    imageAlt: "Fire ant mound in a lawn",
+  },
+  {
+    id: "Mosquito, Flea & Tick Control",
+    href: "/mosquito-flea-tick-treatments/",
+    category: "pests",
+    tag: "Seasonal & event options",
+    title: "Mosquito, Flea & Tick Control",
+    body: "Outdoor treatment focused on appropriate landscape and harborage areas, with recurring warm-season and one-time event options.",
+    meta: ["Recurring plan", "Event treatment"],
+    image: "/images/services/mosquito.webp",
+    imageAlt: "Outdoor landscape area where mosquitoes and ticks often gather",
+  },
+];
+
+const goals = [
+  {
+    filter: "lawn",
+    title: "Greener, cleaner turf",
+    body: "Control weeds, support seasonal color, monitor problems, and build a healthier warm-season lawn.",
+    link: "See lawn services",
+    icon: "lawn",
+  },
+  {
+    filter: "soil",
+    title: "Better soil & roots",
+    body: "Address compaction, improve pathways into the root zone, and support stronger turf from below.",
+    link: "See soil options",
+    icon: "soil",
+  },
+  {
+    filter: "landscape",
+    title: "Cleaner beds & ornamentals",
+    body: "Reduce bed weeds and give valuable trees and shrubs seasonally timed attention.",
+    link: "See landscape care",
+    icon: "landscape",
+  },
+  {
+    filter: "pests",
+    title: "Less pest pressure outside",
+    body: "Target fire ants, mosquitoes, fleas, ticks, and damaging lawn insects with the appropriate service.",
+    link: "See pest services",
+    icon: "pests",
+  },
+] as const;
+
+const layers = [
+  {
+    n: "01",
+    title: "Year-round lawn foundation",
+    body: "Fertilization, weed prevention, active weed control, and routine monitoring.",
+    label: "Most popular",
+  },
+  {
+    n: "02",
+    title: "Soil & root support",
+    body: "Core aeration, liquid aeration, or soil sampling selected for the property and objective.",
+    label: "As needed",
+  },
+  {
+    n: "03",
+    title: "Landscape protection",
+    body: "Flower bed weed control and tree-and-shrub care for the areas around the turf.",
+    label: "Optional",
+  },
+  {
+    n: "04",
+    title: "Targeted problems & pests",
+    body: "Specific treatment when insects, disease, fire ants, or biting pests need attention.",
+    label: "Targeted",
+  },
+] as const;
+
+const symptoms = [
+  {
+    label: "Weeds or weak color",
+    quote: "“My lawn never looks consistently clean.”",
+    body: "Start with the year-round lawn program for seasonally timed nutrition, prevention, and weed control.",
+    services: ["Lawn Fertilization & Weed Control"],
+  },
+  {
+    label: "Fast brown or thinning areas",
+    quote: "“Something is spreading through the grass.”",
+    body: "Insects, fungus, irrigation, heat stress, or mowing can look similar. Request an evaluation before choosing.",
+    services: ["Lawn Insect Control", "Lawn Fungus Control"],
+  },
+  {
+    label: "Hard or compacted soil",
+    quote: "“Water runs off and the turf struggles.”",
+    body: "Compare mechanical core aeration with a liquid soil-conditioning approach—or start with a soil sample.",
+    services: ["Core Aeration", "Liquid Aeration", "Soil Sampling"],
+  },
+  {
+    label: "Mounds, stings, or bites",
+    quote: "“We are not enjoying the yard.”",
+    body: "Tell us which pests you are seeing and where. We can recommend the closest outdoor-control option.",
+    services: ["Fire Ant Control", "Mosquito, Flea & Tick Control"],
+  },
+] as const;
+
+const steps = [
+  {
+    n: "01",
+    title: "Tell us your goals",
+    body: "Select one or more services—or choose “not sure”—and share the service address.",
+  },
+  {
+    n: "02",
+    title: "We review the property",
+    body: "Our team evaluates the treatable area, service needs, and any details you provide.",
+  },
+  {
+    n: "03",
+    title: "You receive clear pricing",
+    body: "We explain the recommended service, expected scope, price, and practical limitations.",
+  },
+  {
+    n: "04",
+    title: "Approve & schedule",
+    body: "Choose what you want, approve the estimate, and let the local office coordinate service.",
+  },
+] as const;
+
+const reasons = [
+  {
+    title: "Local ownership",
+    body: "Decisions are made by the team serving your property.",
+  },
+  {
+    title: "Professional service",
+    body: "Licensed, insured, and applied according to product labels.",
+  },
+  {
+    title: "Clear communication",
+    body: "Local office support before and after service.",
+  },
+  {
+    title: "Service accountability",
+    body: "Tell us when something needs another look.",
+  },
+] as const;
+
+const pickOptions = [
+  ...catalog.map((c) => c.id),
+  "Not sure — recommend a service",
+];
+
+const faqs = [
+  {
+    q: "Do I need to know exactly which service I need?",
+    a: "No. Choose “Not sure — recommend a service” in the quote form and describe what you see. We can help separate likely weed, insect, disease, irrigation, soil, or maintenance issues before recommending the next step.",
+  },
+  {
+    q: "Is Grow Green a mowing or landscaping company?",
+    a: "No. Grow Green is a specialized lawn and landscape treatment company. We focus on fertilization, weed control, lawn insects and disease, aeration, ornamental care, flower bed weed control, soil sampling, and specific outdoor pest programs.",
+  },
+  {
+    q: "What is the main lawn program?",
+    a: "Our signature lawn fertilization and weed control program combines seasonally appropriate nutrition, weed prevention, active weed control, and routine monitoring for South Louisiana warm-season lawns. Plans start at $39/month; final pricing depends on lawn size and selected services.",
+  },
+  {
+    q: "Can I request several services at the same time?",
+    a: "Yes. Select every service you are considering. We can price them separately, explain which ones fit the property, and let you decide what to approve.",
+  },
+  {
+    q: "How is my quote calculated?",
+    a: "Pricing depends on the selected service, measured treatable area, property access, landscape conditions, and service scope. That is why we request the service address instead of giving every property the same generic price.",
+  },
+  {
+    q: "What should children and pets do around treatments?",
+    a: "Keep people and pets away during application and follow the re-entry instructions provided after service—often until treated surfaces are dry. Product-specific label directions always control, and pet flea or tick prevention should be coordinated with your veterinarian.",
+  },
+  {
+    q: "Where does Grow Green provide service?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+  {
+    q: "How quickly will I receive an estimate?",
+    a: "Our office reviews quote requests during weekday business hours, Monday through Friday. Complex properties or requests that need an on-site look may take a little longer, and our office will keep you informed.",
+  },
+];
+
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Lawn and Outdoor Treatment Services",
+  url: "https://growgreenweedcontrol.com/services/",
+  description:
+    "South Louisiana lawn fertilization, weed control, aeration, lawn insect, fungus, tree and shrub, flower bed, fire ant, mosquito, flea and tick services from Grow Green Weed Control.",
+  provider: {
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    logo: "https://growgreenweedcontrol.com/images/brand/logo.png",
+    telephone: site.phoneTel,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.city,
+      addressRegion: site.address.state,
+      postalCode: site.address.zip,
+      addressCountry: "US",
+    },
+    areaServed: areaServedSchema(),
+  },
+  mainEntity: {
+    "@type": "ItemList",
+    numberOfItems: catalog.length,
+    itemListElement: catalog.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Service",
+        name: item.title,
+        url: `https://growgreenweedcontrol.com${item.href}`,
+      },
+    })),
+  },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: f.a,
+    },
+  })),
+};
+
+function goalIcon(kind: (typeof goals)[number]["icon"]) {
+  switch (kind) {
+    case "lawn":
+      return `<path d="M4 20c0-7 3.5-12 8-16 1 7-1 12-8 16Zm5 0c1-5 4.5-8.5 11-10-1 6-4.5 9-11 10Z" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>`;
+    case "soil":
+      return `<path d="M3 8h18M3 13h18M3 18h18M7 5v3M12 8v5M17 13v5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>`;
+    case "landscape":
+      return `<path d="M12 21v-8M8 21h8M12 13c-4 0-7-2.4-7-6 3.7 0 6.1 1.5 7 4.4C13 7.8 15.5 5.5 20 5.5c0 4.6-3 7.5-8 7.5Z" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>`;
+    default:
+      return `<path d="M8 9h8M7 14h10M12 5V2M4 8l3 2M20 8l-3 2M4 17l3-2M20 17l-3-2M8 5.5 6 3v7l6 4 6-4v-7l-2-3-4-1-4 1Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>`;
+  }
+}
+---
+
+<div class="svc-page" data-svc-page>
+  <header class="svc-hero">
+    <div class="svc-hero__media" aria-hidden="true">
+      <img
+        src="/images/home/hero-lawn.webp"
+        alt=""
+        width="1920"
+        height="1080"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="svc-hero__shade" aria-hidden="true"></div>
+    <div class="svc-inner svc-hero__grid">
+      <div class="svc-motion">
+        <div class="svc-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <p class="svc-kicker svc-kicker--light">South Louisiana lawn & outdoor treatments</p>
+        <h1 id="svc-page-title">One local team. <em>A complete plan</em> for your property.</h1>
+        <p class="svc-hero__lead">
+          From our signature lawn program to aeration, ornamental care, and targeted pest services, Grow Green helps you
+          choose what your property actually needs—with treatments timed for South Louisiana seasons.
+        </p>
+        <div class="svc-hero__actions">
+          <a class="svc-btn svc-btn--gold" href="#svc-services">Explore all services</a>
+          <a class="svc-btn svc-btn--ghost" href="#svc-quote">Build my free quote</a>
+        </div>
+        <ul class="svc-hero__notes" aria-label="Service highlights">
+          <li>Warm-season lawn specialists</li>
+          <li>Clear, custom pricing</li>
+          <li>Local office support</li>
+        </ul>
+      </div>
+      <div class="svc-hero__aside svc-motion svc-motion-delay">
+        <img
+          class="svc-hero__mascot"
+          src="/images/mascot/backpack-sprayer-320.webp"
+          srcset="/images/mascot/backpack-sprayer-216.webp 216w, /images/mascot/backpack-sprayer-320.webp 320w, /images/mascot/backpack-sprayer-480.webp 480w"
+          sizes="180px"
+          width="320"
+          height="380"
+          alt=""
+          decoding="async"
+        />
+        <div class="svc-hero__card">
+          <strong>Not sure what you need?</strong>
+          <span>Show us the property and the problem. We will point you toward the right service.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="svc-proof" aria-label="Grow Green trust highlights">
+    <div class="svc-inner svc-proof__grid">
+      <div class="svc-proof__item">
+        <strong>Family-owned</strong>
+        <span>Local decisions, local service</span>
+      </div>
+      <div class="svc-proof__item">
+        <strong>Firefighter-owned</strong>
+        <span>Built in St. Amant, Louisiana</span>
+      </div>
+      <div class="svc-proof__item">
+        <strong>Licensed & insured</strong>
+        <span>Professional residential applications</span>
+      </div>
+      <div class="svc-proof__item">
+        <strong>Starts at $39/month</strong>
+        <span>Final price by lawn size & services</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="svc-section svc-goals" aria-labelledby="svc-goals-title">
+    <div class="svc-inner">
+      <p class="svc-kicker svc-center">Start with your goal</p>
+      <h2 class="svc-title svc-center" id="svc-goals-title">What would you like to improve?</h2>
+      <p class="svc-lead svc-center">
+        You do not need to diagnose the property before calling. Choose the closest goal below, explore the services, or
+        send us the address and let our local team help.
+      </p>
+      <div class="svc-goal-grid">
+        {
+          goals.map((g) => (
+            <button class="svc-goal" type="button" data-filter-jump={g.filter} aria-label={`Show ${g.title} services`}>
+              <span class="svc-goal__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" set:html={goalIcon(g.icon)} />
+              </span>
+              <h3>{g.title}</h3>
+              <p>{g.body}</p>
+              <span class="svc-goal__link">{g.link} →</span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-section svc-catalog" id="svc-services" aria-labelledby="svc-services-title">
+    <div class="svc-inner">
+      <p class="svc-kicker">Explore Grow Green services</p>
+      <h2 class="svc-title" id="svc-services-title">Specialized treatment programs for the whole property.</h2>
+      <p class="svc-lead">
+        Our signature lawn program is the starting point for many homeowners. Aeration, landscape, disease, insect, and
+        outdoor pest services can be added when they match the property and your goals.
+      </p>
+
+      <div class="svc-filters">
+        <div class="svc-filter-group" role="group" aria-label="Filter services by category">
+          <button class="svc-filter" type="button" data-filter="all" aria-pressed="true">All services</button>
+          <button class="svc-filter" type="button" data-filter="lawn" aria-pressed="false">Lawn health</button>
+          <button class="svc-filter" type="button" data-filter="soil" aria-pressed="false">Soil & roots</button>
+          <button class="svc-filter" type="button" data-filter="landscape" aria-pressed="false">Landscape</button>
+          <button class="svc-filter" type="button" data-filter="pests" aria-pressed="false">Outdoor pests</button>
+        </div>
+        <span class="svc-result-count" data-result-count aria-live="polite"
+          >Showing {catalog.length} services</span
+        >
+      </div>
+
+      <div class="svc-grid" data-service-grid>
+        {
+          catalog.map((item) => (
+            <article
+              class:list={["svc-card", item.featured && "svc-card--featured"]}
+              data-category={item.category}
+              data-service-card={item.id}
+            >
+              <a class="svc-card__media" href={item.href} aria-label={`Learn about ${item.title}`}>
+                <img
+                  src={item.image}
+                  srcset={item.imageSrcset}
+                  sizes={item.featured ? "(max-width: 900px) 100vw, 55vw" : "(max-width: 900px) 100vw, 360px"}
+                  alt={item.imageAlt}
+                  width="800"
+                  height="640"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="svc-card__tag">{item.tag}</span>
+              </a>
+              <div class="svc-card__body">
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+                {item.points && (
+                  <ul class="svc-card__points">
+                    {item.points.map((point) => (
+                      <li>{point}</li>
+                    ))}
+                  </ul>
+                )}
+                <div class="svc-card__meta">
+                  {item.meta.map((m) => (
+                    <span>{m}</span>
+                  ))}
+                </div>
+                <div class="svc-card__actions">
+                  <a class="svc-card__link" href={item.href}>
+                    {item.featured ? "Explore the program" : "Learn more"}
+                  </a>
+                  <button class="svc-card__add" type="button" data-add-service={item.id}>
+                    {item.featured ? "Add to my quote" : "Add to quote"}
+                  </button>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-section" aria-labelledby="svc-fit-title">
+    <div class="svc-inner svc-fit__grid">
+      <div>
+        <p class="svc-kicker">A plan that makes sense</p>
+        <h2 class="svc-title" id="svc-fit-title">Start with the lawn. Add only what the property needs.</h2>
+        <p class="svc-lead">
+          Many customers begin with year-round fertilization and weed control, then layer in soil, landscape, or pest
+          services based on their goals. Each service has a clear job—there is no reason to buy an add-on that does not
+          fit.
+        </p>
+        <div class="svc-fit__note">
+          <strong>Important:</strong> Lawn care is a process. Weather, irrigation, mowing, shade, drainage, soil, and the
+          starting condition all affect results. We will explain what a treatment can reasonably accomplish before you
+          approve it.
+        </div>
+      </div>
+      <div class="svc-layers" aria-label="How Grow Green services can be combined">
+        {
+          layers.map((layer) => (
+            <div class="svc-layer">
+              <span class="svc-layer__num">{layer.n}</span>
+              <span class="svc-layer__copy">
+                <strong>{layer.title}</strong>
+                <span>{layer.body}</span>
+              </span>
+              <span class="svc-layer__label">{layer.label}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-section svc-finder" aria-labelledby="svc-finder-title">
+    <div class="svc-inner">
+      <p class="svc-kicker svc-kicker--light">Not sure which service?</p>
+      <h2 class="svc-title" id="svc-finder-title">Start with what you are seeing.</h2>
+      <p class="svc-lead">
+        These common symptoms can point toward the right next step. They are a starting point—not a diagnosis from a
+        webpage.
+      </p>
+      <div class="svc-finder__grid">
+        {
+          symptoms.map((s) => (
+            <button
+              class="svc-finder__card"
+              type="button"
+              data-select-services={s.services.join("|")}
+            >
+              <span>{s.label}</span>
+              <strong>{s.quote}</strong>
+              <small>{s.body}</small>
+            </button>
+          ))
+        }
+      </div>
+      <p class="svc-finder__note">
+        Photos and a description help, but some problems require an on-site look. Treatment recommendations depend on
+        the actual pest, plant, turf type, conditions, and product-label requirements.
+      </p>
+    </div>
+  </section>
+
+  <section class="svc-section svc-process" aria-labelledby="svc-process-title">
+    <div class="svc-inner">
+      <p class="svc-kicker svc-center">Simple from the start</p>
+      <h2 class="svc-title svc-center" id="svc-process-title">From request to the right service plan.</h2>
+      <p class="svc-lead svc-center">
+        No confusing package maze and no pressure to guess. We gather the details, measure when needed, and give you a
+        clear recommendation.
+      </p>
+      <div class="svc-steps">
+        {
+          steps.map((step) => (
+            <article class="svc-step">
+              <span class="svc-step__num">{step.n}</span>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-section" aria-labelledby="svc-local-title">
+    <div class="svc-inner svc-local__grid">
+      <div class="svc-local__photo-wrap">
+        <img
+          class="svc-local__photo"
+          src="/images/about/owner-with-son-960.webp"
+          srcset="/images/about/owner-with-son-640.webp 640w, /images/about/owner-with-son-960.webp 960w, /images/about/owner-with-son-1280.webp 1280w"
+          sizes="(max-width: 900px) 90vw, 420px"
+          width="960"
+          height="1200"
+          alt="Grow Green owner Dereck with his son beside a branded Grow Green service truck"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="svc-local__badge">
+          <strong>Built here. Serving here.</strong>
+          <span>Family-owned in St. Amant, Louisiana</span>
+        </div>
+      </div>
+      <div class="svc-local__copy">
+        <p class="svc-kicker">A genuinely local company</p>
+        <h2 class="svc-title" id="svc-local-title">Your lawn is not routed to a national call center.</h2>
+        <p>
+          Grow Green was built in South Louisiana by owner and firefighter Dereck Palermo. Our office, technicians,
+          equipment, and service decisions are local—and our programs are shaped around the turf, heat, humidity, weeds,
+          insects, and disease pressure we work with every day.
+        </p>
+        <div class="svc-reasons">
+          {
+            reasons.map((r) => (
+              <div class="svc-reason">
+                <strong>{r.title}</strong>
+                <span>{r.body}</span>
+              </div>
+            ))
+          }
+        </div>
+        <a class="svc-btn svc-btn--green" href="/about-us/">Meet Grow Green</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-section svc-quote" id="svc-quote" aria-labelledby="svc-quote-title">
+    <div class="svc-inner svc-quote__grid">
+      <div>
+        <p class="svc-kicker svc-kicker--light">Free custom estimate</p>
+        <h2 class="svc-title" id="svc-quote-title">Choose the services. We’ll build the quote.</h2>
+        <p class="svc-lead">
+          Select everything you are considering. Our team can separate the recommendations and pricing so you can decide
+          what makes sense.
+        </p>
+        <ul class="svc-quote__benefits">
+          <li>Reviewed by the local Grow Green office</li>
+          <li>No pressure or obligation</li>
+          <li>Your request goes directly to the Grow Green team</li>
+        </ul>
+        <a class="svc-phone" href={`tel:${site.phoneTel}`}>
+          <span>
+            <span>Prefer to talk?</span>
+            <strong>Call {site.phone}</strong>
+          </span>
+        </a>
+      </div>
+      <div class="svc-quote__panel">
+        <div class="svc-picks" data-svc-picks>
+          <div class="svc-picks__head">
+            <strong id="svc-picks-label">Services requested</strong>
+            <span class="svc-picks__count" data-selected-count>0 selected</span>
+          </div>
+          <div class="svc-picks__list" role="group" aria-labelledby="svc-picks-label" data-service-options>
+            {
+              pickOptions.map((opt) => (
+                <button class="svc-pick" type="button" data-service-option={opt} aria-pressed="false">
+                  <span>{opt}</span>
+                  <span class="svc-pick__check" aria-hidden="true">✓</span>
+                </button>
+              ))
+            }
+          </div>
+        </div>
+        <QuoteForm
+          source={source}
+          leadSource={leadSource}
+          heading="Request your free estimate"
+          subheading="Share the service address and we will prepare a clear recommendation for the services you selected."
+          compact
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-section svc-faq" aria-labelledby="svc-faq-title">
+    <div class="svc-inner svc-faq__grid">
+      <div>
+        <p class="svc-kicker">Common questions</p>
+        <h2 class="svc-title" id="svc-faq-title">Choosing the right Grow Green service.</h2>
+        <p class="svc-lead">
+          You can select multiple services on one request. If you are unsure, describe the problem and our local team
+          will help narrow it down.
+        </p>
+      </div>
+      <div class="svc-faq__list">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-final" aria-label="Request a Grow Green service estimate">
+    <div class="svc-inner">
+      <div class="svc-final__card">
+        <div>
+          <h2>Let’s build the right plan for your property.</h2>
+          <p>
+            Choose one service, combine several, or simply tell us the problem. Grow Green will provide a clear local
+            recommendation and custom price.
+          </p>
+        </div>
+        <div class="svc-final__actions">
+          <a class="svc-btn svc-btn--gold" href="#svc-quote">Request my free quote</a>
+          <a class="svc-btn svc-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-svc-page]");
+  if (root && root.dataset.initialized !== "true") {
+    root.dataset.initialized = "true";
+
+    const notes = root.querySelector<HTMLTextAreaElement>('textarea[name="notes"]');
+    const options = root.querySelector<HTMLElement>("[data-service-options]");
+    const selectedCount = root.querySelector<HTMLElement>("[data-selected-count]");
+    const resultCount = root.querySelector<HTMLElement>("[data-result-count]");
+    const PREFIX = "Services requested: ";
+
+    function selectedServices() {
+      if (!options) return [] as string[];
+      return Array.from(options.querySelectorAll<HTMLButtonElement>('[data-service-option][aria-pressed="true"]')).map(
+        (button) => button.dataset.serviceOption || "",
+      ).filter(Boolean);
+    }
+
+    function syncNotes() {
+      if (!notes) return;
+      const selected = selectedServices();
+      const lines = (notes.value || "")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .filter((line) => !line.startsWith(PREFIX));
+      if (selected.length) lines.unshift(`${PREFIX}${selected.join(", ")}`);
+      notes.value = lines.join("\n");
+    }
+
+    function syncSelection() {
+      const selected = selectedServices();
+      if (selectedCount) {
+        selectedCount.textContent = `${selected.length} selected`;
+      }
+      root.querySelectorAll<HTMLButtonElement>("[data-add-service]").forEach((button) => {
+        const isAdded = selected.includes(button.dataset.addService || "");
+        button.classList.toggle("is-added", isAdded);
+        const featured = Boolean(button.closest(".svc-card--featured"));
+        button.textContent = isAdded
+          ? "Added to quote"
+          : featured
+            ? "Add to my quote"
+            : "Add to quote";
+      });
+      syncNotes();
+    }
+
+    function setService(service: string, selected: boolean) {
+      const button = Array.from(options?.querySelectorAll<HTMLButtonElement>("[data-service-option]") || []).find(
+        (option) => option.dataset.serviceOption === service,
+      );
+      if (!button) return false;
+      button.setAttribute("aria-pressed", selected ? "true" : "false");
+      syncSelection();
+      return true;
+    }
+
+    function addServices(services: string[], shouldScroll: boolean) {
+      services.forEach((service) => setService(service, true));
+      if (shouldScroll) {
+        document.getElementById("svc-quote")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.setTimeout(() => {
+          const first = options?.querySelector<HTMLButtonElement>('[aria-pressed="true"]');
+          first?.focus({ preventScroll: true });
+        }, 500);
+      }
+    }
+
+    function filterServices(filter: string) {
+      let visible = 0;
+      root.querySelectorAll<HTMLElement>("[data-service-card]").forEach((card) => {
+        const categories = (card.dataset.category || "").split(/\s+/);
+        const show = filter === "all" || categories.includes(filter);
+        card.hidden = !show;
+        if (show) visible += 1;
+      });
+      root.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((button) => {
+        button.setAttribute("aria-pressed", button.dataset.filter === filter ? "true" : "false");
+      });
+      if (resultCount) {
+        resultCount.textContent = `Showing ${visible} ${visible === 1 ? "service" : "services"}`;
+      }
+    }
+
+    options?.addEventListener("click", (event) => {
+      const button = (event.target as HTMLElement | null)?.closest<HTMLButtonElement>("[data-service-option]");
+      if (!button) return;
+      const pressed = button.getAttribute("aria-pressed") === "true";
+      button.setAttribute("aria-pressed", pressed ? "false" : "true");
+      syncSelection();
+    });
+
+    root.querySelectorAll<HTMLButtonElement>("[data-add-service]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const service = button.dataset.addService || "";
+        if (!service) return;
+        const already = selectedServices().includes(service);
+        setService(service, !already);
+        if (!already) {
+          document.getElementById("svc-quote")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+
+    root.querySelectorAll<HTMLButtonElement>("[data-select-services]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const services = (button.dataset.selectServices || "").split("|").filter(Boolean);
+        addServices(services, true);
+      });
+    });
+
+    root.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((button) => {
+      button.addEventListener("click", () => filterServices(button.dataset.filter || "all"));
+    });
+
+    root.querySelectorAll<HTMLButtonElement>("[data-filter-jump]").forEach((button) => {
+      button.addEventListener("click", () => {
+        filterServices(button.dataset.filterJump || "all");
+        document.getElementById("svc-services")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.get("service");
+    if (requested) setService(requested, true);
+
+    syncSelection();
+    filterServices("all");
+  }
+</script>

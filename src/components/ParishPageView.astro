@@ -1,0 +1,758 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import CtaBand from "./CtaBand.astro";
+import { site } from "../data/site";
+import { services } from "../data/services";
+import { serviceAreaCount } from "../data/service-areas";
+import type { GeoPage } from "../data/geo-pages.generated";
+import { resolveParishHub } from "../lib/geo/parishHub";
+import { loadPageContent } from "../lib/content/loadPageContent";
+import { parishHubCopyFor } from "../data/parish-hub-content";
+import {
+  parishMediaFor,
+  parishPhotoJpg,
+  parishPhotoSrc,
+  parishPhotoSrcSet,
+} from "../data/parish-media";
+import "../styles/faq-accordion.css";
+
+interface Props {
+  page: GeoPage;
+}
+
+const { page } = Astro.props;
+const hub = resolveParishHub(page);
+const rich = loadPageContent(page.slug);
+const localCopy = parishHubCopyFor(hub.parishKey);
+const media = parishMediaFor(hub.parishKey);
+const faqs = [
+  ...(localCopy?.faqs || []),
+  ...(rich?.faqs || []),
+].filter((faq, index, all) => all.findIndex((f) => f.q === faq.q) === index).slice(0, 10);
+const featuredServices = services.slice(0, 6);
+const uniqueParas = (page.bodyParas || []).filter(Boolean).slice(0, 4);
+
+const highlights = [
+  {
+    title: "Warm-season timing",
+    body: "Treatments follow South Louisiana growing conditions—not a generic national calendar.",
+  },
+  {
+    title: "Clear monthly pricing",
+    body: "Plans start at $39/month. Final pricing depends on lawn size and the services you select.",
+  },
+  {
+    title: "Local office support",
+    body: `Call or text ${site.phone} Monday–Friday, 8 AM–4 PM. Your estimate goes to the Grow Green team in ${site.address.city}.`,
+  },
+];
+
+const steps = [
+  {
+    title: "Request an estimate",
+    body: "Share the service address and what you want help with. No payment is required to get pricing.",
+  },
+  {
+    title: "We review the lawn",
+    body: "We look at treatable area, grass type, and conditions so the recommendation fits the property.",
+  },
+  {
+    title: "Approve a clear plan",
+    body: "Review the recommended program and monthly price, then choose a start when you are ready.",
+  },
+  {
+    title: "Stay on a seasonal schedule",
+    body: "Visits, notes, and seasonal adjustments stay organized through the year.",
+  },
+];
+---
+
+<section class="parish-hero" aria-labelledby="parish-hero-title">
+  <div class="container parish-hero__grid">
+    <div class="parish-hero__copy motion-rise">
+      <p class="parish-eyebrow">{hub.eyebrow}</p>
+      <h1 id="parish-hero-title">{hub.displayTitle}</h1>
+      <p class="parish-lead">{hub.intro}</p>
+      <div class="parish-hero__actions">
+        <a class="btn btn-green" href="#parish-estimate">Get My Free Quote</a>
+        <a class="btn btn-soft parish-hero__phone" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+      </div>
+      <ul class="parish-hero__trust">
+        <li>Firefighter-owned</li>
+        <li>Family-operated</li>
+        <li>Based in {site.address.city}</li>
+      </ul>
+    </div>
+    <aside class="parish-hero__aside motion-rise motion-delay-1">
+      {
+        media ? (
+          <figure class="parish-hero-photo">
+            <picture>
+              <source type="image/webp" srcset={parishPhotoSrcSet(media.hero)} sizes="(min-width: 960px) 28vw, 92vw" />
+              <img
+                src={parishPhotoJpg(media.hero)}
+                alt={media.hero.alt}
+                title={media.hero.caption}
+                width={media.hero.width}
+                height={media.hero.height}
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </picture>
+            <figcaption>
+              <span class="parish-hero-photo__label">{hub.parishLabel}</span>
+              <span class="parish-hero-photo__note">{media.hero.caption}</span>
+            </figcaption>
+          </figure>
+        ) : (
+          <div class="parish-media-slot" data-parish-media="pending">
+            <div class="parish-media-slot__glow"></div>
+            <div class="parish-media-slot__panel">
+              <p class="parish-media-slot__label">{hub.parishLabel}</p>
+              <p class="parish-media-slot__note">Local lawn treatment coverage</p>
+              <ul>
+                <li>{hub.communities.length} communities listed</li>
+                <li>Season-smart applications</li>
+                <li>Free property estimate</li>
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    </aside>
+  </div>
+</section>
+
+<section class="section-tight parish-highlights">
+  <div class="container parish-highlights__grid">
+    {
+      highlights.map((item) => (
+        <article class="parish-highlight motion-rise">
+          <h2>{item.title}</h2>
+          <p>{item.body}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<section class="section-tight parish-main" id="parish-estimate">
+  <div class="container parish-main__grid">
+    <div class="parish-main__content motion-rise">
+      <p class="parish-kicker">Serving {hub.parishLabel}</p>
+      <h2>{localCopy?.localTitle || "Lawn care matched to local turf—not a one-size spray route."}</h2>
+      <p class="parish-copy">{localCopy?.localLead || hub.focusNote}</p>
+      {
+        localCopy && (
+          <>
+            <p class="parish-copy">{localCopy.climateNote}</p>
+            <p class="parish-copy">{localCopy.turfNote}</p>
+          </>
+        )
+      }
+      {
+        uniqueParas.map((para) => (
+          <p class="parish-copy">{para}</p>
+        ))
+      }
+      <p class="parish-copy">
+        Grow Green is a lawn-treatment company. We do not advertise mowing. The core program combines
+        fertilization and weed control for St. Augustine, centipede, zoysia, and bermuda lawns, with
+        optional add-ons when your property needs them.
+      </p>
+
+      {
+        media && media.gallery.length > 0 && (
+          <section class="parish-gallery" aria-labelledby="parish-gallery-title">
+            <h2 id="parish-gallery-title">Lawn care visuals for {hub.parishLabel} homeowners</h2>
+            <p class="parish-copy">
+              Illustrative photos of healthy residential lawns and treatment work from our South Louisiana
+              service area—used here to show the kind of turf care we provide.
+            </p>
+            <div class="parish-gallery__grid">
+              {media.gallery.map((photo) => (
+                <figure class="parish-gallery__item">
+                  <picture>
+                    <source type="image/webp" srcset={parishPhotoSrcSet(photo)} sizes="(min-width: 800px) 22vw, 90vw" />
+                    <img
+                      src={parishPhotoJpg(photo)}
+                      alt={photo.alt}
+                      title={photo.caption}
+                      width={photo.width}
+                      height={photo.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
+                  <figcaption>{photo.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      <div class="parish-points">
+        <div>
+          <h3>What the program is built to do</h3>
+          <ul class="bullet-list">
+            <li>Prevent and treat weeds with season-appropriate timing</li>
+            <li>Feed warm-season turf when nutrition helps—not when it forces weak growth</li>
+            <li>Monitor for common insect and disease pressure during visits</li>
+            <li>Keep communication clear with visit notes and local office support</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Good to know before you start</h3>
+          <ul class="bullet-list">
+            <li>{site.startingPrice.short}</li>
+            <li>Coverage is confirmed from your service address</li>
+            <li>Office hours: Monday–Friday, 8 AM–4 PM America/Chicago</li>
+            <li>
+              Prefer to talk? Call or text <a href={`tel:${site.phoneTel}`}>{site.phone}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {
+        hub.communities.length > 0 && (
+          <section class="parish-communities" aria-labelledby="parish-communities-title">
+            <h2 id="parish-communities-title">Communities we serve in {hub.parishLabel}</h2>
+            <p class="parish-copy">
+              These are confirmed service locations in this parish. Open a city page for local detail, or
+              send any address for a coverage check.
+            </p>
+            <ul class="parish-community-list">
+              {hub.communities.map((area) => (
+                <li>
+                  <a href={`/service-areas/${area.slug}/`}>{area.name}</a>
+                </li>
+              ))}
+            </ul>
+            <p class="parish-communities__more">
+              <a href="/service-areas/">View all {serviceAreaCount} service areas →</a>
+            </p>
+          </section>
+        )
+      }
+
+      <section class="parish-steps" aria-labelledby="parish-steps-title">
+        <h2 id="parish-steps-title">From estimate to a clearer lawn plan</h2>
+        <ol class="parish-step-list">
+          {
+            steps.map((step, index) => (
+              <li>
+                <span class="parish-step-list__num">{index + 1}</span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.body}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+    </div>
+
+    <aside class="parish-main__form motion-rise motion-delay-1">
+      <QuoteForm
+        source={`geo-${page.slug}`}
+        leadSource="Website"
+        heading={`Free estimate for ${hub.parishLabel}`}
+        subheading="Enter the service address and we’ll prepare a clear, no-obligation estimate for your property."
+      />
+      <div class="gg-aside-rail">
+        <section class="gg-aside-services" aria-labelledby="parish-services-title">
+          <p class="gg-aside-services__kicker">Services</p>
+          <h2 id="parish-services-title">Available in {hub.parishLabel}</h2>
+          <p class="gg-aside-services__lead">
+            Core lawn programs plus targeted add-ons when your property needs them.
+          </p>
+          <ul class="gg-aside-services__list">
+            {
+              featuredServices.map((service) => (
+                <li>
+                  <a href={service.path || `/${service.slug}/`}>
+                    <strong>{service.title}</strong>
+                    <span>{service.summary}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+        {
+          faqs.length > 0 && (
+            <section class="gg-faq gg-faq--aside parish-faqs" aria-labelledby="parish-faqs-title">
+              <div class="gg-faq__head">
+                <p class="gg-faq__kicker">FAQ</p>
+                <h2 id="parish-faqs-title">Common questions for {hub.parishLabel}</h2>
+                <p class="gg-faq__lead">
+                  Coverage, pricing, and what to expect before you request an estimate.
+                </p>
+              </div>
+              <div class="gg-faq__list">
+                {faqs.map((faq) => (
+                  <details>
+                    <summary>{faq.q}</summary>
+                    <p class="gg-faq__answer">{faq.a}</p>
+                  </details>
+                ))}
+              </div>
+              <script
+                type="application/ld+json"
+                set:html={JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "FAQPage",
+                  mainEntity: faqs.map((faq) => ({
+                    "@type": "Question",
+                    name: faq.q,
+                    acceptedAnswer: { "@type": "Answer", text: faq.a },
+                  })),
+                })}
+              />
+            </section>
+          )
+        }
+      </div>
+    </aside>
+  </div>
+</section>
+
+<CtaBand
+  heading={`Get a lawn plan for ${hub.parishLabel}`}
+  text={`Tell us the service address — our local office in ${site.address.city} follows up during business hours.`}
+/>
+
+<style>
+  .parish-hero {
+    position: relative;
+    padding: clamp(2.6rem, 5.5vw, 3.8rem) 0 clamp(2.2rem, 4vw, 3rem);
+    background:
+      radial-gradient(circle at 92% 12%, rgba(242, 170, 43, 0.14), transparent 26%),
+      radial-gradient(circle at 8% 88%, rgba(47, 122, 67, 0.1), transparent 32%),
+      linear-gradient(180deg, #eef5ef 0%, #f7faf7 42%, #ffffff 100%);
+    border-bottom: 1px solid rgba(22, 56, 37, 0.08);
+    overflow: hidden;
+  }
+  .parish-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold) 0 30%, var(--green-700) 30% 100%);
+  }
+  .parish-hero__grid {
+    display: grid;
+    gap: 1.75rem;
+    align-items: center;
+  }
+  @media (min-width: 960px) {
+    .parish-hero__grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.85fr);
+      gap: 2.5rem;
+    }
+  }
+  .parish-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0 0 0.85rem;
+    color: #8a5a10;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .parish-eyebrow::before {
+    content: "";
+    width: 1.6rem;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--gold);
+  }
+  .parish-hero h1 {
+    margin: 0 0 0.7rem;
+    max-width: 14ch;
+    font-size: clamp(2.15rem, 4.4vw, 3.35rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--green-900);
+  }
+  .parish-lead {
+    margin: 0;
+    max-width: 38rem;
+    color: #3f5347;
+    font-size: clamp(1.02rem, 1.5vw, 1.12rem);
+    line-height: 1.6;
+  }
+  .parish-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.35rem;
+  }
+  .parish-hero__phone {
+    background: #fff;
+    border-color: rgba(22, 56, 37, 0.18);
+    color: var(--green-900);
+  }
+  .parish-hero__phone:hover,
+  .parish-hero__phone:focus-visible {
+    background: #f3f8f4;
+    border-color: rgba(47, 122, 67, 0.35);
+    color: var(--green-800);
+  }
+  .parish-hero__trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1rem;
+    margin: 1.2rem 0 0;
+    padding: 0;
+    list-style: none;
+    color: #5f7466;
+    font-size: 0.88rem;
+    font-weight: 800;
+  }
+  .parish-hero__trust li {
+    position: relative;
+    padding-left: 0.95rem;
+  }
+  .parish-hero__trust li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--green-700);
+  }
+
+  .parish-hero-photo {
+    position: relative;
+    margin: 0;
+    border-radius: 1.35rem;
+    overflow: hidden;
+    border: 1px solid rgba(22, 56, 37, 0.1);
+    box-shadow: 0 22px 48px rgba(10, 36, 20, 0.16);
+    background: #0d2918;
+  }
+  .parish-hero-photo img {
+    display: block;
+    width: 100%;
+    height: min(28rem, 62vw);
+    object-fit: cover;
+  }
+  .parish-hero-photo figcaption {
+    position: absolute;
+    inset: auto 0 0;
+    display: grid;
+    gap: 0.2rem;
+    padding: 1.1rem 1.15rem 1.15rem;
+    background: linear-gradient(180deg, transparent, rgba(7, 29, 17, 0.88));
+    color: #fff;
+  }
+  .parish-hero-photo__label {
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #f2c56d;
+  }
+  .parish-hero-photo__note {
+    font-size: 0.92rem;
+    font-weight: 750;
+    line-height: 1.35;
+    color: #e7f0e8;
+  }
+
+  .parish-gallery {
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(22, 56, 37, 0.1);
+  }
+  .parish-gallery__grid {
+    display: grid;
+    gap: 0.85rem;
+    margin-top: 1rem;
+  }
+  @media (min-width: 700px) {
+    .parish-gallery__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .parish-gallery__item {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid rgba(22, 56, 37, 0.1);
+    background: #fff;
+    box-shadow: 0 10px 24px rgba(16, 44, 27, 0.05);
+  }
+  .parish-gallery__item img {
+    display: block;
+    width: 100%;
+    height: 12.5rem;
+    object-fit: cover;
+  }
+  .parish-gallery__item figcaption {
+    padding: 0.7rem 0.85rem 0.85rem;
+    color: #43574a;
+    font-size: 0.82rem;
+    font-weight: 650;
+    line-height: 1.4;
+  }
+
+  .parish-media-slot {
+    position: relative;
+    min-height: 18rem;
+    border-radius: 1.35rem;
+    overflow: hidden;
+    background:
+      linear-gradient(145deg, rgba(7, 29, 17, 0.92), rgba(16, 53, 31, 0.88)),
+      radial-gradient(circle at 70% 20%, rgba(242, 170, 43, 0.2), transparent 40%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 22px 48px rgba(10, 36, 20, 0.18);
+  }
+  .parish-media-slot__glow {
+    position: absolute;
+    inset: auto -20% -30% auto;
+    width: 70%;
+    height: 70%;
+    background: radial-gradient(circle, rgba(77, 168, 95, 0.28), transparent 65%);
+    pointer-events: none;
+  }
+  .parish-media-slot__panel {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 0.55rem;
+    padding: 1.6rem 1.5rem;
+    color: #fff;
+    height: 100%;
+    align-content: end;
+  }
+  .parish-media-slot__label {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #f2c56d;
+  }
+  .parish-media-slot__note {
+    margin: 0;
+    font-size: clamp(1.45rem, 2.4vw, 1.9rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+  .parish-media-slot__panel ul {
+    margin: 0.55rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.35rem;
+    color: #d5e4da;
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+  .parish-media-slot__panel li {
+    padding-left: 0.9rem;
+    position: relative;
+  }
+  .parish-media-slot__panel li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  @media (max-width: 959px) {
+    .parish-hero-photo img {
+      height: min(22rem, 70vw);
+    }
+  }
+
+  .parish-highlights {
+    padding-top: 0;
+    margin-top: -0.5rem;
+  }
+  .parish-highlights__grid {
+    display: grid;
+    gap: 0.85rem;
+  }
+  @media (min-width: 800px) {
+    .parish-highlights__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+  }
+  .parish-highlight {
+    padding: 1.15rem 1.2rem 1.25rem;
+    border-top: 3px solid var(--gold);
+    background: transparent;
+  }
+  .parish-highlight h2 {
+    margin: 0 0 0.4rem;
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: var(--green-900);
+  }
+  .parish-highlight p {
+    margin: 0;
+    color: #51665a;
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+
+  .parish-main__grid {
+    display: grid;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (min-width: 960px) {
+    .parish-main__grid {
+      grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+      gap: 2.25rem;
+    }
+  }
+  .parish-main__content {
+    display: grid;
+    gap: 1.35rem;
+  }
+  .parish-kicker {
+    margin: 0;
+    color: var(--green-700);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .parish-main__content > h2 {
+    margin: 0;
+    max-width: 22ch;
+    font-size: clamp(1.55rem, 2.6vw, 2.05rem);
+    line-height: 1.15;
+    color: var(--green-900);
+  }
+  .parish-copy {
+    margin: 0;
+    color: #44574c;
+    line-height: 1.6;
+  }
+  .parish-points {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (min-width: 700px) {
+    .parish-points {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+  }
+  .parish-points h3 {
+    margin: 0 0 0.55rem;
+    font-size: 1.02rem;
+    color: var(--ink);
+  }
+
+  .parish-communities,
+  .parish-steps {
+    display: grid;
+    gap: 0.75rem;
+    padding-top: 0.35rem;
+  }
+  .parish-communities h2,
+  .parish-steps h2 {
+    margin: 0;
+    font-size: clamp(1.25rem, 2vw, 1.55rem);
+    color: var(--green-900);
+  }
+  .parish-community-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .parish-community-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid #cfe0d3;
+    background: #f7faf7;
+    color: var(--green-900);
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.9rem;
+  }
+  .parish-community-list a:hover,
+  .parish-community-list a:focus-visible {
+    background: #eef6f0;
+    border-color: #a9cbb0;
+    outline: none;
+  }
+  .parish-communities__more {
+    margin: 0.35rem 0 0;
+  }
+  .parish-communities__more a {
+    color: var(--green-700);
+    font-weight: 900;
+    text-decoration: none;
+  }
+  .parish-communities__more a:hover {
+    color: var(--green-900);
+  }
+
+  .parish-step-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.85rem;
+  }
+  .parish-step-list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.85rem;
+    align-items: start;
+  }
+  .parish-step-list__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: var(--green-800);
+    color: #fff;
+    font-weight: 900;
+    font-size: 0.88rem;
+  }
+  .parish-step-list h3 {
+    margin: 0.15rem 0 0.25rem;
+    font-size: 1rem;
+  }
+  .parish-step-list p {
+    margin: 0;
+    color: #51665a;
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+
+  .parish-main__form {
+    display: grid;
+    gap: 0;
+    align-content: start;
+  }
+</style>

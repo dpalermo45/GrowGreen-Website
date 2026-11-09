@@ -1,0 +1,609 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { site } from "../data/site";
+import { coverageFaqAnswer, areaServedSchema } from "../data/service-areas";
+import "../styles/lawn-fungus-insects.css";
+
+const source = "Lawn Fungus and Insects Page";
+const leadSource = "Website - Lawn Fungus and Insects Page";
+
+const paths = [
+  {
+    href: "/lawn-fungus/",
+    tag: "Disease pressure",
+    title: "Lawn fungus control",
+    body: "Separate fungus from look-alike causes, then recommend fungicide only when timing and target fit South Louisiana turf.",
+    image: "/images/services/lawn-fungus-large-patch-720.webp",
+    imageAlt:
+      "Yellow-brown circular patch in an otherwise green St. Augustine lawn—an example of large patch disease",
+    cta: "Explore lawn fungus →",
+  },
+  {
+    href: "/lawn-insects/",
+    tag: "Pest pressure",
+    title: "Lawn insect control",
+    body: "Match evidence to the pest—chinch bugs, armyworms, sod webworms, mole crickets—before recommending insecticide.",
+    image: "/images/services/lawn-insects-damage-720.webp",
+    imageAlt: "Brown dead turf patch beside a concrete sidewalk on an otherwise green residential lawn",
+    cta: "Explore lawn insects →",
+  },
+] as const;
+
+const checks = [
+  {
+    title: "Pattern in the lawn",
+    body: "Rings, scattered spots, sunny thinning, chewed blades, or loosened soil each point to different next steps.",
+  },
+  {
+    title: "Grass type & timing",
+    body: "St. Augustine, bermuda, centipede, and zoysia do not share identical disease and insect risks—or the same seasonal windows.",
+  },
+  {
+    title: "Conditions around the turf",
+    body: "Weather, moisture, irrigation, mowing, shade, compaction, and recent products all change what the symptoms mean.",
+  },
+] as const;
+
+const concerns = [
+  {
+    title: "Large patch & leaf diseases",
+    body: "Circular or irregular brown areas, leaf spots, and thinning that often intensify with humidity, wetness, or cool transitions.",
+    image: "/images/services/lawn-fungus-large-patch-720.webp",
+    imageAlt:
+      "Yellow-brown circular patch in an otherwise green St. Augustine lawn—an example of large patch disease",
+  },
+  {
+    title: "Root & stress complexes",
+    body: "Persistent yellowing or weak turf can involve root disease, soil limits, and plant stress—not only a surface fungicide target.",
+    image: "/images/services/lawn-fungus-video-poster.webp",
+    imageAlt: "Close view of stressed turf that may involve more than a surface disease target",
+  },
+  {
+    title: "Chinch bugs & armyworms",
+    body: "Hot-weather thinning or rapidly chewed turf may be insect pressure. The active edge and recent weather matter.",
+    image: "/images/services/lawn-insects-chinch-640.webp",
+    imageAlt: "Turf damage pattern associated with chinch bug and armyworm pressure",
+  },
+  {
+    title: "Sod webworms & mole crickets",
+    body: "Ragged blades, scalped-looking turf, tunnels, or loose soil can signal pests that need confirmation before treatment.",
+    image: "/images/services/lawn-insects-mole-640.webp",
+    imageAlt: "Turf and soil disturbance that may involve sod webworms or mole crickets",
+  },
+] as const;
+
+const steps = [
+  {
+    n: "01",
+    title: "Tell us what changed",
+    body: "Share grass type, pattern, timing, watering, mowing, and anything already applied. Photos may help prioritize the next look.",
+  },
+  {
+    n: "02",
+    title: "Narrow fungus vs insects vs look-alikes",
+    body: "We compare disease clues with insects, drought, irrigation gaps, mowing injury, compaction, and root stress.",
+  },
+  {
+    n: "03",
+    title: "Choose the right response",
+    body: "Fungicide or insecticide only when the target and timing fit. When they do not, we explain the better next step.",
+  },
+  {
+    n: "04",
+    title: "Protect the recovery",
+    body: "You receive practical watering, mowing, and stress guidance. Follow-up depends on severity, weather, and turf response.",
+  },
+] as const;
+
+const lookalikes = [
+  {
+    title: "Drought or irrigation gaps",
+    body: "Missed zones, clogged heads, and heat stress can mimic disease or chinch-bug injury—especially in full sun.",
+  },
+  {
+    title: "Mowing injury",
+    body: "Scalping, dull blades, or cutting wet turf can leave discoloration and wounds that resemble pest or disease damage.",
+  },
+  {
+    title: "Compaction, drainage & shade",
+    body: "Restricted roots, saturated soil, and low light weaken turf and can be the primary problem—or increase secondary pressure.",
+  },
+  {
+    title: "Wrong product, wrong timing",
+    body: "Spraying first and diagnosing later wastes time while the real cause keeps working. Evaluation protects living turf.",
+  },
+] as const;
+
+const concernOptions = [
+  "Not sure — evaluate first",
+  "Possible lawn fungus / disease",
+  "Possible lawn insects",
+  "Brown, thinning, or chewed turf",
+  "Both fungus and insect concerns",
+] as const;
+
+const faqs = [
+  {
+    q: "How do I know whether brown grass is fungus or insects?",
+    a: "You often cannot tell from color alone. Pattern, grass type, weather, moisture, the active edge, chewed tissue, tunnels, and root condition all help. Grow Green evaluates those clues before recommending fungicide, insecticide, or a non-product next step.",
+  },
+  {
+    q: "Will treatment turn dead grass green again?",
+    a: "No. Fungicide and insecticide can help manage a susceptible target and protect living turf. Dead leaf, crown, or root tissue will not green back. Recovery depends on remaining living turf, conditions, and follow-through care.",
+  },
+  {
+    q: "Do you always recommend a spray?",
+    a: "No. Product is recommended when the evidence, timing, and label fit. Drought, irrigation gaps, mowing injury, compaction, shade, and root stress may need a different response first.",
+  },
+  {
+    q: "Should I start on the fungus page or the insect page?",
+    a: "If you already know which path fits, open that dedicated page. If you are unsure, request an estimate here and note what you are seeing—our team will help sort fungus, insects, and look-alikes.",
+  },
+  {
+    q: "Do I need to be home for an evaluation or treatment?",
+    a: "Usually not, as long as we can safely access the lawn and pets are secured. Gate codes, locked areas, and recent product applications should be shared when you request service.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Lawn Fungus and Insect Treatments",
+  serviceType: "Lawn Disease and Turf Insect Evaluation and Treatment",
+  url: "https://growgreenweedcontrol.com/lawn-fungus-and-insects/",
+  image: "https://growgreenweedcontrol.com/images/services/lawn-fungus-large-patch.webp",
+  description:
+    "Evaluation-first lawn fungus and insect treatments for South Louisiana turf. Separate disease from insects and look-alikes, then recommend the right response.",
+  provider: {
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    logo: "https://growgreenweedcontrol.com/images/brand/logo.png",
+    telephone: site.phoneTel,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.city,
+      addressRegion: site.address.state,
+      postalCode: site.address.zip,
+      addressCountry: "US",
+    },
+  },
+  areaServed: areaServedSchema(),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://growgreenweedcontrol.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Services",
+      item: "https://growgreenweedcontrol.com/services/",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Lawn Fungus and Insect Treatments",
+      item: "https://growgreenweedcontrol.com/lawn-fungus-and-insects/",
+    },
+  ],
+};
+---
+
+<div class="fi-page fi-page--pathfinder" data-fi-page>
+  <header class="fi-hero fi-hero--photo">
+    <div class="fi-hero__media" aria-hidden="true">
+      <img
+        src="/images/services/lawn-fungus-large-patch.webp"
+        width="480"
+        height="640"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="fi-hero__shade" aria-hidden="true"></div>
+    <div class="f-inner fi-hero__grid">
+      <div class="motion-rise">
+        <div class="fi-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <p class="fi-hero__eyebrow">Lawn fungus · Lawn insects</p>
+        <h1>Brown turf needs a <em>diagnosis</em>, not a guess.</h1>
+        <p class="fi-hero__lead">
+          Targeted help when brown, thinning, or chewed turf may be disease or insect pressure. We evaluate first, then
+          recommend fungicide, insecticide, or a better next step for South Louisiana lawns.
+        </p>
+        <div class="fi-hero__actions">
+          <a class="f-btn f-btn--gold" href="#fi-quote">Get my free estimate →</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+        <ul class="fi-hero__notes" aria-label="Service highlights">
+          <li>Evaluation before product</li>
+          <li>Fungus & insect paths</li>
+          <li>Look-alikes ruled out</li>
+        </ul>
+        <p class="fi-hero__truth">
+          Product protects living turf when the target fits. It does not bring dead grass back—or replace every other lawn
+          care need.
+        </p>
+      </div>
+      <div class="fi-hero__visual motion-rise">
+        <img
+          class="fi-hero__mascot"
+          src="/images/mascot/mushroom-weed-320.webp"
+          srcset="/images/mascot/mushroom-weed-216.webp 216w, /images/mascot/mushroom-weed-320.webp 320w, /images/mascot/mushroom-weed-480.webp 480w"
+          sizes="(max-width: 960px) 55vw, 300px"
+          width="480"
+          height="439"
+          alt=""
+          decoding="async"
+        />
+      </div>
+    </div>
+  </header>
+
+  <div class="fi-proof f-inner" aria-label="Grow Green credentials">
+    <div class="fi-proof__item">
+      <strong>Firefighter-owned</strong>
+      <span>Local and family-operated</span>
+    </div>
+    <div class="fi-proof__item">
+      <strong>Diagnosis before product</strong>
+      <span>Right problem, right response</span>
+    </div>
+    <div class="fi-proof__item">
+      <strong>Label-directed applications</strong>
+      <span>Clear recovery expectations</span>
+    </div>
+    <div class="fi-proof__item">
+      <strong>Warm-season turf focus</strong>
+      <span>Built for South Louisiana lawns</span>
+    </div>
+  </div>
+
+  <section class="f-section fi-paths fi-paths--featured" aria-labelledby="fi-paths-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Choose your path—or start here</p>
+      <h2 class="f-title f-center" id="fi-paths-title">Two dedicated services. One evaluation-first approach.</h2>
+      <p class="f-lead f-center">
+        Dive into the page that matches what you are seeing, or request an estimate here if you are not sure yet.
+      </p>
+      <div class="fi-paths__grid">
+        {
+          paths.map((path) => (
+            <a class="fi-path" href={path.href}>
+              <div class="fi-path__media">
+                <img
+                  src={path.image}
+                  width="800"
+                  height="640"
+                  alt={path.imageAlt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div class="fi-path__body">
+                <p class="fi-path__tag">{path.tag}</p>
+                <h3>{path.title}</h3>
+                <p>{path.body}</p>
+                <span class="fi-path__cta">{path.cta}</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="fi-diag-title">
+    <div class="f-inner fi-diag__grid">
+      <div>
+        <p class="f-kicker">Diagnosis before treatment</p>
+        <h2 class="f-title" id="fi-diag-title">Brown grass is a symptom. Fungus and insects are two possible causes.</h2>
+        <p class="f-lead">
+          A useful recommendation comes from the whole picture—not one photo or one brown patch. We look at the pattern,
+          grass species, weather, moisture, maintenance, and how quickly the problem changed.
+        </p>
+        <ul class="fi-checks">
+          {
+            checks.map((item, i) => (
+              <li>
+                <span class="fi-checks__num" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <div>
+                  <strong>{item.title}</strong>
+                  <p>{item.body}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <figure class="fi-diagram">
+        <img
+          src="/images/services/lawn-insects-damage-960.webp"
+          srcset="/images/services/lawn-insects-damage-720.webp 720w, /images/services/lawn-insects-damage-960.webp 960w"
+          sizes="(max-width: 960px) 90vw, 420px"
+          width="960"
+          height="1280"
+          alt="Brown dead turf patch beside a concrete sidewalk on an otherwise green residential lawn"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>
+          Disease clues, insect evidence, and look-alike stress can overlap. Evaluation sorts the target before product.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="fi-look-title">
+    <div class="f-inner fi-help-grid">
+      <div>
+        <p class="f-kicker">When spraying is not step one</p>
+        <h2 class="f-title" id="fi-look-title">Common look-alikes we separate first.</h2>
+        <p class="f-lead">
+          Using the wrong product on the wrong problem costs time while the actual cause keeps working.
+        </p>
+      </div>
+      <div class="fi-help-items">
+        {
+          lookalikes.map((item, i) => (
+            <article class="fi-help-item">
+              <span class="fi-help-num" aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <strong>{item.title}</strong>
+                <span>{item.body}</span>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section fi-guide" aria-labelledby="fi-concerns-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Common local concerns</p>
+      <h2 class="f-title f-center" id="fi-concerns-title">What homeowners ask us to look at most often.</h2>
+      <p class="f-lead f-center">
+        These are field clues—not a remote diagnosis. Similar symptoms can overlap, and turf may have more than one stress
+        at a time.
+      </p>
+      <div class="fi-concern-grid">
+        {
+          concerns.map((item) => (
+            <article class="fi-concern fi-concern--media">
+              <div class="fi-concern__media">
+                <img src={item.image} width="640" height="480" alt={item.imageAlt} loading="lazy" decoding="async" />
+              </div>
+              <div class="fi-concern__body">
+                <strong>{item.title}</strong>
+                <p>{item.body}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section fi-process" aria-labelledby="fi-process-title">
+    <div class="f-inner">
+      <p class="f-kicker f-kicker--light f-center">What happens next</p>
+      <h2 class="f-title f-center" id="fi-process-title">A clear path from clue to response.</h2>
+      <p class="f-lead f-center">
+        Whether the answer is fungicide, insecticide, or a non-product fix, the process stays straightforward.
+      </p>
+      <div class="fi-steps">
+        {
+          steps.map((step) => (
+            <article class="fi-step">
+              <span class="fi-step__num">{step.n}</span>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="fi-expect__grid">
+        <article class="fi-expect__card fi-expect__card--yes">
+          <h3>What evaluation can do</h3>
+          <ul>
+            <li>Sort fungus, insects, and look-alike stress before recommending product</li>
+            <li>Match timing and target to South Louisiana warm-season turf</li>
+            <li>Explain recovery limits so expectations stay honest</li>
+          </ul>
+        </article>
+        <article class="fi-expect__card fi-expect__card--no">
+          <h3>What treatment cannot do</h3>
+          <ul>
+            <li>Bring dead leaf, crown, or root tissue back to green</li>
+            <li>Fix drought, irrigation gaps, or mowing injury by spraying alone</li>
+            <li>Replace every other lawn-care need on the property</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section fi-program" aria-labelledby="fi-local-title">
+    <div class="f-inner fi-local__grid">
+      <figure class="fi-owner">
+        <img
+          class="fi-local__photo"
+          src="/images/services/lawn-fungus-local-960.webp"
+          srcset="/images/about/owner-with-son-640.webp 640w, /images/services/lawn-fungus-local-960.webp 960w, /images/about/owner-with-son-1280.webp 1280w"
+          sizes="(max-width: 900px) 90vw, 420px"
+          width="960"
+          height="1200"
+          alt="Grow Green Weed Control owner with his son beside a branded service truck"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="fi-owner__badge">
+          <strong>Family-owned. Firefighter-owned.</strong>
+          <span>Local turf decisions for South Louisiana lawns.</span>
+        </figcaption>
+      </figure>
+      <div>
+        <p class="f-kicker">Why Grow Green</p>
+        <h2 class="f-title" id="fi-local-title">Local judgment for warm-season turf problems.</h2>
+        <p class="f-lead">
+          Heat, humidity, heavy rain, and drought stress change what brown turf means from week to week. Grow Green is a
+          local team that evaluates the lawn in front of us—not a one-size calendar spray.
+        </p>
+        <div class="fi-local__points">
+          <div class="fi-local__point">Honest expectations</div>
+          <div class="fi-local__point">Label-directed applications</div>
+          <div class="fi-local__point">Fungus & insect deep-dives</div>
+          <div class="fi-local__point">No-pressure pricing</div>
+        </div>
+        <p class="fi-program__links">
+          Prefer a focused read?
+          <a href="/lawn-fungus/">Lawn fungus</a>
+          {" · "}
+          <a href="/lawn-insects/">Lawn insects</a>
+        </p>
+        <a class="f-btn f-btn--green" href="/about-us/">Meet Grow Green →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section fi-faq" aria-labelledby="fi-faq-title">
+    <div class="f-inner fi-faq__grid">
+      <div>
+        <p class="f-kicker">Straight answers</p>
+        <h2 class="f-title" id="fi-faq-title">Lawn fungus & insect FAQs</h2>
+        <p class="f-lead">
+          Still sorting through brown patches or chewed turf? Call the local Grow Green team at{" "}
+          <a href={`tel:${site.phoneTel}`}>{site.phone}</a>.
+        </p>
+      </div>
+      <div class="fi-faq__list">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section fi-quote" id="fi-quote" aria-labelledby="fi-quote-title">
+    <div class="f-inner fi-quote__grid">
+      <div>
+        <p class="f-kicker f-kicker--light">Free local estimate</p>
+        <h2 class="f-title" id="fi-quote-title">Tell us what you are seeing.</h2>
+        <p class="f-lead">
+          Share the service address and a short note about the pattern, timing, or pest activity. Our local team will
+          review the details and prepare straightforward next steps.
+        </p>
+        <ul class="fi-quote__benefits">
+          <li>No pressure or obligation</li>
+          <li>Most quote requests reviewed during business hours, {site.hours.label}</li>
+          <li>Your information goes directly to Grow Green</li>
+        </ul>
+        <p class="fi-quote__chip" aria-hidden="true">Service noted: Lawn Fungus / Insects</p>
+        <a class="fi-quote__phone" href={`tel:${site.phoneTel}`}>
+          <span>Prefer to talk?</span>
+          <strong>Call {site.phone}</strong>
+        </a>
+      </div>
+      <div class="core-form-shell">
+        <div class="fi-picks" data-fi-picks>
+          <div>
+            <label for="fi-concern">What concerns you most?</label>
+            <select id="fi-concern" data-fi-concern>
+              {concernOptions.map((opt) => <option value={opt}>{opt}</option>)}
+            </select>
+          </div>
+        </div>
+        <QuoteForm
+          source={source}
+          leadSource={leadSource}
+          heading="Request your free estimate"
+          subheading="Enter the service address and anything about grass type, pattern, timing, watering, or recent products that will help us prepare your quote."
+          compact
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="fi-final" aria-label="Request a lawn fungus or insect treatment estimate">
+    <div class="f-inner">
+      <div class="fi-final__card">
+        <div>
+          <h2>Stop guessing at brown turf.</h2>
+          <p>
+            Let Grow Green help sort fungus, insects, and look-alikes—then recommend the response that actually fits your
+            lawn.
+          </p>
+        </div>
+        <div class="fi-final__actions">
+          <a class="f-btn f-btn--gold" href="#fi-quote">Get my free estimate</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-fi-page]");
+  if (root) {
+    const notes = root.querySelector<HTMLTextAreaElement>('textarea[name="notes"]');
+    const concern = root.querySelector<HTMLSelectElement>("[data-fi-concern]");
+    const SERVICE = "Service requested: Lawn Fungus / Insects";
+
+    function syncNotes() {
+      if (!notes) return;
+      const lines = (notes.value || "")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .filter((line) => !line.startsWith("Service requested:") && !line.startsWith("Main concern:"));
+      lines.unshift(SERVICE);
+      if (concern?.value) lines.push(`Main concern: ${concern.value}`);
+      notes.value = lines.join("\n");
+    }
+
+    concern?.addEventListener("change", syncNotes);
+    notes?.addEventListener("blur", syncNotes);
+    syncNotes();
+  }
+</script>

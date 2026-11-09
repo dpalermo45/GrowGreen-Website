@@ -1,0 +1,85 @@
+{
+  "id": "1467",
+  "slug": "post-card-estimate-request",
+  "title": "Post Card Estimate Request",
+  "seo_title": "",
+  "seo_desc": "",
+  "link": "https://growgreenweedcontrol.com/post-card-estimate-request/",
+  "kind": "pages",
+  "headings": [
+    "We just treated your neighbor's lawn.",
+    "Claim your neighbor offer",
+    "Request received!",
+    "Why your neighbors choose Grow Green",
+    "Firefighter-owned & local",
+    "Already in your area",
+    "Care built for local lawns",
+    "Firefighter-owned.Community focused.",
+    "Great service starts with trust.",
+    "A healthier-looking lawn starts with a simple estimate."
+  ],
+  "paragraphs": [
+    "Your lawn could be next. Get a free, no-pressure estimate from the local lawn care team already working in your neighborhood.",
+    "Tell us where your lawn is. We'll review your property and follow up with your personalized estimate.",
+    "Free estimate \u2022 No obligation \u2022 $25 neighbor offer noted for our team",
+    "Our local team will review your lawn and follow up with your estimate.",
+    "Your $25 first-month neighbor offer is noted.",
+    "A local team, professional treatments, and a straightforward way to get started.",
+    "We're a South Louisiana business that cares about the neighborhoods we serve.",
+    "Our crews are treating lawns nearby, so getting started is simple.",
+    "Seasonal weed prevention and fertilization designed around South Louisiana turf.",
+    "Professional care from a local team.",
+    "Ask us about our local customer experience.",
+    "Get your custom price and ask about your $25 neighbor discount."
+  ],
+  "list_items": [],
+  "faqs": [
+    {
+      "q": "Firefighter-owned & local",
+      "a": "We're a South Louisiana business that cares about the neighborhoods we serve."
+    },
+    {
+      "q": "Already in your area",
+      "a": "Our crews are treating lawns nearby, so getting started is simple."
+    },
+    {
+      "q": "Care built for local lawns",
+      "a": "Seasonal weed prevention and fertilization designed around South Louisiana turf."
+    },
+    {
+      "q": "Firefighter-owned.Community focused.",
+      "a": "Professional care from a local team."
+    },
+    {
+      "q": "Great service starts with trust.",
+      "a": "Ask us about our local customer experience."
+    }
+  ],
+  "plain_len": 1965,
+  "plain_text": "\ud83d\ude92 Locally owned. Firefighter-owned. Exclusive neighborhood offer We just treated your neighbor's lawn. Your lawn could be next. Get a free, no-pressure estimate from the local lawn care team already working in your neighborhood. $25 OFF your first month When you start an eligible recurring lawn treatment program. \u2713 Free estimates \u2713 No contracts \u2713 Licensed & insured \u2713 Local lawn specialists Claim your neighbor offer Tell us where your lawn is. We'll review your property and follow up with your personalized estimate. Street address * City * ZIP code * Full name * Mobile phone * Email address * Website Yes, Grow Green Weed Control may text me about my requested estimate and lawn services. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. This does not enroll me in promotional texts. See our Privacy Policy and Terms . Get My Free Estimate \u2192 Free estimate \u2022 No obligation \u2022 $25 neighbor offer noted for our team \u2713 Request received! Our local team will review your lawn and follow up with your estimate. Your $25 first-month neighbor offer is noted. Why your neighbors choose Grow Green A local team, professional treatments, and a straightforward way to get started. \ud83d\ude92 Firefighter-owned & local We're a South Louisiana business that cares about the neighborhoods we serve. \ud83d\udccd Already in your area Our crews are treating lawns nearby, so getting started is simple. \ud83c\udf31 Care built for local lawns Seasonal weed prevention and fertilization designed around South Louisiana turf. Firefighter-owned. Community focused. Professional care from a local team. Great service starts with trust. Ask us about our local customer experience. A healthier-looking lawn starts with a simple estimate. Get your custom price and ask about your $25 neighbor discount. Claim my neighbor offer \u2192 Grow Green Weed Control \u00b7 Firefighter-owned \u00b7 Licensed & insured \u00b7 (225) 461-3199 \u00b7 Privacy Policy Claim $25 Off \u2014 Get My Free Estimate \u2192",
+  "html_len": 5645,
+  "html": "<div id=\"gg-postcard-v2\"><header class=\"top\"><div class=\"wrap topinner\"><img class=\"logo\" src=\"https://growgreenweedcontrol.com/wp-content/uploads/2021/07/Grow-Green-Logo.png\" alt=\"Grow Green Weed Control\" width=\"155\" height=\"115\"><span class=\"topnote\">\ud83d\ude92 Locally owned. Firefighter-owned.</span></div></header><main><section class=\"hero\"><div class=\"wrap hero-inner\"><div class=\"copy\"><span class=\"eyebrow\">Exclusive neighborhood offer</span><h1>We just treated <span>your neighbor's lawn.</span></h1><p class=\"lede\">Your lawn could be next. Get a free, no-pressure estimate from the local lawn care team already working in your neighborhood.</p><div class=\"offer\"><div class=\"offer-num\">$25</div><div><strong>OFF your first month</strong><small>When you start an eligible recurring lawn treatment program.</small></div></div><div class=\"trustbits\"><span>\u2713 Free estimates</span><span>\u2713 No contracts</span><span>\u2713 Licensed & insured</span><span>\u2713 Local lawn specialists</span></div></div><div class=\"formcard\" id=\"gg-postcard-estimate\"><div id=\"gg-p-formarea\"><h2>Claim your neighbor offer</h2><p class=\"desc\">Tell us where your lawn is. We'll review your property and follow up with your personalized estimate.</p><form id=\"gg-p-form\" novalidate><div class=\"fieldgrid\"><div class=\"field full\"><label for=\"gg-p-address\">Street address *</label><input id=\"gg-p-address\" name=\"address\" autocomplete=\"street-address\" placeholder=\"123 Main Street\" required maxlength=\"150\"></div><div class=\"field city\"><label for=\"gg-p-city\">City *</label><input id=\"gg-p-city\" name=\"city\" autocomplete=\"address-level2\" placeholder=\"Prairieville\" required maxlength=\"80\"></div><div class=\"field\"><label for=\"gg-p-zip\">ZIP code *</label><input id=\"gg-p-zip\" name=\"zip\" autocomplete=\"postal-code\" inputmode=\"numeric\" placeholder=\"70769\" maxlength=\"5\" pattern=\"[0-9]{5}\" required></div><div class=\"field\"><label for=\"gg-p-name\">Full name *</label><input id=\"gg-p-name\" name=\"name\" autocomplete=\"name\" placeholder=\"Your name\" required maxlength=\"120\"></div><div class=\"field\"><label for=\"gg-p-phone\">Mobile phone *</label><input id=\"gg-p-phone\" name=\"phone\" type=\"tel\" autocomplete=\"tel\" inputmode=\"tel\" placeholder=\"(225) 555-1234\" required></div><div class=\"field full\"><label for=\"gg-p-email\">Email address *</label><input id=\"gg-p-email\" name=\"email\" type=\"email\" autocomplete=\"email\" placeholder=\"you@example.com\" maxlength=\"254\" required></div></div><div class=\"honeypot\" aria-hidden=\"true\"><label for=\"gg-p-website\">Website</label><input id=\"gg-p-website\" name=\"website\" tabindex=\"-1\" autocomplete=\"off\"></div><div class=\"consent\"><input id=\"gg-p-sms\" type=\"checkbox\"><label for=\"gg-p-sms\">Yes, Grow Green Weed Control may text me about my requested estimate and lawn services. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. This does not enroll me in promotional texts. See our <a href=\"https://growgreenweedcontrol.com/privacy/\" target=\"_blank\" rel=\"noopener\">Privacy Policy</a> and <a href=\"https://growgreenweedcontrol.com/terms/\" target=\"_blank\" rel=\"noopener\">Terms</a>.</label></div><div id=\"gg-p-error\" class=\"error\" role=\"alert\" aria-live=\"polite\"></div><button class=\"button\" id=\"gg-p-submit\" type=\"submit\">Get My Free Estimate \u2192</button><p class=\"micro\">Free estimate \u2022 No obligation \u2022 $25 neighbor offer noted for our team</p></form></div><div id=\"gg-p-success\" class=\"success\" role=\"status\"><div class=\"tick\">\u2713</div><h2>Request received!</h2><p>Our local team will review your lawn and follow up with your estimate.</p><p><strong>Your $25 first-month neighbor offer is noted.</strong></p></div></div></div></section><section class=\"below\"><div class=\"wrap\"><h2 class=\"sectionhead\">Why your neighbors choose Grow Green</h2><p class=\"sectionintro\">A local team, professional treatments, and a straightforward way to get started.</p><div class=\"benefits\"><article class=\"benefit\"><div class=\"symbol\">\ud83d\ude92</div><h3>Firefighter-owned & local</h3><p>We're a South Louisiana business that cares about the neighborhoods we serve.</p></article><article class=\"benefit\"><div class=\"symbol\">\ud83d\udccd</div><h3>Already in your area</h3><p>Our crews are treating lawns nearby, so getting started is simple.</p></article><article class=\"benefit\"><div class=\"symbol\">\ud83c\udf31</div><h3>Care built for local lawns</h3><p>Seasonal weed prevention and fertilization designed around South Louisiana turf.</p></article></div><div class=\"brandrow\"><div class=\"brandcard\"><div><h3>Firefighter-owned.<br>Community focused.</h3><p>Professional care from a local team.</p></div><img src=\"https://growgreenweedcontrol.com/wp-content/uploads/2026/10/gg-firefighter.webp\" alt=\"Grow Green firefighter mascot\" loading=\"lazy\"></div><div class=\"brandcard\"><div><h3>Great service starts with trust.</h3><p>Ask us about our local customer experience.</p></div><img src=\"https://growgreenweedcontrol.com/wp-content/uploads/2026/10/gg-five-star.webp\" alt=\"Grow Green five-star mascot\" loading=\"lazy\"></div></div></div></section><section class=\"bottom\"><div class=\"wrap\"><h2>A healthier-looking lawn starts with a simple estimate.</h2><p>Get your custom price and ask about your $25 neighbor discount.</p><a class=\"bottomcta\" href=\"#gg-postcard-estimate\">Claim my neighbor offer \u2192</a></div></section></main><footer class=\"footer\">Grow Green Weed Control \u00b7 Firefighter-owned \u00b7 Licensed & insured \u00b7 <a href=\"tel:+12254613199\">(225) 461-3199</a> \u00b7 <a href=\"https://growgreenweedcontrol.com/privacy/\">Privacy Policy</a></footer><div class=\"mobilebar\" id=\"gg-p-mobilebar\"><a href=\"#gg-postcard-estimate\">Claim $25 Off \u2014 Get My Free Estimate \u2192</a></div></div>",
+  "structured": {
+    "hero_sub": "Your lawn could be next. Get a free, no-pressure estimate from the local lawn care team already working in your neighborhood.",
+    "local_title": "Claim your neighbor offer",
+    "local_lead": "",
+    "honest_note": "",
+    "features": [
+      {
+        "title": "Firefighter-owned & local",
+        "body": "We're a South Louisiana business that cares about the neighborhoods we serve."
+      },
+      {
+        "title": "Already in your area",
+        "body": "Our crews are treating lawns nearby, so getting started is simple."
+      },
+      {
+        "title": "Care built for local lawns",
+        "body": "Seasonal weed prevention and fertilization designed around South Louisiana turf."
+      }
+    ],
+    "rounds": [],
+    "process": [],
+    "real_faqs": []
+  }
+}

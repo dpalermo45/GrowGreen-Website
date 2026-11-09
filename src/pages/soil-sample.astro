@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SoilSamplePage from "../components/SoilSamplePage.astro";
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Soil Sampling & pH Balance | Grow Green Weed Control"
+  description="Professional $55 lawn soil sample with lab analysis, graphic report, and plain-English recommendations for South Louisiana turf. Request a soil test."
+  canonicalPath="/soil-sample/"
+>
+  <link slot="head" rel="preload" as="image" href="/images/services/soil-sampling-960.webp" fetchpriority="high" />
+  <SoilSamplePage />
+</BaseLayout>

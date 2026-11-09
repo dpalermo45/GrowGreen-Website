@@ -1,0 +1,735 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { site } from "../data/site";
+import { coverageFaqAnswer, areaServedSchema } from "../data/service-areas";
+import "../styles/lawn-insects.css";
+
+const source = "Lawn Insect Control Page";
+const leadSource = "Website - Lawn Insect Control Page";
+
+const pests = [
+  {
+    title: "Southern Chinch Bugs",
+    season: "Hot-weather concern",
+    body: "Small sap-feeding insects strongly associated with St. Augustinegrass. Their injury can resemble drought and often begins in stressed, sunny areas.",
+    clues: [
+      "Yellow-to-brown patches that can expand outward",
+      "Activity near the border of injured and healthy turf",
+      "Tiny red-orange nymphs or black-and-white adults may be present",
+    ],
+    pick: "Sunny yellow or brown patches — possible chinch bugs",
+    image: "/images/services/lawn-insects-chinch-640.webp",
+    imageAlt: "Close-up of an adult southern chinch bug",
+    imageLabel: "Adult southern chinch bug",
+  },
+  {
+    title: "Fall Armyworms",
+    season: "Usually summer into fall",
+    body: "Caterpillars that feed on grass blades and can remove foliage rapidly during an outbreak. Most turfgrasses can be affected; bermudagrass is a common target in Louisiana.",
+    clues: [
+      "Chewed, skeletonized, thinned, or bare-looking turf",
+      "Larvae may be more active morning or after dark",
+      "Green pellets or concentrated bird activity may be clues",
+    ],
+    pick: "Caterpillars or rapidly chewed turf — possible armyworms",
+    image: "/images/services/lawn-insects-army-640.webp",
+    imageAlt: "Armyworm caterpillar on turf",
+    imageLabel: "Leaf-feeding caterpillar pattern",
+  },
+  {
+    title: "Tropical Sod Webworms",
+    season: "Mid-summer into early fall",
+    body: "Larvae feed on leaf tissue, often making affected turf appear unevenly clipped or scalped. St. Augustine, bermuda, and centipede are common hosts in Louisiana.",
+    clues: [
+      "Ragged leaf edges or noticeably shorter turf",
+      "Yellow or brown patches as feeding intensifies",
+      "Larvae often feed at night and shelter lower in the turf",
+    ],
+    pick: "Ragged or scalped-looking turf — possible sod webworms",
+    image: "/images/services/lawn-insects-webworm-640.webp",
+    imageAlt: "Sod webworm moth associated with turf feeding",
+    imageLabel: "Short, ragged, or scalped-looking blades",
+  },
+  {
+    title: "Mole Crickets",
+    season: "Soil and root injury",
+    body: "Some species feed on turf while tunneling can also loosen soil, dry roots, and disrupt the surface. Timing and life stage strongly affect treatment strategy.",
+    clues: [
+      "Small raised tunnels or loosened, disturbed soil",
+      "Weak turf with clipped roots or poor anchoring",
+      "Damage may be patchy and easier to confirm with a close inspection",
+    ],
+    pick: "Loose soil, tunnels, or root injury — possible mole crickets",
+    image: "/images/services/lawn-insects-mole-640.webp",
+    imageAlt: "Broad thinning and disrupted turf that still needs pest confirmation",
+    imageLabel: "Turf damage still requires pest confirmation",
+  },
+] as const;
+
+const lookalikes = [
+  {
+    title: "Lawn disease",
+    body: "Large Patch, Take-All Root Rot, Gray Leaf Spot, and other diseases can produce brown, yellow, or thinning turf without an insect being the primary cause.",
+  },
+  {
+    title: "Drought or irrigation gaps",
+    body: "Missed zones, clogged heads, poor coverage, and heat stress can closely mimic chinch-bug injury—especially in full sun and near hard surfaces.",
+  },
+  {
+    title: "Mowing or chemical injury",
+    body: "Scalping, dull blades, spills, overlap, drift, or a recent product application can leave patterns that appear suddenly without turf-feeding insects.",
+  },
+  {
+    title: "Root and soil stress",
+    body: "Compaction, drainage, construction debris, buried material, thatch, shade, or root disease may weaken turf and alter how firmly it is anchored.",
+  },
+] as const;
+
+const steps = [
+  {
+    n: "01",
+    title: "Tell us what changed",
+    body: "Share the grass type, where damage began, how fast it moved, what you see in the blades or soil, and anything already applied.",
+  },
+  {
+    n: "02",
+    title: "Inspect likely activity",
+    body: "We compare the injury with likely insects, disease, irrigation, mowing, and root stress. The active edge often receives the closest look.",
+  },
+  {
+    n: "03",
+    title: "Treat the target",
+    body: "When an actionable pest is present or strongly supported, we choose a labeled product and application approach appropriate for that pest and site.",
+  },
+  {
+    n: "04",
+    title: "Protect recovery",
+    body: "We explain watering, mowing, and monitoring steps. Follow-up depends on pest biology, life stage, pressure, weather, and surviving turf.",
+  },
+] as const;
+
+const faqs = [
+  {
+    q: "How can I tell whether the damage is insects or fungus?",
+    a: "Color and patch shape alone may not be enough. Chewed blades, visible insects, green pellets, spittle, tunnels, clipped roots, turf that lifts easily, and activity at the damaged edge can support an insect diagnosis. Weather, moisture, leaf lesions, root symptoms, and maintenance history help separate disease or environmental stress.",
+  },
+  {
+    q: "How quickly can armyworms damage a lawn?",
+    a: "During a heavy outbreak, armyworm larvae can remove foliage very quickly; LSU AgCenter notes that severe feeding may devastate turf overnight. Prompt inspection matters, but the amount of living crown and runner tissue left after feeding still determines recovery.",
+  },
+  {
+    q: "Why do chinch bugs look so much like drought?",
+    a: "Southern chinch bugs feed at the base of St. Augustinegrass and often injure hot, sunny, water-stressed areas first. The resulting yellow-to-brown patches can look like poor irrigation. Finding the insects near the active margin helps distinguish the two.",
+  },
+  {
+    q: "Will damaged grass grow back after treatment?",
+    a: "It may if enough living crowns, runners, and roots remain and growing conditions support recovery. Treatment does not turn dead tissue green. Severe areas may require more time, repair, or replacement even after insect pressure is reduced.",
+  },
+  {
+    q: "Is lawn insect control included in the regular lawn program?",
+    a: "Seasonal insect attention may be included as described in your specific plan. Active outbreaks, specialized targets, or one-time insect treatments may be priced separately; we review that scope with you first.",
+  },
+  {
+    q: "Will one treatment prevent every future lawn insect?",
+    a: "No outdoor treatment permanently excludes every insect or life stage. Results depend on the target pest, pressure, life cycle, timing, weather, application site, and product label. Continued scouting may be needed when pressure remains favorable.",
+  },
+  {
+    q: "When can children and pets return to the lawn?",
+    a: "Keep people and pets out of the treatment area during application and until the product label’s re-entry directions have been satisfied. This often includes allowing treated surfaces to dry, but directions can vary. Grow Green provides the applicable instructions for your service.",
+  },
+  {
+    q: "Do you handle fire ants, mosquitoes, fleas, and ticks too?",
+    a: "Yes, but those are separate outdoor pest services. Use Fire Ant Treatment for mounds and colony pressure, or Mosquito, Flea & Tick Treatment for biting pests around outdoor-use areas. Choose “Not sure” in this form if you want the office to route the request.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+];
+
+const concernOptions = [
+  "Not sure — please help identify it",
+  "Sunny yellow or brown patches — possible chinch bugs",
+  "Caterpillars or rapidly chewed turf — possible armyworms",
+  "Ragged or scalped-looking turf — possible sod webworms",
+  "Loose soil, tunnels, or root injury — possible mole crickets",
+  "Spongy turf or grass that lifts easily",
+  "Visible spittle or froth near the soil surface",
+  "Known or recurring lawn insect problem",
+] as const;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Lawn Insect Control",
+  url: "https://growgreenweedcontrol.com/lawn-insects/",
+  description:
+    "Evaluation and targeted control for chinch bugs, armyworms, sod webworms, mole crickets, and other damaging turf insects in the Baton Rouge area and South Louisiana.",
+  serviceType: "Lawn insect evaluation and targeted turf insect treatment",
+  provider: {
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    telephone: site.phoneTel,
+  },
+  areaServed: areaServedSchema(),
+};
+---
+
+<div class="insects-page insects-page--suspects" data-insects-page>
+  <header class="insects-hero insects-hero--photo">
+    <div class="insects-hero__media" aria-hidden="true">
+      <img
+        src="/images/services/lawn-insects-damage-960.webp"
+        width="480"
+        height="640"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="insects-hero__shade" aria-hidden="true"></div>
+    <div class="f-inner insects-hero__grid">
+      <div class="motion-rise">
+        <div class="insects-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <p class="insects-hero__eyebrow">Lawn insects · South Louisiana</p>
+        <h1>Lawn insect control that starts with <em>the right pest.</em></h1>
+        <p class="insects-hero__lead">
+          Fast thinning, chewed blades, yellow patches, or disturbed soil may point to chinch bugs, armyworms, sod
+          webworms, mole crickets, or another turf pest. Grow Green evaluates the evidence before recommending a targeted
+          response.
+        </p>
+        <div class="insects-hero__actions">
+          <a class="f-btn f-btn--gold" href="#insects-quote">Request an insect-control quote →</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+        <ul class="insects-hero__notes" aria-label="Service highlights">
+          <li>Evidence before product</li>
+          <li>Turf-feeding pests</li>
+          <li>Honest recovery limits</li>
+        </ul>
+        <p class="insects-hero__truth">
+          An insecticide can suppress a susceptible target pest when the timing and application fit. It cannot revive turf
+          tissue or roots that are already dead.
+        </p>
+      </div>
+      <div class="insects-hero__visual motion-rise">
+        <img
+          class="insects-hero__photo"
+          src="/images/services/lawn-insects-damage-720.webp"
+          srcset="/images/services/lawn-insects-damage-720.webp 720w, /images/services/lawn-insects-damage-960.webp 960w"
+          sizes="(max-width: 960px) 70vw, 320px"
+          width="720"
+          height="900"
+          alt="Brown dead turf patch beside a concrete sidewalk on an otherwise green residential lawn"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </header>
+
+  <div class="insects-proof f-inner" aria-label="Grow Green credentials">
+    <div class="insects-proof__item">
+      <strong>Firefighter-owned</strong>
+      <span>Local and family-operated</span>
+    </div>
+    <div class="insects-proof__item">
+      <strong>Lawn specialists</strong>
+      <span>Not a mowing or landscape crew</span>
+    </div>
+    <div class="insects-proof__item">
+      <strong>Evidence before product</strong>
+      <span>Right pest, right response</span>
+    </div>
+    <div class="insects-proof__item">
+      <strong>Straight answers</strong>
+      <span>What treatment can—and cannot—do</span>
+    </div>
+  </div>
+
+  <section class="f-section insects-guide insects-guide--featured" aria-labelledby="insects-guide-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Common local suspects</p>
+      <h2 class="f-title f-center" id="insects-guide-title">Different pests leave different evidence.</h2>
+      <p class="f-lead f-center">
+        These are scouting clues—not a diagnosis from the screen. Pest species, life stage, population, weather, and turf
+        condition affect whether treatment is justified.
+      </p>
+      <div class="insects-disease-grid">
+        {
+          pests.map((p) => (
+            <article class="insects-disease">
+              <div class="insects-disease__art">
+                <img src={p.image} alt={p.imageAlt} width="640" height="800" loading="lazy" decoding="async" />
+                <span class="insects-disease__art-label">{p.imageLabel}</span>
+              </div>
+              <div class="insects-disease__body">
+                <div class="insects-disease__meta">
+                  <span class="insects-disease__season">{p.season}</span>
+                </div>
+                <h3>{p.title}</h3>
+                <p>{p.body}</p>
+                <ul>
+                  {p.clues.map((c) => (
+                    <li>{c}</li>
+                  ))}
+                </ul>
+                <button class="insects-pick" type="button" data-pick-concern={p.pick}>
+                  Add this clue to my request →
+                </button>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+      <p class="insects-note">
+        Other Louisiana turf pests—including spittlebugs and white grubs—can create yellowing, thinning, or root injury.
+        The treatment target should match what is actually present, not simply the most familiar pest name.
+      </p>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="insects-process-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Our targeted process</p>
+      <h2 class="f-title f-center" id="insects-process-title">From symptom to a lawn-specific response.</h2>
+      <p class="f-lead f-center">
+        The target pest, life stage, location in the turf, and severity help determine whether treatment makes sense and
+        what follow-up may be needed.
+      </p>
+      <div class="insects-steps">
+        {
+          steps.map((s) => (
+            <article class="insects-step">
+              <span class="insects-step__num">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section insects-expect" aria-labelledby="insects-expect-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Clear expectations</p>
+      <h2 class="f-title f-center" id="insects-expect-title">Controlling the pest and rebuilding the turf are separate.</h2>
+      <p class="f-lead f-center">
+        Once feeding pressure is reduced, the lawn still needs viable crowns or runners, suitable growing weather, water,
+        and time to replace lost tissue.
+      </p>
+      <div class="insects-expect__grid">
+        <article class="insects-expect__card insects-expect__card--yes">
+          <h3>Targeted treatment may help</h3>
+          <ul>
+            <li>Suppress a susceptible insect that is actively damaging the lawn</li>
+            <li>Protect remaining living turf from continued feeding pressure</li>
+            <li>Address the pest at a life stage and location the product label covers</li>
+            <li>Give surviving turf a better opportunity to recover</li>
+          </ul>
+        </article>
+        <article class="insects-expect__card insects-expect__card--no">
+          <h3>Treatment cannot</h3>
+          <ul>
+            <li>Revive leaves, crowns, runners, or roots that are already dead</li>
+            <li>Correct drought, irrigation coverage, disease, drainage, or mowing injury</li>
+            <li>Guarantee that every life stage or future insect is eliminated</li>
+            <li>Guarantee a cosmetic recovery date regardless of damage and season</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="insects-diag-title">
+    <div class="f-inner insects-diag__grid">
+      <div>
+        <p class="f-kicker">Evidence before application</p>
+        <h2 class="f-title" id="insects-diag-title">Yellow or brown turf does not identify the insect.</h2>
+        <p class="f-lead">
+          Useful clues come from where the injury begins, what part of the plant is damaged, whether insects are present,
+          and how conditions changed. The border between healthy and injured turf is often more informative than the
+          dead-looking center.
+        </p>
+        <ul class="insects-checks">
+          <li>
+            <span class="insects-checks__num" aria-hidden="true">1</span>
+            <div>
+              <strong>Inspect the blades</strong>
+              <p>
+                Chewed edges, skeletonized leaves, shorter turf, green pellets, or missing foliage can point toward
+                caterpillar feeding.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="insects-checks__num" aria-hidden="true">2</span>
+            <div>
+              <strong>Work the active margin</strong>
+              <p>
+                Tiny pests such as chinch bugs may be concentrated where stressed turf meets greener grass, not in the
+                oldest damage.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="insects-checks__num" aria-hidden="true">3</span>
+            <div>
+              <strong>Check the soil and roots</strong>
+              <p>
+                Loose soil, shallow tunnels, clipped roots, spongy turf, or sod that lifts easily shift attention below
+                the leaves.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <aside class="insects-equation" aria-label="Four lawn insect investigation clues">
+        <div class="insects-equation__card">
+          <strong>Plant part</strong>
+          <span>Leaf, stem base, crown, root, or soil disturbance</span>
+        </div>
+        <div class="insects-equation__card">
+          <strong>Damage pattern</strong>
+          <span>Sunny edge, scalped patch, irregular wilt, or disrupted soil</span>
+        </div>
+        <div class="insects-equation__card">
+          <strong>Season and speed</strong>
+          <span>When it began and whether change was sudden or gradual</span>
+        </div>
+        <div class="insects-equation__card">
+          <strong>Site conditions</strong>
+          <span>Sun, water stress, thatch, compaction, and recent care</span>
+        </div>
+        <p class="insects-equation__result">
+          Matching the treatment to what is actually present beats guessing from color alone.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="f-section insects-video" id="insects-video" aria-labelledby="insects-video-title">
+    <div class="f-inner insects-video__grid">
+      <div class="insects-video__frame">
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          poster="/images/services/lawn-insects-video-poster.webp"
+          controlslist="nodownload"
+          aria-label="Grow Green field walkthrough showing armyworm damage on St. Augustinegrass"
+        >
+          <source src="/videos/lawn-insects-armyworm.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="insects-video__copy">
+        <p class="f-kicker f-kicker--light">Real lawn. Real field evidence.</p>
+        <h2 class="f-title" id="insects-video-title">See how quickly leaf-feeding damage can change a lawn.</h2>
+        <p>
+          This short walkthrough shows armyworm injury on an actual local St. Augustine lawn. It demonstrates why
+          blade-level inspection matters when a lawn appears to thin suddenly—but similar-looking damage still needs its
+          own evaluation.
+        </p>
+        <ul class="insects-video__points">
+          <li>One focused ~50-second field example</li>
+          <li>Displayed in its correct uncropped 9:16 format</li>
+          <li>A reminder that rapid change deserves prompt inspection</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="insects-look-title">
+    <div class="f-inner insects-look__grid">
+      <div>
+        <p class="f-kicker">Common look-alikes</p>
+        <h2 class="f-title" id="insects-look-title">When lawn insecticide is not the first answer.</h2>
+        <p class="f-lead">
+          The wrong treatment delays the right correction. These problems can overlap with or closely resemble insect
+          injury.
+        </p>
+        <a class="insects-text-link" href="/lawn-fungus/">Explore lawn fungus control →</a>
+      </div>
+      <div class="insects-look__cards">
+        {
+          lookalikes.map((item) => (
+            <article class="insects-look__card">
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="insects-routing-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Choose the right outdoor service</p>
+      <h2 class="f-title f-center" id="insects-routing-title">This page is for insects feeding in the lawn.</h2>
+      <p class="f-lead f-center">
+        Fire ants and biting pests need different programs. Use the closest service below, or choose “not sure” in the
+        form.
+      </p>
+      <div class="insects-routes">
+        <article class="insects-route insects-route--current">
+          <h3>Turf-feeding insects</h3>
+          <p>
+            Chinch bugs, armyworms, sod webworms, mole crickets, and other pests damaging grass blades, roots, or soil.
+          </p>
+          <a href="#insects-quote">Request lawn insect help →</a>
+        </article>
+        <article class="insects-route">
+          <h3>Fire ants and mounds</h3>
+          <p>Visible mounds, colony activity, and stinging fire ants across lawns, play areas, and other treatable outdoor spaces.</p>
+          <a href="/fire-ant-treatment/">View fire ant treatment →</a>
+        </article>
+        <article class="insects-route">
+          <h3>Mosquitoes, fleas, and ticks</h3>
+          <p>Biting-pest pressure around shaded foliage, resting sites, lawn edges, and the outdoor areas your household uses.</p>
+          <a href="/mosquito-flea-tick-treatments/">View biting-pest service →</a>
+        </article>
+      </div>
+      <p class="insects-source">
+        Scouting and biology guidance informed by LSU AgCenter’s Louisiana Home Lawn Series for{" "}
+        <a href="https://www.lsuagcenter.com/profiles/aiverson/articles/page1532025432171" target="_blank" rel="noopener noreferrer"
+          >southern chinch bugs</a
+        >,{" "}
+        <a href="https://www.lsuagcenter.com/profiles/aiverson/articles/page1532012575433" target="_blank" rel="noopener noreferrer"
+          >fall armyworms</a
+        >,{" "}
+        <a href="https://www.lsuagcenter.com/profiles/aiverson/articles/page1532026707522" target="_blank" rel="noopener noreferrer"
+          >tropical sod webworms</a
+        >, and{" "}
+        <a href="https://www.lsuagcenter.com/profiles/aiverson/articles/page1532016650301" target="_blank" rel="noopener noreferrer"
+          >mole crickets</a
+        >. Product selection and directions always follow the current label.
+      </p>
+    </div>
+  </section>
+
+  <section class="f-section insects-program" aria-labelledby="insects-program-title">
+    <div class="f-inner">
+      <div class="insects-program__card">
+        <div>
+          <p class="f-kicker">Where targeted insect control fits</p>
+          <h2 class="f-title" id="insects-program-title">An active outbreak does not have to wait for the next routine visit.</h2>
+          <p class="f-lead">
+            Insect attention on an ongoing lawn plan depends on what your program covers, the season, and what is found
+            during service. When damaging activity appears outside a normal visit—or a new customer needs a one-time
+            response—targeted insect treatment can be quoted separately.
+          </p>
+          <div class="insects-program__options">
+            <div class="insects-program__option">
+              <strong>Current lawn-program customer</strong>
+              <span>We review recent services, what your plan covers, and whether a targeted follow-up is appropriate.</span>
+            </div>
+            <div class="insects-program__option">
+              <strong>New or one-time insect request</strong>
+              <span>We scope the affected turf, likely target, treatment area, expectations, and price before service.</span>
+            </div>
+          </div>
+        </div>
+        <div class="insects-program__visual" aria-hidden="true">
+          <img src="/images/mascot/spray-wand-240.webp" width="240" height="280" alt="" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="insects-local-title">
+    <div class="f-inner insects-local__grid">
+      <figure class="insects-owner">
+        <img
+          class="insects-local__photo"
+          src="/images/services/lawn-insects-local-960.webp"
+          width="480"
+          height="600"
+          alt="Grow Green owner with his son beside a branded Grow Green service truck"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="insects-owner__badge">
+          <strong>Family-owned. Firefighter-owned.</strong>
+          <span>Lawn treatment specialists—not a mowing route add-on.</span>
+        </figcaption>
+      </figure>
+      <div>
+        <p class="f-kicker">A genuinely local company</p>
+        <h2 class="f-title" id="insects-local-title">Local pest pressure calls for local field experience.</h2>
+        <p class="f-lead">
+          Grow Green was built in South Louisiana by owner and firefighter Dereck Palermo. Our team works in the same
+          heat, humidity, heavy rain, and seasonal pest cycles affecting lawns across the area.
+        </p>
+        <div class="insects-local__points">
+          <div class="insects-local__point">Locally owned</div>
+          <div class="insects-local__point">Family-operated</div>
+          <div class="insects-local__point">Firefighter-owned</div>
+          <div class="insects-local__point">Local office support</div>
+        </div>
+        <a class="f-btn f-btn--green" href="/about-us/">Meet Grow Green →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section insects-faq" aria-labelledby="insects-faq-title">
+    <div class="f-inner insects-faq__grid">
+      <div>
+        <p class="f-kicker">Common questions</p>
+        <h2 class="f-title" id="insects-faq-title">Straight answers about lawn insects.</h2>
+        <p class="f-lead">
+          If your question is not here, call the local Grow Green team at{" "}
+          <a href={`tel:${site.phoneTel}`}>{site.phone}</a>.
+        </p>
+      </div>
+      <div class="insects-faq__list">
+        {
+          faqs.map((f) =>
+            f.q.startsWith("Do you handle fire ants") ? (
+              <details>
+                <summary>{f.q}</summary>
+                <p>
+                  Yes, but those are separate outdoor pest services. Use{" "}
+                  <a href="/fire-ant-treatment/">Fire Ant Treatment</a> for mounds and colony pressure, or{" "}
+                  <a href="/mosquito-flea-tick-treatments/">Mosquito, Flea &amp; Tick Treatment</a> for biting pests
+                  around outdoor-use areas. Choose “Not sure” in this form if you want the office to route the request.
+                </p>
+              </details>
+            ) : (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ),
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section insects-quote" id="insects-quote" aria-labelledby="insects-quote-title">
+    <div class="f-inner insects-quote__grid">
+      <div>
+        <p class="f-kicker f-kicker--light">Free custom estimate</p>
+        <h2 class="f-title" id="insects-quote-title">Tell us what changed in your lawn.</h2>
+        <p class="f-lead">
+          You do not need to identify the insect. Choose the closest clue, share the service address, and our local team
+          will review the next step.
+        </p>
+        <ul class="insects-quote__benefits">
+          <li>No pressure or obligation</li>
+          <li>Most quote requests reviewed during business hours, {site.hours.label}</li>
+          <li>Your information goes directly to Grow Green</li>
+        </ul>
+        <p class="insects-quote__chip" aria-hidden="true">Service noted: Lawn Insect Control</p>
+        <a class="insects-quote__phone" href={`tel:${site.phoneTel}`}>
+          <span>Prefer to talk?</span>
+          <strong>Call {site.phone}</strong>
+        </a>
+      </div>
+      <div class="insects-form-shell">
+        <div class="insects-concerns" data-insects-concerns>
+          <p class="insects-concerns__label">Closest description (optional)</p>
+          <div class="insects-concerns__list" role="group" aria-label="Symptom description">
+            {
+              concernOptions.map((opt) => (
+                <button type="button" data-pick-concern={opt}>
+                  {opt}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+        <QuoteForm
+          source={source}
+          leadSource={leadSource}
+          heading="Request your free quote"
+          subheading="Share the service address and what you are seeing. Not sure what it is? That is normal—choose the closest clue above."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="insects-final-title">
+    <div class="f-inner">
+      <div class="insects-final__card">
+        <div>
+          <h2 id="insects-final-title">Do not let a brown patch choose the pesticide.</h2>
+          <p>
+            Tell Grow Green what changed. We will help separate likely insect activity from disease, irrigation, mowing,
+            and other common look-alikes.
+          </p>
+        </div>
+        <div class="insects-final__actions">
+          <a class="f-btn f-btn--gold" href="#insects-quote">Request my free quote</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-insects-page]");
+  if (root) {
+    const notes = root.querySelector<HTMLTextAreaElement>('textarea[name="notes"]');
+    const buttons = root.querySelectorAll<HTMLButtonElement>("[data-pick-concern]");
+    const SERVICE_PREFIX = "Service requested: Lawn Insect Control";
+
+    function ensureServiceNote() {
+      if (!notes) return;
+      const lines = (notes.value || "")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .filter((line) => !line.startsWith("Service requested:"));
+      lines.unshift(SERVICE_PREFIX);
+      notes.value = lines.join("\n");
+    }
+
+    function applyConcern(value: string) {
+      if (!notes) return;
+      const prefix = "Closest description: ";
+      const lines = (notes.value || "")
+        .split("\n")
+        .map((l) => l.trim())
+        .filter(Boolean)
+        .filter((l) => !l.startsWith(prefix) && !l.startsWith("Service requested:"));
+      lines.unshift(`${prefix}${value}`);
+      lines.unshift(SERVICE_PREFIX);
+      notes.value = lines.join("\n");
+      buttons.forEach((b) => b.classList.toggle("is-active", b.dataset.pickConcern === value));
+    }
+
+    ensureServiceNote();
+    notes?.addEventListener("blur", ensureServiceNote);
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const value = button.dataset.pickConcern || "";
+        if (!value) return;
+        applyConcern(value);
+        const quote = document.getElementById("insects-quote");
+        quote?.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.setTimeout(() => notes?.focus({ preventScroll: true }), 500);
+      });
+    });
+  }
+</script>
