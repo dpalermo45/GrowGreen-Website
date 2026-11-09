@@ -22,9 +22,14 @@ export default defineConfig({
   // "ignore" keeps preferred trailing-slash URLs while allowing Google's registered
   // OAuth callback (`/api/google-reviews/callback` with no trailing slash) to resolve.
   trailingSlash: "ignore",
-  // Legacy WP aliases: dedicated redirect pages under src/pages/* (+ middleware for
-  // case-only typos like south-Louisiana). Avoid duplicating those paths in `redirects`
-  // here — it collides with the page routes on @astrojs/node.
+  // Most legacy aliases use dedicated `prerender=false` redirect pages under src/pages/*.
+  // Case-only typos cannot use distinct filenames on case-insensitive disks — keep them
+  // here and in middleware / SSR 404 case-folding.
+  redirects: {
+    // Trailing-slash variant only — `trailingSlash: "ignore"` still matches without slash.
+    "/the-ultimate-guide-to-fertilizing-your-lawn-in-south-Louisiana/":
+      "/the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/",
+  },
   compressHTML: true,
   server: {
     port: 4321,

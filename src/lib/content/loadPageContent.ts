@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { normalizeSeoText } from "../seoText";
 
 export type PageFaq = { q: string; a: string };
 
@@ -70,9 +71,9 @@ export function loadPageContent(slug: string): PageContent | null {
 
   return {
     slug: raw.slug,
-    title: raw.title,
-    seo_title: raw.seo_title,
-    seo_desc: raw.seo_desc,
+    title: normalizeSeoText(raw.title) || raw.title,
+    seo_title: raw.seo_title ? normalizeSeoText(raw.seo_title) : raw.seo_title,
+    seo_desc: raw.seo_desc ? normalizeSeoText(raw.seo_desc) : raw.seo_desc,
     headings: (raw.headings || []).filter((h) => h && !SKIP_HEADING.test(h)),
     paragraphs: (raw.paragraphs || []).filter((p) => {
       if (!p || p.length < 35) return false;

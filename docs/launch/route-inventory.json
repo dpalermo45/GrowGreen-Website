@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-11-08T05:25:51.214Z",
+  "generatedAt": "2026-11-09T17:58:25.798Z",
   "totals": {
-    "routes": 148,
+    "routes": 154,
     "byType": {
-      "static": 9,
+      "static": 20,
       "error": 1,
       "redirect": 24,
       "api": 12,
       "blog": 8,
-      "service": 12,
       "utility": 9,
       "campaign": 6,
-      "geo": 24,
+      "geo": 30,
+      "service": 1,
       "legal": 2,
       "service-area": 41
     },
     "serviceAreaCities": 40,
-    "serviceAreaHubs": 4,
+    "serviceAreaHubs": 10,
     "getStaticPathsSlugs": 55,
     "sitemapUrls": 101,
     "manifestRetained": 64,
@@ -24,7 +24,38 @@
     "navInternalLinks": 20,
     "middlewareRedirects": 24
   },
-  "discrepancies": [],
+  "discrepancies": [
+    {
+      "kind": "inventory-not-in-sitemap",
+      "path": "/lawn-treatments-east-baton-rouge-parish/",
+      "detail": "In inventory but excluded from sitemap.xml.ts (may be intentional)"
+    },
+    {
+      "kind": "inventory-not-in-sitemap",
+      "path": "/lawn-treatments-jefferson-parish/",
+      "detail": "In inventory but excluded from sitemap.xml.ts (may be intentional)"
+    },
+    {
+      "kind": "inventory-not-in-sitemap",
+      "path": "/lawn-treatments-st-james-parish/",
+      "detail": "In inventory but excluded from sitemap.xml.ts (may be intentional)"
+    },
+    {
+      "kind": "inventory-not-in-sitemap",
+      "path": "/lawn-treatments-st-john-the-baptist-parish/",
+      "detail": "In inventory but excluded from sitemap.xml.ts (may be intentional)"
+    },
+    {
+      "kind": "inventory-not-in-sitemap",
+      "path": "/lawn-treatments-st-tammany-parish/",
+      "detail": "In inventory but excluded from sitemap.xml.ts (may be intentional)"
+    },
+    {
+      "kind": "inventory-not-in-sitemap",
+      "path": "/lawn-treatments-tangipahoa-parish/",
+      "detail": "In inventory but excluded from sitemap.xml.ts (may be intentional)"
+    }
+  ],
   "routes": [
     {
       "path": "/",
@@ -153,8 +184,8 @@
     },
     {
       "path": "/core-aeration/",
-      "type": "service",
-      "source": "getStaticPaths:[slug].astro"
+      "type": "static",
+      "source": "getStaticPaths:[slug].astro; src/pages/core-aeration.astro"
     },
     {
       "path": "/creating-a-thriving-centipede-lawn-in-baton-rouge-louisiana/",
@@ -178,8 +209,8 @@
     },
     {
       "path": "/fire-ant-treatment/",
-      "type": "service",
-      "source": "getStaticPaths:[slug].astro"
+      "type": "static",
+      "source": "getStaticPaths:[slug].astro; src/pages/fire-ant-treatment.astro"
     },
     {
       "path": "/fire-ant-treatments-baton-rouge/",
@@ -193,8 +224,8 @@
     },
     {
       "path": "/flower-bed-weed-control-and-fertilization/",
-      "type": "service",
-      "source": "getStaticPaths:[slug].astro"
+      "type": "static",
+      "source": "getStaticPaths:[slug].astro; src/pages/flower-bed-weed-control-and-fertilization.astro"
     },
     {
       "path": "/flower-bed-weed-control/",
@@ -268,23 +299,23 @@
     },
     {
       "path": "/lawn-fertilization-weed-control/",
-      "type": "service",
-      "source": "getStaticPaths:[slug].astro"
+      "type": "static",
+      "source": "getStaticPaths:[slug].astro; src/pages/lawn-fertilization-weed-control.astro"
     },
     {
       "path": "/lawn-fungus-and-insects/",
-      "type": "service",
-      "source": "getStaticPaths:[slug].astro"
+      "type": "static",
+      "source": "getStaticPaths:[slug].astro; src/pages/lawn-fungus-and-insects.astro"
     },
     {
       "path": "/lawn-fungus/",
-      "type": "service",
-      "source": "getStaticPaths:[slug].astro"
+      "type": "static",
+      "source": "getStaticPaths:[slug].astro; src/pages/lawn-fungus.astro"
     },
     {
       "path": "/lawn-insects/",
-      "type": "service",
-      "source": "getStaticPaths:[slug].astro"
+      "type": "static",
+      "source": "getStaticPaths:[slug].astro; src/pages/lawn-insects.astro"
     },
     {
       "path": "/lawn-treatment-addis-la/",
@@ -357,9 +388,39 @@
       "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl"
     },
     {
+      "path": "/lawn-treatments-east-baton-rouge-parish/",
+      "type": "geo",
+      "source": "service-areas.ts:serviceAreaHubs"
+    },
+    {
+      "path": "/lawn-treatments-jefferson-parish/",
+      "type": "geo",
+      "source": "service-areas.ts:serviceAreaHubs"
+    },
+    {
       "path": "/lawn-treatments-livingston-parish/",
       "type": "geo",
       "source": "geo-pages.generated.ts; getStaticPaths:[slug].astro; service-areas.ts:existingUrl; service-areas.ts:serviceAreaHubs"
+    },
+    {
+      "path": "/lawn-treatments-st-james-parish/",
+      "type": "geo",
+      "source": "service-areas.ts:serviceAreaHubs"
+    },
+    {
+      "path": "/lawn-treatments-st-john-the-baptist-parish/",
+      "type": "geo",
+      "source": "service-areas.ts:serviceAreaHubs"
+    },
+    {
+      "path": "/lawn-treatments-st-tammany-parish/",
+      "type": "geo",
+      "source": "service-areas.ts:serviceAreaHubs"
+    },
+    {
+      "path": "/lawn-treatments-tangipahoa-parish/",
+      "type": "geo",
+      "source": "service-areas.ts:serviceAreaHubs"
     },
     {
       "path": "/liquid-aeration-quote-request-received/",
@@ -368,13 +429,13 @@
     },
     {
       "path": "/liquid-aeration/",
-      "type": "service",
-      "source": "getStaticPaths:[slug].astro"
+      "type": "static",
+      "source": "getStaticPaths:[slug].astro; src/pages/liquid-aeration.astro"
     },
     {
       "path": "/mosquito-flea-tick-treatments/",
-      "type": "service",
-      "source": "getStaticPaths:[slug].astro"
+      "type": "static",
+      "source": "getStaticPaths:[slug].astro; src/pages/mosquito-flea-tick-treatments.astro"
     },
     {
       "path": "/nextdoor-estimate-request/",
@@ -703,8 +764,8 @@
     },
     {
       "path": "/soil-sample/",
-      "type": "service",
-      "source": "getStaticPaths:[slug].astro"
+      "type": "static",
+      "source": "getStaticPaths:[slug].astro; src/pages/soil-sample.astro"
     },
     {
       "path": "/terms-and-conditions/",
@@ -748,8 +809,8 @@
     },
     {
       "path": "/tree-and-shrub-care/",
-      "type": "service",
-      "source": "getStaticPaths:[slug].astro"
+      "type": "static",
+      "source": "getStaticPaths:[slug].astro; src/pages/tree-and-shrub-care.astro"
     },
     {
       "path": "/trucklead/",

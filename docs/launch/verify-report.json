@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-09T04:59:35.258Z",
-  "baseUrl": "http://127.0.0.1:4321",
-  "passed": 20,
-  "failed": 0,
+  "generatedAt": "2026-11-09T18:11:34.345Z",
+  "baseUrl": "https://growgreenweedcontrol.com",
+  "passed": 19,
+  "failed": 1,
   "results": [
     {
       "id": "preview-home",
@@ -67,7 +67,7 @@
     {
       "id": "redirect:/the-ultimate-guide-to-fertilizing-your-lawn-in-south-Louisiana/",
       "status": "PASS",
-      "detail": "200 (case-insensitive FS served canonical content; edge 301 required on Linux)"
+      "detail": "404 locally for mixed-case path but canonical /the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/ is 200 — deploy-time 301 (astro redirects + middleware + SSR 404) still required on Linux"
     },
     {
       "id": "unknown-404",
@@ -76,8 +76,8 @@
     },
     {
       "id": "mock-lead",
-      "status": "PASS",
-      "detail": "201 {\"ok\":true,\"customer_id\":\"mock-customer-1001\",\"mocked\":true}"
+      "status": "FAIL",
+      "detail": "400 live CRM mode detected (set GGWC_CRM_MODE=mock for local verify): {\"ok\":false,\"code\":\"upstream\",\"message\":\"Blocked email domain (@example.com).\",\"retryable\":false}"
     },
     {
       "id": "staging-noindex",

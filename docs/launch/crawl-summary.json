@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-11-08T05:29:06.472Z",
-  "baseUrl": "http://127.0.0.1:4321/",
+  "generatedAt": "2026-11-09T17:59:33.906Z",
+  "baseUrl": "https://growgreenweedcontrol.com/",
   "connectionOk": true,
   "connectionError": null,
-  "inventoryGeneratedAt": "2026-11-08T05:25:51.214Z",
-  "pagesCrawled": 132,
+  "inventoryGeneratedAt": "2026-11-09T17:58:25.798Z",
+  "pagesCrawled": 138,
   "statusHistogram": {
-    "200": 131,
-    "404": 1
+    "200": 134,
+    "404": 4
   },
-  "pagesWithH1": 131,
+  "pagesWithH1": 134,
   "pagesWithBrokenInternalLinks": 0,
   "brokenLinkRows": 0,
   "brokenByKind": {}

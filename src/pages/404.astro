@@ -1,8 +1,54 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../data/site";
+import { blogPosts } from "../data/blog-posts.generated";
+import { allGeoPageSlugs } from "../lib/geo/resolveGeoPage";
+import { campaignBySlug } from "../data/campaigns";
+import { relatedServicePages, services } from "../data/services";
 
-export const prerender = true;
+/**
+ * SSR so unknown mixed-case legacy URLs (e.g. south-Louisiana) can 301 to the
+ * canonical lowercase slug instead of soft-404ing. Prerendered 404 cannot see
+ * the request path at build time.
+ */
+export const prerender = false;
+
+const requestPath = Astro.url.pathname;
+const trimmed = requestPath.replace(/\/+$/, "") || "/";
+const requestSlug = trimmed === "/" ? "" : trimmed.replace(/^\//, "");
+
+const knownSlugs = new Set<string>();
+for (const s of services) {
+  knownSlugs.add(s.slug);
+  s.relatedPages?.forEach((r) => knownSlugs.add(r.slug));
+}
+Object.keys(relatedServicePages).forEach((s) => knownSlugs.add(s));
+allGeoPageSlugs().forEach((s) => knownSlugs.add(s));
+Object.keys(campaignBySlug).forEach((s) => knownSlugs.add(s));
+blogPosts.forEach((p) => knownSlugs.add(p.slug));
+[
+  "thank-you",
+  "thank-you-nextdoor",
+  "thank-you-core-aeration",
+  "liquid-aeration-quote-request-received",
+  "test",
+  "about-us",
+  "contact-us",
+  "careers",
+  "services",
+  "privacy-policy",
+  "terms-and-conditions",
+  "lawn-care-blog",
+  "request-a-quote",
+  "customer-login-pay-bill",
+].forEach((s) => knownSlugs.add(s));
+
+if (requestSlug && !requestSlug.includes("/")) {
+  const lower = requestSlug.toLowerCase();
+  if (lower !== requestSlug && knownSlugs.has(lower)) {
+    return Astro.redirect(`/${lower}/`, 301);
+  }
+}
 ---
 
 <BaseLayout

@@ -1,0 +1,52 @@
+[
+  {
+    "path": "/category/weed/",
+    "status": 404,
+    "location": ""
+  },
+  {
+    "path": "/feed/",
+    "status": 404,
+    "location": ""
+  },
+  {
+    "path": "/estimate-request/",
+    "status": 404,
+    "location": ""
+  },
+  {
+    "path": "/reviews/",
+    "status": 404,
+    "location": ""
+  },
+  {
+    "path": "/fire-ant-control/",
+    "status": 404,
+    "location": ""
+  },
+  {
+    "path": "/lawn-care-baton-rouge/",
+    "status": 404,
+    "location": ""
+  },
+  {
+    "path": "/lawn-care-prairieville/",
+    "status": 404,
+    "location": ""
+  },
+  {
+    "path": "/lawn-treatment-prairieville/",
+    "status": 404,
+    "location": ""
+  },
+  {
+    "path": "/lawn-treatments-springfield-la/",
+    "status": 404,
+    "location": ""
+  },
+  {
+    "path": "/wp-json/ggwc/v1/website-lead",
+    "status": 404,
+    "location": ""
+  }
+]

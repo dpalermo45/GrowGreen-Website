@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-11-09T18:01:20.253Z",
+  "base": "https://growgreenweedcontrol.com",
+  "findings": [
+    {
+      "severity": "medium",
+      "id": "crawl-404",
+      "title": "Inventory routes returning 404 on production",
+      "evidence": "/(astro-not-found)/ → 404; /google-reviews/setup/ → 404; /the-ultimate-guide-to-fertilizing-your-lawn-in-south-Louisiana → 404; /the-ultimate-guide-to-fertilizing-your-lawn-in-south-Louisiana/ → 404",
+      "routes": [
+        "/(astro-not-found)/",
+        "/google-reviews/setup/",
+        "/the-ultimate-guide-to-fertilizing-your-lawn-in-south-Louisiana",
+        "/the-ultimate-guide-to-fertilizing-your-lawn-in-south-Louisiana/"
+      ],
+      "fix": "Confirm intentional (protected/retired) vs missing pages"
+    },
+    {
+      "severity": "high",
+      "id": "title-encoding",
+      "title": "Mojibake or double-escaped entities in titles",
+      "evidence": "/fire-ant-treatments-baton-rouge/: Fire Ant Treatments Baton Rouge | Grow Green Weed Control â€“ Local Lawn Protection | /lawn-care-blog/: Lawn Care Tips &amp;amp; Weed Control Advice | Grow Green Weed Control Blog | /services/: Lawn Care Services | Grow Green Weed Control – Fertilization, Weed &amp;amp; Pest Control",
+      "routes": [
+        "/fire-ant-treatments-baton-rouge/",
+        "/lawn-care-blog/",
+        "/services/"
+      ],
+      "fix": "Fix source content encoding / HTML entity escaping in layout"
+    },
+    {
+      "severity": "medium",
+      "id": "campaign-indexable",
+      "title": "Campaign landings are index,follow and appear crawlable",
+      "evidence": "/facebook-estimate-request/, /gym-member-lawn-care-special/, /nextdoor-estimate-request/, /post-card-estimate-request/, /request-an-estimate-facebook-50/, /trucklead/",
+      "routes": [
+        "/facebook-estimate-request/",
+        "/gym-member-lawn-care-special/",
+        "/nextdoor-estimate-request/",
+        "/post-card-estimate-request/",
+        "/request-an-estimate-facebook-50/",
+        "/trucklead/"
+      ],
+      "fix": "Confirm intent; usually campaign/noindex or keep indexable if SEO-valuable"
+    },
+    {
+      "severity": "info",
+      "id": "sitemap-count",
+      "title": "Production sitemap has 107 URLs",
+      "evidence": "/, /about-us/, /battling-dallis-grass-the-challenge-of-eliminating-a-stubborn-weed-in-warm-season-grasses/, /battling-large-patch-disease-a-guide-to-protecting-your-baton-rouge-lawn/, /careers/...",
+      "routes": [],
+      "fix": ""
+    },
+    {
+      "severity": "medium",
+      "id": "inventory-missing-from-sitemap",
+      "title": "Public inventory paths missing from production sitemap",
+      "evidence": "/[slug]/, /robots.txt, /service-areas/[slug]/, /sitemap.xml",
+      "routes": [
+        "/[slug]/",
+        "/robots.txt",
+        "/service-areas/[slug]/",
+        "/sitemap.xml"
+      ],
+      "fix": ""
+    },
+    {
+      "severity": "high",
+      "id": "mojibake-/lawn-care-blog/",
+      "title": "Mojibake on live page meta/title",
+      "evidence": "/lawn-care-blog/: Lawn Care Tips &amp;amp; Weed Control Advice | Grow Green Weed Control Blog",
+      "routes": [
+        "/lawn-care-blog/"
+      ],
+      "fix": ""
+    },
+    {
+      "severity": "high",
+      "id": "mojibake-/fire-ant-treatments-baton-rouge/",
+      "title": "Mojibake on live page meta/title",
+      "evidence": "/fire-ant-treatments-baton-rouge/: Fire Ant Treatments Baton Rouge | Grow Green Weed Control â€“ Local Lawn Protection",
+      "routes": [
+        "/fire-ant-treatments-baton-rouge/"
+      ],
+      "fix": ""
+    }
+  ]
+}

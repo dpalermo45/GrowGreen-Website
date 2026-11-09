@@ -1,0 +1,38 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/leads/website/",
+    "status": 404,
+    "body": "<!DOCTYPE html><html lang=\"en\"> <head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Page not found | Grow Green Weed Control</title><meta name=\"descr"
+  },
+  {
+    "method": "POST",
+    "path": "/api/leads/website/",
+    "status": 400,
+    "body": "{\"ok\":false,\"code\":\"validation\",\"message\":\"Name, email, and phone are required.\",\"retryable\":false}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/careers/openings/",
+    "status": 200,
+    "body": "{\"ok\":true,\"openings\":[],\"mocked\":false}"
+  },
+  {
+    "method": "GET",
+    "path": "/api/google-reviews/display/",
+    "status": 200,
+    "body": "{\"ok\":true,\"available\":true,\"averageRating\":5,\"totalReviewCount\":121,\"order\":\"updateTime desc\",\"reviews\":[{\"reviewId\":\"AbFvOqlN2W0A8LGx9Kj_unVF4emV9UbIsYR9Lo9mnAG5iDQlWTcui3rETdOQWNdyCYIkg9nI89y43Q\",\"reviewerName\":\"Andrea Crawley\",\"starRating\":5,\"comment\":\"I’ve been using Grow Green Weed Control for"
+  },
+  {
+    "method": "GET",
+    "path": "/google-reviews/setup/",
+    "status": 404,
+    "body": "Not found"
+  },
+  {
+    "method": "GET",
+    "path": "/api/google-reviews/oauth/start/",
+    "status": 404,
+    "body": "Not found"
+  }
+]

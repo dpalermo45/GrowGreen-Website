@@ -3,6 +3,11 @@ import { defineMiddleware } from "astro:middleware";
 /**
  * Preserve legacy WP aliases and typo URLs.
  * /test/ is served as a retired noindex page (not redirected).
+ *
+ * Note: production also keeps dedicated `prerender=false` redirect pages for
+ * most aliases (about, contact, …). Case-only typos cannot use distinct files
+ * on case-insensitive local disks, so they rely on this middleware plus
+ * `astro.config.mjs` redirects and SSR 404 case-folding.
  */
 const redirects: Record<string, string> = {
   "/contact": "/contact-us/",
@@ -33,10 +38,17 @@ const redirects: Record<string, string> = {
     "/the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/",
 };
 
+/** Lowercase lookup so hosts that preserve mixed-case paths still redirect. */
+const redirectsByLower = new Map(
+  Object.entries(redirects).map(([from, to]) => [from.toLowerCase(), to]),
+);
+
 export const onRequest = defineMiddleware(async (context, next) => {
   const path = context.url.pathname;
-  const target = redirects[path];
-  if (target) {
+  const target = redirects[path] || redirectsByLower.get(path.toLowerCase());
+  // Redirect when the request path is an alias — including case-only typos where
+  // path.toLowerCase() already equals the canonical target.
+  if (target && target !== path) {
     return context.redirect(target, 301);
   }
   return next();

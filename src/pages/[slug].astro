@@ -205,6 +205,13 @@ const articleHtml =
       title={`${campaign.title} | Grow Green Weed Control`}
       description={campaign.summary}
       canonicalPath={`/${slug}/`}
+      robots={
+        campaign.id === "nextdoor" ||
+        campaign.id === "postcard" ||
+        campaign.id === "trucklead"
+          ? "noindex, follow"
+          : undefined
+      }
       hideChrome={
         campaign.id === "facebook-50" ||
         campaign.id === "facebook-estimate" ||

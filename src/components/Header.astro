@@ -208,8 +208,21 @@ const serviceGroups = [
     .topbar {
       font-size: 0.72rem;
     }
+    .topbar-inner {
+      gap: 0.75rem;
+    }
     .topbar p {
-      max-width: 58vw;
+      /* Prefer wrapping over ellipsis so "South Louisiana" stays readable. */
+      max-width: none;
+      white-space: normal;
+      line-height: 1.25;
+      padding: 0.35rem 0;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .topbar p {
+      font-size: 0.68rem;
     }
   }
 

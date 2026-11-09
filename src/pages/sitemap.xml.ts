@@ -27,6 +27,10 @@ const excludedExact = new Set([
   "/thank-you-nextdoor/",
   "/test/",
   "/google-reviews/setup/",
+  // Paid/QR campaign landings — publicly reachable, but noindex + sitemap-excluded
+  "/nextdoor-estimate-request/",
+  "/post-card-estimate-request/",
+  "/trucklead/",
 ]);
 
 function shouldInclude(path: string): boolean {

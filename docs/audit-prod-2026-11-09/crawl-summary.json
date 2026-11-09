@@ -1,0 +1,16 @@
+{
+  "generatedAt": "2026-11-09T17:59:33.906Z",
+  "baseUrl": "https://growgreenweedcontrol.com/",
+  "connectionOk": true,
+  "connectionError": null,
+  "inventoryGeneratedAt": "2026-11-09T17:58:25.798Z",
+  "pagesCrawled": 138,
+  "statusHistogram": {
+    "200": 134,
+    "404": 4
+  },
+  "pagesWithH1": 134,
+  "pagesWithBrokenInternalLinks": 0,
+  "brokenLinkRows": 0,
+  "brokenByKind": {}
+}

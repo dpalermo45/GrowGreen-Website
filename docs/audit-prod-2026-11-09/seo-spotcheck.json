@@ -1,0 +1,162 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "title": "Grow Green Weed Control | Lawn Fertilization &amp; Weed Control",
+    "robots": "index, follow",
+    "canonical": "https://growgreenweedcontrol.com/",
+    "description": "Local lawn fertilization and weed control serving 40 communities across 10 South Louisiana parishes. Firefighter-owned, based in St. Amant. Free estimates.",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  },
+  {
+    "path": "/request-a-quote/",
+    "status": 200,
+    "title": "Request a Quote | Grow Green Weed Control",
+    "robots": "index, follow",
+    "canonical": "https://growgreenweedcontrol.com/request-a-quote/",
+    "description": "Request a free lawn care estimate from Grow Green Weed Control. Plans start at $39/month. Your estimate depends on lawn size and selected services.",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  },
+  {
+    "path": "/post-card-estimate-request/",
+    "status": 200,
+    "title": "Post Card Estimate Request | Grow Green Weed Control",
+    "robots": "index, follow",
+    "canonical": "https://growgreenweedcontrol.com/post-card-estimate-request/",
+    "description": "Postcard neighbor landing: $25 off your first month when you start an eligible recurring lawn treatment program, plus a free local estimate.",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  },
+  {
+    "path": "/nextdoor-estimate-request/",
+    "status": 200,
+    "title": "Nextdoor Estimate Request | Grow Green Weed Control",
+    "robots": "index, follow",
+    "canonical": "https://growgreenweedcontrol.com/nextdoor-estimate-request/",
+    "description": "Nextdoor neighbor landing: $25 to open your lawn-care account, plus a free local estimate for fertilization and weed control.",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  },
+  {
+    "path": "/trucklead/",
+    "status": 200,
+    "title": "You Saw Our Truck | Grow Green Weed Control",
+    "robots": "index, follow",
+    "canonical": "https://growgreenweedcontrol.com/trucklead/",
+    "description": "Truck QR landing: $25 to open your lawn-care account, plus a free local estimate for fertilization and weed control.",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  },
+  {
+    "path": "/facebook-estimate-request/",
+    "status": 200,
+    "title": "Facebook Estimate Request | Grow Green Weed Control",
+    "robots": "index, follow",
+    "canonical": "https://growgreenweedcontrol.com/facebook-estimate-request/",
+    "description": "Facebook estimate request page; WP copy also references the November 50% / $75 offer.",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  },
+  {
+    "path": "/request-an-estimate-facebook-50/",
+    "status": 200,
+    "title": "Request An Estimate — Facebook 50 | Grow Green Weed Control",
+    "robots": "index, follow",
+    "canonical": "https://growgreenweedcontrol.com/request-an-estimate-facebook-50/",
+    "description": "November Facebook estimate landing: 50% off the first lawn treatment, maximum $75 discount.",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  },
+  {
+    "path": "/gym-member-lawn-care-special/",
+    "status": 200,
+    "title": "Gym Member Lawn Care Special | Grow Green Weed Control",
+    "robots": "index, follow",
+    "canonical": "https://growgreenweedcontrol.com/gym-member-lawn-care-special/",
+    "description": "Gym TV / member special — free custom price estimate for weed control and fertilization.",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  },
+  {
+    "path": "/thank-you/",
+    "status": 200,
+    "title": "Thank you — estimate request received",
+    "robots": "noindex, nofollow",
+    "canonical": "https://growgreenweedcontrol.com/thank-you/",
+    "description": "Thanks for requesting an estimate. Our local office will follow up during business hours (Monday–Friday, 8 AM–4 PM).",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  },
+  {
+    "path": "/thank-you-nextdoor/",
+    "status": 200,
+    "title": "Thank you — Nextdoor request received",
+    "robots": "noindex, nofollow",
+    "canonical": "https://growgreenweedcontrol.com/thank-you-nextdoor/",
+    "description": "We received your Nextdoor estimate request. A Grow Green team member will follow up during business hours.",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  },
+  {
+    "path": "/test/",
+    "status": 200,
+    "title": "Page retired | Grow Green Weed Control",
+    "robots": "noindex, nofollow",
+    "canonical": "https://growgreenweedcontrol.com/test/",
+    "description": "This test page has been retired.",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  },
+  {
+    "path": "/careers/",
+    "status": 200,
+    "title": "Careers | Join Grow Green Weed Control – Lawn Treatment Jobs in Louisiana",
+    "robots": "index, follow",
+    "canonical": "https://growgreenweedcontrol.com/careers/",
+    "description": "Join the firefighter-owned team at Grow Green Weed Control. Explore lawn treatment and customer service careers across South Louisiana.",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  },
+  {
+    "path": "/customer-login-pay-bill/",
+    "status": 200,
+    "title": "Customer Login / Pay Bill | Grow Green Weed Control",
+    "robots": "index, follow",
+    "canonical": "https://growgreenweedcontrol.com/customer-login-pay-bill/",
+    "description": "Sign in to the Grow Green Weed Control customer portal to view your account or pay your bill. Local office help available during business hours.",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  },
+  {
+    "path": "/lawn-care-blog/",
+    "status": 200,
+    "title": "Lawn Care Tips &amp;amp; Weed Control Advice | Grow Green Weed Control Blog",
+    "robots": "index, follow",
+    "canonical": "https://growgreenweedcontrol.com/lawn-care-blog/",
+    "description": "Explore expert lawn care tips, weed control guides, and seasonal advice from Grow Green Weed Control — your local lawn treatment experts in South Louisiana.",
+    "localhostOrStagingRef": false,
+    "mojibake": true
+  },
+  {
+    "path": "/fire-ant-treatments-baton-rouge/",
+    "status": 200,
+    "title": "Fire Ant Treatments Baton Rouge | Grow Green Weed Control â€“ Local Lawn Protection",
+    "robots": "index, follow",
+    "canonical": "https://growgreenweedcontrol.com/fire-ant-treatments-baton-rouge/",
+    "description": "Get reliable fire ant treatments in Baton Rouge from Grow Green Weed Control. Protect your lawn and family with long-lasting fire ant control by local lawn care",
+    "localhostOrStagingRef": false,
+    "mojibake": true
+  },
+  {
+    "path": "/how-to-kill-pickers-stickers-burweed-in-louisiana/",
+    "status": 200,
+    "title": "How To Kill Pickers, Stickers, Burweed, in Louisiana | Grow Green Weed Control",
+    "robots": "index, follow",
+    "canonical": "https://growgreenweedcontrol.com/how-to-kill-pickers-stickers-burweed-in-louisiana/",
+    "description": "For the best results, prevent or treat lawn burweed while plants are still small—from fall through winter and before the spine-tipped burs harden in spring",
+    "localhostOrStagingRef": false,
+    "mojibake": false
+  }
+]

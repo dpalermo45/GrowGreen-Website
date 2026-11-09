@@ -1,5 +1,18 @@
 # Test results & launch blockers
 
+## Production readiness audit (2026-11-09)
+
+Full write-up: **`docs/audit-prod-2026-11-09/FINAL-AUDIT-REPORT.md`**.
+
+| Check | Result |
+| --- | --- |
+| `npm test` | **49 passed** (includes new `seo-text`) |
+| `npm run build` | **PASS** after SEO/redirect/topbar fixes |
+| Production crawl | **138** pages; **0** broken same-origin links/images |
+| Local fixes pending deploy | Louisiana capital-L redirect stack; SEO title normalize; mobile topbar wrap |
+| Live CRM mutating test | **Not authorized** — blocked |
+| `launch:verify` mock-lead | Fails while local preview uses live CRM mode (`GGWC_CRM_MODE=mock` required) |
+
 ## Automated (local)
 
 | Suite | Result | Notes |

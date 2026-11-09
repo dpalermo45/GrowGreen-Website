@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../data/site";
+import { normalizeSeoText } from "../lib/seoText";
 
 interface Props {
   title: string;
@@ -10,23 +11,34 @@ interface Props {
   canonicalPath?: string;
   ogImage?: string;
   noindex?: boolean;
+  /**
+   * Explicit robots directive when set (e.g. "noindex, follow" for campaign LPs).
+   * When omitted: noindex → "noindex, nofollow"; else index/follow gated by PUBLIC_SITE_INDEXING.
+   */
+  robots?: string;
   /** Self-contained campaign landings that ship their own header/footer chrome. */
   hideChrome?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
-  title,
-  description = "Local lawn fertilization and weed control for South Louisiana. Firefighter-owned. Free estimates.",
+  title: titleRaw,
+  description: descriptionRaw = "Local lawn fertilization and weed control for South Louisiana. Firefighter-owned. Free estimates.",
   canonicalPath = Astro.url.pathname,
   ogImage = site.defaultOgImage,
   noindex,
+  robots: robotsProp,
   hideChrome = false,
   jsonLd,
 } = Astro.props;
 
+const title = normalizeSeoText(titleRaw) || titleRaw;
+const description = normalizeSeoText(descriptionRaw) || descriptionRaw;
+
 const indexingEnabled = import.meta.env.PUBLIC_SITE_INDEXING === "true";
-const forceNoIndex = noindex || !indexingEnabled;
+const robotsContent =
+  robotsProp?.trim() ||
+  (noindex || !indexingEnabled ? "noindex, nofollow" : "index, follow");
 const siteUrl = Astro.site?.toString().replace(/\/$/, "") || "https://growgreenweedcontrol.com";
 const canonical = `${siteUrl}${canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`}`;
 const absoluteOg = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`;
@@ -40,8 +52,7 @@ const absoluteOg = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {forceNoIndex && <meta name="robots" content="noindex, nofollow" />}
-    {!forceNoIndex && <meta name="robots" content="index, follow" />}
+    <meta name="robots" content={robotsContent} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
