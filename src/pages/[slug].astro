@@ -205,11 +205,17 @@ const articleHtml =
       title={`${campaign.title} | Grow Green Weed Control`}
       description={campaign.summary}
       canonicalPath={`/${slug}/`}
-      hideChrome={campaign.id === "facebook-50" || campaign.id === "facebook-estimate"}
+      hideChrome={
+        campaign.id === "facebook-50" ||
+        campaign.id === "facebook-estimate" ||
+        campaign.id === "nextdoor"
+      }
       ogImage={
         campaign.id === "facebook-50" || campaign.id === "facebook-estimate"
           ? "/images/campaigns/facebook-nov/lawn-sign.jpg"
-          : undefined
+          : campaign.id === "nextdoor"
+            ? "/images/home/hero-lawn.jpg"
+            : undefined
       }
     >
       <CampaignPageView campaign={campaign} />

@@ -107,13 +107,17 @@ export const campaigns: CampaignOffer[] = [
     id: "nextdoor",
     slug: "nextdoor-estimate-request",
     title: "Nextdoor Estimate Request",
-    headline: "A healthier South Louisiana lawn starts with a local team.",
+    headline: "Start your lawn account for $25",
     summary:
-      "Nextdoor estimate landing for professional weed control and fertilization.",
+      "Nextdoor neighbor landing: $25 to open your lawn-care account, plus a free local estimate for fertilization and weed control.",
+    offerLabel: "$25 to open your account",
+    offerDetail: "Nextdoor $25 Account Offer",
     expiresAt: null,
     status: "active",
     thankYouPath: "/thank-you-nextdoor/",
-    leadSourceHint: "nextdoor",
+    leadSourceHint: "Nextdoor Ad - $25 Account Offer",
+    notes:
+      "Owner-confirmed usual Nextdoor neighbor offer. Final pricing still depends on lawn size and selected services.",
     scrubbedClaims: [
       "Customer quote on WP page — do not invent additional testimonials; verify before reusing",
       "8 scheduled treatments per year",

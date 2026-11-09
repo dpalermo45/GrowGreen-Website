@@ -85,7 +85,7 @@ Total URLs recorded: **138**
 | `/liquid-aeration-quote-request-received/` | retained | 200 | Published WordPress page | wordpress_page |
 | `/liquid-aeration/` | retained | 200 | Published WordPress page | wordpress_page, gsc:performance |
 | `/mosquito-flea-tick-treatments/` | retained | 200 | Published WordPress page | wordpress_page, gsc:performance |
-| `/nextdoor-estimate-request/` | retained | 200 | Published WordPress page | wordpress_page |
+| `/nextdoor-estimate-request/` | retained | 200 | Nextdoor ad landing with $25 account offer + CRM quote form | wordpress_page |
 | `/plant-disease-or-pest/` | retained | 200 | Published WordPress page | wordpress_page, gsc:Discovered - currently not indexed, gsc:performance |
 | `/post-card-estimate-request/` | retained | 200 | Published WordPress page | wordpress_page, gsc:Crawled - currently not indexed |
 | `/privacy-policy/` | retained | 200 | Published WordPress page | wordpress_page |

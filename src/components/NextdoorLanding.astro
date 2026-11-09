@@ -1,0 +1,529 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { site } from "../data/site";
+import type { CampaignOffer } from "../data/campaigns";
+import { coverageShortPhrase } from "../data/service-areas";
+
+interface Props {
+  campaign: CampaignOffer;
+  offerActive: boolean;
+}
+
+const { campaign, offerActive } = Astro.props;
+
+const leadSource = campaign.leadSourceHint || "Nextdoor Ad - $25 Account Offer";
+const promotion = offerActive
+  ? campaign.offerDetail || "Nextdoor $25 Account Offer"
+  : "";
+const thankYouPath = campaign.thankYouPath || "/thank-you-nextdoor/";
+---
+
+<section class="nd-page" aria-label="Nextdoor lawn estimate offer" data-nextdoor-landing>
+  <div class="nd-topline">
+    {
+      offerActive ? (
+        <>
+          NEXTDOOR NEIGHBOR OFFER &nbsp;·&nbsp;
+          <strong>$25 to open your account</strong>
+          &nbsp;·&nbsp; Free local estimate
+        </>
+      ) : (
+        <>
+          FREE ESTIMATE &nbsp;·&nbsp;
+          <strong>Lawn fertilization &amp; weed control</strong>
+          &nbsp;·&nbsp; Plans start at ${site.startingPrice.amount}/{site.startingPrice.period}
+        </>
+      )
+    }
+  </div>
+
+  <header class="nd-header">
+    <a class="nd-logo" href="/" aria-label={`${site.name} home`}>
+      <img
+        src="/images/brand/logo-128.webp"
+        srcset="/images/brand/logo-64.webp 64w, /images/brand/logo-128.webp 128w, /images/brand/logo-192.webp 192w"
+        sizes="52px"
+        width="52"
+        height="52"
+        alt=""
+        decoding="async"
+      />
+      <span>
+        <strong>Grow Green</strong>
+        <small>Weed Control</small>
+      </span>
+    </a>
+    <a class="nd-phone" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+  </header>
+
+  <div class="nd-hero">
+    <div class="nd-hero__media" aria-hidden="true"></div>
+    <div class="nd-hero__veil" aria-hidden="true"></div>
+    <div class="nd-hero__inner">
+      <div class="nd-hero__copy">
+        <p class="nd-kicker">From your Nextdoor neighbors · {coverageShortPhrase()}</p>
+        <p class="nd-brand">Grow Green Weed Control</p>
+        <h1>
+          {
+            offerActive ? (
+              <>
+                Start your lawn account for <span>$25</span>
+              </>
+            ) : (
+              <>
+                A healthier lawn from a <span>local team</span>
+              </>
+            )
+          }
+        </h1>
+        <p class="nd-lead">
+          {
+            offerActive
+              ? "Request a free estimate for lawn fertilization and weed control. Your Nextdoor neighbor offer is noted for our office when we follow up."
+              : "Request a free estimate for lawn fertilization and weed control from your local, firefighter-owned team."
+          }
+        </p>
+        <ul class="nd-points">
+          <li>Local · family-owned · firefighter-owned</li>
+          <li>Free, no-obligation estimate</li>
+          <li>Plans start at ${site.startingPrice.amount}/{site.startingPrice.period}</li>
+        </ul>
+        <div class="nd-hero__actions">
+          <a class="nd-btn nd-btn--gold" href="#nd-estimate">Claim the neighbor offer</a>
+          <a class="nd-btn nd-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+      </div>
+
+      <div class="nd-hero__form" id="nd-estimate">
+        {
+          offerActive ? (
+            <div class="nd-offer-chip">
+              <strong>$25 account offer</strong>
+              <span>Nextdoor neighbors · Applied during office follow-up</span>
+            </div>
+          ) : null
+        }
+        <QuoteForm
+          source="nextdoor-estimate-request"
+          leadSource={leadSource}
+          promotionCode={promotion}
+          thankYouPath={thankYouPath}
+          compact
+          heading={offerActive ? "Claim your $25 account offer" : "Request your free estimate"}
+          subheading={
+            offerActive
+              ? "Enter your lawn address. We’ll prepare a clear estimate and note the Nextdoor $25 account offer for our team."
+              : "Enter your lawn address for a clear, no-obligation estimate."
+          }
+        />
+        <p class="nd-form-note">
+          Hours {site.hours.label}. Prefer a call?
+          <a href={`tel:${site.phoneTel}`}>{site.phone}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <section class="nd-why">
+    <div class="nd-why__inner">
+      <h2>Why neighbors choose Grow Green</h2>
+      <p>
+        We treat South Louisiana lawns with seasonal timing, clear visit notes, and a local office you can
+        actually reach — not a national call center.
+      </p>
+      <ul>
+        <li>
+          <strong>Local routes</strong>
+          <span>Programs built around our heat, humidity, and warm-season turf.</span>
+        </li>
+        <li>
+          <strong>Clear communication</strong>
+          <span>Reminders and visit details so you know what was done.</span>
+        </li>
+        <li>
+          <strong>Straightforward next step</strong>
+          <span>Request an estimate, review the plan, and start when it makes sense.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="nd-faq">
+    <div class="nd-faq__inner">
+      <h2>Quick answers</h2>
+      <details>
+        <summary>What is the $25 account offer?</summary>
+        <p>
+          For Nextdoor neighbors, we typically open a new lawn-care account for $25. Mention this page when we
+          follow up — final pricing still depends on lawn size and the services you choose.
+        </p>
+      </details>
+      <details>
+        <summary>How fast will I hear back?</summary>
+        <p>
+          Usually the same business day during office hours ({site.hours.label}), or by the next business day in
+          busier periods.
+        </p>
+      </details>
+      <details>
+        <summary>What happens after I submit?</summary>
+        <p>
+          Your request goes to the Grow Green office as a Nextdoor lead. A team member reviews it and contacts you
+          about the estimate — no obligation to enroll.
+        </p>
+      </details>
+      <details>
+        <summary>Where do you service?</summary>
+        <p>
+          We serve {coverageShortPhrase()}, including Prairieville, Gonzales, St. Amant, Denham Springs, Walker,
+          Central, Zachary, and nearby communities.
+        </p>
+      </details>
+    </div>
+  </section>
+
+  <footer class="nd-footer">
+    <p>
+      <strong>{site.name}</strong> · {site.address.full} ·
+      <a href={`tel:${site.phoneTel}`}>{site.phone}</a> ·
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
+    <p>
+      <a href="/">Homepage</a>
+      ·
+      <a href="/privacy-policy/">Privacy</a>
+      ·
+      <a href="/terms-and-conditions/">Terms</a>
+    </p>
+  </footer>
+</section>
+
+<style>
+  .nd-page {
+    --nd-forest: #102c1b;
+    --nd-green: #2f7a43;
+    --nd-gold: #f5a20a;
+    --nd-ink: #14251a;
+    --nd-muted: #53645a;
+    color: var(--nd-ink);
+    background: #fff;
+    font-family: var(--font-body);
+  }
+  .nd-topline {
+    background: var(--nd-forest);
+    color: #e8f2ea;
+    text-align: center;
+    padding: 0.55rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .nd-topline strong {
+    color: #ffd27a;
+    font-weight: 900;
+  }
+  .nd-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1.15rem;
+    background: #fff;
+    border-bottom: 1px solid #e4eee7;
+  }
+  .nd-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: var(--nd-ink);
+  }
+  .nd-logo img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+  }
+  .nd-logo span {
+    display: grid;
+    line-height: 1.05;
+  }
+  .nd-logo strong {
+    font-size: 1.05rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: var(--nd-forest);
+  }
+  .nd-logo small {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6a7d71;
+  }
+  .nd-phone {
+    font-weight: 850;
+    color: var(--nd-forest);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .nd-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: #fff;
+    background: #0b2817;
+  }
+  .nd-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      url("/images/home/hero-lawn-640.webp") center / cover no-repeat;
+  }
+  @media (min-width: 700px) {
+    .nd-hero__media {
+      background-image: url("/images/home/hero-lawn-960.webp");
+    }
+  }
+  @media (min-width: 1100px) {
+    .nd-hero__media {
+      background-image: url("/images/home/hero-lawn-1280.webp");
+    }
+  }
+  .nd-hero__veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(105deg, rgba(8, 28, 16, 0.88) 0%, rgba(8, 28, 16, 0.72) 42%, rgba(8, 28, 16, 0.45) 100%),
+      linear-gradient(180deg, rgba(8, 28, 16, 0.25), rgba(8, 28, 16, 0.55));
+  }
+  .nd-hero__inner {
+    position: relative;
+    z-index: 2;
+    width: min(1120px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 2rem 0 2.4rem;
+    display: grid;
+    gap: 1.75rem;
+  }
+  @media (min-width: 960px) {
+    .nd-hero__inner {
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: start;
+      gap: 2rem;
+      padding: 2.6rem 0 3rem;
+    }
+  }
+  .nd-kicker {
+    margin: 0 0 0.55rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #cfe5d5;
+  }
+  .nd-brand {
+    margin: 0 0 0.45rem;
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    color: #fff;
+  }
+  .nd-hero__copy h1 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(2.15rem, 5vw, 3.35rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    color: #fff;
+  }
+  .nd-hero__copy h1 span {
+    color: var(--nd-gold);
+  }
+  .nd-lead {
+    margin: 0 0 1rem;
+    max-width: 34rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: #e4efe7;
+  }
+  .nd-points {
+    list-style: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    display: grid;
+    gap: 0.4rem;
+  }
+  .nd-points li {
+    position: relative;
+    padding-left: 1.1rem;
+    font-weight: 750;
+    color: #d7e8db;
+  }
+  .nd-points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--nd-gold);
+  }
+  .nd-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+  .nd-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0.7rem 1.15rem;
+    border-radius: 0.75rem;
+    font-weight: 850;
+    text-decoration: none;
+  }
+  .nd-btn--gold {
+    background: var(--nd-gold);
+    color: #172014;
+  }
+  .nd-btn--ghost {
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+  }
+
+  .nd-hero__form {
+    background: #fff;
+    color: var(--nd-ink);
+    border-radius: 1.1rem;
+    padding: 0.85rem;
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.28);
+  }
+  .nd-offer-chip {
+    display: grid;
+    gap: 0.15rem;
+    margin: 0 0 0.75rem;
+    padding: 0.75rem 0.9rem;
+    border-radius: 0.85rem;
+    background: linear-gradient(135deg, #fff7e8, #f3faf4);
+    border: 1px solid #ead7a8;
+  }
+  .nd-offer-chip strong {
+    font-size: 1.02rem;
+    color: var(--nd-forest);
+  }
+  .nd-offer-chip span {
+    font-size: 0.86rem;
+    color: var(--nd-muted);
+    font-weight: 650;
+  }
+  .nd-form-note {
+    margin: 0.75rem 0 0.15rem;
+    font-size: 0.86rem;
+    color: var(--nd-muted);
+    text-align: center;
+  }
+  .nd-form-note a {
+    color: var(--nd-green);
+    font-weight: 800;
+  }
+
+  .nd-why,
+  .nd-faq {
+    padding: 2.4rem 1rem;
+  }
+  .nd-why {
+    background: #f4f8f4;
+  }
+  .nd-why__inner,
+  .nd-faq__inner {
+    width: min(860px, 100%);
+    margin: 0 auto;
+  }
+  .nd-why h2,
+  .nd-faq h2 {
+    margin: 0 0 0.55rem;
+    font-size: clamp(1.55rem, 3vw, 2rem);
+    letter-spacing: -0.03em;
+    color: var(--nd-forest);
+  }
+  .nd-why > .nd-why__inner > p {
+    margin: 0 0 1.25rem;
+    color: var(--nd-muted);
+    max-width: 42rem;
+  }
+  .nd-why ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.85rem;
+  }
+  @media (min-width: 720px) {
+    .nd-why ul {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .nd-why li {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.15rem 0;
+  }
+  .nd-why strong {
+    color: var(--nd-forest);
+    font-size: 1.02rem;
+  }
+  .nd-why span {
+    color: var(--nd-muted);
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .nd-faq details {
+    border-top: 1px solid #dbe6de;
+    padding: 0.85rem 0;
+  }
+  .nd-faq details:last-child {
+    border-bottom: 1px solid #dbe6de;
+  }
+  .nd-faq summary {
+    cursor: pointer;
+    font-weight: 850;
+    color: var(--nd-ink);
+  }
+  .nd-faq details p {
+    margin: 0.55rem 0 0;
+    color: var(--nd-muted);
+  }
+
+  .nd-footer {
+    padding: 1.4rem 1rem 2rem;
+    background: var(--nd-forest);
+    color: #cfe0d4;
+    text-align: center;
+    font-size: 0.88rem;
+  }
+  .nd-footer a {
+    color: #ffe0a0;
+    font-weight: 750;
+  }
+  .nd-footer p {
+    margin: 0.35rem 0;
+  }
+
+  @media (max-width: 520px) {
+    .nd-logo span {
+      display: none;
+    }
+    .nd-hero__actions {
+      width: 100%;
+    }
+    .nd-btn {
+      flex: 1 1 auto;
+    }
+  }
+</style>

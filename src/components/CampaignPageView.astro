@@ -4,6 +4,7 @@ import PageHero from "./PageHero.astro";
 import BrandStrip from "./BrandStrip.astro";
 import CtaBand from "./CtaBand.astro";
 import FacebookNovemberLanding from "./FacebookNovemberLanding.astro";
+import NextdoorLanding from "./NextdoorLanding.astro";
 import { site } from "../data/site";
 import type { CampaignOffer } from "../data/campaigns";
 import { loadPageContent } from "../lib/content/loadPageContent";
@@ -16,6 +17,7 @@ const { campaign } = Astro.props;
 
 const facebookNovember =
   campaign.id === "facebook-50" || campaign.id === "facebook-estimate";
+const nextdoorLanding = campaign.id === "nextdoor";
 
 const expired =
   campaign.status === "expired" ||
@@ -42,7 +44,8 @@ function campaignParagraphOk(p: string): boolean {
   return true;
 }
 
-const rich = !facebookNovember ? loadPageContent(campaign.slug) : null;
+const rich =
+  !facebookNovember && !nextdoorLanding ? loadPageContent(campaign.slug) : null;
 const s = rich?.structured || {};
 
 const storyParasRaw = (rich?.paragraphs || []).filter(campaignParagraphOk);
@@ -90,6 +93,8 @@ const heroEyebrow = showOffer ? "Seasonal offer" : campaign.offerLabel ? "Offer 
 {
   facebookNovember ? (
     <FacebookNovemberLanding campaign={campaign} offerActive={showOffer} />
+  ) : nextdoorLanding ? (
+    <NextdoorLanding campaign={campaign} offerActive={showOffer} />
   ) : (
     <>
       <PageHero eyebrow={heroEyebrow} title={campaign.headline} lead={campaign.summary}>

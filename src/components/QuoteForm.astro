@@ -8,6 +8,8 @@ interface Props {
   heading?: string;
   subheading?: string;
   compact?: boolean;
+  /** Optional redirect after confirmed CRM acceptance. */
+  thankYouPath?: string;
 }
 
 const {
@@ -17,6 +19,7 @@ const {
   heading = "See What Your Lawn Would Cost",
   subheading = "Enter the service address and we’ll prepare an accurate, no-obligation estimate.",
   compact = false,
+  thankYouPath = "",
 } = Astro.props;
 
 const mapToken = import.meta.env.PUBLIC_MAPBOX_TOKEN || "";
@@ -38,6 +41,7 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
   data-promotion={promotionCode}
   data-mapbox={mapToken}
   data-sms-disclosure={smsDisclosure}
+  data-thank-you={thankYouPath}
 >
   <div class="form-panel quote-panel">
     <p class="step-label" data-step-label>Step 1 of 2 — Property details</p>
@@ -446,6 +450,12 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
             mocked: !!data.mocked,
           });
           conversionFired = true;
+        }
+
+        const thankYou = (root.dataset.thankYou || "").trim();
+        if (thankYou && !data.mocked) {
+          window.location.assign(thankYou);
+          return;
         }
 
         showStatus(
