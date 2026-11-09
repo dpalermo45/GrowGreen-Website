@@ -16,22 +16,46 @@ const promotion = offerActive
   ? campaign.offerDetail || "Nextdoor $25 Account Offer"
   : "";
 const thankYouPath = campaign.thankYouPath || "/thank-you-nextdoor/";
+
+const steps = [
+  {
+    n: "1",
+    title: "Send your lawn address",
+    body: "Use the form above — suggestions help fill city and ZIP, or enter them manually.",
+  },
+  {
+    n: "2",
+    title: "We prepare your estimate",
+    body: "Our St. Amant office reviews the property and follows up during business hours.",
+  },
+  {
+    n: "3",
+    title: offerActive ? "Start with the $25 account offer" : "Start when you’re ready",
+    body: offerActive
+      ? "Your Nextdoor neighbor offer is noted for follow-up. Final plan pricing still depends on lawn size and services."
+      : "Review the plan with our team and start only when it makes sense for your yard.",
+  },
+];
 ---
 
-<section class="nd-page" aria-label="Nextdoor lawn estimate offer" data-nextdoor-landing>
+<section class="nd" aria-label="Nextdoor lawn estimate offer" data-nextdoor-landing>
   <div class="nd-topline">
     {
       offerActive ? (
         <>
-          NEXTDOOR NEIGHBOR OFFER &nbsp;·&nbsp;
+          <span>Nextdoor neighbor offer</span>
+          <span class="nd-topline__dot" aria-hidden="true" />
           <strong>$25 to open your account</strong>
-          &nbsp;·&nbsp; Free local estimate
+          <span class="nd-topline__dot" aria-hidden="true" />
+          <span>Free local estimate</span>
         </>
       ) : (
         <>
-          FREE ESTIMATE &nbsp;·&nbsp;
+          <span>Free estimate</span>
+          <span class="nd-topline__dot" aria-hidden="true" />
           <strong>Lawn fertilization &amp; weed control</strong>
-          &nbsp;·&nbsp; Plans start at ${site.startingPrice.amount}/{site.startingPrice.period}
+          <span class="nd-topline__dot" aria-hidden="true" />
+          <span>Plans start at ${site.startingPrice.amount}/{site.startingPrice.period}</span>
         </>
       )
     }
@@ -53,25 +77,33 @@ const thankYouPath = campaign.thankYouPath || "/thank-you-nextdoor/";
         <small>Weed Control</small>
       </span>
     </a>
-    <a class="nd-phone" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+    <div class="nd-header__right">
+      <span class="nd-header__tag">Firefighter-owned · Local</span>
+      <a class="nd-phone" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+    </div>
   </header>
 
   <div class="nd-hero">
     <div class="nd-hero__media" aria-hidden="true"></div>
     <div class="nd-hero__veil" aria-hidden="true"></div>
+    <div class="nd-hero__grain" aria-hidden="true"></div>
     <div class="nd-hero__inner">
-      <div class="nd-hero__copy">
-        <p class="nd-kicker">From your Nextdoor neighbors · {coverageShortPhrase()}</p>
+      <div class="nd-hero__copy nd-rise">
+        <p class="nd-eyebrow">From your Nextdoor neighbors · {coverageShortPhrase()}</p>
         <p class="nd-brand">Grow Green Weed Control</p>
         <h1>
           {
             offerActive ? (
               <>
-                Start your lawn account for <span>$25</span>
+                Start your lawn account
+                <br />
+                for <em>$25</em>
               </>
             ) : (
               <>
-                A healthier lawn from a <span>local team</span>
+                A healthier lawn from
+                <br />
+                a <em>local</em> team
               </>
             )
           }
@@ -79,8 +111,8 @@ const thankYouPath = campaign.thankYouPath || "/thank-you-nextdoor/";
         <p class="nd-lead">
           {
             offerActive
-              ? "Request a free estimate for lawn fertilization and weed control. Your Nextdoor neighbor offer is noted for our office when we follow up."
-              : "Request a free estimate for lawn fertilization and weed control from your local, firefighter-owned team."
+              ? "Professional fertilization and weed control for South Louisiana. Request a free estimate — we’ll note your Nextdoor $25 account offer when our office follows up."
+              : "Professional fertilization and weed control for South Louisiana. Request a free estimate from your local, firefighter-owned team."
           }
         </p>
         <ul class="nd-points">
@@ -89,17 +121,24 @@ const thankYouPath = campaign.thankYouPath || "/thank-you-nextdoor/";
           <li>Plans start at ${site.startingPrice.amount}/{site.startingPrice.period}</li>
         </ul>
         <div class="nd-hero__actions">
-          <a class="nd-btn nd-btn--gold" href="#nd-estimate">Claim the neighbor offer</a>
+          <a class="nd-btn nd-btn--gold" href="#nd-estimate">
+            {offerActive ? "Claim the $25 offer" : "Request my estimate"}
+          </a>
           <a class="nd-btn nd-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
         </div>
       </div>
 
-      <div class="nd-hero__form" id="nd-estimate">
+      <div class="nd-hero__form nd-rise nd-rise--delay" id="nd-estimate">
         {
           offerActive ? (
-            <div class="nd-offer-chip">
-              <strong>$25 account offer</strong>
-              <span>Nextdoor neighbors · Applied during office follow-up</span>
+            <div class="nd-offer-banner">
+              <div class="nd-offer-banner__price" aria-hidden="true">
+                <span>$</span>25
+              </div>
+              <div>
+                <strong>Nextdoor account offer</strong>
+                <p>Noted for office follow-up with your estimate</p>
+              </div>
             </div>
           ) : null
         }
@@ -109,127 +148,273 @@ const thankYouPath = campaign.thankYouPath || "/thank-you-nextdoor/";
           promotionCode={promotion}
           thankYouPath={thankYouPath}
           compact
-          heading={offerActive ? "Claim your $25 account offer" : "Request your free estimate"}
+          heading={offerActive ? "Get your free estimate" : "Request your free estimate"}
           subheading={
             offerActive
-              ? "Enter your lawn address. We’ll prepare a clear estimate and note the Nextdoor $25 account offer for our team."
-              : "Enter your lawn address for a clear, no-obligation estimate."
+              ? "Enter the lawn address. We’ll prepare pricing and note the $25 Nextdoor account offer for our team."
+              : "Enter the lawn address for a clear, no-obligation estimate."
           }
         />
         <p class="nd-form-note">
-          Hours {site.hours.label}. Prefer a call?
+          Office hours {site.hours.label} ·
           <a href={`tel:${site.phoneTel}`}>{site.phone}</a>
         </p>
       </div>
     </div>
   </div>
 
-  <section class="nd-why">
-    <div class="nd-why__inner">
-      <h2>Why neighbors choose Grow Green</h2>
-      <p>
-        We treat South Louisiana lawns with seasonal timing, clear visit notes, and a local office you can
-        actually reach — not a national call center.
-      </p>
-      <ul>
-        <li>
-          <strong>Local routes</strong>
-          <span>Programs built around our heat, humidity, and warm-season turf.</span>
-        </li>
-        <li>
-          <strong>Clear communication</strong>
-          <span>Reminders and visit details so you know what was done.</span>
-        </li>
-        <li>
-          <strong>Straightforward next step</strong>
-          <span>Request an estimate, review the plan, and start when it makes sense.</span>
-        </li>
-      </ul>
+  <section class="nd-steps">
+    <div class="nd-shell">
+      <div class="nd-section-head nd-rise">
+        <p class="nd-eyebrow nd-eyebrow--dark">Simple next steps</p>
+        <h2>{offerActive ? "How the neighbor offer works" : "How your estimate works"}</h2>
+        <p>
+          No pressure pitch. Send the address, talk with our local office, and decide when you’re ready.
+        </p>
+      </div>
+      <ol class="nd-steps__list">
+        {
+          steps.map((step, i) => (
+            <li class={`nd-step nd-rise nd-rise--d${i + 1}`}>
+              <span class="nd-step__n" aria-hidden="true">
+                {step.n}
+              </span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="nd-local">
+    <div class="nd-shell nd-local__grid">
+      <figure class="nd-local__photo nd-rise">
+        <img
+          src="/images/parishes/residential-front-lawn-curb-appeal-960.webp"
+          srcset="/images/parishes/residential-front-lawn-curb-appeal-640.webp 640w, /images/parishes/residential-front-lawn-curb-appeal-960.webp 960w, /images/parishes/residential-front-lawn-curb-appeal-1280.webp 1280w"
+          sizes="(max-width: 900px) 100vw, 48vw"
+          width="960"
+          height="720"
+          alt="South Louisiana front lawn with clean curb appeal"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+      <div class="nd-local__copy nd-rise nd-rise--delay">
+        <p class="nd-eyebrow nd-eyebrow--dark">Why neighbors switch</p>
+        <h2>Local routes. Real office. Clear visit notes.</h2>
+        <p>
+          Grow Green treats lawns across {coverageShortPhrase()} with seasonal timing for our heat and humidity —
+          and a St. Amant office you can actually reach.
+        </p>
+        <ul class="nd-checklist">
+          <li>Programs built for warm-season turf, not a national one-size schedule</li>
+          <li>Reminders and visit details so you know what was done</li>
+          <li>Firefighter-owned, family-operated team based in {site.address.city}</li>
+        </ul>
+        <div class="nd-local__meta">
+          <img
+            class="nd-local__owner"
+            src="/images/about/owner-with-son-640.webp"
+            width="64"
+            height="64"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <strong>Local ownership you can talk to</strong>
+            <span>
+              Call <a href={`tel:${site.phoneTel}`}>{site.phone}</a> · {site.hours.label}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="nd-truck">
+    <div class="nd-shell nd-truck__grid">
+      <div class="nd-truck__copy nd-rise">
+        <p class="nd-eyebrow">On neighborhood routes</p>
+        <h2>You’ll see our truck — and you’ll know who to call.</h2>
+        <p>
+          We’re out treating lawns near you. When you’re ready for fertilization and weed control, this estimate
+          request goes straight to our St. Amant office.
+        </p>
+        <a class="nd-btn nd-btn--gold" href="#nd-estimate">
+          {offerActive ? "Claim the $25 neighbor offer" : "Request my free estimate"}
+        </a>
+      </div>
+      <figure class="nd-truck__photo nd-rise nd-rise--delay">
+        <img
+          src="/images/hero/truck-and-trailer-960.webp"
+          srcset="/images/hero/truck-and-trailer-640.webp 640w, /images/hero/truck-and-trailer-960.webp 960w, /images/hero/truck-and-trailer-1280.webp 1280w"
+          sizes="(max-width: 900px) 100vw, 46vw"
+          width="960"
+          height="720"
+          alt="Grow Green Weed Control truck and trailer"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
     </div>
   </section>
 
   <section class="nd-faq">
-    <div class="nd-faq__inner">
-      <h2>Quick answers</h2>
-      <details>
-        <summary>What is the $25 account offer?</summary>
-        <p>
-          For Nextdoor neighbors, we typically open a new lawn-care account for $25. Mention this page when we
-          follow up — final pricing still depends on lawn size and the services you choose.
-        </p>
-      </details>
-      <details>
-        <summary>How fast will I hear back?</summary>
-        <p>
-          Usually the same business day during office hours ({site.hours.label}), or by the next business day in
-          busier periods.
-        </p>
-      </details>
-      <details>
-        <summary>What happens after I submit?</summary>
-        <p>
-          Your request goes to the Grow Green office as a Nextdoor lead. A team member reviews it and contacts you
-          about the estimate — no obligation to enroll.
-        </p>
-      </details>
-      <details>
-        <summary>Where do you service?</summary>
-        <p>
-          We serve {coverageShortPhrase()}, including Prairieville, Gonzales, St. Amant, Denham Springs, Walker,
-          Central, Zachary, and nearby communities.
-        </p>
-      </details>
+    <div class="nd-shell nd-faq__inner">
+      <div class="nd-section-head nd-rise">
+        <p class="nd-eyebrow nd-eyebrow--dark">Before you submit</p>
+        <h2>Quick answers</h2>
+      </div>
+      <div class="nd-faq__list">
+        {
+          offerActive ? (
+            <details class="nd-faq__item" open>
+              <summary>What is the $25 account offer?</summary>
+              <p>
+                For Nextdoor neighbors, we typically open a new lawn-care account for $25. Mention this page when we
+                follow up. Final monthly pricing still depends on lawn size and the services you choose.
+              </p>
+            </details>
+          ) : null
+        }
+        <details class="nd-faq__item" open={!offerActive}>
+          <summary>How fast will I hear back?</summary>
+          <p>
+            Usually the same business day during office hours ({site.hours.label}), or by the next business day in
+            busier periods.
+          </p>
+        </details>
+        <details class="nd-faq__item">
+          <summary>What happens after I submit?</summary>
+          <p>
+            Your request goes to the Grow Green office as a Nextdoor lead. A team member reviews it and contacts you
+            about the estimate — no obligation to enroll.
+          </p>
+        </details>
+        <details class="nd-faq__item">
+          <summary>Where do you service?</summary>
+          <p>
+            We serve {coverageShortPhrase()}, including Prairieville, Gonzales, St. Amant, Denham Springs, Walker,
+            Central, Zachary, and nearby communities.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="nd-close">
+    <div class="nd-shell nd-close__inner nd-rise">
+      <p class="nd-eyebrow">Ready when you are</p>
+      <h2>
+        {
+          offerActive
+            ? "Claim the Nextdoor $25 account offer"
+            : "Request your free local estimate"
+        }
+      </h2>
+      <p>
+        Enter your service address above, or call{" "}
+        <a href={`tel:${site.phoneTel}`}>{site.phone}</a> during office hours.
+      </p>
+      <div class="nd-close__actions">
+        <a class="nd-btn nd-btn--gold" href="#nd-estimate">
+          {offerActive ? "Claim the $25 offer" : "Back to the form"}
+        </a>
+        <a class="nd-btn nd-btn--ghost-dark" href={`tel:${site.phoneTel}`}>Call the office</a>
+      </div>
     </div>
   </section>
 
   <footer class="nd-footer">
-    <p>
-      <strong>{site.name}</strong> · {site.address.full} ·
-      <a href={`tel:${site.phoneTel}`}>{site.phone}</a> ·
-      <a href={`mailto:${site.email}`}>{site.email}</a>
-    </p>
-    <p>
-      <a href="/">Homepage</a>
-      ·
-      <a href="/privacy-policy/">Privacy</a>
-      ·
-      <a href="/terms-and-conditions/">Terms</a>
-    </p>
+    <div class="nd-shell nd-footer__inner">
+      <a class="nd-footer__brand" href="/">
+        <img src="/images/brand/logo-128.webp" width="40" height="40" alt="" decoding="async" />
+        <span>{site.name}</span>
+      </a>
+      <p>
+        {site.address.full}
+        <br />
+        <a href={`tel:${site.phoneTel}`}>{site.phone}</a>
+        ·
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <br />
+        {site.hours.label}
+      </p>
+      <p class="nd-footer__links">
+        <a href="/">Homepage</a>
+        <a href="/privacy-policy/">Privacy</a>
+        <a href="/terms-and-conditions/">Terms</a>
+      </p>
+    </div>
   </footer>
 </section>
 
 <style>
-  .nd-page {
-    --nd-forest: #102c1b;
+  .nd {
+    --nd-forest: #0e2a1a;
     --nd-green: #2f7a43;
     --nd-gold: #f5a20a;
+    --nd-gold-soft: #ffc857;
     --nd-ink: #14251a;
     --nd-muted: #53645a;
+    --nd-cream: #f4f8f4;
+    --nd-line: #d5e3d9;
     color: var(--nd-ink);
     background: #fff;
-    font-family: var(--font-body);
+    font-family: var(--font-display), var(--font-body);
+    scroll-behavior: smooth;
   }
+
+  .nd-shell {
+    width: min(1100px, calc(100% - 2rem));
+    margin-inline: auto;
+  }
+
   .nd-topline {
-    background: var(--nd-forest);
-    color: #e8f2ea;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem 0.65rem;
+    background: linear-gradient(90deg, #0a2215, #143524 50%, #0a2215);
+    color: #e7f1ea;
     text-align: center;
     padding: 0.55rem 1rem;
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
   .nd-topline strong {
-    color: #ffd27a;
+    color: var(--nd-gold-soft);
     font-weight: 900;
+    letter-spacing: 0.04em;
   }
+  .nd-topline__dot {
+    width: 0.28rem;
+    height: 0.28rem;
+    border-radius: 50%;
+    background: rgba(245, 162, 10, 0.85);
+  }
+
   .nd-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 0.75rem 1.15rem;
-    background: #fff;
-    border-bottom: 1px solid #e4eee7;
+    padding: 0.65rem 1.1rem;
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid var(--nd-line);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    backdrop-filter: blur(10px);
   }
   .nd-logo {
     display: inline-flex;
@@ -248,23 +433,39 @@ const thankYouPath = campaign.thankYouPath || "/thank-you-nextdoor/";
     line-height: 1.05;
   }
   .nd-logo strong {
-    font-size: 1.05rem;
+    font-size: 1.08rem;
     font-weight: 900;
     letter-spacing: -0.03em;
     color: var(--nd-forest);
   }
   .nd-logo small {
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     font-weight: 800;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.11em;
     text-transform: uppercase;
     color: #6a7d71;
   }
+  .nd-header__right {
+    display: grid;
+    justify-items: end;
+    gap: 0.1rem;
+  }
+  .nd-header__tag {
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #6f8175;
+  }
   .nd-phone {
-    font-weight: 850;
+    font-weight: 900;
+    font-size: 1.02rem;
     color: var(--nd-forest);
     text-decoration: none;
-    white-space: nowrap;
+    letter-spacing: -0.02em;
+  }
+  .nd-phone:hover {
+    color: var(--nd-green);
   }
 
   .nd-hero {
@@ -272,14 +473,15 @@ const thankYouPath = campaign.thankYouPath || "/thank-you-nextdoor/";
     isolation: isolate;
     overflow: hidden;
     color: #fff;
-    background: #0b2817;
+    background: #07180f;
   }
   .nd-hero__media {
     position: absolute;
     inset: 0;
     z-index: 0;
-    background:
-      url("/images/home/hero-lawn-640.webp") center / cover no-repeat;
+    background: url("/images/home/hero-lawn-640.webp") center / cover no-repeat;
+    transform: scale(1.04);
+    animation: nd-ken 18s ease-in-out infinite alternate;
   }
   @media (min-width: 700px) {
     .nd-hero__media {
@@ -291,13 +493,26 @@ const thankYouPath = campaign.thankYouPath || "/thank-you-nextdoor/";
       background-image: url("/images/home/hero-lawn-1280.webp");
     }
   }
+  @media (min-width: 1500px) {
+    .nd-hero__media {
+      background-image: url("/images/home/hero-lawn-1600.webp");
+    }
+  }
   .nd-hero__veil {
     position: absolute;
     inset: 0;
     z-index: 1;
     background:
-      linear-gradient(105deg, rgba(8, 28, 16, 0.88) 0%, rgba(8, 28, 16, 0.72) 42%, rgba(8, 28, 16, 0.45) 100%),
-      linear-gradient(180deg, rgba(8, 28, 16, 0.25), rgba(8, 28, 16, 0.55));
+      radial-gradient(ellipse 50% 65% at 82% 38%, rgba(47, 122, 67, 0.2), transparent 58%),
+      linear-gradient(108deg, rgba(5, 22, 13, 0.93) 0%, rgba(5, 22, 13, 0.8) 36%, rgba(5, 22, 13, 0.4) 70%, rgba(5, 22, 13, 0.58) 100%);
+  }
+  .nd-hero__grain {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
   }
   .nd-hero__inner {
     position: relative;
@@ -306,60 +521,77 @@ const thankYouPath = campaign.thankYouPath || "/thank-you-nextdoor/";
     margin: 0 auto;
     padding: 2rem 0 2.4rem;
     display: grid;
-    gap: 1.75rem;
+    gap: 1.5rem;
   }
-  @media (min-width: 960px) {
+  @media (min-width: 980px) {
     .nd-hero__inner {
       grid-template-columns: 1.05fr 0.95fr;
-      align-items: start;
+      align-items: center;
       gap: 2rem;
       padding: 2.6rem 0 3rem;
     }
+    .nd-hero__actions {
+      display: none;
+    }
   }
-  .nd-kicker {
-    margin: 0 0 0.55rem;
-    font-size: 0.78rem;
+
+  #nd-estimate {
+    scroll-margin-top: 5.5rem;
+  }
+
+  .nd-eyebrow {
+    margin: 0 0 0.6rem;
+    font-size: 0.74rem;
     font-weight: 800;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #cfe5d5;
+    color: #c9ddcf;
+  }
+  .nd-eyebrow--dark {
+    color: var(--nd-green);
   }
   .nd-brand {
     margin: 0 0 0.45rem;
-    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    font-size: clamp(1.45rem, 3vw, 2rem);
     font-weight: 900;
-    letter-spacing: -0.035em;
+    letter-spacing: -0.04em;
+    line-height: 1;
     color: #fff;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.22);
   }
   .nd-hero__copy h1 {
-    margin: 0 0 0.75rem;
-    font-size: clamp(2.15rem, 5vw, 3.35rem);
-    line-height: 1.02;
-    letter-spacing: -0.04em;
+    margin: 0 0 0.8rem;
+    font-size: clamp(2.2rem, 5vw, 3.45rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
     color: #fff;
+    font-weight: 900;
   }
-  .nd-hero__copy h1 span {
+  .nd-hero__copy h1 em {
+    font-style: normal;
     color: var(--nd-gold);
   }
   .nd-lead {
     margin: 0 0 1rem;
-    max-width: 34rem;
+    max-width: 33rem;
     font-size: 1.05rem;
     line-height: 1.55;
-    color: #e4efe7;
+    color: #e2efe6;
+    font-weight: 500;
   }
   .nd-points {
     list-style: none;
-    margin: 0 0 1.25rem;
+    margin: 0 0 1.2rem;
     padding: 0;
     display: grid;
-    gap: 0.4rem;
+    gap: 0.42rem;
   }
   .nd-points li {
     position: relative;
     padding-left: 1.1rem;
     font-weight: 750;
-    color: #d7e8db;
+    color: #d8eadc;
+    font-size: 0.98rem;
   }
   .nd-points li::before {
     content: "";
@@ -374,148 +606,499 @@ const thankYouPath = campaign.thankYouPath || "/thank-you-nextdoor/";
   .nd-hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.65rem;
+    gap: 0.6rem;
   }
   .nd-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 46px;
-    padding: 0.7rem 1.15rem;
+    min-height: 48px;
+    padding: 0.72rem 1.15rem;
     border-radius: 0.75rem;
-    font-weight: 850;
+    font-weight: 900;
     text-decoration: none;
+    letter-spacing: -0.01em;
+    transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease, border-color 0.16s ease;
+  }
+  .nd-btn:hover {
+    transform: translateY(-1px);
   }
   .nd-btn--gold {
-    background: var(--nd-gold);
+    background: linear-gradient(180deg, #ffb225, var(--nd-gold));
     color: #172014;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
   .nd-btn--ghost {
     background: transparent;
     color: #fff;
-    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+  }
+  .nd-btn--ghost:hover {
+    border-color: #fff;
+  }
+  .nd-btn--ghost-dark {
+    background: transparent;
+    color: #fff;
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+  }
+  .nd-btn--ghost-dark:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.06);
   }
 
   .nd-hero__form {
     background: #fff;
     color: var(--nd-ink);
-    border-radius: 1.1rem;
-    padding: 0.85rem;
-    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.28);
+    border-radius: 1.15rem;
+    padding: 0.95rem 0.95rem 1rem;
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.5);
   }
-  .nd-offer-chip {
-    display: grid;
-    gap: 0.15rem;
+  .nd-offer-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
     margin: 0 0 0.75rem;
-    padding: 0.75rem 0.9rem;
+    padding: 0.72rem 0.85rem;
     border-radius: 0.85rem;
-    background: linear-gradient(135deg, #fff7e8, #f3faf4);
-    border: 1px solid #ead7a8;
+    background: linear-gradient(135deg, #fff8ea 0%, #f4faf5 100%);
+    border: 1px solid #e6d4a4;
   }
-  .nd-offer-chip strong {
-    font-size: 1.02rem;
+  .nd-offer-banner__price {
+    flex: 0 0 auto;
+    min-width: 3.35rem;
+    height: 3.35rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.75rem;
+    background: var(--nd-forest);
+    color: var(--nd-gold);
+    font-size: 1.28rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .nd-offer-banner__price span {
+    font-size: 0.8rem;
+    margin-right: 0.04rem;
+  }
+  .nd-offer-banner strong {
+    display: block;
+    font-size: 0.98rem;
     color: var(--nd-forest);
   }
-  .nd-offer-chip span {
-    font-size: 0.86rem;
+  .nd-offer-banner p {
+    margin: 0.12rem 0 0;
+    font-size: 0.84rem;
     color: var(--nd-muted);
     font-weight: 650;
   }
   .nd-form-note {
-    margin: 0.75rem 0 0.15rem;
-    font-size: 0.86rem;
+    margin: 0.7rem 0 0.05rem;
+    font-size: 0.82rem;
     color: var(--nd-muted);
     text-align: center;
   }
   .nd-form-note a {
     color: var(--nd-green);
-    font-weight: 800;
+    font-weight: 850;
   }
 
-  .nd-why,
-  .nd-faq {
-    padding: 2.4rem 1rem;
+  .nd :global(.quote-form.compact .quote-panel) {
+    padding: 0.3rem 0.15rem 0.1rem;
+    box-shadow: none;
+    border: 0;
+    background: transparent;
   }
-  .nd-why {
-    background: #f4f8f4;
+  .nd :global(.quote-form .step-label) {
+    margin-bottom: 0.15rem;
   }
-  .nd-why__inner,
-  .nd-faq__inner {
-    width: min(860px, 100%);
-    margin: 0 auto;
+  .nd :global(.quote-form h2) {
+    font-size: 1.28rem;
+    margin-bottom: 0.3rem;
   }
-  .nd-why h2,
-  .nd-faq h2 {
-    margin: 0 0 0.55rem;
-    font-size: clamp(1.55rem, 3vw, 2rem);
-    letter-spacing: -0.03em;
+  .nd :global(.quote-form .form-lead) {
+    font-size: 0.9rem;
+  }
+
+  .nd-section-head {
+    max-width: 36rem;
+    margin-bottom: 1.35rem;
+  }
+  .nd-section-head h2,
+  .nd-local__copy h2,
+  .nd-truck__copy h2,
+  .nd-close h2 {
+    margin: 0 0 0.45rem;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    letter-spacing: -0.035em;
+    line-height: 1.08;
     color: var(--nd-forest);
+    font-weight: 900;
   }
-  .nd-why > .nd-why__inner > p {
-    margin: 0 0 1.25rem;
+  .nd-section-head p,
+  .nd-local__copy > p,
+  .nd-truck__copy > p {
+    margin: 0;
     color: var(--nd-muted);
-    max-width: 42rem;
+    font-size: 1.02rem;
+    line-height: 1.55;
   }
-  .nd-why ul {
+
+  .nd-steps {
+    padding: 2.75rem 0 2.5rem;
+    background:
+      radial-gradient(ellipse 55% 45% at 8% 0%, rgba(47, 122, 67, 0.07), transparent 55%),
+      var(--nd-cream);
+  }
+  .nd-steps__list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 0.85rem;
+    gap: 1.25rem;
+    counter-reset: none;
   }
-  @media (min-width: 720px) {
-    .nd-why ul {
+  @media (min-width: 800px) {
+    .nd-steps__list {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.75rem;
+      position: relative;
+    }
+    .nd-steps__list::before {
+      content: "";
+      position: absolute;
+      top: 1.15rem;
+      left: 8%;
+      right: 8%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--nd-line) 12%, var(--nd-line) 88%, transparent);
+      pointer-events: none;
     }
   }
-  .nd-why li {
+  .nd-step {
     display: grid;
-    gap: 0.25rem;
-    padding: 0.15rem 0;
+    gap: 0.7rem;
+    position: relative;
   }
-  .nd-why strong {
-    color: var(--nd-forest);
-    font-size: 1.02rem;
-  }
-  .nd-why span {
-    color: var(--nd-muted);
+  .nd-step__n {
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: var(--nd-forest);
+    color: var(--nd-gold);
+    font-weight: 900;
     font-size: 0.95rem;
+    position: relative;
+    z-index: 1;
+  }
+  .nd-step h3 {
+    margin: 0 0 0.3rem;
+    font-size: 1.05rem;
+    color: var(--nd-ink);
+    font-weight: 900;
+  }
+  .nd-step p {
+    margin: 0;
+    color: var(--nd-muted);
+    font-size: 0.94rem;
     line-height: 1.45;
   }
 
-  .nd-faq details {
-    border-top: 1px solid #dbe6de;
-    padding: 0.85rem 0;
+  .nd-local {
+    padding: 2.75rem 0;
+    background: #fff;
   }
-  .nd-faq details:last-child {
-    border-bottom: 1px solid #dbe6de;
+  .nd-local__grid {
+    display: grid;
+    gap: 1.5rem;
+    align-items: center;
   }
-  .nd-faq summary {
-    cursor: pointer;
-    font-weight: 850;
-    color: var(--nd-ink);
+  @media (min-width: 900px) {
+    .nd-local__grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 2.25rem;
+    }
   }
-  .nd-faq details p {
-    margin: 0.55rem 0 0;
+  .nd-local__photo,
+  .nd-truck__photo {
+    margin: 0;
+    border-radius: 1.1rem;
+    overflow: hidden;
+  }
+  .nd-local__photo img,
+  .nd-truck__photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+  .nd-checklist {
+    list-style: none;
+    margin: 1rem 0 1.15rem;
+    padding: 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+  .nd-checklist li {
+    position: relative;
+    padding-left: 1.4rem;
     color: var(--nd-muted);
+    font-weight: 650;
+    line-height: 1.4;
+  }
+  .nd-checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.35em;
+    width: 0.82rem;
+    height: 0.82rem;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 35% 35%, #fff 0 28%, transparent 29%),
+      var(--nd-green);
+  }
+  .nd-local__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.2rem;
+  }
+  .nd-local__owner {
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 6px 16px rgba(14, 42, 26, 0.14);
+  }
+  .nd-local__meta strong {
+    display: block;
+    color: var(--nd-forest);
+    font-size: 0.95rem;
+  }
+  .nd-local__meta span {
+    color: var(--nd-muted);
+    font-size: 0.86rem;
+  }
+  .nd-local__meta a {
+    color: var(--nd-green);
+    font-weight: 800;
+    text-decoration: none;
+  }
+  .nd-local__meta a:hover {
+    text-decoration: underline;
+  }
+
+  .nd-truck {
+    padding: 0 0 2.75rem;
+    background: linear-gradient(180deg, #fff 0%, #f3f7f3 100%);
+  }
+  .nd-truck__grid {
+    display: grid;
+    gap: 1.35rem;
+    align-items: center;
+    padding: 1.35rem;
+    border-radius: 1.25rem;
+    background: linear-gradient(135deg, #102c1b 0%, #1a4a2c 55%, #0e2a1a 100%);
+    color: #fff;
+  }
+  @media (min-width: 900px) {
+    .nd-truck__grid {
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 1.35rem;
+      padding: 1.1rem 1.1rem 1.1rem 1.85rem;
+    }
+  }
+  .nd-truck__copy .nd-eyebrow {
+    color: #d7e8db;
+  }
+  .nd-truck__copy h2 {
+    color: #fff;
+  }
+  .nd-truck__copy > p {
+    color: #d5e6da;
+    margin-bottom: 1.1rem;
+  }
+  .nd-truck__photo img {
+    aspect-ratio: 16 / 11;
+  }
+
+  .nd-faq {
+    padding: 2.6rem 0 2.2rem;
+    background: #fff;
+  }
+  .nd-faq__inner {
+    max-width: 720px;
+  }
+  .nd-faq__list {
+    border-top: 1px solid var(--nd-line);
+  }
+  .nd-faq__item {
+    border-bottom: 1px solid var(--nd-line);
+    background: transparent;
+    padding: 0;
+  }
+  .nd-faq__item summary {
+    cursor: pointer;
+    list-style: none;
+    font-weight: 900;
+    color: var(--nd-ink);
+    padding: 1rem 1.75rem 1rem 0;
+    position: relative;
+  }
+  .nd-faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+  .nd-faq__item summary::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--nd-green);
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .nd-faq__item[open] summary::after {
+    content: "–";
+  }
+  .nd-faq__item p {
+    margin: 0 0 1rem;
+    color: var(--nd-muted);
+    line-height: 1.5;
+    max-width: 40rem;
+  }
+
+  .nd-close {
+    padding: 0 0 2.75rem;
+    background: #fff;
+  }
+  .nd-close__inner {
+    text-align: center;
+    padding: 2rem 1.35rem;
+    border-radius: 1.2rem;
+    background:
+      radial-gradient(ellipse 48% 75% at 50% 0%, rgba(245, 162, 10, 0.14), transparent 55%),
+      linear-gradient(180deg, #123222, #0e2a1a);
+    color: #fff;
+  }
+  .nd-close .nd-eyebrow {
+    color: #d7e8db;
+  }
+  .nd-close h2 {
+    color: #fff;
+  }
+  .nd-close p {
+    margin: 0 auto 1.15rem;
+    max-width: 32rem;
+    color: #d5e6da;
+  }
+  .nd-close a:not(.nd-btn) {
+    color: var(--nd-gold-soft);
+    font-weight: 850;
+  }
+  .nd-close__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.65rem;
   }
 
   .nd-footer {
-    padding: 1.4rem 1rem 2rem;
-    background: var(--nd-forest);
-    color: #cfe0d4;
+    background: #07180f;
+    color: #c5d8cb;
+    padding: 1.75rem 0 2.1rem;
+  }
+  .nd-footer__inner {
+    display: grid;
+    gap: 0.85rem;
+    justify-items: center;
     text-align: center;
-    font-size: 0.88rem;
+  }
+  .nd-footer__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 900;
+  }
+  .nd-footer__brand img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
   }
   .nd-footer a {
-    color: #ffe0a0;
+    color: var(--nd-gold-soft);
     font-weight: 750;
   }
   .nd-footer p {
-    margin: 0.35rem 0;
+    margin: 0;
+    line-height: 1.55;
+    font-size: 0.9rem;
+  }
+  .nd-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.1rem;
+    justify-content: center;
   }
 
-  @media (max-width: 520px) {
+  .nd-rise {
+    animation: nd-rise 0.65s ease both;
+  }
+  .nd-rise--delay {
+    animation-delay: 0.1s;
+  }
+  .nd-rise--d1 {
+    animation-delay: 0.04s;
+  }
+  .nd-rise--d2 {
+    animation-delay: 0.1s;
+  }
+  .nd-rise--d3 {
+    animation-delay: 0.16s;
+  }
+
+  @keyframes nd-rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes nd-ken {
+    from {
+      transform: scale(1.02);
+    }
+    to {
+      transform: scale(1.07);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nd,
+    .nd-hero__media,
+    .nd-rise,
+    .nd-btn {
+      scroll-behavior: auto;
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .nd-header__tag {
+      display: none;
+    }
     .nd-logo span {
       display: none;
     }
@@ -524,6 +1107,17 @@ const thankYouPath = campaign.thankYouPath || "/thank-you-nextdoor/";
     }
     .nd-btn {
       flex: 1 1 auto;
+    }
+    .nd-truck__grid {
+      padding: 1.05rem;
+    }
+    .nd-steps__list {
+      gap: 1.1rem;
+    }
+    .nd-step {
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      gap: 0.75rem;
     }
   }
 </style>
