@@ -210,12 +210,13 @@ const serviceGroups = [
     position: sticky;
     top: 0;
     z-index: 200;
-    background-color: rgba(255, 255, 255, 0.97);
+    /* Opaque surface — avoid backdrop-filter/isolation here; they clip the
+       absolute/fixed mobile panel once the sticky header is stuck mid-page. */
+    background-color: #ffffff;
     background-image: none;
-    isolation: isolate;
+    overflow: visible;
     border-bottom: 1px solid #e4eee7;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8), 0 8px 24px rgba(15, 42, 26, 0.04);
-    backdrop-filter: blur(10px);
   }
   .nav-inner {
     position: relative;
@@ -224,6 +225,8 @@ const serviceGroups = [
     gap: 1rem;
     min-height: var(--header-h);
     padding: 0.55rem 0;
+    overflow: visible;
+    z-index: 1;
   }
   .brand {
     display: inline-flex;
@@ -495,6 +498,8 @@ const serviceGroups = [
   }
   .nav-toggle {
     display: none;
+    position: relative;
+    z-index: 2;
     margin-left: auto;
     border: 0;
     background: var(--green-800);
@@ -541,18 +546,21 @@ const serviceGroups = [
     }
     .site-nav {
       display: none;
-      position: absolute;
+      /* Viewport-fixed so the panel stays visible when the sticky header is stuck
+         mid-scroll (absolute + body overflow lock was clipping it). */
+      position: fixed;
       left: 0;
       right: 0;
-      top: 100%;
+      top: var(--nav-panel-top, var(--header-h));
+      bottom: 0;
       background: #ffffff;
       padding: 0.85rem 1rem 1.1rem;
       border-bottom: 1px solid #dfe8e1;
       box-shadow: 0 12px 28px rgba(15, 42, 26, 0.12);
-      z-index: 70;
+      z-index: 250;
       margin: 0;
-      max-height: calc(100dvh - var(--header-h) - 0.5rem);
       overflow: auto;
+      -webkit-overflow-scrolling: touch;
       padding-bottom: max(1.1rem, env(safe-area-inset-bottom));
     }
     .site-nav.open {
@@ -655,7 +663,16 @@ const serviceGroups = [
     if (menu) menu.hidden = true;
   }
 
+  function syncNavPanelTop() {
+    const header = document.querySelector(".site-header");
+    if (!(header instanceof HTMLElement)) return;
+    const bottom = Math.ceil(header.getBoundingClientRect().bottom);
+    document.documentElement.style.setProperty("--nav-panel-top", `${bottom}px`);
+  }
+
   function setNavOpen(open) {
+    if (open) syncNavPanelTop();
+    else document.documentElement.style.removeProperty("--nav-panel-top");
     nav?.classList.toggle("open", open);
     toggle?.setAttribute("aria-expanded", open ? "true" : "false");
     if (toggleLabel) toggleLabel.textContent = open ? "Close" : "Menu";
@@ -708,6 +725,18 @@ const serviceGroups = [
   });
 
   window.addEventListener("resize", () => {
-    if (window.matchMedia("(min-width: 1221px)").matches) setNavOpen(false);
+    if (window.matchMedia("(min-width: 1221px)").matches) {
+      setNavOpen(false);
+      return;
+    }
+    if (nav?.classList.contains("open")) syncNavPanelTop();
   });
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (nav?.classList.contains("open")) syncNavPanelTop();
+    },
+    { passive: true },
+  );
 </script>
