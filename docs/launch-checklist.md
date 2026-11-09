@@ -8,7 +8,7 @@
 - [ ] Staging preview with `PUBLIC_SITE_INDEXING=false` (must stay noindex)
 - [ ] Visual QA: home, service, city, blog (pickers + fertilizing guide), campaign, contact, quote, careers, 404 — desktop + mobile
 - [ ] Lead API mock tests green (`npm test`)
-- [ ] Controlled **live** CRM verification on staging with one known test lead (office aware); confirm automation does **not** double-send from website
+- [ ] Controlled **live** CRM verification on staging with one known test lead (office aware); confirm promotional SMS consent + attribution fields land correctly; confirm automation does **not** double-send welcome texts from website
 - [ ] Map token restricted to production/staging origins
 - [ ] SSL certificate ready on new host
 - [ ] Node standalone process confirmed on KnownHost (see `docs/launch/hosting-knownhost.md`) — not static-only upload

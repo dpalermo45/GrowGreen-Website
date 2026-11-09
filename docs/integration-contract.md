@@ -2,9 +2,11 @@
 
 This document separates **verified facts**, **implementation assumptions**, and **open gaps** for the Grow Green website → CRM lead bridge. It compares the legacy WordPress PHP proxy (`ggwc-crm-lead-proxy (2).php`) with the Astro endpoint at `POST /api/leads/website/`.
 
+CRM request fields below were verified from the local CRM repo (`integrations/views/api_v1.py` → `api_create_lead`, plus `customers/services/promotional_sms_consent.py`).
+
 ---
 
-## Verified facts (from PHP proxy + this repo)
+## Verified facts (from PHP proxy + CRM repo + this site)
 
 | Topic | Fact |
 | --- | --- |
@@ -16,10 +18,13 @@ This document separates **verified facts**, **implementation assumptions**, and 
 | Required fields | `name`, `email`, `phone`, `address`, `city`, `zip` (state defaults to `LA`) |
 | Name split | First token → `first_name`; remainder → `last_name` |
 | Phone | Digits-only before CRM |
-| Payload shape | `first_name`, `last_name`, `email`, `phone`, `lead_source`, `notes`, `property.{address1,city,state,postal_code}` |
-| Notes (PHP) | Fixed lines: “Website estimate request.”, optional Source/Page/Submitted, `SMS marketing opt-in: {Yes\|No}` |
-| Acceptance (PHP) | HTTP status &lt; 400 **and** JSON `customer.id` present; response to browser `{ ok: true, customer_id }` with **201** |
+| Core payload | `first_name`, `last_name`, `email`, `phone`, `lead_source`, `notes`, `property.{address1,city,state,postal_code}` |
+| Promotional SMS (CRM) | First-class `promotional_sms_opt_in` + `promotional_sms_disclosure`. CRM records consent only when opt-in is affirmative **and** disclosure matches CRM `PROMOTIONAL_SMS_DISCLOSURE` exactly (whitespace-normalized). Missing/false → no consent. |
+| Attribution (CRM) | First-class `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `fbclid`, `gclid`, `fbc`, `fbp`, `campaign_id`, `ad_id`, `browser_event_id` (aliases `event_id` / `eventID`), `event_source_url` (alias `page_url`) |
+| Notes (legacy PHP) | Fixed lines: “Website estimate request.”, optional Source/Page/Submitted, `SMS marketing opt-in: {Yes\|No}` — Astro no longer puts SMS/UTM into notes |
+| Acceptance | HTTP status &lt; 400 **and** JSON `customer.id` present; response to browser `{ ok: true, customer_id }` with **201** |
 | Careers | Must **not** use this lead intake. Live Divi posts to CRM public careers APIs; website proxies via `/api/careers/openings/` + `/api/careers/applications/` |
+| Welcome / follow-up | Owned by CRM after accepted lead create — website must not send welcome SMS/email or office SLA texts |
 
 ---
 
@@ -29,10 +34,10 @@ This document separates **verified facts**, **implementation assumptions**, and 
 | --- | --- | --- |
 | Mock mode | `GGWC_CRM_MODE=mock` (default) accepts locally with a fake `customer_id` and never calls CRM | Safe local preview; missing live config must not fake success in `live` mode |
 | Bare HTTP 200 | Empty/`{}` body or missing `customer.id` is **failure**, even if status is 200 | PHP already required `customer.id`; website strengthens “never celebrate bare 200” |
-| Notes enrichment | Website appends UTM params, `promotion_code`, `services_interest`, and customer free-text into `notes` | Improves office context; CRM field set unchanged |
-| SMS wording in notes | Clarifies self-reported form opt-in is **not** a CRM consent API field | Prevents false equivalence with true SMS consent systems |
-| Lead source | Defaults to `Website`; Facebook November landings send exact Divi string `Facebook Ad - November 50% Off First Treatment (Up to $75)` | Preserves CRM reporting parity with live WP LP |
-| Facebook LP form | `FacebookNovemberLanding` posts the same field set as Divi (UTM/fbclid, SMS status, honeypot, idempotency, promotion in notes) to `/api/leads/website/` | Replaces `/wp-json/ggwc/v1/website-lead` without browser CRM secrets |
+| Consent never inferred | Unchecked / missing → `promotional_sms_opt_in: false`. Disclosure is whatever the form presented (sent verbatim); website forms use CRM’s canonical promotional disclosure text | Matches CRM `opted_in_value` / disclosure match rules |
+| Attribution mapping | Supported UTM / click-ID / `event_source_url` sent as CRM fields; `lead_source` unchanged (`Website` default; Facebook LP keeps Divi string) | Parity with CRM `create_lead` view |
+| Notes enrichment | Source / Page / Submitted / promotion / services / customer free-text only | Office context without duplicating consent or attribution |
+| Facebook LP form | `FacebookNovemberLanding` posts the same consent + attribution contract to `/api/leads/website/` | Replaces `/wp-json/ggwc/v1/website-lead` without browser CRM secrets |
 | Meta Pixel Lead | Fires only after confirmed acceptance **and** `mocked !== true` | Prevents fake conversions in local/mock mode |
 | Rate limiting | In-memory per-IP limits on website API | Not present in PHP proxy; defensive for public endpoint |
 | Trailing slash | Prefer `/api/leads/website/`; Astro uses `trailingSlash: "ignore"` so Google’s registered `/api/google-reviews/callback` (no slash) also resolves | Legacy WP path was `/wp-json/ggwc/v1/website-lead` |
@@ -44,13 +49,12 @@ This document separates **verified facts**, **implementation assumptions**, and 
 
 | Gap | Impact | Owner ask |
 | --- | --- | --- |
-| Full CRM OpenAPI / acceptance schema | Website parses `customer.id` like PHP; other success shapes unknown | Confirm documented response body for create-lead |
-| Whether CRM returns 200 vs 201 on success | Website treats any &lt;400 with valid `customer.id` as success | Confirm status codes |
-| True SMS/marketing opt-in API | Form checkbox only lands in notes | Confirm if CRM has a dedicated consent field/API |
-| Careers live openings empty | CRM public openings currently returns `{ openings: [] }` | Confirm when positions are posted again |
+| Whether CRM returns 200 vs 201 on success | Website treats any &lt;400 with valid `customer.id` as success | Confirm status codes in production |
 | Idempotency semantics | Assumed CRM honors `Idempotency-Key` for retries | Confirm duplicate behavior |
-| Promotion / offer codes | Sent in notes / `promotion_code` context only | Confirm if CRM has a first-class promo field |
+| Promotion / offer codes | Still notes / `promotion_code` context only | Confirm if CRM adds a first-class promo field later |
+| Careers live openings empty | CRM public openings currently returns `{ openings: [] }` | Confirm when positions are posted again |
 | Analytics conversion | `ggwc_lead_accepted` fires only after confirmed acceptance | Wire GTM/Meta IDs later (hooks only now) |
+| Controlled live CRM smoke | Local stays `GGWC_CRM_MODE=mock` | One office-aware live test on staging/host before cutover |
 
 ---
 
@@ -96,4 +100,4 @@ Website Google reviews are **display-only**. CRM MCP review sync / invitation wo
 
 - Do not duplicate CRM welcome texts, estimate workflows, or office SLA automation on the website.
 - Do not rebuild the customer portal or payment processor inside this repo.
-- Do not invent CRM fields that the PHP proxy never sent.
+- Do not invent CRM fields beyond the verified `create_lead` request surface.

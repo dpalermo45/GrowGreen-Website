@@ -1,4 +1,6 @@
 ---
+import { PROMOTIONAL_SMS_DISCLOSURE } from "../lib/leads/promotionalSms";
+
 interface Props {
   source?: string;
   leadSource?: string;
@@ -25,6 +27,7 @@ const nameId = `name-${source}`;
 const emailId = `email-${source}`;
 const phoneId = `phone-${source}`;
 const notesId = `notes-${source}`;
+const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
 ---
 
 <div
@@ -34,6 +37,7 @@ const notesId = `notes-${source}`;
   data-lead-source={leadSource}
   data-promotion={promotionCode}
   data-mapbox={mapToken}
+  data-sms-disclosure={smsDisclosure}
 >
   <div class="form-panel quote-panel">
     <p class="step-label" data-step-label>Step 1 of 2 — Property details</p>
@@ -97,10 +101,7 @@ const notesId = `notes-${source}`;
         <div class="field checkbox">
           <label class="consent-label">
             <input type="checkbox" name="sms_opt_in" value="Yes" />
-            <span>
-              Text me helpful updates by SMS. Message/data rates may apply. Reply STOP to opt out.
-              Consent is not required to get an estimate.
-            </span>
+            <span>{smsDisclosure}</span>
           </label>
         </div>
         <div class="actions">
@@ -250,6 +251,13 @@ const notesId = `notes-${source}`;
     return `ggwc-${Date.now()}-${Math.random().toString(16).slice(2)}`;
   }
 
+  function cookieGet(name) {
+    const match = document.cookie.match(
+      new RegExp("(?:^|; )" + name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "=([^;]*)"),
+    );
+    return match ? decodeURIComponent(match[1]) : "";
+  }
+
   function params() {
     const q = new URLSearchParams(location.search);
     return {
@@ -259,6 +267,9 @@ const notesId = `notes-${source}`;
       utm_term: q.get("utm_term") || "",
       utm_content: q.get("utm_content") || "",
       fbclid: q.get("fbclid") || "",
+      gclid: q.get("gclid") || "",
+      fbp: cookieGet("_fbp") || "",
+      fbc: cookieGet("_fbc") || "",
     };
   }
 
@@ -382,11 +393,13 @@ const notesId = `notes-${source}`;
       showStatus("pending", "Sending your request…");
 
       const fd = new FormData(form);
-      const sms = fd.get("sms_opt_in") === "Yes" ? "Yes" : "No";
+      const smsChecked = fd.get("sms_opt_in") === "Yes";
       const tracking = params();
       const userNotes = String(fd.get("notes") || "").trim();
       const extraNotes = (root.dataset.extraNotes || "").trim();
       const notes = [userNotes, extraNotes].filter(Boolean).join("\n");
+      const disclosure = root.dataset.smsDisclosure || "";
+      const pageUrl = location.href;
       const payload = {
         name: String(fd.get("name") || ""),
         email: String(fd.get("email") || ""),
@@ -397,11 +410,15 @@ const notesId = `notes-${source}`;
         state: String(fd.get("state") || "LA"),
         notes,
         website: String(fd.get("website") || ""),
-        sms_opt_in_status: sms,
+        sms_opt_in_status: smsChecked ? "Yes" : "No",
+        promotional_sms_opt_in: smsChecked,
+        promotional_sms_disclosure: disclosure,
         lead_source: root.dataset.leadSource || "Website",
         source: root.dataset.source || "website-quote-form",
         promotion_code: root.dataset.promotion || "",
-        page_url: location.href,
+        page_url: pageUrl,
+        event_source_url: pageUrl,
+        browser_event_id: idempotencyKey,
         submitted_at: new Date().toISOString(),
         idempotency_key: idempotencyKey,
         ...tracking,

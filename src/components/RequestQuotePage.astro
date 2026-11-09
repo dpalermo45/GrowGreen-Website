@@ -1,11 +1,13 @@
 ---
 import { site } from "../data/site";
 import { coverageFaqAnswer, serviceAreaCount } from "../data/service-areas";
+import { PROMOTIONAL_SMS_DISCLOSURE } from "../lib/leads/promotionalSms";
 import "../styles/request-quote.css";
 
 const mapToken = import.meta.env.PUBLIC_MAPBOX_TOKEN || "";
 const leadSource = "Request an Estimate";
 const source = "Request an Estimate";
+const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
 
 const primaryServices = [
   {
@@ -90,7 +92,13 @@ const faqJsonLd = {
 };
 ---
 
-<article class="rq-page" id="gg-quote-page" data-mapbox={mapToken} aria-labelledby="ggq-page-title">
+<article
+  class="rq-page"
+  id="gg-quote-page"
+  data-mapbox={mapToken}
+  data-sms-disclosure={smsDisclosure}
+  aria-labelledby="ggq-page-title"
+>
   <div class="rq-hero">
     <div class="rq-inner rq-layout">
       <div class="rq-intro motion-rise">
@@ -332,14 +340,7 @@ const faqJsonLd = {
                 <div class="rq-field rq-field-full">
                   <label class="rq-consent" for="ggq-sms-opt-in">
                     <input id="ggq-sms-opt-in" name="sms_opt_in" type="checkbox" value="Yes" />
-                    <span>
-                      <strong>Optional text-message consent:</strong> By checking this box, I agree to receive SMS
-                      messages from Grow Green Weed Control about estimates, appointments, service updates, billing
-                      notifications, and customer support. Message and data rates may apply. Message frequency varies.
-                      Reply STOP to opt out or HELP for help. Consent is not a condition of purchase. See our
-                      <a href="/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a> and
-                      <a href="/terms-and-conditions/" target="_blank" rel="noopener">Terms & Conditions</a>.
-                    </span>
+                    <span>{smsDisclosure}</span>
                   </label>
                 </div>
               </div>
@@ -655,6 +656,13 @@ const faqJsonLd = {
       }
     });
 
+    function cookieGet(name) {
+      const match = document.cookie.match(
+        new RegExp("(?:^|; )" + name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "=([^;]*)"),
+      );
+      return match ? decodeURIComponent(match[1]) : "";
+    }
+
     function trackingParams() {
       const q = new URLSearchParams(location.search);
       return {
@@ -665,6 +673,8 @@ const faqJsonLd = {
         utm_content: q.get("utm_content") || "",
         gclid: q.get("gclid") || "",
         fbclid: q.get("fbclid") || "",
+        fbp: cookieGet("_fbp") || "",
+        fbc: cookieGet("_fbc") || "",
       };
     }
 
@@ -699,6 +709,9 @@ const faqJsonLd = {
       const notesLines = [];
       if (userNotes) notesLines.push(userNotes);
       notesLines.push("Services requested: " + services.join(", "));
+      const smsChecked = !!root.querySelector("#ggq-sms-opt-in")?.checked;
+      const disclosure = root.dataset.smsDisclosure || "";
+      const pageUrl = location.href;
 
       const payload = {
         name: (root.querySelector("#ggq-name")?.value || "").trim(),
@@ -710,11 +723,15 @@ const faqJsonLd = {
         state: (stateInput?.value || "LA").trim() || "LA",
         notes: notesLines.join("\n"),
         website: "",
-        sms_opt_in_status: root.querySelector("#ggq-sms-opt-in")?.checked ? "Yes" : "No",
+        sms_opt_in_status: smsChecked ? "Yes" : "No",
+        promotional_sms_opt_in: smsChecked,
+        promotional_sms_disclosure: disclosure,
         lead_source: form.querySelector('[name="lead_source"]')?.value || "Request an Estimate",
         source: form.querySelector('[name="source"]')?.value || "Request an Estimate",
         services_interest: services.join(", "),
-        page_url: location.href,
+        page_url: pageUrl,
+        event_source_url: pageUrl,
+        browser_event_id: idempotencyKey,
         submitted_at: new Date().toISOString(),
         idempotency_key: idempotencyKey,
         ...tracking,

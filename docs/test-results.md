@@ -4,7 +4,7 @@
 
 | Suite | Result | Notes |
 | --- | --- | --- |
-| `tests/leads.test.ts` (Vitest) | **19/19 passed** | Mapping, SMS notes, honeypot, validation, null customer_id rejection, bare 200 rejection, upstream errors, mock success, missing live config, timeout, idempotency key reuse, rate limit, conversion gate |
+| `tests/leads.test.ts` (Vitest) | **25/25 passed** (suite **45/45**) | Mapping, promotional SMS checked/unchecked (no inference), attribution field mapping, lead_source preservation, honeypot, validation, null customer_id rejection, bare 200 rejection, upstream errors, mock success, missing live config, timeout, idempotency + consent/attribution upstream body, rate limit, conversion gate |
 | `tests/google-reviews.test.ts` (Vitest) | **16/16 passed** | OAuth state/PKCE, token refresh, pagination + Google averageRating accuracy, cache soft/hard expiry, setup-route protection, unavailable fallback, no auto location pick, plain-text review mapping |
 | `npm test` (all) | **35/35 passed** | Leads 19 + Google reviews 16 |
 | `npm run build` | **Passed** | After content-gap closure pass |

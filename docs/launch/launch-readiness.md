@@ -51,6 +51,7 @@ Primary artifact: **`docs/launch/page-audit.csv`**.
 | Check | Result |
 | --- | --- |
 | `POST /api/leads/website` mock mode | **PASS** — `201`, `customer_id`, `mocked: true` |
+| Promotional SMS + attribution mapping | **PASS** (unit) — first-class CRM fields; mock mode only locally |
 | Live CRM on KnownHost | **BLOCKED** — controlled live test still required on host |
 | Careers ≠ lead intake | Separated routes |
 | Google reviews OAuth production | **BLOCKED** until host callback + tokens |
