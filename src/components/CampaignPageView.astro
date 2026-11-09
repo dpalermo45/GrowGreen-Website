@@ -4,10 +4,11 @@ import PageHero from "./PageHero.astro";
 import BrandStrip from "./BrandStrip.astro";
 import CtaBand from "./CtaBand.astro";
 import FacebookNovemberLanding from "./FacebookNovemberLanding.astro";
-import NextdoorLanding from "./NextdoorLanding.astro";
+import Offer25Landing from "./Offer25Landing.astro";
 import { site } from "../data/site";
 import type { CampaignOffer } from "../data/campaigns";
 import { loadPageContent } from "../lib/content/loadPageContent";
+import type { Offer25Key } from "../data/offer25-landings";
 
 interface Props {
   campaign: CampaignOffer;
@@ -17,7 +18,15 @@ const { campaign } = Astro.props;
 
 const facebookNovember =
   campaign.id === "facebook-50" || campaign.id === "facebook-estimate";
-const nextdoorLanding = campaign.id === "nextdoor";
+
+const offer25Channel: Offer25Key | null =
+  campaign.id === "nextdoor"
+    ? "nextdoor"
+    : campaign.id === "postcard"
+      ? "postcard"
+      : campaign.id === "trucklead"
+        ? "trucklead"
+        : null;
 
 const expired =
   campaign.status === "expired" ||
@@ -45,7 +54,7 @@ function campaignParagraphOk(p: string): boolean {
 }
 
 const rich =
-  !facebookNovember && !nextdoorLanding ? loadPageContent(campaign.slug) : null;
+  !facebookNovember && !offer25Channel ? loadPageContent(campaign.slug) : null;
 const s = rich?.structured || {};
 
 const storyParasRaw = (rich?.paragraphs || []).filter(campaignParagraphOk);
@@ -93,8 +102,8 @@ const heroEyebrow = showOffer ? "Seasonal offer" : campaign.offerLabel ? "Offer 
 {
   facebookNovember ? (
     <FacebookNovemberLanding campaign={campaign} offerActive={showOffer} />
-  ) : nextdoorLanding ? (
-    <NextdoorLanding campaign={campaign} offerActive={showOffer} />
+  ) : offer25Channel ? (
+    <Offer25Landing campaign={campaign} offerActive={showOffer} channel={offer25Channel} />
   ) : (
     <>
       <PageHero eyebrow={heroEyebrow} title={campaign.headline} lead={campaign.summary}>

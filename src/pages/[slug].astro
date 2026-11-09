@@ -208,14 +208,18 @@ const articleHtml =
       hideChrome={
         campaign.id === "facebook-50" ||
         campaign.id === "facebook-estimate" ||
-        campaign.id === "nextdoor"
+        campaign.id === "nextdoor" ||
+        campaign.id === "postcard" ||
+        campaign.id === "trucklead"
       }
       ogImage={
         campaign.id === "facebook-50" || campaign.id === "facebook-estimate"
           ? "/images/campaigns/facebook-nov/lawn-sign.jpg"
-          : campaign.id === "nextdoor"
+          : campaign.id === "nextdoor" || campaign.id === "postcard"
             ? "/images/home/hero-lawn.jpg"
-            : undefined
+            : campaign.id === "trucklead"
+              ? "/images/hero/f250-side-view.jpg"
+              : undefined
       }
     >
       <CampaignPageView campaign={campaign} />

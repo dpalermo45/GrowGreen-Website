@@ -3,19 +3,33 @@ import QuoteForm from "./QuoteForm.astro";
 import { site } from "../data/site";
 import type { CampaignOffer } from "../data/campaigns";
 import { coverageShortPhrase } from "../data/service-areas";
+import {
+  offer25Landings,
+  type Offer25Key,
+  type Offer25LandingCopy,
+} from "../data/offer25-landings";
 
 interface Props {
   campaign: CampaignOffer;
   offerActive: boolean;
+  channel: Offer25Key;
 }
 
-const { campaign, offerActive } = Astro.props;
+const { campaign, offerActive, channel } = Astro.props;
+const copy: Offer25LandingCopy = offer25Landings[channel];
 
-const leadSource = campaign.leadSourceHint || "Nextdoor Ad - $25 Account Offer";
+const leadSource = campaign.leadSourceHint || copy.leadSourceFallback;
 const promotion = offerActive
-  ? campaign.offerDetail || "Nextdoor $25 Account Offer"
+  ? campaign.offerDetail || copy.promotionFallback
   : "";
-const thankYouPath = campaign.thankYouPath || "/thank-you-nextdoor/";
+const thankYouPath = campaign.thankYouPath || copy.thankYouFallback;
+
+const coverage = coverageShortPhrase();
+const eyebrow = copy.appendCoverageToEyebrow
+  ? `${copy.eyebrow} · ${coverage}`
+  : copy.eyebrow;
+
+const h1 = offerActive ? copy.h1Active : copy.h1Inactive;
 
 const steps = [
   {
@@ -30,22 +44,38 @@ const steps = [
   },
   {
     n: "3",
-    title: offerActive ? "Start with the $25 account offer" : "Start when you’re ready",
+    title: offerActive ? copy.step3TitleActive : "Start when you’re ready",
     body: offerActive
-      ? "Your Nextdoor neighbor offer is noted for follow-up. Final plan pricing still depends on lawn size and services."
+      ? copy.step3BodyActive
       : "Review the plan with our team and start only when it makes sense for your yard.",
   },
 ];
+
+const bandImage =
+  copy.bandImage === "lawn"
+    ? {
+        src: "/images/parishes/residential-front-lawn-curb-appeal-960.webp",
+        srcset:
+          "/images/parishes/residential-front-lawn-curb-appeal-640.webp 640w, /images/parishes/residential-front-lawn-curb-appeal-960.webp 960w, /images/parishes/residential-front-lawn-curb-appeal-1280.webp 1280w",
+        alt: "Well-maintained South Louisiana lawn",
+      }
+    : {
+        src: "/images/hero/truck-and-trailer-960.webp",
+        srcset:
+          "/images/hero/truck-and-trailer-640.webp 640w, /images/hero/truck-and-trailer-960.webp 960w, /images/hero/truck-and-trailer-1280.webp 1280w",
+        alt: "Grow Green Weed Control truck and trailer",
+      };
+const attrs = { [copy.dataAttr]: true };
 ---
 
-<section class="nd" aria-label="Nextdoor lawn estimate offer" data-nextdoor-landing>
+<section class="nd" aria-label={copy.ariaLabel} {...attrs}>
   <div class="nd-topline">
     {
       offerActive ? (
         <>
-          <span>Nextdoor neighbor offer</span>
+          <span>{copy.toplineChannel}</span>
           <span class="nd-topline__dot" aria-hidden="true" />
-          <strong>$25 to open your account</strong>
+          <strong>{copy.toplineOffer}</strong>
           <span class="nd-topline__dot" aria-hidden="true" />
           <span>Free local estimate</span>
         </>
@@ -84,37 +114,21 @@ const steps = [
   </header>
 
   <div class="nd-hero">
-    <div class="nd-hero__media" aria-hidden="true"></div>
+    <div class={`nd-hero__media nd-hero__media--${copy.heroMedia}`} aria-hidden="true"></div>
     <div class="nd-hero__veil" aria-hidden="true"></div>
     <div class="nd-hero__grain" aria-hidden="true"></div>
     <div class="nd-hero__inner">
       <div class="nd-hero__copy nd-rise">
-        <p class="nd-eyebrow">From your Nextdoor neighbors · {coverageShortPhrase()}</p>
+        <p class="nd-eyebrow">{eyebrow}</p>
         <p class="nd-brand">Grow Green Weed Control</p>
         <h1>
-          {
-            offerActive ? (
-              <>
-                Start your lawn account
-                <br />
-                for <em>$25</em>
-              </>
-            ) : (
-              <>
-                A healthier lawn from
-                <br />
-                a <em>local</em> team
-              </>
-            )
-          }
+          {h1.before}
+          {h1.breakBeforeEmphasis ? <br /> : " "}
+          {h1.emphasisPrefix}
+          <em>{h1.emphasis}</em>
+          {h1.after || ""}
         </h1>
-        <p class="nd-lead">
-          {
-            offerActive
-              ? "Professional fertilization and weed control for South Louisiana. Request a free estimate — we’ll note your Nextdoor $25 account offer when our office follows up."
-              : "Professional fertilization and weed control for South Louisiana. Request a free estimate from your local, firefighter-owned team."
-          }
-        </p>
+        <p class="nd-lead">{offerActive ? copy.leadActive : copy.leadInactive}</p>
         <ul class="nd-points">
           <li>Local · family-owned · firefighter-owned</li>
           <li>Free, no-obligation estimate</li>
@@ -122,7 +136,7 @@ const steps = [
         </ul>
         <div class="nd-hero__actions">
           <a class="nd-btn nd-btn--gold" href="#nd-estimate">
-            {offerActive ? "Claim the $25 offer" : "Request my estimate"}
+            {offerActive ? copy.ctaPrimaryActive : "Request my estimate"}
           </a>
           <a class="nd-btn nd-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
         </div>
@@ -136,22 +150,22 @@ const steps = [
                 <span>$</span>25
               </div>
               <div>
-                <strong>Nextdoor account offer</strong>
-                <p>Noted for office follow-up with your estimate</p>
+                <strong>{copy.offerBannerTitle}</strong>
+                <p>{copy.offerBannerBody}</p>
               </div>
             </div>
           ) : null
         }
         <QuoteForm
-          source="nextdoor-estimate-request"
+          source={copy.formSource}
           leadSource={leadSource}
           promotionCode={promotion}
           thankYouPath={thankYouPath}
           compact
-          heading={offerActive ? "Get your free estimate" : "Request your free estimate"}
+          heading={offerActive ? copy.formHeadingActive : "Request your free estimate"}
           subheading={
             offerActive
-              ? "Enter the lawn address. We’ll prepare pricing and note the $25 Nextdoor account offer for our team."
+              ? copy.formSubActive
               : "Enter the lawn address for a clear, no-obligation estimate."
           }
         />
@@ -167,7 +181,7 @@ const steps = [
     <div class="nd-shell">
       <div class="nd-section-head nd-rise">
         <p class="nd-eyebrow nd-eyebrow--dark">Simple next steps</p>
-        <h2>{offerActive ? "How the neighbor offer works" : "How your estimate works"}</h2>
+        <h2>{offerActive ? copy.stepsTitleActive : "How your estimate works"}</h2>
         <p>
           No pressure pitch. Send the address, talk with our local office, and decide when you’re ready.
         </p>
@@ -205,10 +219,10 @@ const steps = [
         />
       </figure>
       <div class="nd-local__copy nd-rise nd-rise--delay">
-        <p class="nd-eyebrow nd-eyebrow--dark">Why neighbors switch</p>
+        <p class="nd-eyebrow nd-eyebrow--dark">{copy.localEyebrow}</p>
         <h2>Local routes. Real office. Clear visit notes.</h2>
         <p>
-          Grow Green treats lawns across {coverageShortPhrase()} with seasonal timing for our heat and humidity —
+          Grow Green treats lawns across {coverage} with seasonal timing for our heat and humidity —
           and a St. Amant office you can actually reach.
         </p>
         <ul class="nd-checklist">
@@ -240,24 +254,21 @@ const steps = [
   <section class="nd-truck">
     <div class="nd-shell nd-truck__grid">
       <div class="nd-truck__copy nd-rise">
-        <p class="nd-eyebrow">On neighborhood routes</p>
-        <h2>You’ll see our truck — and you’ll know who to call.</h2>
-        <p>
-          We’re out treating lawns near you. When you’re ready for fertilization and weed control, this estimate
-          request goes straight to our St. Amant office.
-        </p>
+        <p class="nd-eyebrow">{copy.bandEyebrow}</p>
+        <h2>{copy.bandTitle}</h2>
+        <p>{copy.bandBody}</p>
         <a class="nd-btn nd-btn--gold" href="#nd-estimate">
-          {offerActive ? "Claim the $25 neighbor offer" : "Request my free estimate"}
+          {offerActive ? copy.bandCtaActive : "Request my free estimate"}
         </a>
       </div>
       <figure class="nd-truck__photo nd-rise nd-rise--delay">
         <img
-          src="/images/hero/truck-and-trailer-960.webp"
-          srcset="/images/hero/truck-and-trailer-640.webp 640w, /images/hero/truck-and-trailer-960.webp 960w, /images/hero/truck-and-trailer-1280.webp 1280w"
+          src={bandImage.src}
+          srcset={bandImage.srcset}
           sizes="(max-width: 900px) 100vw, 46vw"
           width="960"
           height="720"
-          alt="Grow Green Weed Control truck and trailer"
+          alt={bandImage.alt}
           loading="lazy"
           decoding="async"
         />
@@ -275,11 +286,8 @@ const steps = [
         {
           offerActive ? (
             <details class="nd-faq__item" open>
-              <summary>What is the $25 account offer?</summary>
-              <p>
-                For Nextdoor neighbors, we typically open a new lawn-care account for $25. Mention this page when we
-                follow up. Final monthly pricing still depends on lawn size and the services you choose.
-              </p>
+              <summary>{copy.faqOfferSummary}</summary>
+              <p>{copy.faqOfferBody}</p>
             </details>
           ) : null
         }
@@ -292,15 +300,12 @@ const steps = [
         </details>
         <details class="nd-faq__item">
           <summary>What happens after I submit?</summary>
-          <p>
-            Your request goes to the Grow Green office as a Nextdoor lead. A team member reviews it and contacts you
-            about the estimate — no obligation to enroll.
-          </p>
+          <p>{copy.faqSubmitBody}</p>
         </details>
         <details class="nd-faq__item">
           <summary>Where do you service?</summary>
           <p>
-            We serve {coverageShortPhrase()}, including Prairieville, Gonzales, St. Amant, Denham Springs, Walker,
+            We serve {coverage}, including Prairieville, Gonzales, St. Amant, Denham Springs, Walker,
             Central, Zachary, and nearby communities.
           </p>
         </details>
@@ -312,11 +317,7 @@ const steps = [
     <div class="nd-shell nd-close__inner nd-rise">
       <p class="nd-eyebrow">Ready when you are</p>
       <h2>
-        {
-          offerActive
-            ? "Claim the Nextdoor $25 account offer"
-            : "Request your free local estimate"
-        }
+        {offerActive ? copy.closeTitleActive : "Request your free local estimate"}
       </h2>
       <p>
         Enter your service address above, or call{" "}
@@ -324,7 +325,7 @@ const steps = [
       </p>
       <div class="nd-close__actions">
         <a class="nd-btn nd-btn--gold" href="#nd-estimate">
-          {offerActive ? "Claim the $25 offer" : "Back to the form"}
+          {offerActive ? copy.ctaPrimaryActive : "Back to the form"}
         </a>
         <a class="nd-btn nd-btn--ghost-dark" href={`tel:${site.phoneTel}`}>Call the office</a>
       </div>
@@ -479,23 +480,50 @@ const steps = [
     position: absolute;
     inset: 0;
     z-index: 0;
-    background: url("/images/home/hero-lawn-640.webp") center / cover no-repeat;
     transform: scale(1.04);
     animation: nd-ken 18s ease-in-out infinite alternate;
+    background: center / cover no-repeat;
+  }
+  .nd-hero__media--lawn {
+    background-image: url("/images/home/hero-lawn-640.webp");
+  }
+  .nd-hero__media--truck-and-trailer {
+    background-image: url("/images/hero/truck-and-trailer-640.webp");
+  }
+  .nd-hero__media--f250-side-view {
+    background-image: url("/images/hero/f250-side-view-640.webp");
   }
   @media (min-width: 700px) {
-    .nd-hero__media {
+    .nd-hero__media--lawn {
       background-image: url("/images/home/hero-lawn-960.webp");
+    }
+    .nd-hero__media--truck-and-trailer {
+      background-image: url("/images/hero/truck-and-trailer-960.webp");
+    }
+    .nd-hero__media--f250-side-view {
+      background-image: url("/images/hero/f250-side-view-960.webp");
     }
   }
   @media (min-width: 1100px) {
-    .nd-hero__media {
+    .nd-hero__media--lawn {
       background-image: url("/images/home/hero-lawn-1280.webp");
+    }
+    .nd-hero__media--truck-and-trailer {
+      background-image: url("/images/hero/truck-and-trailer-1280.webp");
+    }
+    .nd-hero__media--f250-side-view {
+      background-image: url("/images/hero/f250-side-view-1280.webp");
     }
   }
   @media (min-width: 1500px) {
-    .nd-hero__media {
+    .nd-hero__media--lawn {
       background-image: url("/images/home/hero-lawn-1600.webp");
+    }
+    .nd-hero__media--truck-and-trailer {
+      background-image: url("/images/hero/truck-and-trailer-1920.webp");
+    }
+    .nd-hero__media--f250-side-view {
+      background-image: url("/images/hero/f250-side-view-1920.webp");
     }
   }
   .nd-hero__veil {

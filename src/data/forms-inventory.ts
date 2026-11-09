@@ -159,7 +159,8 @@ export const forms: FormDefinition[] = [
     ],
     honeypot: "company_website",
     notes: [
-      "Nextdoor may use /thank-you-nextdoor/",
+      "Nextdoor uses /thank-you-nextdoor/; postcard and trucklead use /thank-you/",
+      "$25 offer landings: nextdoor-estimate-request, post-card-estimate-request, trucklead",
       "Liquid aeration and core aeration have dedicated thank-you variants in WP — keep if those forms stay separate",
       "Never merge careers into this handler",
     ],
