@@ -45,6 +45,13 @@ const serviceGroups = [
 </div>
 
 <header class="site-header">
+  <button
+    type="button"
+    class="nav-backdrop"
+    data-nav-backdrop
+    aria-label="Close menu"
+    hidden
+  ></button>
   <div class="container nav-inner">
     <a class="brand" href="/" aria-label={`${site.name} home`}>
       <img
@@ -544,21 +551,37 @@ const serviceGroups = [
     .nav-toggle {
       display: inline-flex;
     }
+    .nav-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 240;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: rgba(10, 28, 16, 0.28);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-backdrop.is-open {
+      display: block;
+    }
     .site-nav {
       display: none;
-      /* Viewport-fixed so the panel stays visible when the sticky header is stuck
-         mid-scroll (absolute + body overflow lock was clipping it). */
+      /* Fixed dropdown under the sticky header — height follows content so the
+         page/backdrop stay tappable and the menu is not a full-screen trap. */
       position: fixed;
       left: 0;
       right: 0;
       top: var(--nav-panel-top, var(--header-h));
-      bottom: 0;
+      bottom: auto;
       background: #ffffff;
       padding: 0.85rem 1rem 1.1rem;
       border-bottom: 1px solid #dfe8e1;
       box-shadow: 0 12px 28px rgba(15, 42, 26, 0.12);
       z-index: 250;
       margin: 0;
+      max-height: min(75dvh, calc(100dvh - var(--nav-panel-top, var(--header-h)) - 0.75rem));
       overflow: auto;
       -webkit-overflow-scrolling: touch;
       padding-bottom: max(1.1rem, env(safe-area-inset-bottom));
@@ -636,6 +659,7 @@ const serviceGroups = [
   const toggle = document.querySelector("[data-nav-toggle]");
   const toggleLabel = document.querySelector("[data-nav-toggle-label]");
   const nav = document.querySelector("[data-site-nav]");
+  const backdrop = document.querySelector("[data-nav-backdrop]");
   const parents = document.querySelectorAll("[data-nav-item='parent']");
 
   function closeAll(except) {
@@ -674,10 +698,12 @@ const serviceGroups = [
     if (open) syncNavPanelTop();
     else document.documentElement.style.removeProperty("--nav-panel-top");
     nav?.classList.toggle("open", open);
+    backdrop?.classList.toggle("is-open", open);
+    if (backdrop instanceof HTMLElement) backdrop.hidden = !open;
     toggle?.setAttribute("aria-expanded", open ? "true" : "false");
     if (toggleLabel) toggleLabel.textContent = open ? "Close" : "Menu";
-    document.documentElement.classList.toggle("nav-open", open);
-    document.body.classList.toggle("nav-open", open);
+    // Do not lock html/body overflow — that trapped users mid-scroll with no
+    // way to dismiss except picking a nav link.
     if (!open) closeAll();
   }
 
@@ -685,6 +711,8 @@ const serviceGroups = [
     const open = !nav?.classList.contains("open");
     setNavOpen(open);
   });
+
+  backdrop?.addEventListener("click", () => setNavOpen(false));
 
   parents.forEach((item) => {
     const btn = item.querySelector("[data-nav-parent]");
