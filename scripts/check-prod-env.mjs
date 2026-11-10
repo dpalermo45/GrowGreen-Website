@@ -131,6 +131,23 @@ add(
     : "Empty — manual address entry still works",
 );
 
+const metaPixelId = (env.PUBLIC_META_PIXEL_ID || "").trim();
+const metaPixelShapeOk = !metaPixelId || /^\d{5,20}$/.test(metaPixelId);
+const metaPixelRequiredOk = !production || Boolean(metaPixelId && metaPixelShapeOk);
+add(
+  "PUBLIC_META_PIXEL_ID",
+  metaPixelShapeOk && metaPixelRequiredOk,
+  metaPixelId
+    ? metaPixelShapeOk
+      ? production
+        ? "Present (PageView Pixel — rebuild required after changes)"
+        : "Present (will load Pixel on this build; leave empty for local/preview)"
+      : "Invalid — expected digits-only Meta Pixel ID"
+    : production
+      ? "Missing — set PUBLIC_META_PIXEL_ID=1014961828315598 and rebuild"
+      : "Empty (correct for local/preview — Pixel disabled)",
+);
+
 const failed = checks.filter((c) => !c.ok);
 for (const c of checks) {
   console.log(`${c.ok ? "PASS" : "FAIL"}\t${c.id}\t${c.detail}`);

@@ -36,3 +36,8 @@ Browser form (Facebook ad LP / homepage / quote forms)
    Keep the field map; note Astro owns mapping and secrets. Env vars live on the website host (`GGWC_CRM_BASE_URL`, `GGWC_CRM_API_KEY`, `GGWC_CRM_MODE`), not `wp-config.php`.
 
 9. **Google reviews (website vs CRM):** Document that the public marketing site may use a **separate** Google Cloud OAuth client (`Grow Green Website Reviews`) in project `ggwc-crm` solely to display Business Profile reviews. CRM review sync, review-request automation, replies, and customer matching remain CRM/MCP concerns and must not share website token files or the website redirect URI (`http://localhost:4321/api/google-reviews/callback`).
+
+10. **Meta Pixel PageView (website, 2026-11-10):** After the Astro site deploys with `PUBLIC_META_PIXEL_ID=1014961828315598`, update CRM-side docs when convenient (not done in the website PR):
+    - `docs/specs/social-media/PHASE_6_CAPI.md` marketing-site Pixel audit: base PageView snippet is on the Astro `BaseLayout` (not WordPress/Divi); consent gate `__ggwcMarketingConsent === false`.
+    - `docs/website_lead_bridge.md` / Events Manager checklist: browser PageView Pixel ID is `1014961828315598`; Lead still post-acceptance only; CAPI remains CRM-flagged/dry-run until a separate CRM change.
+    - Admin Academy / MCP knowledge (`mcp-knowledge-stays-current` / Social Hub topics): note public-site PageView vs CRM CAPI lifecycle — do **not** claim CAPI is live from this website-only change.

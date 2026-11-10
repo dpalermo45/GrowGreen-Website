@@ -103,7 +103,7 @@ See **`docs/launch/hosting-knownhost.md`**, `deploy/litespeed-redirects.conf`, `
 2. Production `.env` with live CRM + indexing + Mapbox origin restriction.
 3. One office-aware live CRM lead test.
 4. Confirm whether to restore harder “8 visits” / contract claims after review.
-5. Analytics / GTM / Meta Pixel IDs (hooks only).
+5. Meta Pixel PageView via `PUBLIC_META_PIXEL_ID` (see `docs/meta-pixel.md`); GTM/GA4 still deferred.
 6. Google reviews production OAuth + callback.
 7. Search Console sitemap submit after indexing build.
 

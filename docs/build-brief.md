@@ -50,7 +50,7 @@ Replace WordPress with a custom, crawlable website that preserves URLs, brand, s
 ## Out of scope this build
 
 - Live deploy, DNS, SSL cutover  
-- Analytics/GTM/Pixel ID configuration (hooks only)  
+- GTM/GA4 IDs; Meta Pixel PageView is wired via `PUBLIC_META_PIXEL_ID` (see `docs/meta-pixel.md`)  
 - Service-area interactive map (optional later; no multi-office markers)  
 - CRM welcome automation duplication  
 - Rebuilding portal/payments  

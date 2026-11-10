@@ -32,6 +32,7 @@ See `.env.example`. Important:
 | `GGWC_CRM_MODE` | `mock` (default) or `live` |
 | `GGWC_CRM_BASE_URL` / `GGWC_CRM_API_KEY` | Required only for `live` |
 | `PUBLIC_MAPBOX_TOKEN` | Optional address autocomplete |
+| `PUBLIC_META_PIXEL_ID` | Meta Pixel ID for PageView (empty locally; production `1014961828315598` — see `docs/meta-pixel.md`) |
 | `GOOGLE_REVIEWS_*` | Website-only Google Business Profile OAuth + review cache (see `.env.example` and `docs/google-reviews.md`) |
 
 **Never commit `.env`.** Missing live CRM config fails closed — it never fakes success.
@@ -75,6 +76,7 @@ Until authorized, the site shows a clean Google profile link only — never inve
 - `docs/url-migration-manifest.md` — URL outcomes
 - `docs/image-catalog.md` / `docs/photo-replacement.md` — media
 - `docs/integration-contract.md` — CRM contract (verified / assumptions / gaps)
+- `docs/meta-pixel.md` — Meta Pixel PageView install + Render env
 - `docs/google-reviews.md` — Google reviews OAuth, cache policy, setup
 - `docs/open-questions.md` — non-blocking questions
 - `docs/launch-checklist.md` — launch/rollback

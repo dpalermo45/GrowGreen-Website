@@ -85,7 +85,9 @@ Priority migration care (verified from Performance workbook): homepage (583 clic
 
 ## Tracking
 
-Analytics, GTM, and Meta Pixel IDs are deferred. Provide integration points only. Fire lead conversion events only after confirmed acceptance; prevent duplicates.
+- **Meta Pixel PageView:** install in `BaseLayout` when `PUBLIC_META_PIXEL_ID` is set (production: `1014961828315598`). Leave empty for local/preview. See `docs/meta-pixel.md`.
+- Init once; one PageView per real navigation (`astro:page-load` safe). Honor `window.__ggwcMarketingConsent === false`.
+- GTM/GA4 IDs remain deferred. Fire browser Lead conversion events only after confirmed CRM acceptance; prevent duplicates. Do not enable CRM CAPI from this repo.
 
 ## Google reviews (website display only)
 

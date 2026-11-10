@@ -13,14 +13,14 @@
 - [ ] SSL certificate ready on new host
 - [ ] Node standalone process confirmed on KnownHost (see `docs/launch/hosting-knownhost.md`) — not static-only upload
 - [ ] Redirect map implemented in app (SSR redirect pages) **and** optionally at LiteSpeed edge
-- [ ] Analytics/GTM/Meta Pixel IDs filled into integration hooks (still deferred until IDs provided)
+- [ ] Meta Pixel: set `PUBLIC_META_PIXEL_ID=1014961828315598` on production host and rebuild (see `docs/meta-pixel.md`); GTM/GA4 still deferred
 - [ ] Careers live mode: CRM public openings/applications reachable from production host; confirm openings appear when hiring
 - [ ] Re-run `npm run launch:crawl` + lighthouse batch against production URL after deploy
 
 ## Cutover
 
 - [ ] Deploy production build
-- [ ] Set `PUBLIC_SITE_URL`, `PUBLIC_SITE_INDEXING=true`, live CRM env vars
+- [ ] Set `PUBLIC_SITE_URL`, `PUBLIC_SITE_INDEXING=true`, `PUBLIC_META_PIXEL_ID`, live CRM env vars
 - [ ] Point DNS; verify HTTPS
 - [ ] Smoke: homepage, quote submit (one controlled lead), portal link, phone/email, sitemap, robots
 - [ ] Submit sitemap in Search Console
