@@ -2550,6 +2550,8 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
             typeof result.data !== "object" ||
             Array.isArray(result.data) ||
             Object.keys(result.data).length === 0 ||
+            result.data.ok !== true ||
+            result.data.ignored === true ||
             hasBridgeError(result.data) ||
             result.data.customer_id == null ||
             result.data.customer_id === ""
@@ -2563,7 +2565,6 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
           successBox.classList.add("is-visible");
           root.classList.add("gg-submitted");
           successBox.focus();
-          safeSessionRemove("gg_facebook_november_2026_estimate_key");
 
           if (typeof window.ggwcTrack === "function") {
             try {
@@ -2577,21 +2578,20 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
             }
           }
 
-          /* Meta Pixel Lead only after confirmed non-mock CRM acceptance. */
-          if (!result.data.mocked && typeof window.fbq === "function") {
-            try {
-              window.fbq(
-                "track",
-                "Lead",
-                {
-                  content_name: "Facebook November 50% Off First Treatment Estimate",
-                },
-                { eventID: leadKey },
-              );
-            } catch (pixelError) {
-              /* Tracking must never block a successful submission. */
+          /* Shared Meta Lead helper — empty params, browser_event_id as eventID. */
+          try {
+            if (typeof window.ggwcTrackMetaLead === "function") {
+              window.ggwcTrackMetaLead({
+                response: result.data,
+                httpOk: result.response.ok,
+                browserEventId: leadKey,
+              });
             }
+          } catch (pixelError) {
+            /* Pixel failures must never block success UX. */
           }
+
+          safeSessionRemove("gg_facebook_november_2026_estimate_key");
 
           window.setTimeout(function () {
             window.location.assign(THANK_YOU_URL);

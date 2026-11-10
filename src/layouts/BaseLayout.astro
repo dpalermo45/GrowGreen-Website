@@ -165,6 +165,52 @@ const metaPixelId = normalizeMetaPixelId(
       window.ggwcTrack = function ggwcTrack(eventName, payload) {
         window.dataLayer.push({ event: eventName, ...payload });
       };
+
+      /**
+       * Meta Lead after confirmed website quote acceptance.
+       * Safe no-op when Pixel/consent unavailable. Never throws into form handlers.
+       * opts: { response, httpOk, browserEventId }
+       */
+      window.__ggwcMetaLeadsFired = window.__ggwcMetaLeadsFired || Object.create(null);
+      window.ggwcTrackMetaLead = function ggwcTrackMetaLead(opts) {
+        try {
+          var data = opts && opts.response;
+          var httpOk = !!(opts && opts.httpOk);
+          var eventId = String((opts && opts.browserEventId) || "").trim();
+          if (!eventId || eventId.length > 200) return false;
+          if (!httpOk || !data || typeof data !== "object") return false;
+          if (data.ok !== true) return false;
+          if (data.ignored === true) return false;
+          if (data.customer_id == null || data.customer_id === "") return false;
+          if (data.mocked === true) return false;
+          if (window.__ggwcMarketingConsent === false) return false;
+          if (typeof window.fbq !== "function") return false;
+
+          var storageKey = "ggwc_meta_lead:" + eventId;
+          if (window.__ggwcMetaLeadsFired[eventId]) return false;
+          try {
+            if (window.sessionStorage && window.sessionStorage.getItem(storageKey) === "1") {
+              window.__ggwcMetaLeadsFired[eventId] = true;
+              return false;
+            }
+          } catch (storageReadError) {
+            /* sessionStorage may be blocked */
+          }
+
+          window.__ggwcMetaLeadsFired[eventId] = true;
+          try {
+            if (window.sessionStorage) window.sessionStorage.setItem(storageKey, "1");
+          } catch (storageWriteError) {
+            /* sessionStorage may be blocked */
+          }
+
+          /* Empty custom data — no names/email/phone/form contents */
+          window.fbq("track", "Lead", {}, { eventID: eventId });
+          return true;
+        } catch (pixelError) {
+          return false;
+        }
+      };
     </script>
   </body>
 </html>

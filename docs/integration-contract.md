@@ -39,7 +39,7 @@ CRM request fields below were verified from the local CRM repo (`integrations/vi
 | Notes enrichment | Source / Page / Submitted / promotion / services / customer free-text only | Office context without duplicating consent or attribution |
 | Facebook LP form | `FacebookNovemberLanding` posts the same consent + attribution contract to `/api/leads/website/` | Replaces `/wp-json/ggwc/v1/website-lead` without browser CRM secrets |
 | Meta Pixel PageView | Base snippet in `BaseLayout` when `PUBLIC_META_PIXEL_ID` is set; disabled when unset (local/preview) | See `docs/meta-pixel.md` |
-| Meta Pixel Lead | Fires only after confirmed acceptance **and** `mocked !== true` (Facebook LP JS; unchanged by PageView install) | Prevents fake conversions in local/mock mode |
+| Meta Pixel Lead | `ggwcTrackMetaLead` after confirmed acceptance (`ok` + `customer_id`, not `ignored`/`mocked`); `eventID` = `browser_event_id`; empty custom params; memory + sessionStorage dedupe | QuoteForm, RequestQuotePage, FacebookNovemberLanding; Pixel never blocks submit |
 | Rate limiting | In-memory per-IP limits on website API | Not present in PHP proxy; defensive for public endpoint |
 | Trailing slash | Prefer `/api/leads/website/`; Astro uses `trailingSlash: "ignore"` so Google’s registered `/api/google-reviews/callback` (no slash) also resolves | Legacy WP path was `/wp-json/ggwc/v1/website-lead` |
 | Mapbox | Address suggest uses `PUBLIC_MAPBOX_TOKEN` in the browser; manual entry always allowed | UX only — not required for CRM |
@@ -54,7 +54,7 @@ CRM request fields below were verified from the local CRM repo (`integrations/vi
 | Idempotency semantics | Assumed CRM honors `Idempotency-Key` for retries | Confirm duplicate behavior |
 | Promotion / offer codes | Still notes / `promotion_code` context only | Confirm if CRM adds a first-class promo field later |
 | Careers live openings empty | CRM public openings currently returns `{ openings: [] }` | Confirm when positions are posted again |
-| Analytics conversion | `ggwc_lead_accepted` fires only after confirmed acceptance; Meta PageView uses `PUBLIC_META_PIXEL_ID` | GTM/GA4 still deferred; CAPI is CRM-side |
+| Analytics conversion | `ggwc_lead_accepted` + Meta `Lead` only after confirmed acceptance; Meta uses `PUBLIC_META_PIXEL_ID` | GTM/GA4 still deferred; CAPI is CRM-side |
 | Controlled live CRM smoke | Local stays `GGWC_CRM_MODE=mock` | One office-aware live test on staging/host before cutover |
 
 ---

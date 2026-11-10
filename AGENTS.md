@@ -85,9 +85,10 @@ Priority migration care (verified from Performance workbook): homepage (583 clic
 
 ## Tracking
 
-- **Meta Pixel PageView:** install in `BaseLayout` when `PUBLIC_META_PIXEL_ID` is set (production: `1014961828315598`). Leave empty for local/preview. See `docs/meta-pixel.md`.
+- **Meta Pixel:** install in `BaseLayout` when `PUBLIC_META_PIXEL_ID` is set (production: `1014961828315598`). Leave empty for local/preview. See `docs/meta-pixel.md`.
 - Init once; one PageView per real navigation (`astro:page-load` safe). Honor `window.__ggwcMarketingConsent === false`.
-- GTM/GA4 IDs remain deferred. Fire browser Lead conversion events only after confirmed CRM acceptance; prevent duplicates. Do not enable CRM CAPI from this repo.
+- **Lead:** `ggwcTrackMetaLead` only after confirmed website quote acceptance; `eventID` = `browser_event_id`; empty custom params; dedupe in memory + sessionStorage. Never block submit on Pixel failure.
+- GTM/GA4 IDs remain deferred. Do not enable CRM CAPI from this repo.
 
 ## Google reviews (website display only)
 

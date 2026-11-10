@@ -1,13 +1,17 @@
 import { describe, expect, it } from "vitest";
 import {
+  isConfirmedWebsiteLeadAcceptance,
   isMarketingConsentGranted,
   isMetaPixelEnabled,
+  normalizeBrowserEventId,
   normalizeMetaPixelId,
+  shouldFireMetaLead,
   shouldInitMetaPixel,
   shouldTrackMetaPageView,
 } from "../src/lib/analytics/metaPixel";
 
 const PROD_PIXEL_ID = "1014961828315598";
+const EVENT_ID = "lead_abc-123-uuid";
 
 describe("normalizeMetaPixelId", () => {
   it("accepts the production Pixel ID", () => {
@@ -124,5 +128,100 @@ describe("duplicate init / PageView guards", () => {
     });
     expect(first).toBe(true);
     expect(second).toBe(false);
+  });
+});
+
+describe("website lead acceptance contract", () => {
+  it("accepts only confirmed quote responses with customer_id", () => {
+    expect(
+      isConfirmedWebsiteLeadAcceptance(
+        { ok: true, customer_id: "cust-1" },
+        true,
+      ),
+    ).toBe(true);
+    expect(
+      isConfirmedWebsiteLeadAcceptance(
+        { ok: true, customer_id: 42 },
+        true,
+      ),
+    ).toBe(true);
+  });
+
+  it("rejects failed submissions, bare 2xx, honeypot soft-success, and missing ids", () => {
+    expect(
+      isConfirmedWebsiteLeadAcceptance(
+        { ok: false, message: "nope" },
+        true,
+      ),
+    ).toBe(false);
+    expect(
+      isConfirmedWebsiteLeadAcceptance(
+        { ok: true, customer_id: "x" },
+        false,
+      ),
+    ).toBe(false);
+    expect(isConfirmedWebsiteLeadAcceptance({}, true)).toBe(false);
+    expect(
+      isConfirmedWebsiteLeadAcceptance(
+        { ok: true, customer_id: null, ignored: true },
+        true,
+      ),
+    ).toBe(false);
+    expect(
+      isConfirmedWebsiteLeadAcceptance(
+        { ok: true, customer_id: null },
+        true,
+      ),
+    ).toBe(false);
+    expect(
+      isConfirmedWebsiteLeadAcceptance(
+        { ok: true, customer_id: "" },
+        true,
+      ),
+    ).toBe(false);
+    expect(isConfirmedWebsiteLeadAcceptance(null, true)).toBe(false);
+  });
+});
+
+describe("Meta Lead fire gates", () => {
+  const base = {
+    accepted: true,
+    mocked: false,
+    browserEventId: EVENT_ID,
+    marketingConsent: undefined as boolean | undefined,
+    pixelAvailable: true,
+    alreadyFiredForEventId: false,
+  };
+
+  it("fires Lead after successful non-mock acceptance with shared event id", () => {
+    expect(shouldFireMetaLead(base)).toBe(true);
+    expect(normalizeBrowserEventId(EVENT_ID)).toBe(EVENT_ID);
+  });
+
+  it("does not fire Lead on failed or unconfirmed acceptance", () => {
+    expect(shouldFireMetaLead({ ...base, accepted: false })).toBe(false);
+  });
+
+  it("does not fire Lead for mock CRM acceptance", () => {
+    expect(shouldFireMetaLead({ ...base, mocked: true })).toBe(false);
+  });
+
+  it("suppresses duplicate Lead for the same browser_event_id", () => {
+    expect(
+      shouldFireMetaLead({ ...base, alreadyFiredForEventId: true }),
+    ).toBe(false);
+  });
+
+  it("respects consent deny and unavailable Pixel (env gating)", () => {
+    expect(
+      shouldFireMetaLead({ ...base, marketingConsent: false }),
+    ).toBe(false);
+    expect(shouldFireMetaLead({ ...base, pixelAvailable: false })).toBe(false);
+  });
+
+  it("requires a usable browser_event_id shared with CRM", () => {
+    expect(shouldFireMetaLead({ ...base, browserEventId: "" })).toBe(false);
+    expect(shouldFireMetaLead({ ...base, browserEventId: "   " })).toBe(false);
+    expect(normalizeBrowserEventId("  lead_shared  ")).toBe("lead_shared");
   });
 });

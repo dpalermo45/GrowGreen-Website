@@ -315,11 +315,35 @@ describe("rate limit", () => {
 });
 
 describe("tracking event contract (unit-level)", () => {
-  it("conversion should only fire when ok and customer_id present", () => {
-    const shouldFire = (data: { ok?: boolean; customer_id?: unknown }) =>
-      Boolean(data.ok && data.customer_id != null && data.customer_id !== "");
-    expect(shouldFire({ ok: true, customer_id: null })).toBe(false);
-    expect(shouldFire({ ok: true, customer_id: "x" })).toBe(true);
-    expect(shouldFire({ ok: false, customer_id: "x" })).toBe(false);
+  it("conversion should only fire when ok and customer_id present", async () => {
+    const { isConfirmedWebsiteLeadAcceptance, shouldFireMetaLead } =
+      await import("../src/lib/analytics/metaPixel");
+    expect(
+      isConfirmedWebsiteLeadAcceptance({ ok: true, customer_id: null }, true),
+    ).toBe(false);
+    expect(
+      isConfirmedWebsiteLeadAcceptance({ ok: true, customer_id: "x" }, true),
+    ).toBe(true);
+    expect(
+      isConfirmedWebsiteLeadAcceptance({ ok: false, customer_id: "x" }, true),
+    ).toBe(false);
+    expect(
+      shouldFireMetaLead({
+        accepted: true,
+        mocked: false,
+        browserEventId: "shared-id",
+        pixelAvailable: true,
+        alreadyFiredForEventId: false,
+      }),
+    ).toBe(true);
+    expect(
+      shouldFireMetaLead({
+        accepted: true,
+        mocked: true,
+        browserEventId: "shared-id",
+        pixelAvailable: true,
+        alreadyFiredForEventId: false,
+      }),
+    ).toBe(false);
   });
 });

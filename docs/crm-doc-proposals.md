@@ -41,3 +41,8 @@ Browser form (Facebook ad LP / homepage / quote forms)
     - `docs/specs/social-media/PHASE_6_CAPI.md` marketing-site Pixel audit: base PageView snippet is on the Astro `BaseLayout` (not WordPress/Divi); consent gate `__ggwcMarketingConsent === false`.
     - `docs/website_lead_bridge.md` / Events Manager checklist: browser PageView Pixel ID is `1014961828315598`; Lead still post-acceptance only; CAPI remains CRM-flagged/dry-run until a separate CRM change.
     - Admin Academy / MCP knowledge (`mcp-knowledge-stays-current` / Social Hub topics): note public-site PageView vs CRM CAPI lifecycle — do **not** claim CAPI is live from this website-only change.
+
+11. **Meta Pixel Lead (website, quote acceptance):** When the Astro Lead browser event ships, CRM docs/Academy/MCP should note (proposal only — not applied here):
+    - Browser `Lead` fires only after website `POST /api/leads/website/` confirms `ok` + `customer_id` (not careers, not mock, not thank-you revisits).
+    - `eventID` equals CRM `browser_event_id` for CAPI dedupe; empty browser custom params (no PII in Pixel).
+    - Website Pixel ID remains `1014961828315598`. Do not treat website Lead deploy as CAPI go-live.

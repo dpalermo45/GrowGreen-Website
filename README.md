@@ -32,7 +32,7 @@ See `.env.example`. Important:
 | `GGWC_CRM_MODE` | `mock` (default) or `live` |
 | `GGWC_CRM_BASE_URL` / `GGWC_CRM_API_KEY` | Required only for `live` |
 | `PUBLIC_MAPBOX_TOKEN` | Optional address autocomplete |
-| `PUBLIC_META_PIXEL_ID` | Meta Pixel ID for PageView (empty locally; production `1014961828315598` — see `docs/meta-pixel.md`) |
+| `PUBLIC_META_PIXEL_ID` | Meta Pixel ID for PageView + post-acceptance Lead (empty locally; production `1014961828315598` — see `docs/meta-pixel.md`) |
 | `GOOGLE_REVIEWS_*` | Website-only Google Business Profile OAuth + review cache (see `.env.example` and `docs/google-reviews.md`) |
 
 **Never commit `.env`.** Missing live CRM config fails closed — it never fakes success.

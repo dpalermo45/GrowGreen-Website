@@ -745,17 +745,40 @@ const faqJsonLd = {
         });
         const data = await res.json().catch(() => ({}));
 
-        if (!res.ok || !data.ok || data.customer_id == null || data.customer_id === "") {
+        if (
+          !res.ok ||
+          !data.ok ||
+          data.ignored === true ||
+          data.customer_id == null ||
+          data.customer_id === ""
+        ) {
           throw new Error(data.message || "Submission was not confirmed.");
         }
 
         if (!conversionFired && typeof window.ggwcTrack === "function") {
-          window.ggwcTrack("ggwc_lead_accepted", {
-            customer_id: data.customer_id,
-            mocked: !!data.mocked,
-          });
-          conversionFired = true;
+          try {
+            window.ggwcTrack("ggwc_lead_accepted", {
+              customer_id: data.customer_id,
+              mocked: !!data.mocked,
+            });
+          } catch {
+            /* Tracking must never block a successful submission. */
+          }
         }
+
+        try {
+          if (typeof window.ggwcTrackMetaLead === "function") {
+            window.ggwcTrackMetaLead({
+              response: data,
+              httpOk: res.ok,
+              browserEventId: idempotencyKey,
+            });
+          }
+        } catch {
+          /* Pixel failures must never block success UX. */
+        }
+
+        conversionFired = true;
 
         form.hidden = true;
         if (successPanel instanceof HTMLElement) {

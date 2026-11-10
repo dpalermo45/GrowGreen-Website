@@ -1,6 +1,6 @@
-# Meta Pixel (website PageView)
+# Meta Pixel (website PageView + Lead)
 
-PageView-only browser Pixel for the Grow Green marketing site. Lead / Subscribe / Purchase browser events and CRM Conversions API are **out of scope** for this install.
+Browser Meta Pixel for the Grow Green marketing site. CRM Conversions API / Subscribe / Purchase remain **out of scope** here.
 
 ## Behavior
 
@@ -11,32 +11,56 @@ PageView-only browser Pixel for the Grow Green marketing site. Lead / Subscribe 
 | Local / preview | Leave `PUBLIC_META_PIXEL_ID` empty → no `fbq` script, no noscript pixel |
 | Init | Once per browsing context (`window.__ggwcMetaPixelInitialized`) |
 | PageView | Once per distinct `pathname + search`; also listens for `astro:page-load` if client navigation is added later |
-| Consent | Honors `window.__ggwcMarketingConsent === false` (explicit deny). Unset consent allows tracking (no CMP banner yet) |
-| Lead forms | Unchanged — existing post-acceptance `fbq('track','Lead')` / `ggwcTrack` / `browser_event_id` paths preserved |
+| Lead | `window.ggwcTrackMetaLead` after confirmed `POST /api/leads/website/` acceptance only |
+| Lead `eventID` | Same value as CRM `browser_event_id` / form idempotency key; retries reuse it |
+| Lead params | Empty object `{}` — no names, email, phone, or form contents |
+| Consent | Honors `window.__ggwcMarketingConsent === false` (explicit deny). Unset consent allows tracking |
 | Duplicate IDs | Do not also paste a Divi/GTM Pixel with a different or same ID |
+| Failure isolation | Pixel/consent failures never block lead submit or success UI |
+
+## Lead acceptance (required)
+
+Browser Lead fires only when **all** are true:
+
+1. HTTP response is OK
+2. JSON `ok === true`
+3. `customer_id` is non-null / non-empty
+4. Not honeypot soft-success (`ignored !== true`)
+5. Not mock CRM (`mocked !== true`)
+6. Pixel available (`fbq`) and marketing consent not denied
+7. This `browser_event_id` has not already fired Lead (memory + `sessionStorage`)
+
+Bare HTTP 2xx without a confirmed `customer_id` is **not** a lead.
+
+## Forms covered
+
+| Form | Component | Notes |
+| --- | --- | --- |
+| Homepage / service / campaign embed | `QuoteForm.astro` | Shared helper after acceptance |
+| Request a quote | `RequestQuotePage.astro` | Shared helper after acceptance |
+| Facebook November LP | `FacebookNovemberLanding.astro` | Consolidated onto shared helper (no raw `fbq('Lead')`) |
+
+**Not** Lead events: careers applications, button clicks, form views, validation failures, rejected/failed requests, thank-you page loads.
 
 ## Required production env (Render)
-
-Set on the **GrowGreen-Website** service (build + runtime), then **redeploy/rebuild**:
 
 ```bash
 PUBLIC_META_PIXEL_ID=1014961828315598
 ```
 
-`PUBLIC_*` values are baked into the Astro SSR build. Changing the ID without a rebuild will not update HTML.
+Already required for PageView. Lead uses the same Pixel; no extra website env vars.
 
 Do **not** set this in local `.env` unless you intentionally want Pixel traffic from localhost.
 
 ## Verify after deploy (not claimed until done)
 
-1. View source / Network: `fbevents.js` loads once; `PageView` once per navigation.
-2. Meta Events Manager → Test Events (or Diagnostics) for Pixel `1014961828315598`.
-3. Confirm no second Pixel ID is still installed via GTM or leftover WordPress snippets.
-
-Tracking is **not live** until that deploy + browser evidence exist.
+1. Submit a live quote (office-aware): Events Manager shows one `Lead` with `eventID` matching CRM `browser_event_id`.
+2. Retry / double-click / refresh thank-you: no second Lead for the same id.
+3. Mock/local: no Lead (Pixel off or `mocked: true`).
+4. Consent deny (`__ggwcMarketingConsent = false`): submit still succeeds; no Lead.
 
 ## Non-goals (follow-up elsewhere)
 
 - Do not enable CRM `META_CAPI_*` / flip `GGWC_SOCIAL_CAPI_DRY_RUN` from this website change.
-- Do not add browser Lead / Subscribe / Purchase in this step (Lead already gated in Facebook LP JS after CRM acceptance).
+- CRM already documents `browser_event_id` dedupe + server CAPI queue — preserve that contract; do not change CRM code here.
 - CRM Academy / MCP knowledge updates are proposed in `docs/crm-doc-proposals.md` only — not applied here.

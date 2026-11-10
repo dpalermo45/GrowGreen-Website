@@ -436,7 +436,13 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
         });
         const data = await res.json().catch(() => ({}));
 
-        if (!res.ok || !data.ok || data.customer_id == null || data.customer_id === "") {
+        if (
+          !res.ok ||
+          !data.ok ||
+          data.ignored === true ||
+          data.customer_id == null ||
+          data.customer_id === ""
+        ) {
           const msg =
             data.message ||
             "We could not confirm your request. Your information is still on this form — please try again or call (225) 461-3199.";
@@ -445,12 +451,29 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
         }
 
         if (!conversionFired && typeof window.ggwcTrack === "function") {
-          window.ggwcTrack("ggwc_lead_accepted", {
-            customer_id: data.customer_id,
-            mocked: !!data.mocked,
-          });
-          conversionFired = true;
+          try {
+            window.ggwcTrack("ggwc_lead_accepted", {
+              customer_id: data.customer_id,
+              mocked: !!data.mocked,
+            });
+          } catch {
+            /* Tracking must never block a successful submission. */
+          }
         }
+
+        try {
+          if (typeof window.ggwcTrackMetaLead === "function") {
+            window.ggwcTrackMetaLead({
+              response: data,
+              httpOk: res.ok,
+              browserEventId: idempotencyKey,
+            });
+          }
+        } catch {
+          /* Pixel failures must never block success UX. */
+        }
+
+        conversionFired = true;
 
         const thankYou = (root.dataset.thankYou || "").trim();
         if (thankYou && !data.mocked) {

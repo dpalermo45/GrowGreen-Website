@@ -18,7 +18,7 @@ Full write-up: **`docs/audit-prod-2026-11-09/FINAL-AUDIT-REPORT.md`**.
 | Suite | Result | Notes |
 | --- | --- | --- |
 | `tests/leads.test.ts` (Vitest) | **25/25 passed** | Mapping, promotional SMS checked/unchecked (no inference), attribution field mapping, lead_source preservation, honeypot, validation, null customer_id rejection, bare 200 rejection, upstream errors, mock success, missing live config, timeout, idempotency + consent/attribution upstream body, rate limit, conversion gate |
-| `tests/meta-pixel.test.ts` (Vitest) | **10/10 passed** | Pixel ID normalize/gate, consent deny, duplicate init + PageView path dedupe |
+| `tests/meta-pixel.test.ts` (Vitest) | Lead + PageView helpers | Pixel ID normalize/gate, consent deny, PageView dedupe, acceptance contract, Lead success/fail/mock/dupe/consent/eventID |
 | `tests/google-reviews.test.ts` (Vitest) | **16/16 passed** | OAuth state/PKCE, token refresh, pagination + Google averageRating accuracy, cache soft/hard expiry, setup-route protection, unavailable fallback, no auto location pick, plain-text review mapping |
 | `npm test` (all) | **35/35 passed** | Leads 19 + Google reviews 16 |
 | `npm run build` | **Passed** | After content-gap closure pass |
@@ -100,7 +100,7 @@ Viewport checks with browser tooling + CDP: **360/390** (Menu), **768**, **1024*
 | Local preview homepage + forms | Preview server on **:4321** |
 | Live CRM E2E lead | **Blocked** — no credentials; mock only |
 | Mapbox autocomplete | Local token set; confirm production-restricted token |
-| Analytics / Pixel | PageView via `PUBLIC_META_PIXEL_ID` (empty locally); Lead still gated to non-mock acceptance |
+| Analytics / Pixel | PageView + Lead via `PUBLIC_META_PIXEL_ID` / `ggwcTrackMetaLead`; Lead only after confirmed non-mock acceptance with shared `eventID` |
 | Careers hiring APIs | Mock openings + JSON applications via `/api/careers/*` (not lead intake); mock apply **201**; live CRM openings currently empty |
 | Production indexing | Intentionally off (`PUBLIC_SITE_INDEXING=false`) |
 
