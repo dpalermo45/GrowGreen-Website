@@ -1,4 +1,5 @@
 ---
+import { LA_MAPBOX_BBOX, LA_MAPBOX_PROXIMITY } from "../lib/geo/louisianaMapboxBias";
 import { PROMOTIONAL_SMS_DISCLOSURE } from "../lib/leads/promotionalSms";
 import {
   QUOTE_SUCCESS_HEADING,
@@ -45,6 +46,8 @@ const offerConfirmText = offerConfirm.trim();
   data-lead-source={leadSource}
   data-promotion={promotionCode}
   data-mapbox={mapToken}
+  data-mapbox-proximity={LA_MAPBOX_PROXIMITY}
+  data-mapbox-bbox={LA_MAPBOX_BBOX}
   data-sms-disclosure={smsDisclosure}
   data-offer-confirm={offerConfirmText}
 >
@@ -437,15 +440,28 @@ const offerConfirmText = offerConfirm.trim();
       goStep(1);
     });
 
+    const laProximity = root.dataset.mapboxProximity || "";
+    const laBbox = root.dataset.mapboxBbox || "";
+
     async function lookupAddress(query) {
       if (!mapToken || query.length < 5 || !(suggest instanceof HTMLElement)) {
         if (suggest instanceof HTMLElement) suggest.hidden = true;
         return;
       }
       try {
+        const params = new URLSearchParams({
+          access_token: mapToken,
+          autocomplete: "true",
+          country: "US",
+          types: "address",
+          limit: "5",
+          language: "en",
+          proximity: laProximity,
+          bbox: laBbox,
+        });
         const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
           query,
-        )}.json?access_token=${encodeURIComponent(mapToken)}&country=US&types=address&limit=5`;
+        )}.json?${params.toString()}`;
         const res = await fetch(url);
         if (!res.ok) return;
         const data = await res.json();

@@ -2,6 +2,7 @@
 import { site } from "../data/site";
 import type { CampaignOffer } from "../data/campaigns";
 import { coverageShortPhrase } from "../data/service-areas";
+import { LA_MAPBOX_BBOX, LA_MAPBOX_PROXIMITY } from "../lib/geo/louisianaMapboxBias";
 import { PROMOTIONAL_SMS_DISCLOSURE } from "../lib/leads/promotionalSms";
 
 interface Props {
@@ -30,6 +31,8 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
   data-promotion={offerActive ? promotion : ""}
   data-service={serviceLabel}
   data-mapbox={mapToken}
+  data-mapbox-proximity={LA_MAPBOX_PROXIMITY}
+  data-mapbox-bbox={LA_MAPBOX_BBOX}
   data-offer-active={offerActive ? "true" : "false"}
   data-sms-disclosure={smsDisclosure}
 >
@@ -1886,6 +1889,8 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
 
     var CRM_ENDPOINT = "/api/leads/website/";
     var MAPBOX_TOKEN = root.getAttribute("data-mapbox") || "";
+    var MAPBOX_PROXIMITY = root.getAttribute("data-mapbox-proximity") || "";
+    var MAPBOX_BBOX = root.getAttribute("data-mapbox-bbox") || "";
     var LEAD_SOURCE =
       root.getAttribute("data-lead-source") ||
       "Facebook Ad - November 50% Off First Treatment (Up to $75)";
@@ -2363,7 +2368,11 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
       var endpoint =
         "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
         encodeURIComponent(query) +
-        ".json?autocomplete=true&types=address&country=us&limit=5&language=en&proximity=-91.05,30.35&bbox=-92.25,29.40,-89.35,31.65&access_token=" +
+        ".json?autocomplete=true&types=address&country=us&limit=5&language=en&proximity=" +
+        encodeURIComponent(MAPBOX_PROXIMITY) +
+        "&bbox=" +
+        encodeURIComponent(MAPBOX_BBOX) +
+        "&access_token=" +
         encodeURIComponent(MAPBOX_TOKEN);
 
       fetch(endpoint, {

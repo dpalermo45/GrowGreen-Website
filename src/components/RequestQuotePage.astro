@@ -1,6 +1,7 @@
 ---
 import { site } from "../data/site";
 import { coverageFaqAnswer, serviceAreaCount } from "../data/service-areas";
+import { LA_MAPBOX_BBOX, LA_MAPBOX_PROXIMITY } from "../lib/geo/louisianaMapboxBias";
 import { PROMOTIONAL_SMS_DISCLOSURE } from "../lib/leads/promotionalSms";
 import "../styles/request-quote.css";
 
@@ -96,6 +97,8 @@ const faqJsonLd = {
   class="rq-page"
   id="gg-quote-page"
   data-mapbox={mapToken}
+  data-mapbox-proximity={LA_MAPBOX_PROXIMITY}
+  data-mapbox-bbox={LA_MAPBOX_BBOX}
   data-sms-disclosure={smsDisclosure}
   aria-labelledby="ggq-page-title"
 >
@@ -586,7 +589,8 @@ const faqJsonLd = {
           autocomplete: "true",
           country: "us",
           types: "address",
-          proximity: "-91.1403,30.2296",
+          proximity: root.dataset.mapboxProximity || "",
+          bbox: root.dataset.mapboxBbox || "",
           language: "en",
           limit: "5",
         });
