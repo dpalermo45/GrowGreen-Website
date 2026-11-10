@@ -40,6 +40,7 @@ CRM request fields below were verified from the local CRM repo (`integrations/vi
 | Facebook LP form | `FacebookNovemberLanding` posts the same consent + attribution contract to `/api/leads/website/` | Replaces `/wp-json/ggwc/v1/website-lead` without browser CRM secrets |
 | Meta Pixel PageView | Base snippet in `BaseLayout` when `PUBLIC_META_PIXEL_ID` is set; disabled when unset (local/preview) | See `docs/meta-pixel.md` |
 | Meta Pixel Lead | `ggwcTrackMetaLead` after confirmed acceptance (`ok` + `customer_id`, not `ignored`/`mocked`); `eventID` = `browser_event_id`; empty custom params; memory + sessionStorage dedupe | QuoteForm, RequestQuotePage, FacebookNovemberLanding; Pixel never blocks submit |
+| Quote success UX | Inline “Thank you!” confirmation on the form page (no `/thank-you/` navigation); promo landings keep offer confirmation | Failed submits keep the form + error/retry |
 | Rate limiting | In-memory per-IP limits on website API | Not present in PHP proxy; defensive for public endpoint |
 | Trailing slash | Prefer `/api/leads/website/`; Astro uses `trailingSlash: "ignore"` so Google’s registered `/api/google-reviews/callback` (no slash) also resolves | Legacy WP path was `/wp-json/ggwc/v1/website-lead` |
 | Mapbox | Address suggest uses `PUBLIC_MAPBOX_TOKEN` in the browser; manual entry always allowed | UX only — not required for CRM |

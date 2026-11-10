@@ -17,7 +17,6 @@ const leadSource =
   "Facebook Ad - November 50% Off First Treatment (Up to $75)";
 const promotion =
   "November Facebook Promo - 50% Off First Lawn Treatment, Maximum $75 Discount";
-const thankYouPath = campaign.thankYouPath || "/thank-you/";
 const serviceLabel = "Lawn Fertilization & Weed Control";
 const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
 ---
@@ -30,7 +29,6 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
   data-source={leadSource}
   data-promotion={offerActive ? promotion : ""}
   data-service={serviceLabel}
-  data-thank-you={thankYouPath}
   data-mapbox={mapToken}
   data-offer-active={offerActive ? "true" : "false"}
   data-sms-disclosure={smsDisclosure}
@@ -365,14 +363,16 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
             <div class="gg-success-mark" aria-hidden="true">✓</div>
             <h3>Thank you!</h3>
             <p>
-              Your request has been accepted by our website. We’ll be in touch about your lawn
-              estimate.
-              {
-                offerActive
-                  ? " November offer: 50% off your first lawn treatment, up to $75 off."
-                  : ""
-              }
+              We’ve received your estimate request! Our local team will contact you within one
+              business day.
             </p>
+            {
+              offerActive ? (
+                <p class="gg-success-offer">
+                  November offer: 50% off your first lawn treatment, up to $75 off.
+                </p>
+              ) : null
+            }
           </div>
 
           <noscript>
@@ -1259,6 +1259,11 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
     font-size: 14px;
     color: #526454;
   }
+  #gg-fb-estimate .gg-success-offer {
+    margin-top: 0.85rem;
+    color: var(--green);
+    font-weight: 700;
+  }
   #gg-fb-estimate .gg-success-mark {
     font-size: 32px;
     color: var(--green);
@@ -1880,7 +1885,6 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
     root.setAttribute("data-ready", "true");
 
     var CRM_ENDPOINT = "/api/leads/website/";
-    var THANK_YOU_URL = root.getAttribute("data-thank-you") || "/thank-you/";
     var MAPBOX_TOKEN = root.getAttribute("data-mapbox") || "";
     var LEAD_SOURCE =
       root.getAttribute("data-lead-source") ||
@@ -2564,7 +2568,10 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
           form.style.display = "none";
           successBox.classList.add("is-visible");
           root.classList.add("gg-submitted");
-          successBox.focus();
+          successBox.focus({ preventScroll: true });
+          if (typeof successBox.scrollIntoView === "function") {
+            successBox.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
 
           if (typeof window.ggwcTrack === "function") {
             try {
@@ -2592,10 +2599,6 @@ const smsDisclosure = PROMOTIONAL_SMS_DISCLOSURE;
           }
 
           safeSessionRemove("gg_facebook_november_2026_estimate_key");
-
-          window.setTimeout(function () {
-            window.location.assign(THANK_YOU_URL);
-          }, 1200);
         })
         .catch(function (error) {
           var hasFieldErrors = applyServerErrors(error.serverData);

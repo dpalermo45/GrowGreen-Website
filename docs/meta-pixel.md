@@ -40,7 +40,7 @@ Bare HTTP 2xx without a confirmed `customer_id` is **not** a lead.
 | Request a quote | `RequestQuotePage.astro` | Shared helper after acceptance |
 | Facebook November LP | `FacebookNovemberLanding.astro` | Consolidated onto shared helper (no raw `fbq('Lead')`) |
 
-**Not** Lead events: careers applications, button clicks, form views, validation failures, rejected/failed requests, thank-you page loads.
+**Not** Lead events: careers applications, button clicks, form views, validation failures, rejected/failed requests, or revisits of retired `/thank-you/` URLs (those redirect home; confirmation is inline on the form page).
 
 ## Required production env (Render)
 
@@ -55,7 +55,7 @@ Do **not** set this in local `.env` unless you intentionally want Pixel traffic 
 ## Verify after deploy (not claimed until done)
 
 1. Submit a live quote (office-aware): Events Manager shows one `Lead` with `eventID` matching CRM `browser_event_id`.
-2. Retry / double-click / refresh thank-you: no second Lead for the same id.
+2. Retry / double-click / refresh after inline success: no second Lead for the same id.
 3. Mock/local: no Lead (Pixel off or `mocked: true`).
 4. Consent deny (`__ggwcMarketingConsent = false`): submit still succeeds; no Lead.
 

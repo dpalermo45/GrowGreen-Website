@@ -7,7 +7,6 @@ export type Offer25LandingCopy = {
   formSource: string;
   leadSourceFallback: string;
   promotionFallback: string;
-  thankYouFallback: string;
   heroMedia: "lawn" | "truck-and-trailer" | "f250-side-view";
   bandImage: "truck-and-trailer" | "lawn";
   toplineChannel: string;
@@ -57,7 +56,6 @@ export const offer25Landings: Record<Offer25Key, Offer25LandingCopy> = {
     formSource: "nextdoor-estimate-request",
     leadSourceFallback: "Nextdoor Ad - $25 Account Offer",
     promotionFallback: "Nextdoor $25 Account Offer",
-    thankYouFallback: "/thank-you-nextdoor/",
     heroMedia: "lawn",
     bandImage: "truck-and-trailer",
     toplineChannel: "Nextdoor neighbor offer",
@@ -111,7 +109,6 @@ export const offer25Landings: Record<Offer25Key, Offer25LandingCopy> = {
     formSource: "post-card-estimate-request",
     leadSourceFallback: "Postcard - $25 Neighbor Offer",
     promotionFallback: "Postcard $25 Neighbor Offer",
-    thankYouFallback: "/thank-you/",
     heroMedia: "lawn",
     bandImage: "truck-and-trailer",
     toplineChannel: "Neighborhood postcard offer",
@@ -163,7 +160,6 @@ export const offer25Landings: Record<Offer25Key, Offer25LandingCopy> = {
     formSource: "trucklead",
     leadSourceFallback: "Truck QR",
     promotionFallback: "Truck QR $25 Account Offer",
-    thankYouFallback: "/thank-you/",
     heroMedia: "f250-side-view",
     bandImage: "truck-and-trailer",
     toplineChannel: "You saw our truck",

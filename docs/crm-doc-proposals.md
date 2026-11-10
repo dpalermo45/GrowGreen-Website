@@ -46,3 +46,5 @@ Browser form (Facebook ad LP / homepage / quote forms)
     - Browser `Lead` fires only after website `POST /api/leads/website/` confirms `ok` + `customer_id` (not careers, not mock, not thank-you revisits).
     - `eventID` equals CRM `browser_event_id` for CAPI dedupe; empty browser custom params (no PII in Pixel).
     - Website Pixel ID remains `1014961828315598`. Do not treat website Lead deploy as CAPI go-live.
+
+12. **Inline quote confirmation (website):** Office/Academy/MCP process notes (proposal only): successful website quote requests confirm **on the form page** (“Thank you!” + one-business-day follow-up). Standalone `/thank-you/` (and nextdoor/core-aeration variants) now **301 to homepage** — do not train staff that a thank-you URL is required for a valid lead.

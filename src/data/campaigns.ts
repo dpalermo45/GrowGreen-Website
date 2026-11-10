@@ -10,7 +10,6 @@ export type CampaignOffer = {
   /** ISO date or null when unknown — treat as reviewable/expirable */
   expiresAt: string | null;
   status: "active-review" | "active" | "expired" | "draft";
-  thankYouPath?: string;
   leadSourceHint: string;
   notes?: string;
   scrubbedClaims?: string[];
@@ -33,7 +32,6 @@ export const campaigns: CampaignOffer[] = [
     /** End of November America/Chicago — offer auto-hides after this instant */
     expiresAt: "2026-12-01T06:00:00.000Z",
     status: "active",
-    thankYouPath: "/thank-you/",
     /** Exact CRM lead_source / source strings from live Divi module */
     leadSourceHint:
       "Facebook Ad - November 50% Off First Treatment (Up to $75)",
@@ -55,7 +53,6 @@ export const campaigns: CampaignOffer[] = [
     offerDetail: "November special · Save up to $75",
     expiresAt: "2026-12-01T06:00:00.000Z",
     status: "active",
-    thankYouPath: "/thank-you/",
     leadSourceHint:
       "Facebook Ad - November 50% Off First Treatment (Up to $75)",
     notes:
@@ -76,7 +73,6 @@ export const campaigns: CampaignOffer[] = [
     offerDetail: "Postcard $25 Neighbor Offer",
     expiresAt: null,
     status: "active",
-    thankYouPath: "/thank-you/",
     leadSourceHint: "Postcard - $25 Neighbor Offer",
     notes:
       "Owner-confirmed postcard neighbor offer. Final pricing still depends on lawn size and selected services.",
@@ -93,7 +89,6 @@ export const campaigns: CampaignOffer[] = [
     offerDetail: "Truck QR $25 Account Offer",
     expiresAt: null,
     status: "active",
-    thankYouPath: "/thank-you/",
     leadSourceHint: "Truck QR",
     notes:
       "Printed truck QR codes keep /trucklead/. Owner-confirmed $25 account offer. lead_source stays Truck QR for attribution.",
@@ -122,7 +117,6 @@ export const campaigns: CampaignOffer[] = [
     offerDetail: "Nextdoor $25 Account Offer",
     expiresAt: null,
     status: "active",
-    thankYouPath: "/thank-you-nextdoor/",
     leadSourceHint: "Nextdoor Ad - $25 Account Offer",
     notes:
       "Owner-confirmed usual Nextdoor neighbor offer. Final pricing still depends on lawn size and selected services.",

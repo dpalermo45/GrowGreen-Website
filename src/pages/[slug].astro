@@ -48,13 +48,7 @@ export function getStaticPaths() {
   Object.keys(campaignBySlug).forEach((s) => slugs.add(s));
   blogPosts.forEach((p) => slugs.add(p.slug));
 
-  [
-    "thank-you",
-    "thank-you-nextdoor",
-    "thank-you-core-aeration",
-    "liquid-aeration-quote-request-received",
-    "test",
-  ].forEach((s) => slugs.add(s));
+  ["liquid-aeration-quote-request-received", "test"].forEach((s) => slugs.add(s));
 
   return [...slugs].map((slug) => ({ params: { slug } }));
 }
@@ -68,21 +62,6 @@ const campaign = campaignBySlug[slug];
 const post = blogPostBySlug[slug];
 
 const thankYouMeta: Record<string, { title: string; message: string }> = {
-  "thank-you": {
-    title: "Thank you — estimate request received",
-    message:
-      "Thanks for requesting an estimate. Our local office will follow up during business hours (Monday–Friday, 8 AM–4 PM).",
-  },
-  "thank-you-nextdoor": {
-    title: "Thank you — Nextdoor request received",
-    message:
-      "We received your Nextdoor estimate request. A Grow Green team member will follow up during business hours.",
-  },
-  "thank-you-core-aeration": {
-    title: "Thank you — core aeration request received",
-    message:
-      "Thanks for your interest in core aeration. We’ll review your property details and follow up during business hours.",
-  },
   "liquid-aeration-quote-request-received": {
     title: "Liquid aeration quote request received",
     message:

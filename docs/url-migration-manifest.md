@@ -128,9 +128,9 @@ Total URLs recorded: **138**
 | `/terms-and-conditions/` | retained | 200 | Published WordPress page | wordpress_page |
 | `/test/` | retained | 200 | Published WordPress page | wordpress_page, gsc:Discovered - currently not indexed |
 | `/thank-you-careers/` | review | None | Seen in Search Console or references; map during implementation | gsc:Not found (404) |
-| `/thank-you-core-aeration/` | retained | 200 | Published WordPress page | wordpress_page, gsc:Discovered - currently not indexed |
-| `/thank-you-nextdoor/` | retained | 200 | Published WordPress page | wordpress_page |
-| `/thank-you/` | retained | 200 | Published WordPress page | wordpress_page |
+| `/thank-you-core-aeration/` | redirected | 301 → `/` | Standalone thank-you retired; quote forms confirm inline | wordpress_page, gsc:Discovered - currently not indexed |
+| `/thank-you-nextdoor/` | redirected | 301 → `/` | Standalone thank-you retired; quote forms confirm inline | wordpress_page |
+| `/thank-you/` | redirected | 301 → `/` | Standalone thank-you retired; quote forms confirm inline | wordpress_page |
 | `/the-ultimate-guide-to-fertilizing-your-lawn-in-south-Louisiana/` | redirected | 301 | Alias/typo URL → /the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/ → /the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/ | gsc:performance |
 | `/the-ultimate-guide-to-fertilizing-your-lawn-in-south-louisiana/` | retained | 200 | Published WordPress post | PRIORITY: top clicks 117 | wordpress_post, gsc:performance |
 | `/tree-and-shrub-care/` | retained | 200 | Published WordPress page | wordpress_page, gsc:performance |

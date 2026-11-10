@@ -19,6 +19,7 @@ Full write-up: **`docs/audit-prod-2026-11-09/FINAL-AUDIT-REPORT.md`**.
 | --- | --- | --- |
 | `tests/leads.test.ts` (Vitest) | **25/25 passed** | Mapping, promotional SMS checked/unchecked (no inference), attribution field mapping, lead_source preservation, honeypot, validation, null customer_id rejection, bare 200 rejection, upstream errors, mock success, missing live config, timeout, idempotency + consent/attribution upstream body, rate limit, conversion gate |
 | `tests/meta-pixel.test.ts` (Vitest) | Lead + PageView helpers | Pixel ID normalize/gate, consent deny, PageView dedupe, acceptance contract, Lead success/fail/mock/dupe/consent/eventID |
+| `tests/quote-success.test.ts` (Vitest) | Inline success helpers | Required copy, offer confirm, failure keeps form, no thank-you nav, one Lead + eventID, retired thank-you redirects |
 | `tests/google-reviews.test.ts` (Vitest) | **16/16 passed** | OAuth state/PKCE, token refresh, pagination + Google averageRating accuracy, cache soft/hard expiry, setup-route protection, unavailable fallback, no auto location pick, plain-text review mapping |
 | `npm test` (all) | **35/35 passed** | Leads 19 + Google reviews 16 |
 | `npm run build` | **Passed** | After content-gap closure pass |

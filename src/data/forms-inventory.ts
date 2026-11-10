@@ -72,7 +72,7 @@ export const forms: FormDefinition[] = [
     paths: ["/request-a-quote/"],
     purpose: "Primary new-customer lawn estimate request for selected services.",
     handler: "lead-intake",
-    successPath: "/thank-you/",
+    successPath: "inline",
     fields: [
       { name: "full_name", label: "Full name", type: "text", required: true },
       { name: "phone", label: "Phone", type: "tel", required: true },
@@ -113,6 +113,7 @@ export const forms: FormDefinition[] = [
     notes: [
       "Maps to website-owned POST /api/leads/website → CRM leads API",
       "Success only after acceptance criteria met — never bare HTTP 200",
+      "Inline confirmation replaces /thank-you/ redirect",
     ],
   },
   {
@@ -129,7 +130,7 @@ export const forms: FormDefinition[] = [
     purpose:
       "Offer-specific estimate intake. Same CRM lead bridge as quote, with campaign lead-source / offer notes.",
     handler: "campaign-lead",
-    successPath: "/thank-you/",
+    successPath: "inline",
     fields: [
       { name: "full_name", label: "Full name", type: "text", required: true },
       { name: "phone", label: "Phone", type: "tel", required: true },
@@ -159,9 +160,9 @@ export const forms: FormDefinition[] = [
     ],
     honeypot: "company_website",
     notes: [
-      "Nextdoor uses /thank-you-nextdoor/; postcard and trucklead use /thank-you/",
+      "Inline success on the landing (offer confirmation preserved when offer is active)",
       "$25 offer landings: nextdoor-estimate-request, post-card-estimate-request, trucklead",
-      "Liquid aeration and core aeration have dedicated thank-you variants in WP — keep if those forms stay separate",
+      "Retired /thank-you/ and /thank-you-nextdoor/ redirect to homepage",
       "Never merge careers into this handler",
     ],
   },

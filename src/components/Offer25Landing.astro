@@ -22,7 +22,9 @@ const leadSource = campaign.leadSourceHint || copy.leadSourceFallback;
 const promotion = offerActive
   ? campaign.offerDetail || copy.promotionFallback
   : "";
-const thankYouPath = campaign.thankYouPath || copy.thankYouFallback;
+const offerConfirm = offerActive
+  ? `${copy.offerBannerTitle}. ${copy.offerBannerBody}`
+  : "";
 
 const coverage = coverageShortPhrase();
 const eyebrow = copy.appendCoverageToEyebrow
@@ -160,7 +162,7 @@ const attrs = { [copy.dataAttr]: true };
           source={copy.formSource}
           leadSource={leadSource}
           promotionCode={promotion}
-          thankYouPath={thankYouPath}
+          offerConfirm={offerConfirm}
           compact
           heading={offerActive ? copy.formHeadingActive : "Request your free estimate"}
           subheading={

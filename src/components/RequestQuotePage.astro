@@ -358,7 +358,14 @@ const faqJsonLd = {
           </div>
         </form>
 
-        <div class="rq-success" id="ggq-success" role="status" aria-live="polite" hidden>
+        <div
+          class="rq-success"
+          id="ggq-success"
+          role="status"
+          aria-live="polite"
+          tabindex="-1"
+          hidden
+        >
           <div class="rq-success-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none"
               ><path
@@ -369,11 +376,11 @@ const faqJsonLd = {
                 stroke-linejoin="round"></path></svg
             >
           </div>
-          <h2>Your quote request is in.</h2>
-          <p>
-            Thanks! A Grow Green team member will review your information and follow up with pricing during business
-            hours. Need help sooner?
+          <h2>Thank you!</h2>
+          <p data-rq-success-message>
+            We’ve received your estimate request! Our local team will contact you within one business day.
           </p>
+          <p class="rq-success-mock" data-rq-success-mock hidden></p>
           <a class="rq-success-call" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
         </div>
       </div>
@@ -783,13 +790,18 @@ const faqJsonLd = {
         form.hidden = true;
         if (successPanel instanceof HTMLElement) {
           successPanel.hidden = false;
-          if (data.mocked) {
-            const p = successPanel.querySelector("p");
-            if (p) {
-              p.textContent =
+          const mockNote = successPanel.querySelector("[data-rq-success-mock]");
+          if (mockNote instanceof HTMLElement) {
+            if (data.mocked) {
+              mockNote.hidden = false;
+              mockNote.textContent =
                 "Request accepted in mock mode (no live CRM). Configure CRM credentials for production delivery.";
+            } else {
+              mockNote.hidden = true;
+              mockNote.textContent = "";
             }
           }
+          successPanel.focus({ preventScroll: true });
           successPanel.scrollIntoView({ behavior: "smooth", block: "center" });
         }
         idempotencyKey = uuid();

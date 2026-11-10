@@ -25,6 +25,7 @@ const corePaths = [
 const excludedExact = new Set([
   "/thank-you/",
   "/thank-you-nextdoor/",
+  "/thank-you-core-aeration/",
   "/test/",
   "/google-reviews/setup/",
   // Paid/QR campaign landings — publicly reachable, but noindex + sitemap-excluded
