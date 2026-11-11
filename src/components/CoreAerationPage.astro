@@ -121,12 +121,52 @@ const faqSchema = {
   })),
 };
 
+const videoTranscript =
+  "This is probably one of the best things you can possibly do for your lawn. We pull cores throughout the whole lawn, and you see how you get these soil plugs. That's going to decrease bulk density in the soil, allow water and everything else to penetrate deeper down in there, and overall reduce compaction. Request your aeration quote.";
+
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "@id": "https://growgreenweedcontrol.com/core-aeration/#core-video-object",
+  name: "Core Aeration Explained | Grow Green Weed Control",
+  description:
+    "Short field explainer of professional core aeration for South Louisiana lawns: pulling soil plugs to decrease bulk density, improve water movement, and reduce compaction so nutrients can reach the root zone.",
+  thumbnailUrl: [
+    "https://growgreenweedcontrol.com/images/services/core-aeration-video-poster.webp",
+  ],
+  uploadDate: "2026-11-10",
+  duration: "PT28S",
+  contentUrl: "https://growgreenweedcontrol.com/videos/core-aeration.mp4",
+  embedUrl: "https://growgreenweedcontrol.com/core-aeration/#core-video",
+  transcript: videoTranscript,
+  encodingFormat: "video/mp4",
+  width: 720,
+  height: 900,
+  inLanguage: "en-US",
+  isFamilyFriendly: true,
+  publisher: {
+    "@type": "Organization",
+    name: site.name,
+    logo: {
+      "@type": "ImageObject",
+      url: "https://growgreenweedcontrol.com/images/brand/logo.png",
+    },
+  },
+  potentialAction: {
+    "@type": "WatchAction",
+    target: "https://growgreenweedcontrol.com/core-aeration/#core-video",
+  },
+};
+
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   name: "Core Aeration",
   url: "https://growgreenweedcontrol.com/core-aeration/",
-  image: "https://growgreenweedcontrol.com/images/services/core-aeration-hero-1280.webp",
+  image: [
+    "https://growgreenweedcontrol.com/images/services/core-aeration-hero-1280.webp",
+    "https://growgreenweedcontrol.com/images/services/core-aeration-video-poster.webp",
+  ],
   description:
     "Professional core aeration for warm-season lawns in Baton Rouge, Ascension Parish, Livingston Parish, and surrounding South Louisiana communities.",
   serviceType: "Lawn Core Aeration",
@@ -146,6 +186,7 @@ const serviceSchema = {
     },
   },
   areaServed: areaServedSchema(),
+  subjectOf: { "@id": "https://growgreenweedcontrol.com/core-aeration/#core-video-object" },
 };
 
 const breadcrumbSchema = {
@@ -248,6 +289,51 @@ const breadcrumbSchema = {
       <span>We recommend the better fit</span>
     </div>
   </div>
+
+  <section class="f-section core-video" id="core-video" aria-labelledby="core-video-title">
+    <div class="f-inner core-video__grid">
+      <div class="core-video__frame">
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          poster="/images/services/core-aeration-video-poster.webp"
+          controlslist="nodownload"
+          width="720"
+          height="900"
+          title="Core aeration explained by Grow Green Weed Control"
+          aria-label="Grow Green field explainer showing professional core aeration pulling soil plugs to reduce lawn compaction"
+        >
+          <source src="/videos/core-aeration.mp4" type="video/mp4" />
+          <track
+            kind="captions"
+            src="/videos/core-aeration.vtt"
+            srclang="en"
+            label="English"
+            default
+          />
+        </video>
+      </div>
+      <div class="core-video__copy">
+        <p class="f-kicker f-kicker--light">Watch the process</p>
+        <h2 class="f-title" id="core-video-title">See what core aeration looks like on a real lawn.</h2>
+        <p>
+          This short explainer shows Grow Green pulling soil plugs across a residential lawn—decreasing bulk density so
+          water and nutrients can move deeper into the root zone and helping reduce compaction where turf works hardest.
+        </p>
+        <ul class="core-video__points">
+          <li>About 28 seconds with on-screen captions</li>
+          <li>Shown in the original 4:5 social format—no crop</li>
+          <li>Field footage of stand-on core equipment and soil plugs</li>
+        </ul>
+        <details class="core-video__transcript">
+          <summary>Read video transcript</summary>
+          <p>{videoTranscript}</p>
+        </details>
+        <a class="core-video__cta" href="#core-quote">Request your aeration estimate →</a>
+      </div>
+    </div>
+  </section>
 
   <section class="f-section core-process core-process--wash" aria-labelledby="core-process-title">
     <div class="f-inner">
@@ -520,6 +606,7 @@ const breadcrumbSchema = {
 <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
 <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
 
 <script>
   const root = document.querySelector<HTMLElement>("[data-core-page]");

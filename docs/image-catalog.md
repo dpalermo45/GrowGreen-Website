@@ -53,6 +53,8 @@ All paths under `/images/mascot/`. Original owner art — do not redraw or disto
 | `/images/home/hero-lawn.webp` | Homepage hero lawn + yard sign | From WP `2025/10/Untitled-design.jpg` |
 | `/images/home/video-poster.webp` | Dereck intro video poster | From WP `2025/10/video_thumb_00_01.jpg` |
 | `/videos/dereck-intro.mp4` | Owner intro video | From WP `2025/10/Hello-Im-Dereck-with-Grow-Green-Weed-Control-1.mp4` |
+| `/videos/core-aeration.mp4` (+ `.vtt`) | Core aeration field explainer | From desktop `GrowGreen_Aeration_Facebook_Ad.mp4`; web-encoded 720×900 H.264 (~6 MB), `preload=metadata`, captions track |
+| `/images/services/core-aeration-video-poster.webp` | Core aeration video poster | Frame from same source showing soil plugs after core pull |
 | `/images/services/zoysia.webp` | Zoysia lawn service card | From WP `2022/09/zoysia.jpg` |
 | `/images/about/owner-family.jpg` (+ webp/sizes) | Owner Dereck Palermo with his son | From WP 2026/04 upload |
 | `/images/hero/lawn-hero.jpg` (+ webp) | Supporting lawn photography | From WP `lawn-treatment-ascension-parish-scaled.jpg` — not labeled as a specific customer property |

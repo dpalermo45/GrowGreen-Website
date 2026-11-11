@@ -7,9 +7,18 @@ export const prerender = true;
 
 <BaseLayout
   title="Core Aeration | Grow Green Weed Control – Compacted Soil Relief"
-  description="Professional core aeration for South Louisiana lawns. Open compacted soil so air, water, and nutrients reach the root zone. Free local estimate."
+  description="Professional core aeration for South Louisiana lawns. Watch how we pull soil plugs to open compacted soil so air, water, and nutrients reach the root zone. Free local estimate."
   canonicalPath="/core-aeration/"
+  ogImage="/images/services/core-aeration-hero-1280.webp"
 >
   <link slot="head" rel="preload" as="image" href="/images/services/core-aeration-hero-800.webp" fetchpriority="high" />
+  <meta
+    slot="head"
+    property="og:video"
+    content="https://growgreenweedcontrol.com/videos/core-aeration.mp4"
+  />
+  <meta slot="head" property="og:video:type" content="video/mp4" />
+  <meta slot="head" property="og:video:width" content="720" />
+  <meta slot="head" property="og:video:height" content="900" />
   <CoreAerationPage />
 </BaseLayout>
