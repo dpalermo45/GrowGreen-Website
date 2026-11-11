@@ -14,6 +14,11 @@ import {
   parishPhotoSrc,
   parishPhotoSrcSet,
 } from "../data/parish-media";
+import {
+  PARISH_TRUST_VIDEO,
+  parishTrustVideoSchema,
+  parishVideoFor,
+} from "../data/parish-video";
 import "../styles/faq-accordion.css";
 
 interface Props {
@@ -25,6 +30,8 @@ const hub = resolveParishHub(page);
 const rich = loadPageContent(page.slug);
 const localCopy = parishHubCopyFor(hub.parishKey);
 const media = parishMediaFor(hub.parishKey);
+const videoSeo = parishVideoFor(hub.parishKey);
+const videoSchema = videoSeo ? parishTrustVideoSchema(videoSeo, page.path) : null;
 const faqs = [
   ...(localCopy?.faqs || []),
   ...(rich?.faqs || []),
@@ -189,6 +196,52 @@ const steps = [
                 </figure>
               ))}
             </div>
+          </section>
+        )
+      }
+
+      {
+        videoSeo && (
+          <section
+            class="parish-video"
+            id={videoSeo.sectionId}
+            aria-labelledby="parish-video-title"
+          >
+            <div class="parish-video__grid">
+              <div class="parish-video__frame">
+                <video
+                  controls
+                  playsinline
+                  preload="metadata"
+                  poster={PARISH_TRUST_VIDEO.poster}
+                  controlslist="nodownload"
+                  width={PARISH_TRUST_VIDEO.width}
+                  height={PARISH_TRUST_VIDEO.height}
+                  title={videoSeo.videoTitle}
+                  aria-label={videoSeo.ariaLabel}
+                >
+                  <source src={PARISH_TRUST_VIDEO.src} type="video/mp4" />
+                </video>
+              </div>
+              <div class="parish-video__copy">
+                <p class="parish-kicker">{videoSeo.kicker}</p>
+                <h2 id="parish-video-title">{videoSeo.title}</h2>
+                <p class="parish-copy">{videoSeo.lead}</p>
+                <ul class="parish-video__points">
+                  {videoSeo.points.map((point) => (
+                    <li>{point}</li>
+                  ))}
+                </ul>
+                <details class="parish-video__transcript">
+                  <summary>Read video transcript</summary>
+                  <p>{PARISH_TRUST_VIDEO.transcript}</p>
+                </details>
+                <a class="parish-video__cta" href="#parish-estimate">{videoSeo.ctaLabel}</a>
+              </div>
+            </div>
+            {videoSchema && (
+              <script type="application/ld+json" set:html={JSON.stringify(videoSchema)} />
+            )}
           </section>
         )
       }
@@ -467,6 +520,117 @@ const steps = [
     font-weight: 750;
     line-height: 1.35;
     color: #e7f0e8;
+  }
+
+  .parish-video {
+    margin-top: 1.75rem;
+    padding: 1.35rem 1.2rem 1.45rem;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(22, 56, 37, 0.12);
+    background:
+      radial-gradient(ellipse 45% 55% at 8% 12%, rgba(47, 122, 67, 0.12), transparent 55%),
+      linear-gradient(165deg, #f3f8f4 0%, #ffffff 55%, #eef5ef 100%);
+  }
+  .parish-video__grid {
+    display: grid;
+    gap: 1.25rem;
+    align-items: center;
+  }
+  @media (min-width: 800px) {
+    .parish-video__grid {
+      grid-template-columns: minmax(12rem, 0.78fr) minmax(0, 1.22fr);
+      gap: 1.6rem;
+    }
+  }
+  .parish-video__frame {
+    position: relative;
+    width: min(100%, 22rem);
+    aspect-ratio: 4 / 5;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 1.15rem;
+    border: 1px solid rgba(22, 56, 37, 0.14);
+    background: #0d2918;
+    box-shadow: 0 18px 36px rgba(10, 36, 20, 0.14);
+  }
+  .parish-video__frame video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .parish-video__copy h2 {
+    margin: 0.35rem 0 0.65rem;
+    max-width: 22ch;
+    font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+    line-height: 1.18;
+    color: var(--green-900);
+  }
+  .parish-video__points {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .parish-video__points li {
+    position: relative;
+    padding-left: 1rem;
+    color: #44574c;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+  .parish-video__points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--green-700);
+  }
+  .parish-video__transcript {
+    margin-top: 1rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgba(22, 56, 37, 0.1);
+  }
+  .parish-video__transcript summary {
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 0.92rem;
+    color: var(--green-900);
+    list-style: none;
+  }
+  .parish-video__transcript summary::-webkit-details-marker {
+    display: none;
+  }
+  .parish-video__transcript summary::before {
+    content: "▸ ";
+    color: var(--gold);
+  }
+  .parish-video__transcript[open] summary::before {
+    content: "▾ ";
+  }
+  .parish-video__transcript p {
+    margin: 0.7rem 0 0;
+    color: #44574c;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .parish-video__cta {
+    display: inline-flex;
+    margin-top: 1.05rem;
+    color: var(--green-700);
+    font-weight: 900;
+    text-decoration: none;
+  }
+  .parish-video__cta:hover,
+  .parish-video__cta:focus-visible {
+    color: var(--green-900);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
   }
 
   .parish-gallery {

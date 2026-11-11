@@ -14,6 +14,7 @@ import { curatedArticleHtmlFor } from "../data/blog-articles";
 import { loadPageContent } from "../lib/content/loadPageContent";
 import { allGeoPageSlugs, resolveGeoPage } from "../lib/geo/resolveGeoPage";
 import { parishMediaFor } from "../data/parish-media";
+import { PARISH_TRUST_VIDEO, parishVideoFor } from "../data/parish-video";
 import { site } from "../data/site";
 
 export const prerender = true;
@@ -94,6 +95,7 @@ const parishOg = parishHub
       return media ? `/images/parishes/${media.hero.slug}-1280.jpg` : undefined;
     })()
   : undefined;
+const parishVideo = parishHub ? parishVideoFor(parishHub.parishKey) : null;
 const richPostRaw = post ? loadPageContent(post.slug) : null;
 /** WP extracts that are only shortcodes / empty must not block generated article HTML. */
 const richPostHasBody = Boolean(
@@ -168,6 +170,28 @@ const articleHtml = post
       canonicalPath={geo.path}
       ogImage={parishOg}
     >
+      {parishVideo && (
+        <meta
+          slot="head"
+          property="og:video"
+          content={`https://growgreenweedcontrol.com${PARISH_TRUST_VIDEO.src}`}
+        />
+      )}
+      {parishVideo && <meta slot="head" property="og:video:type" content="video/mp4" />}
+      {parishVideo && (
+        <meta
+          slot="head"
+          property="og:video:width"
+          content={String(PARISH_TRUST_VIDEO.width)}
+        />
+      )}
+      {parishVideo && (
+        <meta
+          slot="head"
+          property="og:video:height"
+          content={String(PARISH_TRUST_VIDEO.height)}
+        />
+      )}
       <ParishPageView page={geo} />
     </BaseLayout>
   )

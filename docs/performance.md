@@ -84,6 +84,7 @@ Conditions used for the 2026-11-07 audit:
 | Deployed URLs | **Not tested** — distinguish future production runs from this local preview |
 | Video file size | `public/videos/dereck-intro.mp4` remains large; OK while click-to-play, but re-encode if autoplay is ever added |
 | Core aeration video | `public/videos/core-aeration.mp4` web-encoded ~6 MB (720×900, CRF 30, `faststart`); `preload=metadata` + WebP poster; do not autoplay |
+| Parish trust ad video | `public/videos/grow-green-trust-ad.mp4` web-encoded ~5.7 MB (720×900, CRF 30, `faststart`); `preload=metadata` + WebP poster on Jefferson / St. Tammany / Tangipahoa hubs; do not autoplay |
 | MCP/Academy docs | No CRM contract or workflow changes — **no MCP/Academy updates required** |
 
 ## Maintenance

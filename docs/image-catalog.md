@@ -55,6 +55,8 @@ All paths under `/images/mascot/`. Original owner art — do not redraw or disto
 | `/videos/dereck-intro.mp4` | Owner intro video | From WP `2025/10/Hello-Im-Dereck-with-Grow-Green-Weed-Control-1.mp4` |
 | `/videos/core-aeration.mp4` | Core aeration field explainer | From desktop `GrowGreen_Aeration_Facebook_Ad.mp4`; web-encoded 720×900 H.264 (~6 MB), `preload=metadata`; burnt-in captions (no separate VTT track) |
 | `/images/services/core-aeration-video-poster.webp` | Core aeration video poster | Frame from same source showing soil plugs after core pull |
+| `/videos/grow-green-trust-ad.mp4` | Owner trust ad (Dereck) | From desktop `GrowGreen_Trust_Ad_Smooth_Feed_4x5.mp4`; web-encoded 720×900 H.264 (~5.7 MB), `preload=metadata`; burnt-in captions; used on St. Tammany / Tangipahoa / Jefferson parish hubs |
+| `/images/parishes/grow-green-trust-ad-poster.webp` | Trust-ad video poster | Frame from same source (~640×800 WebP) |
 | `/images/services/zoysia.webp` | Zoysia lawn service card | From WP `2022/09/zoysia.jpg` |
 | `/images/about/owner-family.jpg` (+ webp/sizes) | Owner Dereck Palermo with his son | From WP 2026/04 upload |
 | `/images/hero/lawn-hero.jpg` (+ webp) | Supporting lawn photography | From WP `lawn-treatment-ascension-parish-scaled.jpg` — not labeled as a specific customer property |
