@@ -3,8 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 /**
- * Build favicons from a tight, centered crop of the thumbs-up mascot face.
- * Tall grass spikes dominate a full-head crop at 16px — face fills the icon.
+ * Build favicons from the full thumbs-up mascot, scaled to fit the square.
  */
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const src = path.join(root, "public/images/mascot/thumbs-up.png");
@@ -12,37 +11,17 @@ const outDir = path.join(root, "public/images/brand");
 const out = path.join(outDir, "favicon.png");
 
 const size = 180;
-const pad = 6;
+const pad = 8;
 const radius = 36;
 const bg = { r: 247, g: 251, b: 247, alpha: 1 };
 const iconSize = size - pad * 2;
 
-const trimmed = await sharp(src)
-  .ensureAlpha()
-  .trim({ threshold: 8 })
-  .png()
-  .toBuffer({ resolveWithObject: true });
-
-const w = trimmed.info.width;
-const h = trimmed.info.height;
-
-/** Square locked on the face (cuts tall spike tips so eyes sit near center at 16px). */
-const cropSize = Math.round(w * 0.38);
-const cropLeft = Math.round(w * 0.26);
-const cropTop = Math.round(h * 0.135);
-
-const { data, info } = await sharp(trimmed.data)
-  .extract({
-    left: cropLeft,
-    top: cropTop,
-    width: Math.min(cropSize, w - cropLeft),
-    height: Math.min(cropSize, h - cropTop),
-  })
+const { data, info } = await sharp(src)
   .ensureAlpha()
   .raw()
   .toBuffer({ resolveWithObject: true });
 
-/** Clear only edge-connected near-black canvas; keep black eyebrows/outlines. */
+/** Clear only edge-connected near-black canvas; keep black shoes/outlines. */
 const { width, height } = info;
 const visited = new Uint8Array(width * height);
 const stack = [];
@@ -79,7 +58,7 @@ while (stack.length) {
   push(x, y - 1);
 }
 
-const faceCentered = await sharp(data, {
+const full = await sharp(data, {
   raw: { width, height, channels: 4 },
 })
   .trim({ threshold: 8 })
@@ -90,8 +69,8 @@ const faceCentered = await sharp(data, {
   .png()
   .toBuffer({ resolveWithObject: true });
 
-const left = Math.round((size - faceCentered.info.width) / 2);
-const top = Math.round((size - faceCentered.info.height) / 2);
+const left = Math.round((size - full.info.width) / 2);
+const top = Math.round((size - full.info.height) / 2);
 
 const maskSvg = Buffer.from(
   `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><rect width="${size}" height="${size}" rx="${radius}" ry="${radius}" fill="white"/></svg>`,
@@ -100,7 +79,7 @@ const maskSvg = Buffer.from(
 const base = await sharp({
   create: { width: size, height: size, channels: 4, background: bg },
 })
-  .composite([{ input: faceCentered.data, left, top }])
+  .composite([{ input: full.data, left, top }])
   .png()
   .toBuffer();
 
@@ -112,4 +91,4 @@ await sharp(base)
 await sharp(out).resize(48, 48).png().toFile(path.join(outDir, "favicon-48.png"));
 await sharp(out).resize(32, 32).png().toFile(path.join(outDir, "favicon-32.png"));
 
-console.log(`Wrote ${path.relative(root, out)} (+ 32 / 48) from centered thumbs-up face`);
+console.log(`Wrote ${path.relative(root, out)} (+ 32 / 48) from full thumbs-up mascot`);

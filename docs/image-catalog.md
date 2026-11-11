@@ -9,9 +9,9 @@ Curated assets live in `public/images/`. Raw WordPress uploads remain in gitigno
 | `/images/brand/logo.png` | Grow Green Weed Control logo | Owner-supplied Full-Glow transparent (canonical header/footer) |
 | `/images/brand/logo-full-glow.png` | Full-Glow logo | Same asset, explicit filename |
 | `/images/brand/logo-160.png` … `logo-640.png` | Sized logo copies | Same Full-Glow source |
-| `/images/brand/favicon.png` | Favicon (180), thumbs-up mascot head | Tab / apple-touch icon |
-| `/images/brand/favicon-32.png` | Favicon 32×32, thumbs-up mascot head | Tab icon |
-| `/images/brand/favicon-48.png` | Favicon 48×48, thumbs-up mascot head | Tab icon |
+| `/images/brand/favicon.png` | Favicon (180), full thumbs-up mascot | Tab / apple-touch icon |
+| `/images/brand/favicon-32.png` | Favicon 32×32, full thumbs-up mascot | Tab icon |
+| `/images/brand/favicon-48.png` | Favicon 48×48, full thumbs-up mascot | Tab icon |
 
 Older logo variants (`logo-mark`, `logo-words`, `/images/logos/*`, campaign logo copies) were removed. Do not reintroduce them.
 
