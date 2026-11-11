@@ -29,6 +29,7 @@ Set on the host (never commit):
 - `GGWC_CRM_BASE_URL`, `GGWC_CRM_API_KEY`
 - `PUBLIC_MAPBOX_TOKEN` (origin-restricted)
 - `PUBLIC_META_PIXEL_ID=1014961828315598` (PageView; rebuild required — see `docs/meta-pixel.md`)
+- `PUBLIC_GA_MEASUREMENT_ID=G-8PF7LD6SRT` (GA4 page views; rebuild required — see `docs/ga4.md`)
 - Google reviews vars per `.env.example` / `docs/google-reviews.md`
 - `GOOGLE_REVIEWS_SETUP_ENABLED=false` in production unless using setup token
 

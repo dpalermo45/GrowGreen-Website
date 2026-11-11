@@ -85,10 +85,12 @@ Priority migration care (verified from Performance workbook): homepage (583 clic
 
 ## Tracking
 
+- **GA4:** install the Google tag in `BaseLayout` `<head>` when `PUBLIC_GA_MEASUREMENT_ID` is set (production: `G-8PF7LD6SRT`). Leave empty for local/preview. See `docs/ga4.md`.
 - **Meta Pixel:** install in `BaseLayout` when `PUBLIC_META_PIXEL_ID` is set (production: `1014961828315598`). Leave empty for local/preview. See `docs/meta-pixel.md`.
-- Init once; one PageView per real navigation (`astro:page-load` safe). Honor `window.__ggwcMarketingConsent === false`.
+- Init each tag once; one page view per real navigation (`astro:page-load` safe). Honor `window.__ggwcMarketingConsent === false`.
+- Never send names, email, phone, address, or form contents to GA4.
 - **Lead:** `ggwcTrackMetaLead` only after confirmed website quote acceptance; `eventID` = `browser_event_id`; empty custom params; dedupe in memory + sessionStorage. Never block submit on Pixel failure.
-- GTM/GA4 IDs remain deferred. Do not enable CRM CAPI from this repo.
+- Do not enable CRM CAPI from this repo.
 
 ## Google reviews (website display only)
 

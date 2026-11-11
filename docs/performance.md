@@ -10,7 +10,7 @@ Lab evidence for the Grow Green Weed Control Astro site. **Not** field Core Web 
 | Adapter | `@astrojs/node` standalone |
 | Output | `output: "server"` with `prerender = true` on marketing pages |
 | HTML | `compressHTML: true` |
-| Tracking | `dataLayer` / `ggwcTrack`; Meta Pixel PageView when `PUBLIC_META_PIXEL_ID` is set (disabled locally) |
+| Tracking | `dataLayer` / `ggwcTrack`; GA4 + Meta Pixel PageView when `PUBLIC_GA_MEASUREMENT_ID` / `PUBLIC_META_PIXEL_ID` are set (disabled locally) |
 | Hosting | Not deployed from this repo yet (see `docs/open-questions.md`) |
 
 ## How to re-test (local production preview)

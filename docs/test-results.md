@@ -101,7 +101,7 @@ Viewport checks with browser tooling + CDP: **360/390** (Menu), **768**, **1024*
 | Local preview homepage + forms | Preview server on **:4321** |
 | Live CRM E2E lead | **Blocked** — no credentials; mock only |
 | Mapbox autocomplete | Local token set; confirm production-restricted token |
-| Analytics / Pixel | PageView + Lead via `PUBLIC_META_PIXEL_ID` / `ggwcTrackMetaLead`; Lead only after confirmed non-mock acceptance with shared `eventID` |
+| Analytics / Pixel | GA4 page_view via `PUBLIC_GA_MEASUREMENT_ID`; Meta PageView + Lead via `PUBLIC_META_PIXEL_ID` / `ggwcTrackMetaLead`; Lead only after confirmed non-mock acceptance with shared `eventID` |
 | Careers hiring APIs | Mock openings + JSON applications via `/api/careers/*` (not lead intake); mock apply **201**; live CRM openings currently empty |
 | Production indexing | Intentionally off (`PUBLIC_SITE_INDEXING=false`) |
 

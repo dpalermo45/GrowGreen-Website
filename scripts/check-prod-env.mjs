@@ -148,6 +148,23 @@ add(
       : "Empty (correct for local/preview — Pixel disabled)",
 );
 
+const ga4Id = (env.PUBLIC_GA_MEASUREMENT_ID || "").trim().toUpperCase();
+const ga4ShapeOk = !ga4Id || /^G-[A-Z0-9]{6,20}$/.test(ga4Id);
+const ga4RequiredOk = !production || Boolean(ga4Id && ga4ShapeOk);
+add(
+  "PUBLIC_GA_MEASUREMENT_ID",
+  ga4ShapeOk && ga4RequiredOk,
+  ga4Id
+    ? ga4ShapeOk
+      ? production
+        ? "Present (GA4 page views — rebuild required after changes)"
+        : "Present (will load GA4 on this build; leave empty for local/preview)"
+      : "Invalid — expected GA4 Measurement ID (G-…)"
+    : production
+      ? "Missing — set PUBLIC_GA_MEASUREMENT_ID=G-8PF7LD6SRT and rebuild"
+      : "Empty (correct for local/preview — GA4 disabled)",
+);
+
 const failed = checks.filter((c) => !c.ok);
 for (const c of checks) {
   console.log(`${c.ok ? "PASS" : "FAIL"}\t${c.id}\t${c.detail}`);

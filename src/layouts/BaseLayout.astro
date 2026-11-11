@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../data/site";
+import { normalizeGa4MeasurementId } from "../lib/analytics/ga4";
 import { normalizeMetaPixelId } from "../lib/analytics/metaPixel";
 import { normalizeSeoText } from "../lib/seoText";
 
@@ -43,10 +44,19 @@ const robotsContent =
 const siteUrl = Astro.site?.toString().replace(/\/$/, "") || "https://growgreenweedcontrol.com";
 const canonical = `${siteUrl}${canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`}`;
 const absoluteOg = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage}`;
-// Empty locally / on preview builds → no Pixel script. Production: set PUBLIC_META_PIXEL_ID at build.
+// Empty locally / on preview builds → no Pixel / GA4 scripts. Production: set IDs at build.
 const metaPixelId = normalizeMetaPixelId(
   import.meta.env.PUBLIC_META_PIXEL_ID || process.env.PUBLIC_META_PIXEL_ID || "",
 );
+const ga4MeasurementId = normalizeGa4MeasurementId(
+  import.meta.env.PUBLIC_GA_MEASUREMENT_ID ||
+    process.env.PUBLIC_GA_MEASUREMENT_ID ||
+    "",
+);
+const analyticsSlots = [
+  ...(metaPixelId ? ["meta-pixel"] : []),
+  ...(ga4MeasurementId ? ["ga4"] : []),
+];
 ---
 
 <!doctype html>
@@ -93,7 +103,63 @@ const metaPixelId = normalizeMetaPixelId(
     {jsonLd && (
       <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     )}
-    <!-- Analytics: Meta Pixel PageView when PUBLIC_META_PIXEL_ID is set (production). -->
+    <!-- Analytics: GA4 + Meta Pixel PageView when PUBLIC_* IDs are set (production). -->
+    {
+      ga4MeasurementId ? (
+        <script
+          is:inline
+          set:html={`
+(function () {
+  var MEASUREMENT_ID = ${JSON.stringify(ga4MeasurementId)};
+  if (!MEASUREMENT_ID) return;
+  if (window.__ggwcMarketingConsent === false) return;
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){window.dataLayer.push(arguments);}
+  window.gtag = window.gtag || gtag;
+
+  if (!window.__ggwcGa4Initialized) {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(MEASUREMENT_ID);
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    /* send_page_view false → one manual page_view per path (dedupe + astro:page-load) */
+    gtag('config', MEASUREMENT_ID, {
+      send_page_view: false,
+      anonymize_ip: true
+    });
+    window.__ggwcGa4Initialized = MEASUREMENT_ID;
+  } else if (window.__ggwcGa4Initialized !== MEASUREMENT_ID) {
+    return;
+  }
+
+  window.__ggwcGa4PageView = function ggwcGa4PageView() {
+    if (window.__ggwcMarketingConsent === false) return;
+    if (!window.__ggwcGa4Initialized || typeof window.gtag !== 'function') return;
+    var path = location.pathname + location.search;
+    if (window.__ggwcGa4LastPageView === path) return;
+    window.__ggwcGa4LastPageView = path;
+    /* Path/title/location only — never names, email, phone, address, or form fields */
+    window.gtag('event', 'page_view', {
+      page_path: path,
+      page_title: document.title,
+      page_location: location.origin + path
+    });
+  };
+
+  window.__ggwcGa4PageView();
+  if (!window.__ggwcGa4PageViewBound) {
+    window.__ggwcGa4PageViewBound = true;
+    document.addEventListener('astro:page-load', function () {
+      if (typeof window.__ggwcGa4PageView === 'function') window.__ggwcGa4PageView();
+    });
+  }
+})();
+`}
+        />
+      ) : null
+    }
     {
       metaPixelId ? (
         <script
@@ -140,7 +206,7 @@ const metaPixelId = normalizeMetaPixelId(
     }
     <slot name="head" />
   </head>
-  <body data-ggwc-analytics-slot={metaPixelId ? "meta-pixel" : "ready"}>
+  <body data-ggwc-analytics-slot={analyticsSlots.length ? analyticsSlots.join(",") : "ready"}>
     <a class="skip-link" href="#main">Skip to content</a>
     {!hideChrome && <Header />}
     <main id="main">
