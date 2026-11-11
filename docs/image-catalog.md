@@ -53,7 +53,7 @@ All paths under `/images/mascot/`. Original owner art — do not redraw or disto
 | `/images/home/hero-lawn.webp` | Homepage hero lawn + yard sign | From WP `2025/10/Untitled-design.jpg` |
 | `/images/home/video-poster.webp` | Dereck intro video poster | From WP `2025/10/video_thumb_00_01.jpg` |
 | `/videos/dereck-intro.mp4` | Owner intro video | From WP `2025/10/Hello-Im-Dereck-with-Grow-Green-Weed-Control-1.mp4` |
-| `/videos/core-aeration.mp4` (+ `.vtt`) | Core aeration field explainer | From desktop `GrowGreen_Aeration_Facebook_Ad.mp4`; web-encoded 720×900 H.264 (~6 MB), `preload=metadata`, captions track |
+| `/videos/core-aeration.mp4` | Core aeration field explainer | From desktop `GrowGreen_Aeration_Facebook_Ad.mp4`; web-encoded 720×900 H.264 (~6 MB), `preload=metadata`; burnt-in captions (no separate VTT track) |
 | `/images/services/core-aeration-video-poster.webp` | Core aeration video poster | Frame from same source showing soil plugs after core pull |
 | `/images/services/zoysia.webp` | Zoysia lawn service card | From WP `2022/09/zoysia.jpg` |
 | `/images/about/owner-family.jpg` (+ webp/sizes) | Owner Dereck Palermo with his son | From WP 2026/04 upload |
@@ -85,6 +85,8 @@ All paths under `/images/mascot/`. Original owner art — do not redraw or disto
 | `/images/home/hero-lawn-{640,960,1280,1600}.webp` | Homepage / lawn-service hero ladder | CSS/`picture` select by viewport |
 | `/images/blog/*-640.webp` | Blog hero / card thumbnails | One per published post |
 | `/images/blog/inline/*.{webp,jpg,png}` | Original WP inline article photos | Restored via `npm run media:curate-blog`; mapped in `src/data/blog-inline-images.ts` |
+| `/images/blog/woolly-aphids-on-crepe-myrtle-baton-rouge-640.webp` | Woolly aphid blog hero | Owner photo; curated via `scripts/curate-woolly-aphid-blog-photos.mjs` |
+| `/images/blog/inline/woolly-aphid-*.{webp,jpg}` + `crepe-myrtle-after-tree-shrub-treatment.*` | Woolly aphid / sooty mold / after shots | Owner Burbank-area crepe myrtle photos embedded in curated article HTML |
 | `/fonts/nunito-sans-latin.woff2` | Self-hosted Nunito Sans | Preloaded; replaces Google Fonts CSS request |
 
 Machine-readable export: `docs/image-catalog.generated.json` (may lag until regenerated).
