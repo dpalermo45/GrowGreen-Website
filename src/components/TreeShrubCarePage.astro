@@ -143,11 +143,31 @@ const faqSchema = {
   })),
 };
 
+const actionPhoto = {
+  slug: "technician-spraying-ornamental-tree-shrubs",
+  alt: "Grow Green technician spraying ornamental shrubs and a small tree in a residential landscaped bed",
+  caption:
+    "Real Grow Green service—not a stock photo. A technician treating ornamental trees and shrubs in a residential landscape.",
+  width: 768,
+  height: 1024,
+} as const;
+
+function actionSrc(width: 480 | 640 | 768): string {
+  return `/images/services/tree-shrub-care/${actionPhoto.slug}-${width}.webp`;
+}
+function actionSrcSet(): string {
+  return `${actionSrc(480)} 480w, ${actionSrc(640)} 640w, ${actionSrc(768)} 768w`;
+}
+function actionJpg(): string {
+  return `/images/services/tree-shrub-care/${actionPhoto.slug}-768.jpg`;
+}
+
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   name: "Tree and Shrub Care",
   url: "https://growgreenweedcontrol.com/tree-and-shrub-care/",
+  image: `https://growgreenweedcontrol.com${actionJpg()}`,
   description:
     "Six-visit ornamental tree and shrub care program with seasonal pest and disease management, nutrition, and monitoring for South Louisiana landscapes.",
   serviceType: "Residential Ornamental Tree and Shrub Care Program",
@@ -158,6 +178,18 @@ const serviceSchema = {
     telephone: site.phoneTel,
   },
   areaServed: areaServedSchema(),
+};
+
+const actionImageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ImageObject",
+  contentUrl: `https://growgreenweedcontrol.com${actionJpg()}`,
+  url: `https://growgreenweedcontrol.com${actionJpg()}`,
+  caption: actionPhoto.caption,
+  description: actionPhoto.alt,
+  width: actionPhoto.width,
+  height: actionPhoto.height,
+  creditText: "Grow Green Weed Control",
 };
 ---
 
@@ -359,18 +391,20 @@ const serviceSchema = {
         </ul>
       </div>
       <figure class="tree-diagram">
-        <img
-          src="/images/services/tree-shrub-kyle-800.webp"
-          width="800"
-          height="1000"
-          alt="Grow Green technician Kyle applying a tree and shrub treatment at a local property"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption>
-          Real Grow Green service—not a stock photo. Kyle applying a tree and shrub treatment at a local South Louisiana
-          property.
-        </figcaption>
+        <picture>
+          <source type="image/webp" srcset={actionSrcSet()} sizes="(max-width: 900px) 92vw, 420px" />
+          <img
+            src={actionJpg()}
+            srcset={`${actionJpg()} 768w`}
+            sizes="(max-width: 900px) 92vw, 420px"
+            width={actionPhoto.width}
+            height={actionPhoto.height}
+            alt={actionPhoto.alt}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <figcaption>{actionPhoto.caption}</figcaption>
       </figure>
     </div>
   </section>
@@ -500,3 +534,4 @@ const serviceSchema = {
 
 <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
 <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(actionImageSchema)} />

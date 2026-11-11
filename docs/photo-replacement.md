@@ -5,7 +5,8 @@
    - source relative path under `website-media/uploads/`
    - destination under `public/images/...`
    - alt text and intended use
-3. Run `npm run media:curate`.
+   - Service-specific one-offs also exist: `scripts/curate-flower-bed-photos.mjs`, `scripts/curate-tree-shrub-care-photo.mjs`
+3. Run `npm run media:curate` (or the service-specific script).
 4. Update `docs/image-catalog.md` with alt text and usage.
 5. Reference the new public path from Astro pages (`src="/images/..."`), preferring `<img>` width/height and webp companions when available.
 6. Commit only `public/images/**` curated outputs + catalog docs — never `website-media/` or `website-media.zip`.

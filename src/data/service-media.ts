@@ -35,8 +35,9 @@ export const serviceMediaBySlug: Record<string, ServiceMedia> = {
   },
   "tree-and-shrub-care": {
     slug: "tree-and-shrub-care",
-    image: "/images/about/kyle-tree-shrub-care.webp",
-    imageAlt: "Grow Green technician reviewing tree and shrub care",
+    image: "/images/services/tree-shrub-care-card.webp",
+    imageAlt:
+      "Grow Green technician spraying ornamental shrubs and a small tree in a residential landscaped bed",
     blurb: "Seasonal monitoring, pest care, and nutrition for ornamentals.",
   },
   "lawn-fungus-and-insects": {

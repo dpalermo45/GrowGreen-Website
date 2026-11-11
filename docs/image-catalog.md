@@ -62,7 +62,9 @@ All paths under `/images/mascot/`. Original owner art — do not redraw or disto
 | `/images/services/lawn-fungus-large-patch*.webp` | Lawn fungus hero, Large Patch card, hub | Owner photo: circular yellow-brown patch in St. Augustine; labeled large patch |
 | `/images/services/flower-beds/*` | Flower bed weed-control page photography | Owner bed photos; SEO slugs + alt in page; `-480/-640/-960.webp` + `-960.jpg`; shared card at `/images/services/flower-bed-card.webp` |
 | ~~`/images/services/flower-bed.*`~~ | Removed | Legacy flower-bed hero/card set deleted Nov 2026 |
-| `/images/about/kyle-tree-shrub-care.webp` | Tree & shrub card | Authentic tech/ornamental photo |
+| `/images/about/kyle-tree-shrub-care.webp` (+ size ladder) | Legacy dormant-season tech/trailer photo | Kept for archival / optional reuse; superseded for hubs by action spray photo |
+| `/images/services/tree-shrub-care/technician-spraying-ornamental-tree-shrubs-*.webp` (+ `-768.jpg`, `-card.webp`) | Tree & shrub action photography | Owner photo: technician spraying ornamental shrubs/tree; SEO slug; alt/caption in page + `manifest.json` |
+| `/images/services/tree-shrub-care-card.webp` | Tree & shrub hub/card thumb | 720×540 cover crop of the action spray photo |
 | `/images/about/kyle-robison.webp` | Kyle Robison, lead technician | Team portrait for About |
 | `/images/about/gavin-broussard.webp` | Gavin Broussard, technician | Team portrait for About |
 | `/images/about/moses-sunseri.webp` | Moses Sunseri, office administrator | Team portrait for About |
