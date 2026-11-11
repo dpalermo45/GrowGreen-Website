@@ -13,6 +13,8 @@ interface Props {
   heading?: string;
   subheading?: string;
   compact?: boolean;
+  /** Hide the lawn $39/month starting-price line (ornamental / non-lawn pages). */
+  hideStartingPrice?: boolean;
   /** Optional promotional confirmation line shown after inline success. */
   offerConfirm?: string;
 }
@@ -24,6 +26,7 @@ const {
   heading = "See What Your Lawn Would Cost",
   subheading = "Enter the service address and we’ll prepare an accurate, no-obligation estimate.",
   compact = false,
+  hideStartingPrice = false,
   offerConfirm = "",
 } = Astro.props;
 
@@ -56,9 +59,13 @@ const offerConfirmText = offerConfirm.trim();
     <p class="step-label" data-step-label>Step 1 of 2 — Property details</p>
     <h2>{heading}</h2>
     <p class="form-lead">{subheading}</p>
-    <p class="price-start">
-      Plans start at <strong>$39/month</strong>. Your estimate depends on lawn size and selected services.
-    </p>
+    {
+      hideStartingPrice ? null : (
+        <p class="price-start">
+          Plans start at <strong>$39/month</strong>. Your estimate depends on lawn size and selected services.
+        </p>
+      )
+    }
 
     <form data-quote-el novalidate>
       <div class="hp" aria-hidden="true">

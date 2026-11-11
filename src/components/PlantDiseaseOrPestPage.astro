@@ -1,0 +1,769 @@
+---
+import QuoteForm from "./QuoteForm.astro";
+import { site } from "../data/site";
+import { coverageFaqAnswer, areaServedSchema } from "../data/service-areas";
+import "../styles/plant-disease-or-pest.css";
+
+const source = "Ornamental Plant Disease and Pest Page";
+const leadSource = "Website - Ornamental Plant Disease and Pest Page";
+const serviceNote = "Service requested: Ornamental Plant Disease/Pest";
+
+const symptoms = [
+  {
+    n: "01",
+    title: "Sticky leaves & black coating",
+    body: "Honeydew from insects such as aphids, soft scales, or whiteflies can support sooty mold. We look for the source of the sticky residue.",
+    pick: "Sticky leaves or black coating",
+    image: "/images/services/plant-disease/sooty-mold-crepe-myrtle-720.webp",
+    imageAlt: "Black sooty mold on crepe myrtle foliage after honeydew from woolly aphids",
+  },
+  {
+    n: "02",
+    title: "Speckled or bronzed foliage",
+    body: "Tiny pale specks, bronzing, or fine webbing can be clues to mite feeding. Leaf undersides and active pests help clarify the cause.",
+    pick: "Speckled or bronzed foliage",
+  },
+  {
+    n: "03",
+    title: "Holes or chewed leaves",
+    body: "Missing leaf tissue calls for a closer look at feeding activity and the damage pattern. The insect may be gone by the time damage is noticed.",
+    pick: "Holes or chewed leaves",
+    image: "/images/services/plant-disease/leaf-damage-example-640.webp",
+    imageAlt: "Close-up of green leaves with holes, pale patches, and brown damaged areas—illustrative leaf damage",
+  },
+  {
+    n: "04",
+    title: "Leaf spots or powdery growth",
+    body: "Spots, blotches, or a powdery coating can point to disease. Plant identity and the pattern of symptoms help determine the next step.",
+    pick: "Leaf spots or powdery growth",
+  },
+  {
+    n: "05",
+    title: "Yellowing or wilting",
+    body: "We consider watering, drainage, roots, and nutrition along with pests and disease. Yellow leaves alone do not identify the problem.",
+    pick: "Yellowing or wilting",
+  },
+  {
+    n: "06",
+    title: "Branch dieback or overall decline",
+    body: "Tell us whether one branch, one plant, or several plants are affected. That pattern helps guide a closer review of the plant and its surroundings.",
+    pick: "Branch dieback or overall decline",
+    image: "/images/services/plant-disease/woolly-aphid-bark-720.webp",
+    imageAlt: "White woolly aphids clustered on crepe myrtle bark",
+  },
+] as const;
+
+const steps = [
+  {
+    n: "01",
+    title: "Review the plant and its history",
+    body: "Tell us when the problem started, how many plants are affected, and what has changed. Photos can help us plan the review.",
+  },
+  {
+    n: "02",
+    title: "Consider the whole picture",
+    body: "We look for pest activity and disease signs while considering roots, moisture, and the planting site. Some concerns need a closer inspection or testing.",
+  },
+  {
+    n: "03",
+    title: "Choose care that fits",
+    body: "When treatment is appropriate, we explain the approach, price, and any follow-up. A watering change, further evaluation, or referral may also be part of the recommendation.",
+  },
+] as const;
+
+const photoTips = [
+  {
+    n: "1",
+    title: "The whole plant and its neighbors",
+    body: "Show where the damage sits and whether nearby plants look different.",
+  },
+  {
+    n: "2",
+    title: "Close-ups from both sides",
+    body: "Capture affected leaves, their undersides, and any visible insects or coatings.",
+  },
+  {
+    n: "3",
+    title: "The base and surrounding soil",
+    body: "Include mulch depth, wet areas, irrigation, and the planting location.",
+  },
+  {
+    n: "4",
+    title: "What changed, and when",
+    body: "Note recent planting, pruning, watering changes, or products already applied.",
+  },
+] as const;
+
+const options = [
+  {
+    tag: "A current concern",
+    title: "Targeted plant care",
+    body: "Start here when a tree or shrub is showing damage, pest activity, or unexplained decline.",
+    points: [
+      "Review of the affected plants and symptoms",
+      "Treatment or next steps based on the findings",
+      "Scope, pricing, and follow-up discussed upfront",
+    ],
+    href: "#opdp-quote",
+    cta: "Request help for my plants →",
+    featured: true,
+  },
+  {
+    tag: "Ongoing support",
+    title: "Tree & Shrub Care",
+    body: "Explore our separate six-visit program for seasonal monitoring and appropriate ornamental plant care throughout the year.",
+    points: [
+      "Repeated opportunities to notice changes",
+      "Pest, disease, and nutrition care as appropriate",
+      "Applications selected for the plant and season",
+    ],
+    href: "/tree-and-shrub-care/",
+    cta: "Explore Tree & Shrub Care →",
+    featured: false,
+  },
+] as const;
+
+const faqs = [
+  {
+    q: "Which plants can you help with?",
+    a: "We review problems affecting eligible ornamental trees and shrubs, including plants such as azaleas, hollies, camellias, gardenias, and similar landscape plantings. Plant size, access, species, and the suspected problem help determine whether our service is appropriate.",
+  },
+  {
+    q: "Can you identify the problem from a photo?",
+    a: "Photos are a useful starting point. We may need to examine the plant and growing conditions in person, and some problems require a sample or laboratory testing. A photo of one damaged leaf may not reveal the full cause.",
+  },
+  {
+    q: "Is every yellow or brown plant a pest or disease problem?",
+    a: "No. Watering, drainage, root injury, planting depth, sunlight, weather, and nutrient issues can produce similar symptoms. We consider those conditions before recommending an insecticide, fungicide, or nutritional treatment.",
+  },
+  {
+    q: "Will damaged leaves turn healthy again after treatment?",
+    a: "Existing holes and dead leaf tissue do not repair themselves. Appropriate treatment may reduce further damage and help protect new growth. Recovery depends on the cause, remaining plant health, and growing conditions; severely declined plants may need another solution.",
+  },
+  {
+    q: "Can I request help for a current problem without starting a program?",
+    a: "Yes. Describe the current concern in the form. We review the property and explain whether targeted treatment, follow-up visits, a recurring program, or a different next step makes sense. Scope and pricing are discussed before you approve service.",
+  },
+  {
+    q: "How does this relate to your Tree & Shrub Care program?",
+    a: "This page helps you request care for an ornamental pest, disease, or decline concern. Our separate Tree & Shrub Care program provides six scheduled visits across the year for seasonal monitoring and appropriate plant-health care. We can discuss that option if ongoing support fits your landscape.",
+  },
+  {
+    q: "How is ornamental treatment priced?",
+    a: "Pricing depends on the number, size, type, and accessibility of the plants, the problem being addressed, and the recommended follow-up. We confirm the service scope and price before you approve. A request through this page does not book an application.",
+  },
+  {
+    q: "Should I tell you about recent watering or treatments?",
+    a: "Yes. Tell us when symptoms started and share recent planting, irrigation, pruning, weather, fertilizer, or pesticide changes. Include product names and application dates if you know them. This history helps us evaluate the concern and plan appropriate care.",
+  },
+  {
+    q: "When can children and pets return after an application?",
+    a: "Keep people and pets away from the treatment area during application. Follow the re-entry directions provided for the specific products used. The waiting period can vary by treatment.",
+  },
+  {
+    q: "Do you prune, remove, or assess dangerous trees?",
+    a: "Pruning, removal, stump work, and structural tree-risk assessment are outside this ornamental treatment service. A dead, storm-damaged, leaning, or otherwise unsafe tree should be evaluated by an appropriately qualified tree professional.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: coverageFaqAnswer(site.address.city),
+  },
+];
+
+const concernOptions = [
+  "Sticky leaves or black coating",
+  "Speckled or bronzed foliage",
+  "Holes or chewed leaves",
+  "Leaf spots or powdery growth",
+  "Yellowing or wilting",
+  "Branch dieback or overall decline",
+  "Not sure what is wrong",
+  "Ongoing tree and shrub care",
+] as const;
+
+const onsetOptions = [
+  "Within the last week",
+  "One to four weeks ago",
+  "More than a month ago",
+  "Not sure",
+] as const;
+
+const related = [
+  {
+    href: "/tree-and-shrub-care/",
+    title: "Tree & Shrub Care",
+    body: "Ongoing ornamental plant care.",
+  },
+  {
+    href: "/flower-bed-weed-control-and-fertilization/",
+    title: "Flower-bed weed control",
+    body: "Manage weeds in landscape beds.",
+  },
+  {
+    href: "/lawn-fungus/",
+    title: "Lawn fungus care",
+    body: "Help for disease concerns in your grass.",
+  },
+  {
+    href: "/lawn-insects/",
+    title: "Lawn insect care",
+    body: "Help for insects damaging your turf.",
+  },
+] as const;
+
+const actionPhoto = {
+  webp: "/images/services/tree-shrub-care/technician-spraying-ornamental-tree-shrubs-768.webp",
+  srcset:
+    "/images/services/tree-shrub-care/technician-spraying-ornamental-tree-shrubs-480.webp 480w, /images/services/tree-shrub-care/technician-spraying-ornamental-tree-shrubs-640.webp 640w, /images/services/tree-shrub-care/technician-spraying-ornamental-tree-shrubs-768.webp 768w",
+  jpg: "/images/services/tree-shrub-care/technician-spraying-ornamental-tree-shrubs-768.jpg",
+  alt: "Grow Green technician spraying ornamental shrubs and a small tree in a residential landscaped bed",
+} as const;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Ornamental Plant Disease and Pest Care",
+  url: "https://growgreenweedcontrol.com/plant-disease-or-pest/",
+  image: `https://growgreenweedcontrol.com${actionPhoto.jpg}`,
+  description:
+    "Review and targeted care for ornamental tree and shrub pest, disease, and decline concerns across Greater Baton Rouge, Ascension Parish, Livingston Parish, and nearby South Louisiana communities.",
+  serviceType: "Ornamental plant pest and disease evaluation and treatment",
+  provider: {
+    "@type": "LocalBusiness",
+    name: site.name,
+    url: "https://growgreenweedcontrol.com/",
+    telephone: site.phoneTel,
+  },
+  areaServed: areaServedSchema(),
+};
+---
+
+<div class="opdp-page" data-opdp-page data-service-note={serviceNote}>
+  <header class="opdp-hero">
+    <div class="opdp-hero__media" aria-hidden="true">
+      <img
+        src={actionPhoto.webp}
+        srcset={actionPhoto.srcset}
+        sizes="100vw"
+        width="768"
+        height="1024"
+        alt=""
+        decoding="async"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="opdp-hero__shade" aria-hidden="true"></div>
+    <div class="f-inner opdp-hero__grid">
+      <div class="motion-rise">
+        <nav class="opdp-crumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/tree-and-shrub-care/">Tree &amp; Shrub Care</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Plant Disease &amp; Pests</span>
+        </nav>
+        <div class="opdp-hero__brand">
+          <img src="/images/brand/logo-128.webp" width="64" height="64" alt="" decoding="async" />
+          <span>Grow Green Weed Control</span>
+        </div>
+        <p class="opdp-hero__eyebrow">Ornamental plant care · South Louisiana</p>
+        <h1>Plant disease &amp; pest care for <em>trees &amp; shrubs.</em></h1>
+        <p class="opdp-hero__lead">
+          Spotted leaves, sticky foliage, or a shrub that keeps declining? Grow Green looks at the plant, the symptoms,
+          and the growing conditions to recommend treatment or the right next step.
+        </p>
+        <div class="opdp-hero__actions">
+          <a class="f-btn f-btn--gold" href="#opdp-quote">Get help with my plants →</a>
+          <a class="f-btn f-btn--ghost" href="#opdp-symptoms">Explore the symptoms</a>
+        </div>
+        <ul class="opdp-hero__notes" aria-label="Service highlights">
+          <li>Free estimate request</li>
+          <li>Clear recommendations</li>
+          <li>Local office follow-up</li>
+        </ul>
+        <a class="opdp-hero__phone" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+      </div>
+      <figure class="opdp-hero__visual motion-rise">
+        <img
+          class="opdp-hero__photo"
+          src={actionPhoto.webp}
+          srcset={actionPhoto.srcset}
+          sizes="(max-width: 960px) 70vw, 320px"
+          width="768"
+          height="1024"
+          alt={actionPhoto.alt}
+          decoding="async"
+        />
+        <figcaption>
+          <strong>Real people. Real plant care.</strong>
+          Grow Green treating ornamental trees and shrubs.
+        </figcaption>
+        <img
+          class="opdp-hero__mascot"
+          src="/images/mascot/spray-wand-240.webp"
+          width="240"
+          height="280"
+          alt=""
+          decoding="async"
+        />
+      </figure>
+    </div>
+  </header>
+
+  <div class="opdp-proof f-inner" aria-label="Grow Green credentials">
+    <div class="opdp-proof__item">
+      <strong>Licensed &amp; insured</strong>
+      <span>Professional treatment specialists</span>
+    </div>
+    <div class="opdp-proof__item">
+      <strong>Firefighter-owned</strong>
+      <span>Local and family-operated</span>
+    </div>
+    <div class="opdp-proof__item">
+      <strong>Photos &amp; service notes</strong>
+      <span>Know what we noticed and treated</span>
+    </div>
+    <div class="opdp-proof__item">
+      <strong>Honest next steps</strong>
+      <span>Treatment—or a clearer path</span>
+    </div>
+  </div>
+
+  <section class="f-section opdp-symptoms" id="opdp-symptoms" aria-labelledby="opdp-symptoms-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Start with what you can see</p>
+      <h2 class="f-title f-center" id="opdp-symptoms-title">What are your plants telling you?</h2>
+      <p class="f-lead f-center">
+        These are clues we review, not a diagnosis. Choose the closest match to add it to your request. We’ll look at the
+        plant and the full pattern of symptoms.
+      </p>
+      <div class="opdp-symptom-grid">
+        {
+          symptoms.map((s) => (
+            <article class="opdp-symptom">
+              {"image" in s && s.image ? (
+                <img
+                  class="opdp-symptom__photo"
+                  src={s.image}
+                  width="720"
+                  height="900"
+                  alt={s.imageAlt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <div class="opdp-symptom__visual" aria-hidden="true">
+                  <span>{s.n}</span>
+                  <strong>Signs to share</strong>
+                </div>
+              )}
+              <span class="opdp-symptom__num">{s.n} / signs to share</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+              <button class="opdp-pick" type="button" data-pick-concern={s.pick}>
+                Add to my request →
+              </button>
+            </article>
+          ))
+        }
+      </div>
+      <p class="opdp-resources">
+        Learn more about these clues:{" "}
+        <a href="https://ipm.ucanr.edu/home-and-landscape/sooty-mold/" target="_blank" rel="noopener noreferrer"
+          >UC IPM on sooty mold</a
+        >
+        ·{" "}
+        <a
+          href="https://extension.umn.edu/yard-and-garden-insects/spider-mites"
+          target="_blank"
+          rel="noopener noreferrer">University of Minnesota Extension on spider mites</a
+        >
+        ·{" "}
+        <a
+          href="https://extension.umn.edu/plant-diseases/anthracnose-trees-and-shrubs"
+          target="_blank"
+          rel="noopener noreferrer">Extension guidance on tree leaf spots</a
+        >.
+      </p>
+    </div>
+  </section>
+
+  <section class="f-section opdp-process" aria-labelledby="opdp-care-title">
+    <div class="f-inner opdp-process__grid">
+      <div>
+        <p class="f-kicker">A closer look. A clearer plan.</p>
+        <h2 class="f-title" id="opdp-care-title">The right next step starts with the cause.</h2>
+        <p class="f-lead">
+          We review accessible ornamental trees and shrubs, including landscape plants such as azaleas, hollies,
+          camellias, and gardenias. Plant identity, size, access, and condition shape the recommendation.
+        </p>
+        <ol class="opdp-steps">
+          {
+            steps.map((s) => (
+              <li>
+                <span aria-hidden="true">{s.n}</span>
+                <div>
+                  <h3>{s.title}</h3>
+                  <p>{s.body}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <div class="opdp-scope">
+          <strong>Clear expectations for recovery.</strong>
+          Treatment may protect healthy foliage and new growth. Existing holes and dead tissue remain, and severe root or
+          site problems can limit recovery.
+        </div>
+        <p class="opdp-coverage">
+          Serving Greater Baton Rouge, Ascension, Livingston, and nearby South Louisiana communities. Enter your property
+          address so we can confirm coverage.
+        </p>
+      </div>
+      <aside class="opdp-expect" aria-label="What treatment can and cannot do">
+        <article class="opdp-expect__card opdp-expect__card--yes">
+          <h3>Treatment may help</h3>
+          <ul>
+            <li>Reduce further pest or disease pressure on living tissue</li>
+            <li>Protect new growth while conditions remain favorable for the problem</li>
+            <li>Clarify whether a one-time visit or seasonal program fits better</li>
+          </ul>
+        </article>
+        <article class="opdp-expect__card opdp-expect__card--no">
+          <h3>Treatment cannot</h3>
+          <ul>
+            <li>Turn damaged holes or dead leaf tissue healthy again</li>
+            <li>Fix drainage failure, deep planting, or the wrong plant for the site</li>
+            <li>Replace pruning, removal, or structural tree-risk assessment</li>
+          </ul>
+        </article>
+      </aside>
+    </div>
+  </section>
+
+  <section class="f-section opdp-quote" id="opdp-quote" aria-labelledby="opdp-quote-title">
+    <div class="f-inner opdp-quote__grid">
+      <div>
+        <p class="f-kicker f-kicker--light">Free, no-obligation estimate</p>
+        <h2 class="f-title" id="opdp-quote-title">Tell us about your plants.</h2>
+        <p class="f-lead">
+          Request a free estimate for ornamental pest or disease care. Our office usually follows up within one business
+          day, {site.hours.label}, to review the concern and next steps.
+        </p>
+        <ul class="opdp-quote__benefits">
+          <li>No payment required to request an estimate</li>
+          <li>Photos coordinated during follow-up—no upload needed here</li>
+          <li>Your request goes directly to the Grow Green team in St. Amant</li>
+        </ul>
+        <p class="opdp-quote__chip" aria-hidden="true">Service noted: Ornamental Plant Disease/Pest</p>
+        <a class="opdp-quote__phone" href={`tel:${site.phoneTel}`}>
+          <span>Prefer to talk?</span>
+          <strong>Call {site.phone}</strong>
+        </a>
+      </div>
+      <div class="opdp-form-shell">
+        <div class="opdp-concerns" data-opdp-concerns>
+          <p class="opdp-concerns__label">What are you noticing? (optional)</p>
+          <div class="opdp-concerns__list" role="group" aria-label="Symptom description">
+            {
+              concernOptions.map((opt) => (
+                <button type="button" data-pick-concern={opt}>
+                  {opt}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+        <div class="opdp-plant-fields" data-opdp-plant-fields>
+          <label>
+            <span>Which plants are affected? <em>(optional)</em></span>
+            <input
+              type="text"
+              name="opdp-plant"
+              data-opdp-plant
+              maxlength="180"
+              placeholder="Azaleas, hollies, camellias, or not sure"
+            />
+          </label>
+          <label>
+            <span>How many plants? <em>(optional)</em></span>
+            <input
+              type="text"
+              name="opdp-count"
+              data-opdp-count
+              maxlength="100"
+              placeholder="3 shrubs, one tree, or a whole bed"
+            />
+          </label>
+          <label>
+            <span>When did it start? <em>(optional)</em></span>
+            <select data-opdp-onset>
+              <option value="">Choose an approximate time</option>
+              {onsetOptions.map((opt) => <option value={opt}>{opt}</option>)}
+            </select>
+          </label>
+        </div>
+        <QuoteForm
+          source={source}
+          leadSource={leadSource}
+          hideStartingPrice={true}
+          heading="Request plant care"
+          subheading="Share the service address and what you are seeing. Plant details above are optional and help us prepare."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="opdp-photos-title">
+    <div class="f-inner opdp-photo-grid">
+      <figure class="opdp-leaf-photo">
+        <img
+          src="/images/services/plant-disease/leaf-damage-example-960.webp"
+          width="960"
+          height="640"
+          alt="Close-up of green leaves with holes, pale patches, and brown damaged areas"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>
+          Example of visible leaf damage. A close-up is only one part of assessing a plant problem.
+        </figcaption>
+      </figure>
+      <div>
+        <p class="f-kicker">Helpful details for your request</p>
+        <h2 class="f-title" id="opdp-photos-title">Show us more than one leaf.</h2>
+        <p class="f-lead">
+          A few clear photos and a short history help us understand what is happening around the affected plants.
+        </p>
+        <ol class="opdp-photo-tips">
+          {
+            photoTips.map((t) => (
+              <li>
+                <span aria-hidden="true">{t.n}</span>
+                <div>
+                  <strong>{t.title}</strong>
+                  <p>{t.body}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <p class="opdp-photo-note">
+          Have photos ready when our team follows up. We’ll help you share them with your request.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section opdp-options" aria-labelledby="opdp-options-title">
+    <div class="f-inner">
+      <p class="f-kicker f-center">Care that fits your landscape</p>
+      <h2 class="f-title f-center" id="opdp-options-title">Help now. Support through the seasons.</h2>
+      <p class="f-lead f-center">
+        The next step depends on the problem and the plants. We can discuss targeted care and an ongoing program when each
+        makes sense.
+      </p>
+      <div class="opdp-options-grid">
+        {
+          options.map((o) => (
+            <article class:list={["opdp-option", o.featured && "opdp-option--featured"]}>
+              <p class="opdp-option__tag">{o.tag}</p>
+              <h3>{o.title}</h3>
+              <p>{o.body}</p>
+              <ul>
+                {o.points.map((p) => (
+                  <li>{p}</li>
+                ))}
+              </ul>
+              <a href={o.href}>{o.cta}</a>
+            </article>
+          ))
+        }
+      </div>
+      <p class="opdp-options-note">
+        Pricing reflects the plants, their size and accessibility, the concern, and the recommended follow-up. We confirm
+        the plan before you approve service.
+      </p>
+    </div>
+  </section>
+
+  <section class="f-section opdp-local" aria-labelledby="opdp-local-title">
+    <div class="f-inner opdp-local__grid">
+      <figure class="opdp-local__figure">
+        <img
+          src="/images/services/plant-disease/crepe-myrtle-after-care-720.webp"
+          width="720"
+          height="900"
+          alt="Crepe myrtle foliage after Grow Green tree and shrub treatment for woolly aphids"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>
+          <strong>Owner photo from a Baton Rouge-area crepe myrtle.</strong>
+          Sticky leaves and sooty mold often point back to a pest source—not a leaf disease alone.
+        </figcaption>
+      </figure>
+      <div>
+        <p class="f-kicker">A genuinely local company</p>
+        <h2 class="f-title" id="opdp-local-title">Local eyes on the plants you care about.</h2>
+        <p class="f-lead">
+          Grow Green is firefighter-owned and family-operated from St. Amant. Your estimate request goes to our local
+          office—not a national call center—so we can review what you are seeing and recommend a clear next step.
+        </p>
+        <div class="opdp-local__points">
+          <div class="opdp-local__point">Firefighter-owned</div>
+          <div class="opdp-local__point">Family-operated</div>
+          <div class="opdp-local__point">Based in St. Amant</div>
+          <div class="opdp-local__point">Local office support</div>
+        </div>
+        <a class="f-btn f-btn--green" href="/about-us/">Meet Grow Green →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section opdp-faq" aria-labelledby="opdp-faq-title">
+    <div class="f-inner opdp-faq__grid">
+      <div>
+        <p class="f-kicker">Before we take a closer look</p>
+        <h2 class="f-title" id="opdp-faq-title">Your plant care questions, answered.</h2>
+        <p class="f-lead">
+          What to expect from assessment, treatment recommendations, and follow-up. Prefer to talk? Call{" "}
+          <a href={`tel:${site.phoneTel}`}>{site.phone}</a>.
+        </p>
+      </div>
+      <div class="opdp-faq__list">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section opdp-related" aria-labelledby="opdp-related-title">
+    <div class="f-inner">
+      <h2 class="f-title f-center" id="opdp-related-title">Find the right care for your property.</h2>
+      <div class="opdp-related-grid">
+        {
+          related.map((r) => (
+            <a href={r.href}>
+              <strong>{r.title}</strong>
+              <span>{r.body}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section" aria-labelledby="opdp-final-title">
+    <div class="f-inner">
+      <div class="opdp-final__card">
+        <div>
+          <p class="opdp-final__kicker">Grow Green Weed Control</p>
+          <h2 id="opdp-final-title">Let’s take a closer look at your plants.</h2>
+          <p>Tell us what you’re seeing. Our local team will help you understand the next step.</p>
+        </div>
+        <div class="opdp-final__actions">
+          <a class="f-btn f-btn--gold" href="#opdp-quote">Get help with my plants</a>
+          <a class="f-btn f-btn--ghost" href={`tel:${site.phoneTel}`}>Call {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="opdp-mobile" aria-label="Quick contact">
+    <a href={`tel:${site.phoneTel}`}>Call office</a>
+    <a href="#opdp-quote">Get plant help</a>
+  </nav>
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-opdp-page]");
+  if (root) {
+    const notes = root.querySelector<HTMLTextAreaElement>('textarea[name="notes"]');
+    const buttons = root.querySelectorAll<HTMLButtonElement>("[data-pick-concern]");
+    const plantInput = root.querySelector<HTMLInputElement>("[data-opdp-plant]");
+    const countInput = root.querySelector<HTMLInputElement>("[data-opdp-count]");
+    const onsetSelect = root.querySelector<HTMLSelectElement>("[data-opdp-onset]");
+    const SERVICE_PREFIX = root.dataset.serviceNote || "Service requested: Ornamental Plant Disease/Pest";
+    const CONCERN_PREFIX = "Closest description: ";
+    const PLANT_PREFIX = "Plants affected: ";
+    const COUNT_PREFIX = "Plant count: ";
+    const ONSET_PREFIX = "First noticed: ";
+
+    function managedPrefixes() {
+      return [SERVICE_PREFIX.split(":")[0] + ":", CONCERN_PREFIX, PLANT_PREFIX, COUNT_PREFIX, ONSET_PREFIX];
+    }
+
+    function isManaged(line: string) {
+      return managedPrefixes().some((prefix) => line.startsWith(prefix));
+    }
+
+    function userLines() {
+      return (notes?.value || "")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .filter((line) => !isManaged(line));
+    }
+
+    function syncNotes(concern?: string) {
+      if (!notes) return;
+      const lines: string[] = [SERVICE_PREFIX];
+      const activeConcern =
+        concern ||
+        [...buttons].find((b) => b.classList.contains("is-active"))?.dataset.pickConcern ||
+        "";
+      if (activeConcern) lines.push(`${CONCERN_PREFIX}${activeConcern}`);
+      const plant = plantInput?.value.trim();
+      if (plant) lines.push(`${PLANT_PREFIX}${plant}`);
+      const count = countInput?.value.trim();
+      if (count) lines.push(`${COUNT_PREFIX}${count}`);
+      const onset = onsetSelect?.value.trim();
+      if (onset) lines.push(`${ONSET_PREFIX}${onset}`);
+      notes.value = [...lines, ...userLines()].join("\n");
+    }
+
+    function applyConcern(value: string) {
+      buttons.forEach((b) => b.classList.toggle("is-active", b.dataset.pickConcern === value));
+      syncNotes(value);
+    }
+
+    syncNotes();
+    notes?.addEventListener("blur", () => syncNotes());
+    plantInput?.addEventListener("change", () => syncNotes());
+    plantInput?.addEventListener("blur", () => syncNotes());
+    countInput?.addEventListener("change", () => syncNotes());
+    countInput?.addEventListener("blur", () => syncNotes());
+    onsetSelect?.addEventListener("change", () => syncNotes());
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const value = button.dataset.pickConcern || "";
+        if (!value) return;
+        applyConcern(value);
+        const quote = document.getElementById("opdp-quote");
+        quote?.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.setTimeout(() => notes?.focus({ preventScroll: true }), 500);
+      });
+    });
+  }
+</script>

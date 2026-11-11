@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PlantDiseaseOrPestPage from "../components/PlantDiseaseOrPestPage.astro";
+
+export const prerender = true;
+---
+
+<BaseLayout
+  title="Ornamental Plant Disease & Pest Care | Grow Green Weed Control"
+  description="Spots, sticky leaves, chewing damage, or declining shrubs? Grow Green reviews ornamental plant pest and disease concerns and recommends the next step for South Louisiana landscapes."
+  canonicalPath="/plant-disease-or-pest/"
+  ogImage="/images/services/tree-shrub-care/technician-spraying-ornamental-tree-shrubs-768.jpg"
+>
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    href="/images/services/tree-shrub-care/technician-spraying-ornamental-tree-shrubs-768.webp"
+    fetchpriority="high"
+  />
+  <PlantDiseaseOrPestPage />
+</BaseLayout>

@@ -87,6 +87,10 @@ All paths under `/images/mascot/`. Original owner art — do not redraw or disto
 | `/images/blog/inline/*.{webp,jpg,png}` | Original WP inline article photos | Restored via `npm run media:curate-blog`; mapped in `src/data/blog-inline-images.ts` |
 | `/images/blog/woolly-aphids-on-crepe-myrtle-baton-rouge-640.webp` | Woolly aphid blog hero | Owner photo; curated via `scripts/curate-woolly-aphid-blog-photos.mjs` |
 | `/images/blog/inline/woolly-aphid-*.{webp,jpg}` + `crepe-myrtle-after-tree-shrub-treatment.*` | Woolly aphid / sooty mold / after shots | Owner Burbank-area crepe myrtle photos embedded in curated article HTML |
+| `/images/services/plant-disease/sooty-mold-crepe-myrtle-720.webp` | Plant disease symptom card | Cropped from owner sooty-mold inline photo |
+| `/images/services/plant-disease/woolly-aphid-bark-720.webp` | Plant disease symptom card | Cropped from owner woolly-aphid bark photo |
+| `/images/services/plant-disease/crepe-myrtle-after-care-720.webp` | Plant disease local band | Cropped from owner after-treatment crepe myrtle photo |
+| `/images/services/plant-disease/leaf-damage-example-{640,960}.webp` (+ `-960.jpg`) | Illustrative leaf-damage photo tip | From WP Fotolia archive; illustrative only—not a customer diagnosis |
 | `/fonts/nunito-sans-latin.woff2` | Self-hosted Nunito Sans | Preloaded; replaces Google Fonts CSS request |
 
 Machine-readable export: `docs/image-catalog.generated.json` (may lag until regenerated).
