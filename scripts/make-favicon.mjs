@@ -3,15 +3,15 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 /**
- * Build favicons from the full thumbs-up mascot, scaled to fit the square.
+ * Build favicons from the full Grow Green logo on a black rounded square.
  */
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const src = path.join(root, "public/images/mascot/thumbs-up.png");
+const src = path.join(root, "public/images/brand/logo.png");
 const outDir = path.join(root, "public/images/brand");
 const out = path.join(outDir, "favicon.png");
 
 const size = 180;
-const pad = 8;
+const pad = 10;
 const radius = 36;
 const bg = { r: 0, g: 0, b: 0, alpha: 1 };
 const iconSize = size - pad * 2;
@@ -21,7 +21,7 @@ const { data, info } = await sharp(src)
   .raw()
   .toBuffer({ resolveWithObject: true });
 
-/** Clear only edge-connected near-black canvas; keep black shoes/outlines. */
+/** Clear edge-connected near-black / empty canvas; keep black script lettering. */
 const { width, height } = info;
 const visited = new Uint8Array(width * height);
 const stack = [];
@@ -58,7 +58,7 @@ while (stack.length) {
   push(x, y - 1);
 }
 
-const full = await sharp(data, {
+const mark = await sharp(data, {
   raw: { width, height, channels: 4 },
 })
   .trim({ threshold: 8 })
@@ -69,8 +69,8 @@ const full = await sharp(data, {
   .png()
   .toBuffer({ resolveWithObject: true });
 
-const left = Math.round((size - full.info.width) / 2);
-const top = Math.round((size - full.info.height) / 2);
+const left = Math.round((size - mark.info.width) / 2);
+const top = Math.round((size - mark.info.height) / 2);
 
 const maskSvg = Buffer.from(
   `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><rect width="${size}" height="${size}" rx="${radius}" ry="${radius}" fill="white"/></svg>`,
@@ -79,7 +79,7 @@ const maskSvg = Buffer.from(
 const base = await sharp({
   create: { width: size, height: size, channels: 4, background: bg },
 })
-  .composite([{ input: full.data, left, top }])
+  .composite([{ input: mark.data, left, top }])
   .png()
   .toBuffer();
 
@@ -91,4 +91,4 @@ await sharp(base)
 await sharp(out).resize(48, 48).png().toFile(path.join(outDir, "favicon-48.png"));
 await sharp(out).resize(32, 32).png().toFile(path.join(outDir, "favicon-32.png"));
 
-console.log(`Wrote ${path.relative(root, out)} (+ 32 / 48) from full thumbs-up mascot`);
+console.log(`Wrote ${path.relative(root, out)} (+ 32 / 48) from full logo on black`);
