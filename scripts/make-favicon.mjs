@@ -13,7 +13,7 @@ const out = path.join(outDir, "favicon.png");
 const size = 180;
 const pad = 8;
 const radius = 36;
-const bg = { r: 247, g: 251, b: 247, alpha: 1 };
+const bg = { r: 0, g: 0, b: 0, alpha: 1 };
 const iconSize = size - pad * 2;
 
 const { data, info } = await sharp(src)
