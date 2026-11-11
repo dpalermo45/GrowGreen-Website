@@ -8,12 +8,16 @@ export type BlogTopic =
   | "Disease"
   | "Seasonal care"
   | "Turf tips"
+  | "Trees & shrubs"
   | "Lawn tips";
 
 export type RelatedService = { label: string; href: string };
 
 export function topicFor(slug: string, title: string): BlogTopic {
   const hay = `${slug} ${title}`.toLowerCase();
+  if (/aphid|woolly|crepe|crape.?myrtle|sooty.?mold|tree.?shrub|ornamental/.test(hay)) {
+    return "Trees & shrubs";
+  }
   if (/picker|sticker|burweed|dallis|weed/.test(hay)) return "Weeds";
   if (/fertiliz/.test(hay)) return "Fertilization";
   if (/insect|chinch|army|webworm/.test(hay)) return "Insects";
@@ -76,6 +80,11 @@ export function relatedServicesFor(topic: BlogTopic): RelatedService[] {
       return [
         { label: "Lawn Fungus Control", href: "/lawn-fungus/" },
         { label: "Lawn Fertilization & Weed Control", href: "/lawn-fertilization-weed-control/" },
+      ];
+    case "Trees & shrubs":
+      return [
+        { label: "Tree and Shrub Care", href: "/tree-and-shrub-care/" },
+        { label: "Plant Disease Or Pest", href: "/plant-disease-or-pest/" },
       ];
   }
 }

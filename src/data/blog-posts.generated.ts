@@ -454,6 +454,44 @@ export const blogPosts: BlogPost[] = [
     ],
     "images": [],
     "alts": []
+  },
+  {
+    "slug": "woolly-aphids-on-crepe-myrtle-baton-rouge",
+    "path": "/woolly-aphids-on-crepe-myrtle-baton-rouge/",
+    "title": "Woolly Aphids on Crepe Myrtle in Baton Rouge",
+    "seoTitle": "Woolly Aphids on Crepe Myrtle in Baton Rouge | Grow Green",
+    "seoDesc": "Woolly aphids left sticky honeydew and black sooty mold on a Burbank-area crepe myrtle. See how tree and shrub care helped the tree improve.",
+    "priority": false,
+    "headings": [
+      "What Woolly Aphids Are",
+      "Why Black Sooty Mold Shows Up",
+      "What We Saw on This Burbank Crepe Myrtle",
+      "How Our Tree and Shrub Treatment Approach Helps",
+      "What Improvement Looked Like After Treatment",
+      "What Homeowners in Baton Rouge Can Do Next",
+      "FAQs: Woolly Aphids and Crepe Myrtles"
+    ],
+    "paragraphs": [
+      "White, cottony insects on a crepe myrtle trunk are easy to miss until sticky leaves, ants, or black sooty mold show up. In the Burbank area of Baton Rouge, our team found woolly aphids on a crepe myrtle, treated them through our tree and shrub program, and watched the tree improve as the pest pressure dropped.",
+      "The black sooty mold did not vanish overnight — it faded over time once the honeydew from the aphids stopped.",
+      "Woolly aphids are soft-bodied insects covered in white, waxy filaments that look like tiny bits of cotton or wool. On crepe myrtles, they often collect along bark cracks, branch crotches, and tender new growth.",
+      "They feed by piercing plant tissue and sucking sap. Heavier feeding can stress tender growth, leave sticky honeydew, and invite secondary problems such as black sooty mold.",
+      "Black sooty mold is a superficial fungus that grows on honeydew rather than a bark disease that attacks the wood first. When aphids keep producing honeydew, the black film returns even after washing.",
+      "On this Burbank-area crepe myrtle, woolly aphids were visible on the bark along with heavy sooty mold. We treated the aphids through our scheduled tree and shrub program, and as honeydew slowed, the mold diminished over time.",
+      "A six-visit tree and shrub program combines inspection, targeted treatment when it fits, seasonal follow-up, and plant nutrition support so ornamental pests are less likely to rebound unnoticed.",
+      "After aphid pressure was addressed, the crepe myrtle canopy looked fuller and cleaner, and the bark no longer carried the same heavy sooty-mold coating. Results vary by infestation level, weather, and follow-up timing.",
+      "If you are seeing woolly aphids, sticky honeydew, or black sooty mold on crepe myrtles around Baton Rouge, request a free estimate for tree and shrub care or call (225) 461-3199."
+    ],
+    "list_items": [
+      "White fuzzy spots on bark, twigs, or new shoots",
+      "Sticky leaves, patio furniture, or cars under the canopy",
+      "Ants climbing the trunk to feed on honeydew",
+      "Black film on bark or leaves from sooty mold",
+      "Identify and reduce aphids before scrubbing mold",
+      "Allow sooty mold to weather away after honeydew stops"
+    ],
+    "images": [],
+    "alts": []
   }
 ];
 

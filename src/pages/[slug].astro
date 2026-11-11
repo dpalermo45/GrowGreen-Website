@@ -104,18 +104,20 @@ const richPostHasBody = Boolean(
 );
 const richPost = richPostHasBody ? richPostRaw : null;
 const curatedHtml = post ? curatedArticleHtmlFor(post.slug) : null;
-const articleHtml =
-  post && !richPost
-    ? curatedHtml ||
-      readableToArticleHtml(
-        {
-          headings: post.headings,
-          paragraphs: post.paragraphs,
-          list_items: post.list_items,
-        },
-        { prioritize: post.priority || (post.paragraphs?.length || 0) > 8 },
-      )
-    : null;
+/** Curated article HTML wins when present; otherwise use rich extract or generated readable HTML. */
+const articleHtml = post
+  ? curatedHtml ||
+    (!richPost
+      ? readableToArticleHtml(
+          {
+            headings: post.headings,
+            paragraphs: post.paragraphs,
+            list_items: post.list_items,
+          },
+          { prioritize: post.priority || (post.paragraphs?.length || 0) > 8 },
+        )
+      : null)
+  : null;
 ---
 
 {

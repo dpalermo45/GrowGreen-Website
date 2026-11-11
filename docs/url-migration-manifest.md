@@ -46,6 +46,7 @@ Total URLs recorded: **138**
 | `/flower-bed-weed-control-and-fertilization/` | retained | 200 | Published WordPress page | wordpress_page, gsc:performance |
 | `/gym-member-lawn-care-special/` | retained | 200 | Published WordPress page | wordpress_page, gsc:Crawled - currently not indexed |
 | `/how-to-kill-pickers-stickers-burweed-in-louisiana/` | retained | 200 | Published WordPress post | PRIORITY: top clicks 408 | wordpress_post, gsc:performance |
+| `/woolly-aphids-on-crepe-myrtle-baton-rouge/` | retained | 200 | New Astro blog post (owner field photos) | Burbank-area crepe myrtle woolly aphids + sooty mold case | new_content |
 | `/importance-of-winterizing-your-lawn-and-pre-emergents-in-south-louisiana/` | retained | 200 | Published WordPress post | wordpress_post, gsc:Discovered - currently not indexed |
 | `/lawn-care-baton-rouge/` | review | None | Seen in Search Console or references; map during implementation | gsc:Not found (404) |
 | `/lawn-care-blog/` | retained | 200 | Published WordPress page | wordpress_page, gsc:performance |

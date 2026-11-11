@@ -201,10 +201,10 @@ const faqSchema =
         }
 
         {
-          hasRichBody && rich ? (
-            <RichPageBody content={rich} maxSections={18} figures={inlineImages} />
-          ) : hasFallbackHtml ? (
+          hasFallbackHtml ? (
             <div class="rich-body" set:html={resolvedArticleHtml} />
+          ) : hasRichBody && rich ? (
+            <RichPageBody content={rich} maxSections={18} figures={inlineImages} />
           ) : !video ? (
             <p class="bp-empty">
               This article is being refreshed. In the meantime,
@@ -221,7 +221,7 @@ const faqSchema =
 
         <div class="bp-article-cta" id="bp-quote">
           <div>
-            <strong>Seeing this in your lawn?</strong>
+            <strong>{topic === "Trees & shrubs" ? "Seeing this on your trees or shrubs?" : "Seeing this in your lawn?"}</strong>
             <p>Get a free local estimate — or call and tell us what you are dealing with.</p>
           </div>
           <div class="bp-article-cta__actions">
