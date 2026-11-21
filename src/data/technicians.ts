@@ -28,7 +28,7 @@ export const technicians: Technician[] = [
     photoAlt: "Kyle Robison, lead technician at Grow Green Weed Control",
     photoPosition: "center 12%",
     pitch:
-      "Scan my card for a free lawn estimate. Our St. Amant office will follow up with pricing for your property.",
+      "You met Kyle in the field. Request a free lawn estimate and our St. Amant office will follow up with pricing for your property.",
   },
 ];
 
