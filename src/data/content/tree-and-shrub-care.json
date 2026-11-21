@@ -140,64 +140,46 @@
     "honest_note": "",
     "features": [
       {
-        "title": "Insect + Mite Management",
-        "body": "Monitoring and targeted treatment for pests such as aphids, scale, whiteflies, lace bugs, mites and caterpillars when appropriate."
+        "title": "Overwintering Pest Strategy",
+        "body": "Inspection and season-appropriate treatment aimed at reducing overwintering insect pressure before spring growth accelerates."
       },
       {
-        "title": "Disease-Pressure Management",
-        "body": "Preventive or targeted strategies for susceptible plants when weather and observed conditions favor common foliar diseases."
+        "title": "New-Growth Protection",
+        "body": "Support for fresh foliage, with monitoring and targeted treatment for pests and disease conditions emerging in spring."
       },
       {
-        "title": "Nutrition + Micronutrients",
-        "body": "Plant-health inputs selected to support foliage color, vigor and recovery where nutrition is an appropriate part of the solution."
+        "title": "Nutrition + Active-Season Defense",
+        "body": "Micronutrient support combined with targeted insect and disease management when warm, humid conditions increase pressure."
       },
       {
-        "title": "Seasonal Observation",
-        "body": "Six visits create repeated opportunities to notice changes, communicate concerns and adjust the treatment approach during the year."
+        "title": "Heat-Season Monitoring",
+        "body": "Inspection for mite, insect, foliage and stress symptoms, with treatment chosen for what the plants and conditions call for."
       },
       {
-        "title": "Issues We Can Often Help Manage",
-        "body": "These are the kinds of recurring pressures a scheduled tree and shrub program is designed to monitor and address."
+        "title": "Late-Season Protection",
+        "body": "Continued pest and disease monitoring as rainfall, humidity and plant growth patterns shift toward the end of the season."
       },
       {
-        "title": "Problems Spraying Cannot Repair",
-        "body": "We will not pretend another treatment fixes damage caused by the site, structure or irrigation when it does not."
+        "title": "Root-Zone + Winter Preparation",
+        "body": "Season-appropriate root-zone, nutrition or pest strategies selected to support the landscape heading into cooler weather."
       }
     ],
     "rounds": [
       {
         "number": "1",
-        "date": "",
-        "title": "Overwintering Pest Strategy",
-        "body": "Inspection and season-appropriate treatment aimed at reducing overwintering insect pressure before spring growth accelerates."
-      },
-      {
-        "number": "2",
-        "date": "",
+        "date": "Scale \u00b7 Eggs \u00b7 Early pressure",
         "title": "New-Growth Protection",
         "body": "Support for fresh foliage, with monitoring and targeted treatment for pests and disease conditions emerging in spring."
       },
       {
         "number": "3",
-        "date": "",
-        "title": "Nutrition + Active-Season Defense",
-        "body": "Micronutrient support combined with targeted insect and disease management when warm, humid conditions increase pressure."
-      },
-      {
-        "number": "4",
-        "date": "",
+        "date": "Micronutrients \u00b7 Insects \u00b7 Disease",
         "title": "Heat-Season Monitoring",
         "body": "Inspection for mite, insect, foliage and stress symptoms, with treatment chosen for what the plants and conditions call for."
       },
       {
         "number": "5",
-        "date": "",
-        "title": "Late-Season Protection",
-        "body": "Continued pest and disease monitoring as rainfall, humidity and plant growth patterns shift toward the end of the season."
-      },
-      {
-        "number": "6",
-        "date": "",
+        "date": "Leaf spots \u00b7 Late pests \u00b7 Recovery",
         "title": "Root-Zone + Winter Preparation",
         "body": "Season-appropriate root-zone, nutrition or pest strategies selected to support the landscape heading into cooler weather."
       }

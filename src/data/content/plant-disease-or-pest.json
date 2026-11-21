@@ -151,32 +151,7 @@
     "local_title": "What are your plants telling you?",
     "local_lead": "A few clear photos and a short history help us understand what is happening around the affected plants.",
     "honest_note": "",
-    "features": [
-      {
-        "title": "Sticky leaves & black coating",
-        "body": "Honeydew from insects such as aphids, soft scales, or whiteflies can support sooty mold. We look for the source of the sticky residue."
-      },
-      {
-        "title": "Speckled or bronzed foliage",
-        "body": "Tiny pale specks, bronzing, or fine webbing can be clues to mite feeding. Leaf undersides and active pests help clarify the cause."
-      },
-      {
-        "title": "Holes or chewed leaves",
-        "body": "Missing leaf tissue calls for a closer look at feeding activity and the damage pattern. The insect may be gone by the time damage is noticed."
-      },
-      {
-        "title": "Leaf spots or powdery growth",
-        "body": "Spots, blotches, or a powdery coating can point to disease. Plant identity and the pattern of symptoms help determine the next step."
-      },
-      {
-        "title": "Yellowing or wilting",
-        "body": "We consider watering, drainage, roots, and nutrition along with pests and disease. Yellow leaves alone do not identify the problem."
-      },
-      {
-        "title": "Branch dieback or overall decline",
-        "body": "Tell us whether one branch, one plant, or several plants are affected. That pattern helps guide a closer review of the plant and its surroundings."
-      }
-    ],
+    "features": [],
     "rounds": [],
     "process": [],
     "real_faqs": [
