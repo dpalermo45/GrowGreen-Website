@@ -1,0 +1,281 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import QuoteForm from "../../components/QuoteForm.astro";
+import { site } from "../../data/site";
+import {
+  technicians,
+  technicianBySlug,
+  technicianLeadSource,
+  technicianFormSource,
+  technicianAttribution,
+  technicianReferralNote,
+  technicianCanonicalPath,
+} from "../../data/technicians";
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return technicians.map((t) => ({ params: { slug: t.slug } }));
+}
+
+const slug = Astro.params.slug!;
+const tech = technicianBySlug[slug]!;
+
+const leadSource = technicianLeadSource(tech);
+const formSource = technicianFormSource(tech);
+const attribution = technicianAttribution(tech);
+const referralNote = technicianReferralNote(tech);
+const canonicalPath = technicianCanonicalPath(tech);
+const title = `${tech.name} | ${site.name}`;
+const description = `Request a free lawn estimate from Grow Green Weed Control via ${tech.name}, ${tech.role}. ${site.startingPrice.short}`;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  robots="noindex, follow"
+  hideChrome
+  ogImage={tech.photo}
+>
+  <section class="tech-lp" aria-label={`${tech.name} estimate landing`}>
+    <header class="tech-lp__top">
+      <div class="tech-lp__top-inner">
+        <a href="/" class="tech-lp__brand" aria-label={`${site.name} home`}>
+          <img
+            src="/images/brand/logo-128.webp"
+            srcset="/images/brand/logo-64.webp 64w, /images/brand/logo-128.webp 128w, /images/brand/logo-192.webp 192w"
+            sizes="44px"
+            alt=""
+            width="44"
+            height="44"
+            fetchpriority="high"
+            decoding="async"
+          />
+          <span>
+            <strong>Grow Green</strong>
+            <small>Weed Control</small>
+          </span>
+        </a>
+        <a class="tech-lp__phone" href={`tel:${site.phoneTel}`}>{site.phone}</a>
+      </div>
+    </header>
+
+    <div class="tech-lp__hero">
+      <div class="tech-lp__hero-veil" aria-hidden="true"></div>
+      <div class="tech-lp__hero-inner">
+        <img
+          class="tech-lp__photo"
+          src={tech.photo}
+          alt={tech.photoAlt}
+          width="160"
+          height="160"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <p class="tech-lp__brand-line">{site.name}</p>
+        <h1>{tech.name}</h1>
+        <p class="tech-lp__role">{tech.role}</p>
+        <p class="tech-lp__pitch">{tech.pitch}</p>
+        <p class="tech-lp__price">{site.startingPrice.short}</p>
+      </div>
+    </div>
+
+    <div class="tech-lp__form" id="quote">
+      <QuoteForm
+        source={formSource}
+        leadSource={leadSource}
+        heading="Get your free estimate"
+        subheading="Enter the service address and we’ll prepare pricing for your lawn. No obligation."
+        compact
+        extraNotes={referralNote}
+        attributionDefaults={attribution}
+      />
+    </div>
+
+    <footer class="tech-lp__foot">
+      <p>
+        Local · Family-owned · Firefighter-owned · {site.hours.label}
+      </p>
+      <p>
+        <a href={`tel:${site.phoneTel}`}>{site.phone}</a>
+        ·
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+      <p>
+        <a href="/">growgreenweedcontrol.com</a>
+      </p>
+    </footer>
+  </section>
+</BaseLayout>
+
+<style>
+  .tech-lp {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse 90% 50% at 50% -10%, rgba(47, 139, 58, 0.18), transparent 55%),
+      linear-gradient(180deg, var(--green-50) 0%, var(--white) 42%, var(--cream-deep) 100%);
+    color: var(--ink);
+  }
+
+  .tech-lp__top {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .tech-lp__top-inner {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 0.75rem 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .tech-lp__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .tech-lp__brand img {
+    border-radius: 50%;
+  }
+
+  .tech-lp__brand strong {
+    display: block;
+    font-size: 0.95rem;
+    line-height: 1.15;
+    color: var(--green-900);
+  }
+
+  .tech-lp__brand small {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .tech-lp__phone {
+    font-weight: 700;
+    color: var(--green-700);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .tech-lp__hero {
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(160deg, rgba(7, 24, 13, 0.88), rgba(16, 44, 27, 0.72)),
+      url("/images/home/hero-lawn.jpg") center / cover no-repeat;
+    color: var(--white);
+  }
+
+  .tech-lp__hero-veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(7, 24, 13, 0.55));
+    pointer-events: none;
+  }
+
+  .tech-lp__hero-inner {
+    position: relative;
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 2rem 1.1rem 2.25rem;
+    text-align: center;
+  }
+
+  .tech-lp__photo {
+    width: 7.5rem;
+    height: 7.5rem;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  }
+
+  .tech-lp__brand-line {
+    margin: 0 0 0.35rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .tech-lp__hero h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.85rem, 5vw, 2.45rem);
+    line-height: 1.15;
+    font-weight: 800;
+    color: var(--white);
+  }
+
+  .tech-lp__role {
+    margin: 0.35rem 0 0;
+    font-weight: 700;
+    color: var(--gold-soft);
+  }
+
+  .tech-lp__pitch {
+    margin: 0.9rem auto 0;
+    max-width: 28rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1.02rem;
+  }
+
+  .tech-lp__price {
+    margin: 0.85rem auto 0;
+    max-width: 28rem;
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .tech-lp__form {
+    max-width: 40rem;
+    margin: -1.25rem auto 0;
+    padding: 0 1.1rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tech-lp__foot {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 0 1.1rem 2.5rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .tech-lp__foot p {
+    margin: 0.35rem 0;
+  }
+
+  .tech-lp__foot a {
+    font-weight: 600;
+  }
+
+  @media (min-width: 720px) {
+    .tech-lp__hero-inner {
+      padding-top: 2.5rem;
+      padding-bottom: 2.75rem;
+    }
+
+    .tech-lp__photo {
+      width: 8.5rem;
+      height: 8.5rem;
+    }
+  }
+</style>

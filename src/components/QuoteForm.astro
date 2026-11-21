@@ -17,6 +17,22 @@ interface Props {
   hideStartingPrice?: boolean;
   /** Optional promotional confirmation line shown after inline success. */
   offerConfirm?: string;
+  /**
+   * Office-facing notes appended after the customer’s free-text notes
+   * (e.g. technician referral for commission matching).
+   */
+  extraNotes?: string;
+  /**
+   * Default UTM attribution when the URL has no query params
+   * (e.g. printed tech-card QR with a clean path). URL params still win.
+   */
+  attributionDefaults?: {
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+    utm_content?: string;
+    utm_term?: string;
+  };
 }
 
 const {
@@ -28,7 +44,16 @@ const {
   compact = false,
   hideStartingPrice = false,
   offerConfirm = "",
+  extraNotes = "",
+  attributionDefaults = {},
 } = Astro.props;
+
+const extraNotesText = extraNotes.trim();
+const defaultUtmSource = (attributionDefaults.utm_source || "").trim();
+const defaultUtmMedium = (attributionDefaults.utm_medium || "").trim();
+const defaultUtmCampaign = (attributionDefaults.utm_campaign || "").trim();
+const defaultUtmContent = (attributionDefaults.utm_content || "").trim();
+const defaultUtmTerm = (attributionDefaults.utm_term || "").trim();
 
 const mapToken = import.meta.env.PUBLIC_MAPBOX_TOKEN || "";
 const addressId = `address-${source}`;
@@ -53,6 +78,12 @@ const offerConfirmText = offerConfirm.trim();
   data-mapbox-bbox={LA_MAPBOX_BBOX}
   data-sms-disclosure={smsDisclosure}
   data-offer-confirm={offerConfirmText}
+  data-extra-notes={extraNotesText}
+  data-utm-source={defaultUtmSource}
+  data-utm-medium={defaultUtmMedium}
+  data-utm-campaign={defaultUtmCampaign}
+  data-utm-content={defaultUtmContent}
+  data-utm-term={defaultUtmTerm}
 >
   <div class="form-panel quote-panel" data-quote-panel>
     <div data-quote-form-body>
@@ -337,14 +368,15 @@ const offerConfirmText = offerConfirm.trim();
     return match ? decodeURIComponent(match[1]) : "";
   }
 
-  function params() {
+  function params(root) {
     const q = new URLSearchParams(location.search);
+    const el = root instanceof HTMLElement ? root : null;
     return {
-      utm_source: q.get("utm_source") || "",
-      utm_medium: q.get("utm_medium") || "",
-      utm_campaign: q.get("utm_campaign") || "",
-      utm_term: q.get("utm_term") || "",
-      utm_content: q.get("utm_content") || "",
+      utm_source: q.get("utm_source") || el?.dataset.utmSource || "",
+      utm_medium: q.get("utm_medium") || el?.dataset.utmMedium || "",
+      utm_campaign: q.get("utm_campaign") || el?.dataset.utmCampaign || "",
+      utm_term: q.get("utm_term") || el?.dataset.utmTerm || "",
+      utm_content: q.get("utm_content") || el?.dataset.utmContent || "",
       fbclid: q.get("fbclid") || "",
       gclid: q.get("gclid") || "",
       fbp: cookieGet("_fbp") || "",
@@ -518,10 +550,10 @@ const offerConfirmText = offerConfirm.trim();
 
       const fd = new FormData(form);
       const smsChecked = fd.get("sms_opt_in") === "Yes";
-      const tracking = params();
+      const tracking = params(root);
       const userNotes = String(fd.get("notes") || "").trim();
-      const extraNotes = (root.dataset.extraNotes || "").trim();
-      const notes = [userNotes, extraNotes].filter(Boolean).join("\n");
+      const appendedNotes = (root.dataset.extraNotes || "").trim();
+      const notes = [userNotes, appendedNotes].filter(Boolean).join("\n");
       const disclosure = root.dataset.smsDisclosure || "";
       const pageUrl = location.href;
       const payload = {

@@ -48,3 +48,9 @@ Browser form (Facebook ad LP / homepage / quote forms)
     - Website Pixel ID remains `1014961828315598`. Do not treat website Lead deploy as CAPI go-live.
 
 12. **Inline quote confirmation (website):** Office/Academy/MCP process notes (proposal only): successful website quote requests confirm **on the form page** (“Thank you!” + one-business-day follow-up). Standalone `/thank-you/` (and nextdoor/core-aeration variants) now **301 to homepage** — do not train staff that a thank-you URL is required for a valid lead.
+
+13. **Technician business-card QR leads (website):** Astro landings at `/t/<slug>/` (e.g. `/t/kyle-robison/`) post to the same website lead bridge. Attribution for commission/referral credit (proposal only — CRM commission rules stay CRM-side):
+    - `lead_source`: `Technician Card - <Full Name>`
+    - UTMs: `utm_source=technician-card`, `utm_medium=qr`, `utm_campaign=tech-referral`, `utm_content=<slug>`
+    - Notes include `Referred by technician: <Full Name>` (plus Source/Page/Submitted lines)
+    - No website-invented employee assignment field; office/CRM should filter on these fields until a first-class `referred_by` exists.

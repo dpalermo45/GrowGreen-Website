@@ -15,3 +15,4 @@ Recorded for later owner review. Core site proceeds without these.
 11. **Customer login page** content vs hard redirect to portal URL.
 12. Preferred production host (Netlify / Cloudflare / VPS) — affects adapter deploy notes only.
 13. Whether owner photo of Dereck with son may remain hero/about imagery (present in WP media with alt text).
+14. **Technician card commission:** Website stamps tech-card QR leads with `lead_source` like `Technician Card - Kyle Robison`, UTMs (`utm_source=technician-card`, `utm_medium=qr`, `utm_campaign=tech-referral`, `utm_content=<slug>`), and notes `Referred by technician: …`. Confirm the CRM/office process for paying commission on conversions from those fields, and whether a future first-class CRM `referred_by` / employee id is wanted (website must not invent CRM fields).

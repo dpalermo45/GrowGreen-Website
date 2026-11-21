@@ -137,6 +137,7 @@ Total URLs recorded: **138**
 | `/tree-and-shrub-care/` | retained | 200 | Published WordPress page | wordpress_page, gsc:performance |
 | `/tree-shrub-care/` | review | None | Seen in Search Console or references; map during implementation | gsc:Not found (404) |
 | `/tree-shrub-program/` | review | None | Seen in Search Console or references; map during implementation | gsc:performance |
+| `/t/kyle-robison/` | retained | 200 | New Astro technician business-card QR landing (commission attribution) | Printed QR for Kyle Robison; noindex; not in sitemap | new_content |
 | `/trucklead/` | retained | 200 | Published WordPress page | wordpress_page, gsc:Discovered - currently not indexed |
 | `/weed-control-ascension/` | retained | 200 | Published WordPress page | wordpress_page, gsc:performance |
 | `/weed-control-baton-rouge/` | retained | 200 | Published WordPress page | wordpress_page, gsc:performance |

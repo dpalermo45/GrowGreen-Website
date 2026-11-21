@@ -126,9 +126,10 @@ export const forms: FormDefinition[] = [
       "/trucklead/",
       "/gym-member-lawn-care-special/",
       "/nextdoor-estimate-request/",
+      "/t/kyle-robison/",
     ],
     purpose:
-      "Offer-specific estimate intake. Same CRM lead bridge as quote, with campaign lead-source / offer notes.",
+      "Offer-specific and technician-card estimate intake. Same CRM lead bridge as quote, with campaign or tech-referral lead-source / attribution.",
     handler: "campaign-lead",
     successPath: "inline",
     fields: [
@@ -162,6 +163,7 @@ export const forms: FormDefinition[] = [
     notes: [
       "Inline success on the landing (offer confirmation preserved when offer is active)",
       "$25 offer landings: nextdoor-estimate-request, post-card-estimate-request, trucklead",
+      "Technician card QR: /t/<slug>/ (seed: kyle-robison) — lead_source Technician Card - <Name>, UTMs tech-referral",
       "Retired /thank-you/ and /thank-you-nextdoor/ redirect to homepage",
       "Never merge careers into this handler",
     ],

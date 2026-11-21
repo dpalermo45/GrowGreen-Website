@@ -38,6 +38,8 @@ function shouldInclude(path: string): boolean {
   if (excludedExact.has(path)) return false;
   if (path.startsWith("/thank-you")) return false;
   if (path.startsWith("/api/")) return false;
+  // Technician business-card QR landings — reachable, noindex, not SEO inventory
+  if (path.startsWith("/t/")) return false;
   return true;
 }
 
