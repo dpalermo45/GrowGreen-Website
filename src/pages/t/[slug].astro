@@ -72,6 +72,7 @@ const description = `Request a free lawn estimate from Grow Green Weed Control v
           height="160"
           fetchpriority="high"
           decoding="async"
+          style={`object-position: ${tech.photoPosition || "center 20%"};`}
         />
         <p class="tech-lp__brand-line">{site.name}</p>
         <h1>{tech.name}</h1>
@@ -201,6 +202,7 @@ const description = `Request a free lawn estimate from Grow Green Weed Control v
     margin: 0 auto 1rem;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center 20%;
     border: 3px solid rgba(255, 255, 255, 0.85);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
   }

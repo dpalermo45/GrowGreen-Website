@@ -10,6 +10,11 @@ export type Technician = {
   role: string;
   photo: string;
   photoAlt: string;
+  /**
+   * CSS object-position for circular crop on full-body portraits.
+   * Defaults to center; Kyle’s about photo needs a high anchor so the face shows.
+   */
+  photoPosition?: string;
   /** Short customer-facing pitch on the QR landing. */
   pitch: string;
 };
@@ -21,6 +26,7 @@ export const technicians: Technician[] = [
     role: "Lead Technician",
     photo: "/images/about/kyle-robison.webp",
     photoAlt: "Kyle Robison, lead technician at Grow Green Weed Control",
+    photoPosition: "center 12%",
     pitch:
       "Scan my card for a free lawn estimate. Our St. Amant office will follow up with pricing for your property.",
   },
